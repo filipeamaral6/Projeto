@@ -1,4 +1,4 @@
-package rc.bootsecurity.security;
+package polarising.bootsecurity.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

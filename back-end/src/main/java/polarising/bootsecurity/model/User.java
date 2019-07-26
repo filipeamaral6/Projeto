@@ -1,4 +1,4 @@
-package rc.bootsecurity.model;
+package polarising.bootsecurity.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;

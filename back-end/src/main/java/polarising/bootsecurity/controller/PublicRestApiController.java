@@ -1,10 +1,10 @@
-package rc.bootsecurity.controller;
+package polarising.bootsecurity.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import rc.bootsecurity.db.UserRepository;
-import rc.bootsecurity.model.User;
+import polarising.bootsecurity.db.UserRepository;
+import polarising.bootsecurity.model.User;
 
 import java.util.List;
 

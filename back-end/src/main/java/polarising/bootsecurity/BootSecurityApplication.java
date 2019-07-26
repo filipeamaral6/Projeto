@@ -1,4 +1,4 @@
-package rc.bootsecurity;
+package polarising.bootsecurity;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;

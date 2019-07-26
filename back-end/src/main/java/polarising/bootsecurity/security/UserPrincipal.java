@@ -1,9 +1,9 @@
-package rc.bootsecurity.security;
+package polarising.bootsecurity.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import rc.bootsecurity.model.User;
+import polarising.bootsecurity.model.User;
 
 import java.util.ArrayList;
 import java.util.Collection;

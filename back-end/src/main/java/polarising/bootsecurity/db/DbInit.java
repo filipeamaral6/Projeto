@@ -1,9 +1,9 @@
-package rc.bootsecurity.db;
+package polarising.bootsecurity.db;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import rc.bootsecurity.model.User;
+import polarising.bootsecurity.model.User;
 
 import java.util.Arrays;
 import java.util.List;

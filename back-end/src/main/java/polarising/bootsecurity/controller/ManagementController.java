@@ -1,4 +1,4 @@
-package rc.bootsecurity.controller;
+package polarising.bootsecurity.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
