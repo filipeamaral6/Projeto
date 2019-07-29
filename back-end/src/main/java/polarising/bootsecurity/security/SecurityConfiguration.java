@@ -13,43 +13,41 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private UserPrincipalDetailsService userPrincipalDetailsService;
 
-    public SecurityConfiguration(UserPrincipalDetailsService userPrincipalDetailsService) {
-        this.userPrincipalDetailsService = userPrincipalDetailsService;
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(authenticationProvider());
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/index.html").permitAll()
-                .antMatchers("/profile/**").authenticated()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/management/**").hasAnyRole("ADMIN", "MANAGER")
-                .antMatchers("/api/public/test1").hasAuthority("ACCESS_TEST1")
-                .antMatchers("/api/public/test2").hasAuthority("ACCESS_TEST2")
-                .antMatchers("/api/public/users").hasRole("ADMIN")
-                .and()
-                .httpBasic();
-    }
-
-    @Bean
-    DaoAuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailsService);
-
-        return daoAuthenticationProvider;
-    }
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	private UserPrincipalDetailsService userPrincipalDetailsService;
+	
+	public SecurityConfiguration(UserPrincipalDetailsService userPrincipalDetailsService) {
+		this.userPrincipalDetailsService = userPrincipalDetailsService;
+	}
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) {
+		auth
+			.authenticationProvider(authenticationProvider());
+	}
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().and().csrf().disable()
+			.authorizeRequests()
+	        .antMatchers("/api/public/test1").hasAuthority("ACCESS_TEST1")
+	        .antMatchers("/api/public/test2").hasAuthority("ACCESS_TEST2")
+	        .antMatchers("/api/public/users").hasRole("ADMIN")
+	        .and()
+	        .httpBasic();
+	}
+	
+	@Bean
+	DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+		daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailsService);
+		
+		return daoAuthenticationProvider;
+	}
+	
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

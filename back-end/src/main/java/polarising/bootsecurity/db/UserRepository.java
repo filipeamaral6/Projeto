@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import polarising.bootsecurity.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+public interface UserRepository extends JpaRepository<User, Long>{
+	User findByUsername(String username);
 }

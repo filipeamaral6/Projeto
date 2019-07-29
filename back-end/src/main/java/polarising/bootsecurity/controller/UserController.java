@@ -1,21 +1,25 @@
 package polarising.bootsecurity.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import polarising.bootsecurity.db.UserRepository;
 import polarising.bootsecurity.model.User;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("api/public")
-public class PublicRestApiController {
-    private UserRepository userRepository;
+@RequestMapping("/")
+@CrossOrigin
+public class UserController {
 
-    public PublicRestApiController(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
+	private UserRepository userRepository;
+
+	public UserController(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
     @GetMapping("test1")
     public String test1(){
@@ -26,10 +30,9 @@ public class PublicRestApiController {
     public String test2(){
         return "API Test 2";
     }
-
+    
     @GetMapping("users")
-    public List<User> users(){
-        return this.userRepository.findAll();
+    public List<User> users() {
+    	return this.userRepository.findAll();
     }
-
 }

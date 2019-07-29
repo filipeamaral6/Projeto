@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>boot-security</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Spring Boot Security</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -24,7 +24,7 @@
         <java.version>1.8</java.version>
     </properties>
 
-    <dependencies>
+     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -54,8 +54,9 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.4.1</version>
         </dependency>
     </dependencies>
 

@@ -1,74 +1,106 @@
 package polarising.bootsecurity.model;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Entity
 public class User {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+	@Column(nullable = false)
+	private String username;
+	
+	@Column(nullable = false)
+	private String password;
+	
+	private int active;
+	
+	private String roles;
+	
+	private String permissions;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+	public User(String username, String password, String roles, String permissions) {
+		this.username = username;
+		this.password = password;
+		this.active = 1;
+		this.roles = roles;
+		this.permissions = permissions;
+	}
+	
+	protected User(){}
 
-    @Column(nullable = false)
-    private String username;
+	public long getId() {
+		return id;
+	}
 
-    @Column(nullable = false)
-    private String password;
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    private int active;
+	public String getUsername() {
+		return username;
+	}
 
-    private String roles = "";
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    private String permissions = "";
+	public String getPassword() {
+		return password;
+	}
 
-    public User(String username, String password, String roles, String permissions){
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-        this.permissions = permissions;
-        this.active = 1;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    protected User(){}
+	public int getActive() {
+		return active;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public void setActive(int active) {
+		this.active = active;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public String getRoles() {
+		return roles;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
 
-    public int getActive() {
-        return active;
-    }
+	public String getPermissions() {
+		return permissions;
+	}
 
-    public String getRoles() {
-        return roles;
-    }
-
-    public String getPermissions() {
-        return permissions;
-    }
-
-    public List<String> getRoleList(){
-        if(this.roles.length() > 0){
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
-    }
-
-    public List<String> getPermissionList(){
-        if(this.permissions.length() > 0){
-            return Arrays.asList(this.permissions.split(","));
-        }
-        return new ArrayList<>();
-    }
+	public void setPermissions(String permissions) {
+		this.permissions = permissions;
+	}
+	
+	public List<String> getRoleList() {
+		if(this.roles.length() > 0) {
+			return Arrays.asList(this.roles.split(","));
+		}
+		return new ArrayList<>();
+	}
+	
+	public List<String> getPermissionList() {
+		if(this.permissions.length() > 0) {
+			return Arrays.asList(this.permissions.split(","));
+		}
+		return new ArrayList<>();
+	}
+	
+	
+	
 }
