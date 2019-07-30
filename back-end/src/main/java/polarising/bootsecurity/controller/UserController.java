@@ -21,14 +21,14 @@ public class UserController {
 		this.userRepository = userRepository;
 	}
 
-    @GetMapping("test1")
+    @GetMapping("admin")
     public String test1(){
-        return "API Test 1";
+        return "Admins only";
     }
 
-    @GetMapping("test2")
+    @GetMapping("user")
     public String test2(){
-        return "API Test 2";
+        return "Users only";
     }
     
     @GetMapping("users")
