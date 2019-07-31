@@ -1,0 +1,14 @@
+com\polarising\bootsecurity\security\UserPrincipal.class
+com\polarising\bootsecurity\model\Login.class
+com\polarising\bootsecurity\controller\UserController.class
+com\polarising\bootsecurity\jwt\JwtProperties.class
+com\polarising\bootsecurity\security\UserPrincipalDetailsService.class
+com\polarising\bootsecurity\BootSecurityApplication.class
+com\polarising\bootsecurity\model\User.class
+com\polarising\bootsecurity\jwt\JwtAuthenticationFilter.class
+com\polarising\bootsecurity\jwt\JwtAuthorizationFilter.class
+com\polarising\bootsecurity\security\SecurityConfiguration.class
+com\polarising\bootsecurity\model\UserResponse.class
+com\polarising\bootsecurity\db\DbInit.class
+com\polarising\bootsecurity\db\UserRepository.class
+com\polarising\bootsecurity\controller\HomeController.class
