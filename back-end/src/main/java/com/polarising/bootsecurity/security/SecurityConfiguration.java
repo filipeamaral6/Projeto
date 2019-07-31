@@ -1,4 +1,4 @@
-package polarising.bootsecurity.security;
+package com.polarising.bootsecurity.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,11 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
-import polarising.bootsecurity.db.UserRepository;
-import polarising.bootsecurity.jwt.JwtAuthenticationFilter;
-import polarising.bootsecurity.jwt.JwtAuthorizationFilter;
+import com.polarising.bootsecurity.db.UserRepository;
+import com.polarising.bootsecurity.jwt.JwtAuthenticationFilter;
+import com.polarising.bootsecurity.jwt.JwtAuthorizationFilter;
 
 @Configuration
 @EnableWebSecurity

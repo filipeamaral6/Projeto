@@ -1,4 +1,4 @@
-package polarising.bootsecurity.jwt;
+package com.polarising.bootsecurity.jwt;
 
 import java.io.IOException;
 
@@ -14,10 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.auth0.jwt.JWT;
-
-import polarising.bootsecurity.db.UserRepository;
-import polarising.bootsecurity.model.User;
-import polarising.bootsecurity.security.UserPrincipal;
+import com.polarising.bootsecurity.db.UserRepository;
+import com.polarising.bootsecurity.model.User;
+import com.polarising.bootsecurity.security.UserPrincipal;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 

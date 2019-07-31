@@ -1,4 +1,4 @@
-package polarising.bootsecurity.jwt;
+package com.polarising.bootsecurity.jwt;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,10 +21,9 @@ import com.auth0.jwt.algorithms.Algorithm;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-
-import polarising.bootsecurity.model.Login;
-import polarising.bootsecurity.model.UserResponse;
-import polarising.bootsecurity.security.UserPrincipal;
+import com.polarising.bootsecurity.model.Login;
+import com.polarising.bootsecurity.model.UserResponse;
+import com.polarising.bootsecurity.security.UserPrincipal;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authenticationManager;

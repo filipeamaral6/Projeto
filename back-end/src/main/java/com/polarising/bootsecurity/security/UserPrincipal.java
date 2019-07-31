@@ -1,4 +1,4 @@
-package polarising.bootsecurity.security;
+package com.polarising.bootsecurity.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import polarising.bootsecurity.model.User;
+import com.polarising.bootsecurity.model.User;
 
 public class UserPrincipal implements UserDetails {
 	private User user;

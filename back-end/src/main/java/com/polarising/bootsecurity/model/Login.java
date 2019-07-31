@@ -1,4 +1,4 @@
-package polarising.bootsecurity.model;
+package com.polarising.bootsecurity.model;
 
 public class Login {
 	private String username;

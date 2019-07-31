@@ -1,4 +1,4 @@
-package polarising.bootsecurity.model;
+package com.polarising.bootsecurity.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;

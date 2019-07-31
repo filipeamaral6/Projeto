@@ -1,4 +1,4 @@
-package polarising.bootsecurity.jwt;
+package com.polarising.bootsecurity.jwt;
 
 public class JwtProperties {
 	

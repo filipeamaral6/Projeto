@@ -1,4 +1,4 @@
-package polarising.bootsecurity.controller;
+package com.polarising.bootsecurity.controller;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import polarising.bootsecurity.db.UserRepository;
-import polarising.bootsecurity.model.User;
+import com.polarising.bootsecurity.db.UserRepository;
+import com.polarising.bootsecurity.model.User;
 
 @RestController
 @RequestMapping("/")

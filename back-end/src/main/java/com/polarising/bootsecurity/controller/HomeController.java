@@ -1,4 +1,4 @@
-package polarising.bootsecurity.controller;
+package com.polarising.bootsecurity.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
