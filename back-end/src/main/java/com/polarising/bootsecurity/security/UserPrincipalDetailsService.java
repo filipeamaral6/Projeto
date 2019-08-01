@@ -1,6 +1,9 @@
 package com.polarising.bootsecurity.security;
 
 
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +26,18 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 		UserPrincipal userPrincipal = new UserPrincipal(user);
 		
 		return userPrincipal;
+	}
+	
+	private List<User> fetchUsers() throws IOException {
+		String requestBody = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n"
+				+ "   <soapenv:Header/>\n" + "   <soapenv:Body/>\n" + "</soapenv:Envelope>";
+		try {
+			List<User> users = xmlParserService.getUsersFromXML(http.post(url, "/users", requestBody, getUsersUrl));
+			return users;
+		} catch (Exception e) {
+			throw new ApiRequestException("Unable to reach server");
+		}
+
 	}
 
 }
