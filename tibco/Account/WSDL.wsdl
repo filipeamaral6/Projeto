@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1564670098615" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.example.com/1564670098615">
+    <message name="CreateAccountInput"/>
+    <message name="CreateAccountOutput"/>
+    <message name="GetAccountInput"/>
+    <message name="GetAccountOutput"/>
+    <message name="GetAllAccountsInput"/>
+    <message name="GetAllAccountsOutput"/>
+    <message name="UpdateAccountInput"/>
+    <message name="UpdateAccountOutput"/>
+    <portType name="PortType_CreateAccount">
+        <operation name="Operation">
+            <input message="tns:"/>
+            <output message="tns:"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetAccount">
+        <operation name="Operation"/>
+    </portType>
+    <portType name="PortType_GetAccounts">
+        <operation name="Operation"/>
+    </portType>
+    <portType name="PortType_UpdateAccount">
+        <operation name="Operation"/>
+    </portType>
+</definitions>

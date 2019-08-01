@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceResource>
+    <config>
+        <wsdl namespace="http://xmlns.example.com/1564670090695" embedWsdlComponents="true" embedSchemaComponents="true" embedJndiProperties="false"/>
+        <class>com.tibco.bw.service.serviceAgent.ServiceServiceAgent</class>
+        <implType>bw</implType>
+        <groups>
+            <row isDefault="true" groupName="Default"/>
+        </groups>
+        <name>Service</name>
+        <resourceType>service.definition</resourceType>
+    </config>
+</serviceResource>

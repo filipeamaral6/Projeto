@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns0:httpSharedResource xmlns:ns0="www.tibco.com/shared/HTTPConnection">
     <config>
-        <Host>localhost</Host>
-        <serverType>Tomcat</serverType>
+        <Host>%%GLOBALS/Host%%</Host>
+        <serverType>HttpComponent</serverType>
+        <Port>%%GLOBALS/HTTP_Connections/Client/Client_Port%%</Port>
         <HttpConnectionProperties>
             <row>
-                <PropertyName>maxPostSize (bytes)</PropertyName>
-                <PropertyValue/>
-                <PropertyDefaultValue>2097152</PropertyDefaultValue>
-            </row>
-            <row>
-                <PropertyName>maxSavePostSize (bytes)</PropertyName>
-                <PropertyValue/>
-                <PropertyDefaultValue>4096</PropertyDefaultValue>
-            </row>
-            <row>
                 <PropertyName>uriEncoding</PropertyName>
-                <PropertyValue/>
-                <PropertyDefaultValue/>
-            </row>
-            <row>
-                <PropertyName>acceptCount</PropertyName>
                 <PropertyValue/>
                 <PropertyDefaultValue/>
             </row>
@@ -40,5 +26,7 @@
                 <PropertyDefaultValue>60000</PropertyDefaultValue>
             </row>
         </HttpConnectionProperties>
+        <useSsl>false</useSsl>
+        <ns1:ssl xmlns:ns1="http://www.tibco.com/xmlns/aemeta/services/2002"/>
     </config>
 </ns0:httpSharedResource>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1564670608293" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.example.com/1564670608293">
+    <message name="CreateClientInput"/>
+    <message name="CreateClientOutput"/>
+    <message name="GetAllClientsInput"/>
+    <message name="GetAllClientsOutput"/>
+    <message name="GetClientInput"/>
+    <message name="GetClientOutput"/>
+    <message name="UpdateClientInput"/>
+    <message name="UpdateClientOutput"/>
+    <message name="DeleteClientInput"/>
+    <message name="DeleteClientOutput"/>
+    <portType name="PortType_CreateClient">
+        <operation name="Operation"/>
+    </portType>
+    <portType name="PortType_GetAllClients">
+        <operation name="Operation"/>
+    </portType>
+    <portType name="PortType_GetClient">
+        <operation name="Operation"/>
+    </portType>
+    <portType name="PortType_UpdateClient">
+        <operation name="Operation"/>
+    </portType>
+</definitions>

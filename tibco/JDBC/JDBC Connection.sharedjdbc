@@ -8,7 +8,7 @@
         <loginTimeout>0</loginTimeout>
         <connectionType>JDBC</connectionType>
         <UseSharedJndiConfig>false</UseSharedJndiConfig>
-        <location>%%Globals/JDBC/JDBC_URL%%</location>
-        <user>root</user>
+        <location>%%GLOBALS/JDBC_Connections/Url%%</location>
+        <user>%%GLOBALS/JDBC_Connections/username%%</user>
     </config>
 </BWSharedResource>

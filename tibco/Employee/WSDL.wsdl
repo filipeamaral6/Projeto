@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1564670902359" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.example.com/1564670902359">
+    <message name="CreateEmployeeInput"/>
+    <message name="CreateEmployeeOutput"/>
+    <message name="GetEmployeeInput"/>
+    <message name="GetEmployeeOutput"/>
+    <message name="GetAllEmployeesInput"/>
+    <message name="GetAllEmployeesOutput"/>
+    <message name="UpdateEmployeeInput"/>
+    <message name="UpdateEmployeeOutput"/>
+    <portType name="PortType_CreateClient"/>
+    <portType name="PortType_GetEmployee"/>
+    <portType name="PortType_GetAllEmployees"/>
+    <portType name="PortType_UpdateEmployee"/>
+</definitions>
