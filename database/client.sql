@@ -3,6 +3,7 @@ CREATE TABLE `client` (
   `full_name` varchar(255) NOT NULL,
   `nif` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `client_cc` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `phone_number` bigint(20) DEFAULT NULL,
   `mobile_number` bigint(20) DEFAULT NULL,
@@ -17,5 +18,6 @@ CREATE TABLE `client` (
   `login_password` varchar(255) NOT NULL,
   `transaction_password` varchar(255) NOT NULL,
   `created_at` date NOT NULL DEFAULT curdate(),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `client_cc_un` (`client_cc`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
