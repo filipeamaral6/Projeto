@@ -8,12 +8,12 @@
 	<xs:element name="root">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="inputData" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="outputData" minOccurs="0"/>
+				<xs:element ref="inputAccount" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputAccount" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="inputData">
+	<xs:element name="inputAccount">
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
@@ -29,7 +29,7 @@
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="outputData">
+	<xs:element name="outputAccount">
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">

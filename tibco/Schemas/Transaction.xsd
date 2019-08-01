@@ -8,25 +8,25 @@
 	<xs:element name="root">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="inputData" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="outputData" minOccurs="0"/>
+				<xs:element ref="inputTransaction" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputTransaction" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="inputData">
+	<xs:element name="inputTransaction">
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
 					<xs:attribute name="value" type="xs:string"/>
 					<xs:attribute name="account_iban" type="xs:string"/>
 					<xs:attribute name="created_at" type="xs:string"/>
-					<xs:attribute name="client_id" type="xs:string"/>
+					<xs:attribute name="client_cc" type="xs:string"/>
 					<xs:attribute name="description" type="xs:string"/>
 				</xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="outputData">
+	<xs:element name="outputTransaction">
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">

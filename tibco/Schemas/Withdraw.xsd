@@ -6,6 +6,30 @@
 	 elementFormDefault="qualified"
 	 attributeFormDefault="unqualified">
 	<xs:element name="root">
-		<xs:complexType/>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="inputWithdraw" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputWithdraw" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="inputWithdraw">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="transaction_id" type="xs:string"/>
+					<xs:attribute name="employee_id" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="outputWithdraw">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="message" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
 	</xs:element>
 </xs:schema>

@@ -8,18 +8,19 @@
 	<xs:element name="root">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="inputData" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="outputData" minOccurs="0"/>
+				<xs:element ref="inputClient" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputClient" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="inputData">
+	<xs:element name="inputClient">
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
 					<xs:attribute name="full_name" type="xs:string"/>
 					<xs:attribute name="nif" type="xs:string"/>
 					<xs:attribute name="email" type="xs:string"/>
+					<xs:attribute name="client_cc" type="xs:string"/>
 					<xs:attribute name="username" type="xs:string"/>
 					<xs:attribute name="phone_number" type="xs:string"/>
 					<xs:attribute name="mobile_number" type="xs:string"/>
@@ -37,7 +38,7 @@
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="outputData">
+	<xs:element name="outputClient">
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">

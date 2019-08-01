@@ -8,12 +8,12 @@
 	<xs:element name="root">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="inputData" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="outputData" minOccurs="0"/>
+				<xs:element ref="inputDeposit" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputDeposit" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="inputData">
+	<xs:element name="inputDeposit">
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
@@ -25,7 +25,7 @@
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="outputData">
+	<xs:element name="outputDeposit">
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
