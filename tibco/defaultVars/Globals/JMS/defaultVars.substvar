@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>JMS_Host</name>
+			<value>localhost</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1564667117877</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>JMS_Port</name>
+			<value>7222</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<modTime>1564667117804</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>JMS_URL</name>
+			<value>tibjmsnaming://%%Globals/JMS/JMS_Host%%:%%Globals/JMS/JMS_Port%%</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1564667117807</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>
