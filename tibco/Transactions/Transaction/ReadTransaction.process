@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
-    <pd:name>Transactions/Transfer/ReadTransfer.process</pd:name>
+    <pd:name>Transactions/Transaction/ReadTransaction.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startX>150</pd:startX>
     <pd:startY>64</pd:startY>
@@ -10,5 +10,5 @@
     <pd:endY>64</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
-    <pd:targetNamespace>http://xmlns.example.com/1564677796995</pd:targetNamespace>
+    <pd:targetNamespace>http://xmlns.example.com/1564677851380</pd:targetNamespace>
 </pd:ProcessDefinition>
