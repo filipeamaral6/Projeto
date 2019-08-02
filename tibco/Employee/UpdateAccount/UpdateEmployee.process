@@ -4,13 +4,13 @@
     <pd:name>Employee/UpdateAccount/UpdateEmployee.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:UpdateEmployeeInput"/>
-    <pd:startX>148</pd:startX>
+    <pd:startX>152</pd:startX>
     <pd:startY>63</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endType wsMsgRef="pfx:UpdateEmployeeOutput"/>
+    <pd:endType wsMsgRef="pfx:UpdateEmployeeOuput"/>
     <pd:endX>450</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endY>67</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564746094332</pd:targetNamespace>

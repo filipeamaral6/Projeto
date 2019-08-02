@@ -14,15 +14,15 @@
     <message name="GetEmployeeByIdOutput">
         <part name="output" element="ns:InputEmployee"/>
     </message>
-    <message name="UpdateEmployeeInput">
-        <part name="input" element="ns:InputEmployee"/>
-    </message>
-    <message name="UpdateEmployeeOutput">
-        <part name="output" element="ns:OutputEmployee"/>
-    </message>
     <message name="GetAllEmployeesInput"/>
     <message name="GetAllEmployeesOutput">
         <part name="output" element="ns:InputEmployee"/>
+    </message>
+    <message name="UpdateEmployeeInput">
+        <part name="input" element="ns:InputEmployee"/>
+    </message>
+    <message name="UpdateEmployeeOuput">
+        <part name="output" element="ns:OutputEmployee"/>
     </message>
     <portType name="PortType_Employee">
         <operation name="Operation">
@@ -36,16 +36,16 @@
             <output message="tns:GetEmployeeByIdOutput"/>
         </operation>
     </portType>
+    <portType name="PortType_UpdateEmployee">
+        <operation name="Operation">
+            <input message="tns:UpdateEmployeeInput"/>
+            <output message="tns:UpdateEmployeeOuput"/>
+        </operation>
+    </portType>
     <portType name="PortType_GetAllEmployees">
         <operation name="Operation">
             <input message="tns:GetAllEmployeesInput"/>
             <output message="tns:GetAllEmployeesOutput"/>
-        </operation>
-    </portType>
-    <portType name="PortType_UpdateEmployee">
-        <operation name="Operation">
-            <input message="tns:UpdateEmployeeInput"/>
-            <output message="tns:UpdateEmployeeOutput"/>
         </operation>
     </portType>
 </definitions>

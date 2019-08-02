@@ -10,7 +10,7 @@
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetEmployeeByIdOutput"/>
     <pd:endX>450</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endY>67</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677486552</pd:targetNamespace>
