@@ -46,8 +46,9 @@ public class UserController {
     
     @GetMapping("users-testing")
     public List<User> usersTesting() {
-    	User user = new User("user", securityConfiguration.passwordEncoder().encode("user"), "ADMIN" );
-    	List<User> users = Arrays.asList(user);
+    	User user = new User("user", securityConfiguration.passwordEncoder().encode("user"), "USER" );
+    	User admin = new User("admin", securityConfiguration.passwordEncoder().encode("admin"), "ADMIN" );
+    	List<User> users = Arrays.asList(user,admin);
     	return users;
     }
 }

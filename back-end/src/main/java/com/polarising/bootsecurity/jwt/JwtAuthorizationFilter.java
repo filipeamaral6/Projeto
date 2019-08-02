@@ -22,7 +22,7 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-//	 private UserRepository userRepository;
+//	private UserRepository userRepository;
 
 	private UserPrincipalDetailsService userPrincipalDetailsService;
 
