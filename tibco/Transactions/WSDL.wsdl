@@ -13,12 +13,6 @@
     <message name="WriteDepositOutput">
         <part name="output" element="ns:outputDeposit"/>
     </message>
-    <message name="GetAllTransactionsByIbanInput">
-        <part name="input" element="ns7:getByIban"/>
-    </message>
-    <message name="GetAllTransactionsByIbanOutput">
-        <part name="output" element="ns2:inputTransaction"/>
-    </message>
     <message name="WritePaymentInput">
         <part name="input" element="ns3:inputPayment"/>
     </message>
@@ -43,20 +37,22 @@
     <message name="GetTransactionByIdOuput">
         <part name="output" element="ns2:inputTransaction"/>
     </message>
+    <message name="GetTransactionsByIbanInput">
+        <part name="input" element="ns7:getByIban"/>
+    </message>
+    <message name="GetTransactionsByIbanOutput">
+        <part name="output" element="ns2:inputTransaction"/>
+    </message>
     <portType name="PortType_Deposit">
         <operation name="WriteDeposit">
             <input message="tns:WriteDepositInput"/>
             <output message="tns:WriteDepositOutput"/>
         </operation>
     </portType>
-    <portType name="PortType_Transaction">
-        <operation name="GetAllTransactions">
-            <input message="tns:GetAllTransactionsByIbanInput"/>
-            <output message="tns:GetAllTransactionsByIbanOutput"/>
-        </operation>
-        <operation name="GetTransactionById">
+    <portType name="PortType_TransactionById">
+        <operation name="Operation">
             <input message="tns:GetTransactionByIdInput"/>
-            <output message="tns:GetAllTransactionsByIbanOutput"/>
+            <output message="tns:GetTransactionByIdOuput"/>
         </operation>
     </portType>
     <portType name="PortType_Payment">
@@ -75,6 +71,12 @@
         <operation name="WriteWithdraw">
             <input message="tns:WriteWithdrawInput"/>
             <output message="tns:WriteWithdrawOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetTransactionsByIban">
+        <operation name="Operation">
+            <input message="tns:GetTransactionsByIbanInput"/>
+            <output message="tns:GetTransactionsByIbanOutput"/>
         </operation>
     </portType>
 </definitions>

@@ -8,7 +8,7 @@
 	<xs:element name="root">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="GetByClientCC" minOccurs="0"/>
+				<xs:element ref="GetByClientCC"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

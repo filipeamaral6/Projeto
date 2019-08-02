@@ -9,7 +9,8 @@
             <row isDefault="true" groupName="Default"/>
         </groups>
         <name>Service</name>
-        <serviceChange>Fri Aug 02 11:15:33 BST 2019</serviceChange>
+        <serviceChange>Fri Aug 02 12:49:22 BST 2019</serviceChange>
+        <resourceType>service.definition</resourceType>
         <interfaceImpl>
             <tab>
                 <tabName>PortType_Employee</tabName>
@@ -22,7 +23,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="Operation" opImpl=""/>
+                                    <row opName="Operation" opImpl="/Employee/CreateEmployee/CreateEmployee.process"/>
                                 </operations>
                             </config>
                         </tab>
@@ -30,7 +31,118 @@
                             <tabName>service.definition.ep.tab.label</tabName>
                             <tabType>ep</tabType>
                             <config>
-                                <epBindings/>
+                                <epBindings>
+                                    <row epName="PortType_EmployeeEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Employee/Http_connection/Employee_Http_Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Employee/Service.serviceagent/PortType_EmployeeEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Employee/Service.serviceagent/PortType_EmployeeEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>PortType_GetEmployee</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Employee/WSDL.wsdl" portType="PortType_GetEmployee" ns="http://xmlns.example.com/1564670902359"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="Operation" opImpl="/Employee/GetEmployee/GetEmployeeById.process"/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings>
+                                    <row epName="PortType_GetEmployeeEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Employee/Http_connection/Employee_Http_Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Employee/Service.serviceagent/PortType_GetEmployeeEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Employee/Service.serviceagent/PortType_GetEmployeeEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
                             </config>
                         </tab>
                     </detail>
@@ -55,32 +167,50 @@
                             <tabName>service.definition.ep.tab.label</tabName>
                             <tabType>ep</tabType>
                             <config>
-                                <epBindings/>
-                            </config>
-                        </tab>
-                    </detail>
-                </config>
-            </tab>
-            <tab>
-                <tabName>PortType_GetEmployee</tabName>
-                <tabType>bw</tabType>
-                <config>
-                    <wsdlDetail location="/Employee/WSDL.wsdl" portType="PortType_GetEmployee" ns="http://xmlns.example.com/1564670902359"/>
-                    <detail>
-                        <tab>
-                            <tabName>service.definition.impl.tab.label</tabName>
-                            <tabType>impl</tabType>
-                            <config>
-                                <operations>
-                                    <row opName="Operation" opImpl=""/>
-                                </operations>
-                            </config>
-                        </tab>
-                        <tab>
-                            <tabName>service.definition.ep.tab.label</tabName>
-                            <tabType>ep</tabType>
-                            <config>
-                                <epBindings/>
+                                <epBindings>
+                                    <row epName="PortType_GetAllEmployeesEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Employee/Http_connection/Employee_Http_Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Employee/Service.serviceagent/PortType_GetAllEmployeesEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Employee/Service.serviceagent/PortType_GetAllEmployeesEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
                             </config>
                         </tab>
                     </detail>
@@ -105,13 +235,55 @@
                             <tabName>service.definition.ep.tab.label</tabName>
                             <tabType>ep</tabType>
                             <config>
-                                <epBindings/>
+                                <epBindings>
+                                    <row epName="PortType_UpdateEmployeeEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Employee/Http_connection/Employee_Http_Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Employee/Service.serviceagent/PortType_UpdateEmployeeEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Employee/Service.serviceagent/PortType_UpdateEmployeeEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
                             </config>
                         </tab>
                     </detail>
                 </config>
             </tab>
         </interfaceImpl>
-        <resourceType>service.definition</resourceType>
     </config>
 </serviceResource>

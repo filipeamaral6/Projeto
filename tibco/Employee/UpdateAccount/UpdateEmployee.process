@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670902359" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
     <wsdl:import namespace="http://xmlns.example.com/1564670902359" location="/Employee/WSDL.wsdl"/>
-    <pd:name>Employee/GetEmployee/GetEmployeeById.process</pd:name>
+    <pd:name>Employee/UpdateAccount/UpdateEmployee.process</pd:name>
     <pd:startName>Start</pd:startName>
-    <pd:startType wsMsgRef="pfx:GetEmployeeByIdInput"/>
-    <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
+    <pd:startType wsMsgRef="pfx:UpdateEmployeeInput"/>
+    <pd:startX>148</pd:startX>
+    <pd:startY>63</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endType wsMsgRef="pfx:GetEmployeeByIdOutput"/>
+    <pd:endType wsMsgRef="pfx:UpdateEmployeeOutput"/>
     <pd:endX>450</pd:endX>
     <pd:endY>64</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
-    <pd:targetNamespace>http://xmlns.example.com/1564677486552</pd:targetNamespace>
+    <pd:targetNamespace>http://xmlns.example.com/1564746094332</pd:targetNamespace>
 </pd:ProcessDefinition>

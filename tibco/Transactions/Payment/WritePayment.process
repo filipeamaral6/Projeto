@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564671163059" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
+    <wsdl:import namespace="http://xmlns.example.com/1564671163059" location="/Transactions/WSDL.wsdl"/>
     <pd:name>Transactions/Payment/WritePayment.process</pd:name>
     <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx:WritePaymentInput"/>
     <pd:startX>150</pd:startX>
     <pd:startY>64</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endX>450</pd:endX>
+    <pd:endType wsMsgRef="pfx:WirtePaymentOutput"/>
+    <pd:endX>449</pd:endX>
     <pd:endY>64</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>

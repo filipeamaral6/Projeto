@@ -9,7 +9,7 @@
             <row isDefault="true" groupName="Default"/>
         </groups>
         <name>Service</name>
-        <serviceChange>Fri Aug 02 11:16:15 BST 2019</serviceChange>
+        <serviceChange>Fri Aug 02 12:27:13 BST 2019</serviceChange>
         <resourceType>service.definition</resourceType>
         <interfaceImpl>
             <tab>
@@ -23,7 +23,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="Operation" opImpl=""/>
+                                    <row opName="Operation" opImpl="/Client/CreateClient/CreateClient.process"/>
                                 </operations>
                             </config>
                         </tab>
@@ -31,7 +31,50 @@
                             <tabName>service.definition.ep.tab.label</tabName>
                             <tabType>ep</tabType>
                             <config>
-                                <epBindings/>
+                                <epBindings>
+                                    <row epName="PortType_CreateClientEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Client/Service.serviceagent/PortType_CreateClientEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Client/Service.serviceagent/PortType_CreateClientEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
                             </config>
                         </tab>
                     </detail>
@@ -48,7 +91,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="Operation" opImpl=""/>
+                                    <row opName="Operation" opImpl="/Client/GetAllClients/GetAllClients.process"/>
                                 </operations>
                             </config>
                         </tab>
@@ -56,7 +99,50 @@
                             <tabName>service.definition.ep.tab.label</tabName>
                             <tabType>ep</tabType>
                             <config>
-                                <epBindings/>
+                                <epBindings>
+                                    <row epName="PortType_GetAllClientsEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Client/Service.serviceagent/PortType_GetAllClientsEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Client/Service.serviceagent/PortType_GetAllClientsEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
                             </config>
                         </tab>
                     </detail>
@@ -73,7 +159,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="Operation" opImpl=""/>
+                                    <row opName="Operation" opImpl="/Client/GetClient/GetClientByCc.process"/>
                                 </operations>
                             </config>
                         </tab>
@@ -81,7 +167,50 @@
                             <tabName>service.definition.ep.tab.label</tabName>
                             <tabType>ep</tabType>
                             <config>
-                                <epBindings/>
+                                <epBindings>
+                                    <row epName="PortType_GetClientByCcEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Client/Service.serviceagent/PortType_GetClientByCcEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Client/Service.serviceagent/PortType_GetClientByCcEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
                             </config>
                         </tab>
                     </detail>
@@ -98,7 +227,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="Operation" opImpl=""/>
+                                    <row opName="Operation" opImpl="/Client/GetClient/GetClientById.process"/>
                                 </operations>
                             </config>
                         </tab>
@@ -106,7 +235,50 @@
                             <tabName>service.definition.ep.tab.label</tabName>
                             <tabType>ep</tabType>
                             <config>
-                                <epBindings/>
+                                <epBindings>
+                                    <row epName="PortType_GetClientByIdEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Client/Service.serviceagent/PortType_GetClientByIdEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Client/Service.serviceagent/PortType_GetClientByIdEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
                             </config>
                         </tab>
                     </detail>
@@ -123,7 +295,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="Operation" opImpl=""/>
+                                    <row opName="Operation" opImpl="/Client/UpdateClient/UpdateClient.process"/>
                                 </operations>
                             </config>
                         </tab>
@@ -131,7 +303,50 @@
                             <tabName>service.definition.ep.tab.label</tabName>
                             <tabType>ep</tabType>
                             <config>
-                                <epBindings/>
+                                <epBindings>
+                                    <row epName="PortType_UpdateClientEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Client/Service.serviceagent/PortType_UpdateClientEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Client/Service.serviceagent/PortType_UpdateClientEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
                             </config>
                         </tab>
                     </detail>

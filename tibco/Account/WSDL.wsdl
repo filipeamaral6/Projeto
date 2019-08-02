@@ -37,14 +37,10 @@
             <output message="tns:CreateAccountOutput"/>
         </operation>
     </portType>
-    <portType name="PortType_GetAccount">
+    <portType name="PortType_GetAccountById">
         <operation name="Operation_GetAccountById">
             <input message="tns:GetAccountByIdInput"/>
             <output message="tns:GetAccountByIdOutput"/>
-        </operation>
-        <operation name="Operation_GetAccountByIban">
-            <input message="tns:GetAccountByIbanInput"/>
-            <output message="tns:GetAccountByIbanOutput"/>
         </operation>
     </portType>
     <portType name="PortType_GetAllAccounts">
@@ -57,6 +53,12 @@
         <operation name="Operation">
             <input message="tns:UpdateAccountInput"/>
             <output message="tns:UpdateAccountOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetAccountByIban">
+        <operation name="Operation">
+            <input message="tns:GetAccountByIbanInput"/>
+            <output message="tns:GetAccountByIbanOutput"/>
         </operation>
     </portType>
 </definitions>

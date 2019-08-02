@@ -56,7 +56,7 @@
     <portType name="PortType_GetClientByCc">
         <operation name="Operation">
             <input message="tns:GetClientByCcInput"/>
-            <output message="tns:GetClientByIdOutput"/>
+            <output message="tns:GetClientByCcOutput"/>
         </operation>
     </portType>
 </definitions>
