@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serviceResource>
+<serviceResource xmlns:wsdl="http://xmlns.example.com/1564671163059">
+    <ns0:import xmlns:ns0="http://schemas.xmlsoap.org/wsdl/" namespace="http://xmlns.example.com/1564671163059" location="/Transactions/WSDL.wsdl"/>
     <config>
         <wsdl namespace="http://xmlns.example.com/1564671166914" embedWsdlComponents="true" embedSchemaComponents="true" embedJndiProperties="false"/>
         <class>com.tibco.bw.service.serviceAgent.ServiceServiceAgent</class>
@@ -7,5 +8,135 @@
         <groups>
             <row isDefault="true" groupName="Default"/>
         </groups>
+        <name>Service</name>
+        <serviceChange>Fri Aug 02 11:14:31 BST 2019</serviceChange>
+        <interfaceImpl>
+            <tab>
+                <tabName>PortType_Deposit</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Transactions/WSDL.wsdl" portType="PortType_Deposit" ns="http://xmlns.example.com/1564671163059"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="WriteDeposit" opImpl=""/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings/>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>PortType_Payment</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Transactions/WSDL.wsdl" portType="PortType_Payment" ns="http://xmlns.example.com/1564671163059"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="WritePayment" opImpl=""/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings/>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>PortType_Transaction</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Transactions/WSDL.wsdl" portType="PortType_Transaction" ns="http://xmlns.example.com/1564671163059"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="ReadTransaction" opImpl=""/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings/>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>PortType_Transfer</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Transactions/WSDL.wsdl" portType="PortType_Transfer" ns="http://xmlns.example.com/1564671163059"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="WriteTransfer" opImpl=""/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings/>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>PortType_Withdraw</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Transactions/WSDL.wsdl" portType="PortType_Withdraw" ns="http://xmlns.example.com/1564671163059"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="WriteWithdraw" opImpl=""/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings/>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+        </interfaceImpl>
+        <resourceType>service.definition</resourceType>
     </config>
 </serviceResource>

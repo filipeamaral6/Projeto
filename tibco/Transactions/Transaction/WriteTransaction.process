@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
-    <pd:name>Transactions/Transaction/ReadTransaction.process</pd:name>
+    <pd:name>Transactions/Transaction/WriteTransaction.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startX>150</pd:startX>
     <pd:startY>64</pd:startY>

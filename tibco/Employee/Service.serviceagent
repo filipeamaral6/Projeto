@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serviceResource>
+<serviceResource xmlns:wsdl="http://xmlns.example.com/1564670902359">
+    <ns0:import xmlns:ns0="http://schemas.xmlsoap.org/wsdl/" namespace="http://xmlns.example.com/1564670902359" location="/Employee/WSDL.wsdl"/>
     <config>
         <wsdl namespace="http://xmlns.example.com/1564670906833" embedWsdlComponents="true" embedSchemaComponents="true" embedJndiProperties="false"/>
         <class>com.tibco.bw.service.serviceAgent.ServiceServiceAgent</class>
@@ -7,5 +8,110 @@
         <groups>
             <row isDefault="true" groupName="Default"/>
         </groups>
+        <name>Service</name>
+        <serviceChange>Fri Aug 02 11:15:33 BST 2019</serviceChange>
+        <interfaceImpl>
+            <tab>
+                <tabName>PortType_Employee</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Employee/WSDL.wsdl" portType="PortType_Employee" ns="http://xmlns.example.com/1564670902359"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="Operation" opImpl=""/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings/>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>PortType_GetAllEmployees</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Employee/WSDL.wsdl" portType="PortType_GetAllEmployees" ns="http://xmlns.example.com/1564670902359"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="Operation" opImpl=""/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings/>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>PortType_GetEmployee</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Employee/WSDL.wsdl" portType="PortType_GetEmployee" ns="http://xmlns.example.com/1564670902359"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="Operation" opImpl=""/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings/>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>PortType_UpdateEmployee</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Employee/WSDL.wsdl" portType="PortType_UpdateEmployee" ns="http://xmlns.example.com/1564670902359"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="Operation" opImpl=""/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings/>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+        </interfaceImpl>
+        <resourceType>service.definition</resourceType>
     </config>
 </serviceResource>

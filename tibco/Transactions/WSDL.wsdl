@@ -1,30 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1564671163059" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.example.com/1564671163059">
-    <message name="WriteDepositInput"/>
-    <message name="WriteDepositOutput"/>
-    <message name="ReadTransactionsInput"/>
-    <message name="ReadTransactionsOutput"/>
-    <message name="WriteTransactionInput"/>
-    <message name="WriteTransactionOutput"/>
-    <message name="WritePaymentInput"/>
-    <message name="WirtePaymentOutput"/>
-    <message name="WriteTransferInput"/>
-    <message name="WriteTransferOutput"/>
-    <message name="WriteWithdrawInput"/>
-    <message name="WriteWithdrawOutput"/>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns5="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd10" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd6" xmlns:tns="http://xmlns.example.com/1564671163059" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd8" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd9" xmlns:ns3="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd7" targetNamespace="http://xmlns.example.com/1564671163059">
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd6" location="../Schemas/Deposit.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd8" location="../Schemas/Transaction.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd7" location="../Schemas/Payment.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd9" location="../Schemas/Transfer.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd10" location="../Schemas/Withdraw.xsd"/>
+    <message name="WriteDepositInput">
+        <part name="input" element="ns:inputDeposit"/>
+    </message>
+    <message name="WriteDepositOutput">
+        <part name="output" element="ns:outputDeposit"/>
+    </message>
+    <message name="ReadTransactionInput">
+        <part name="input" element="ns2:inputTransaction"/>
+    </message>
+    <message name="ReadTransactionOutput">
+        <part name="output" element="ns2:outputTransaction"/>
+    </message>
+    <message name="WritePaymentInput">
+        <part name="input" element="ns3:inputPayment"/>
+    </message>
+    <message name="WirtePaymentOutput">
+        <part name="output" element="ns3:outputPayment"/>
+    </message>
+    <message name="WriteTransferInput">
+        <part name="input" element="ns4:inputTransfer"/>
+    </message>
+    <message name="WriteTransferOutput">
+        <part name="output" element="ns4:outputTransfer"/>
+    </message>
+    <message name="WriteWithdrawInput">
+        <part name="input" element="ns5:inputWithdraw"/>
+    </message>
+    <message name="WriteWithdrawOutput">
+        <part name="output" element="ns5:outputWithdraw"/>
+    </message>
     <portType name="PortType_Deposit">
-        <operation name="Operation"/>
+        <operation name="WriteDeposit">
+            <input message="tns:WriteDepositInput"/>
+            <output message="tns:WriteDepositOutput"/>
+        </operation>
     </portType>
     <portType name="PortType_Transaction">
-        <operation name="Operation"/>
+        <operation name="ReadTransaction">
+            <input message="tns:ReadTransactionInput"/>
+            <output message="tns:ReadTransactionOutput"/>
+        </operation>
     </portType>
     <portType name="PortType_Payment">
-        <operation name="Operation"/>
+        <operation name="WritePayment">
+            <input message="tns:WritePaymentInput"/>
+            <output message="tns:WirtePaymentOutput"/>
+        </operation>
     </portType>
     <portType name="PortType_Transfer">
-        <operation name="Operation"/>
+        <operation name="WriteTransfer">
+            <input message="tns:WriteTransferInput"/>
+            <output message="tns:WriteTransferOutput"/>
+        </operation>
     </portType>
     <portType name="PortType_Withdraw">
-        <operation name="Operation"/>
+        <operation name="WriteWithdraw">
+            <input message="tns:WriteWithdrawInput"/>
+            <output message="tns:WriteWithdrawOutput"/>
+        </operation>
     </portType>
 </definitions>
