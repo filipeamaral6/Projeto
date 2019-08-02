@@ -15,27 +15,19 @@
 	</xs:element>
 	<xs:element name="inputAccount">
 		<xs:complexType>
-			<xs:simpleContent>
-				<xs:extension base="xs:string">
-					<xs:attribute name="type" type="xs:string"/>
-					<xs:attribute name="iban" type="xs:string"/>
-					<xs:attribute name="account_number" type="xs:string"/>
-					<xs:attribute name="balance" type="xs:string"/>
-					<xs:attribute name="interest" type="xs:string"/>
-					<xs:attribute name="status" type="xs:string"/>
-					<xs:attribute name="created_at" type="xs:string"/>
-					<xs:attribute name="employee_id" type="xs:string"/>
-				</xs:extension>
-			</xs:simpleContent>
+			<xs:attribute name="type" type="xs:string"/>
+			<xs:attribute name="iban" type="xs:string"/>
+			<xs:attribute name="account_number" type="xs:string"/>
+			<xs:attribute name="balance" type="xs:string"/>
+			<xs:attribute name="interest" type="xs:string"/>
+			<xs:attribute name="status" type="xs:string"/>
+			<xs:attribute name="created_at" type="xs:string"/>
+			<xs:attribute name="employee_id" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="outputAccount">
 		<xs:complexType>
-			<xs:simpleContent>
-				<xs:extension base="xs:string">
-					<xs:attribute name="message" type="xs:string"/>
-				</xs:extension>
-			</xs:simpleContent>
+			<xs:attribute name="message" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

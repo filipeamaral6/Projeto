@@ -9,6 +9,6 @@
         <connectionType>JDBC</connectionType>
         <UseSharedJndiConfig>false</UseSharedJndiConfig>
         <location>%%GLOBALS/JDBC_Connections/Url%%</location>
-        <user>%%GLOBALS/JDBC_Connections/username%%</user>
+        <user>root</user>
     </config>
 </BWSharedResource>
