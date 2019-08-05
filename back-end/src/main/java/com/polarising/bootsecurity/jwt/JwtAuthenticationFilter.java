@@ -69,8 +69,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME))
                 .sign(HMAC512(JwtProperties.SECRET.getBytes()));
         
+        String[] splitRole = principal.getAuthorities().toString().split("]");
+        splitRole = splitRole[0].split("_");
+        
         // Build response body
-        UserResponse userResponse = new UserResponse(principal.getUsername(), token, "User signed in sucessfully");
+        UserResponse userResponse = new UserResponse(principal.getUsername(), token, "User signed in sucessfully", splitRole[1]);
         String userJsonString = new Gson().toJson(userResponse);
 
         // Add token and body to the response

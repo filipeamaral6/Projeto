@@ -1,35 +1,24 @@
 package com.polarising.bootsecurity.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 public class User {
 	
 	private long id;
 	
 	private String username;
-	
+
 	private String password;
 	
 	private int active;
 	
-	private String roles;
+	private String role;
 	
-	private String permissions;
 
-	public User(String username, String password, String roles, String permissions) {
+	public User(String username, String password, String role) {
 		this.username = username;
 		this.password = password;
 		this.active = 1;
-		this.roles = roles;
-		this.permissions = permissions;
+		this.role = role;
 	}
 	
 	protected User(){}
@@ -66,33 +55,11 @@ public class User {
 		this.active = active;
 	}
 
-	public String getRoles() {
-		return roles;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRoles(String roles) {
-		this.roles = roles;
-	}
-
-	public String getPermissions() {
-		return permissions;
-	}
-
-	public void setPermissions(String permissions) {
-		this.permissions = permissions;
-	}
-	
-	public List<String> getRoleList() {
-		if(this.roles.length() > 0) {
-			return Arrays.asList(this.roles.split(","));
-		}
-		return new ArrayList<>();
-	}
-	
-	public List<String> getPermissionList() {
-		if(this.permissions.length() > 0) {
-			return Arrays.asList(this.permissions.split(","));
-		}
-		return new ArrayList<>();
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

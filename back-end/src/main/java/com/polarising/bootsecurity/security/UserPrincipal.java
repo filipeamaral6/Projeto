@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.polarising.bootsecurity.model.User;
 
 public class UserPrincipal implements UserDetails {
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	private User user;
@@ -19,24 +19,8 @@ public class UserPrincipal implements UserDetails {
 	public UserPrincipal(User user) {
 		this.user = user;
 	}
-	
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		
-		//Extract list of permissions
-		this.user.getPermissionList().forEach(p -> {
-			GrantedAuthority authority = new SimpleGrantedAuthority(p);
-			authorities.add(authority);
-		});
-		
-		//Extract list of roles
-		this.user.getRoleList().forEach(r-> {
-			GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
-			authorities.add(authority);
-		});
-		
-		return authorities;
+
+	public UserPrincipal() {
 	}
 
 	@Override
@@ -67,5 +51,18 @@ public class UserPrincipal implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return this.user.getActive() == 1;
+	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		
+		//Extract list of roles
+		String role = this.user.getRole();
+		
+		GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
+		authorities.add(authority);
+
+		return authorities;
 	}
 }

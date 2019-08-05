@@ -11,7 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.polarising.bootsecurity.db.UserRepository;
 import com.polarising.bootsecurity.jwt.JwtAuthenticationFilter;
 import com.polarising.bootsecurity.jwt.JwtAuthorizationFilter;
 
@@ -20,12 +19,9 @@ import com.polarising.bootsecurity.jwt.JwtAuthorizationFilter;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private UserPrincipalDetailsService userPrincipalDetailsService;
-	private UserRepository userRepository;
 
-	
-	public SecurityConfiguration(UserPrincipalDetailsService userPrincipalDetailsService, UserRepository userRepository) {
+	public SecurityConfiguration(UserPrincipalDetailsService userPrincipalDetailsService) {
 		this.userPrincipalDetailsService = userPrincipalDetailsService;
-		this.userRepository = userRepository;
 	}
 	
 	@Override
@@ -42,12 +38,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.addFilter(new JwtAuthenticationFilter(authenticationManager()))
-			.addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
+			.addFilter(new JwtAuthorizationFilter(authenticationManager(), userPrincipalDetailsService))
 			.authorizeRequests()
 			.antMatchers("/login").permitAll()
+			.antMatchers("/test").permitAll()
 			.antMatchers("/user").hasAnyRole("ADMIN","USER")
 			.antMatchers("/admin").hasRole("ADMIN")
-			.antMatchers("/users").hasRole("ADMIN");
+			.antMatchers("/users").hasRole("ADMIN")
+			.antMatchers("/users-testing").permitAll();
 	        
 	}
 	
@@ -61,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
-	PasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 }
