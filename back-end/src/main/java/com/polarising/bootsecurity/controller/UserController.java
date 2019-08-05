@@ -62,6 +62,4 @@ public class UserController {
     	return messageOut.getOut();
     }
     
-    @GetMapping("")
-    
 }

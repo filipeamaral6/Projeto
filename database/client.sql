@@ -6,7 +6,6 @@ CREATE TABLE `client` (
   `phone_number` bigint(20) DEFAULT NULL,
   `mobile_number` bigint(20) DEFAULT NULL,
   `address` varchar(255) NOT NULL,
-  `birthdate` date NOT NULL,
   `zip_code` varchar(100) NOT NULL,
   `county` varchar(100) NOT NULL,
   `country` varchar(255) NOT NULL,
