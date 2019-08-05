@@ -4,8 +4,8 @@
     <pd:name>Client/CreateClient/CreateClient.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:CreateClientInput"/>
-    <pd:startX>106</pd:startX>
-    <pd:startY>541</pd:startY>
+    <pd:startX>58</pd:startX>
+    <pd:startY>580</pd:startY>
     <pd:returnBindings>
         <pfx:CreateClientOutput>
             <output>
@@ -21,8 +21,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:CreateClientOutput"/>
-    <pd:endX>919</pd:endX>
-    <pd:endY>360</pd:endY>
+    <pd:endX>923</pd:endX>
+    <pd:endY>323</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -39,10 +39,10 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>469</pd:x>
-        <pd:y>72</pd:y>
-        <pd:width>270</pd:width>
-        <pd:height>148</pd:height>
+        <pd:x>411</pd:x>
+        <pd:y>14</pd:y>
+        <pd:width>602</pd:width>
+        <pd:height>174</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
         <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
@@ -57,7 +57,7 @@
         <pd:expanded>true</pd:expanded>
         <pd:transition>
             <pd:from>start</pd:from>
-            <pd:to>CreateClient</pd:to>
+            <pd:to>CreateUser</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
@@ -76,17 +76,32 @@
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
         </pd:transition>
+        <pd:transition>
+            <pd:from>CreateUser</pd:from>
+            <pd:to>SELECT_Last_Inserted_ID</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>SELECT_Last_Inserted_ID</pd:from>
+            <pd:to>CreateClient</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
         <pd:activity name="CreateClient">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>542</pd:x>
-            <pd:y>144</pd:y>
+            <pd:x>782</pd:x>
+            <pd:y>115</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
                 <emptyStrAsNil>false</emptyStrAsNil>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-                <statement>INSERT INTO client (full_name, nif, email, client_cc, username, phone_number, mobile_number, address, birthDate, zip_code, county, country, nationality, status, notification, login_password, transaction_password)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)</statement>
+                <statement>INSERT INTO client (full_name, nif, client_cc, phone_number, mobile_number, address, birthDate, zip_code, county, country, nationality, status, notification, transaction_password, user_id)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+</statement>
                 <Prepared_Param_DataType>
                     <parameter>
                         <parameterName>full_name</parameterName>
@@ -97,16 +112,8 @@
                         <dataType>INTEGER</dataType>
                     </parameter>
                     <parameter>
-                        <parameterName>email</parameterName>
-                        <dataType>VARCHAR</dataType>
-                    </parameter>
-                    <parameter>
                         <parameterName>client_cc</parameterName>
                         <dataType>INTEGER</dataType>
-                    </parameter>
-                    <parameter>
-                        <parameterName>username</parameterName>
-                        <dataType>VARCHAR</dataType>
                     </parameter>
                     <parameter>
                         <parameterName>phone_number</parameterName>
@@ -122,7 +129,7 @@
                     </parameter>
                     <parameter>
                         <parameterName>birthDate</parameterName>
-                        <dataType>VARCHAR</dataType>
+                        <dataType>DATE</dataType>
                     </parameter>
                     <parameter>
                         <parameterName>zip_code</parameterName>
@@ -149,12 +156,12 @@
                         <dataType>VARCHAR</dataType>
                     </parameter>
                     <parameter>
-                        <parameterName>login_password</parameterName>
+                        <parameterName>transaction_password</parameterName>
                         <dataType>VARCHAR</dataType>
                     </parameter>
                     <parameter>
-                        <parameterName>transaction_password</parameterName>
-                        <dataType>VARCHAR</dataType>
+                        <parameterName>user_id</parameterName>
+                        <dataType>INTEGER</dataType>
                     </parameter>
                 </Prepared_Param_DataType>
             </config>
@@ -180,16 +187,6 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </nif>
-                    <email>
-                        <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@email)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@email"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </email>
                     <client_cc>
                         <xsl:choose>
                             <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@client_cc)">
@@ -200,16 +197,6 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </client_cc>
-                    <username>
-                        <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@username)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@username"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </username>
                     <phone_number>
                         <xsl:choose>
                             <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@phone_number)">
@@ -310,16 +297,6 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </notification>
-                    <login_password>
-                        <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@login_password)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@login_password"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </login_password>
                     <transaction_password>
                         <xsl:choose>
                             <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@transaction_password)">
@@ -330,14 +307,24 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </transaction_password>
+                    <user_id>
+                        <xsl:choose>
+                            <xsl:when test="exists($SELECT_Last_Inserted_ID/resultSet/Record[1]/LAST_INSERT_ID)">
+                                <xsl:value-of select="$SELECT_Last_Inserted_ID/resultSet/Record[1]/LAST_INSERT_ID"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </user_id>
                 </jdbcUpdateActivityInput>
             </pd:inputBindings>
         </pd:activity>
         <pd:activity name="Success">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>667</pd:x>
-            <pd:y>144</pd:y>
+            <pd:x>915</pd:x>
+            <pd:y>107</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -349,12 +336,110 @@
                 </root>
             </pd:inputBindings>
         </pd:activity>
+        <pd:activity name="CreateUser">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>513</pd:x>
+            <pd:y>110</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <statement>INSERT INTO user (username, password, email, role) VALUES (?, ?, ?, ?)</statement>
+                <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>username</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>password</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>email</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>role</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput>
+                    <username>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@username)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@username"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </username>
+                    <password>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@login_password)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@login_password"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </password>
+                    <email>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@email)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@email"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </email>
+                    <role>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@role)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@role"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </role>
+                </jdbcUpdateActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="SELECT_Last_Inserted_ID">
+            <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+            <pd:x>652</pd:x>
+            <pd:y>107</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <maxRows>100</maxRows>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <statement>SELECT  LAST_INSERT_ID();</statement>
+                <oraObjects/>
+                <oraTables/>
+                <QueryOutputCachedSchemaColumns>LAST_INSERT_ID</QueryOutputCachedSchemaColumns>
+                <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+                <QueryOutputCachedSchemaDataTypesName>BIGINT UNSIGNED</QueryOutputCachedSchemaDataTypesName>
+                <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            </config>
+            <pd:inputBindings>
+                <jdbcQueryActivityInput/>
+            </pd:inputBindings>
+        </pd:activity>
     </pd:group>
     <pd:activity name="CLIENTCC_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>648</pd:x>
-        <pd:y>555</pd:y>
+        <pd:x>680</pd:x>
+        <pd:y>586</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -369,8 +454,8 @@
     <pd:activity name="NIF_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>639</pd:x>
-        <pd:y>449</pd:y>
+        <pd:x>624</pd:x>
+        <pd:y>469</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -385,8 +470,8 @@
     <pd:activity name="Query_ClientCC_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>277</pd:x>
-        <pd:y>543</pd:y>
+        <pd:x>261</pd:x>
+        <pd:y>578</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -414,17 +499,9 @@
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>email</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>client_cc</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>username</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>phone_number</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
@@ -438,9 +515,9 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>birthDate</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaColumns>birthdate</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>zip_code</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
@@ -466,10 +543,6 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>login_password</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>transaction_password</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -477,7 +550,11 @@
             <QueryOutputCachedSchemaColumns>created_at</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>user_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
@@ -497,8 +574,8 @@
     <pd:activity name="Query_NIF_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>292</pd:x>
-        <pd:y>411</pd:y>
+        <pd:x>271</pd:x>
+        <pd:y>430</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -526,17 +603,9 @@
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>email</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>client_cc</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>username</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>phone_number</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
@@ -550,9 +619,9 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>birthDate</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaColumns>birthdate</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>zip_code</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
@@ -578,10 +647,6 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>login_password</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>transaction_password</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -589,7 +654,11 @@
             <QueryOutputCachedSchemaColumns>created_at</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>user_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
@@ -609,15 +678,15 @@
     <pd:activity name="Query_Username_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>329</pd:x>
-        <pd:y>269</pd:y>
+        <pd:x>276</pd:x>
+        <pd:y>316</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT * FROM client WHERE username=?</statement>
+            <statement>SELECT * FROM user WHERE username=?</statement>
             <Prepared_Param_DataType>
                 <parameter>
                     <parameterName>username</parameterName>
@@ -630,78 +699,22 @@
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>full_name</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaColumns>username</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>nif</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaColumns>password</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>email</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>client_cc</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>username</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaColumns>role</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>phone_number</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>mobile_number</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>address</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>birthDate</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>zip_code</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>county</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>country</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>nationality</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>notification</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>login_password</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>transaction_password</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>created_at</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
@@ -721,8 +734,8 @@
     <pd:activity name="Username_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>628</pd:x>
-        <pd:y>318</pd:y>
+        <pd:x>611</pd:x>
+        <pd:y>358</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -730,6 +743,78 @@
             <root>
                 <message>
                     <xsl:value-of select="&quot;O username que introduziu já existe!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Query_email_EXISTS">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>318</pd:x>
+        <pd:y>198</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM user WHERE email=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>email</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>username</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>password</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>email</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>role</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <email>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@email)">
+                            <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@email"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </email>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Email_EXISTS">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>615</pd:x>
+        <pd:y>255</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="&quot;O email que introduziu já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -796,7 +881,7 @@
     </pd:transition>
     <pd:transition>
         <pd:from>Query_Username_EXISTS</pd:from>
-        <pd:to>Group</pd:to>
+        <pd:to>Query_email_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
@@ -816,5 +901,28 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_email_EXISTS</pd:from>
+        <pd:to>Email_EXISTS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($Query_email_EXISTS/resultSet/Record)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Email_EXISTS</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_email_EXISTS</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>not(exists($Query_email_EXISTS/resultSet/Record))</pd:xpath>
     </pd:transition>
 </pd:ProcessDefinition>

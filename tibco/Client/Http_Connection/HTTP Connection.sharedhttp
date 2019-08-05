@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns0:httpSharedResource xmlns:ns0="www.tibco.com/shared/HTTPConnection">
     <config>
-        <Host>%%GLOBALS/Host%%</Host>
+        <Host>localhost</Host>
         <serverType>HttpComponent</serverType>
-        <Port>%%GLOBALS/HTTP_Connections/Client/Client_Port%%</Port>
+        <Port>8081</Port>
         <HttpConnectionProperties>
             <row>
                 <PropertyName>uriEncoding</PropertyName>
@@ -26,7 +26,5 @@
                 <PropertyDefaultValue>60000</PropertyDefaultValue>
             </row>
         </HttpConnectionProperties>
-        <useSsl>false</useSsl>
-        <ns1:ssl xmlns:ns1="http://www.tibco.com/xmlns/aemeta/services/2002"/>
     </config>
 </ns0:httpSharedResource>

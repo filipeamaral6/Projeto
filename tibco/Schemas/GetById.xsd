@@ -9,12 +9,18 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="getById"/>
+				<xs:element ref="user_id"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="getById">
 		<xs:complexType>
 			<xs:attribute name="id" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="user_id">
+		<xs:complexType>
+			<xs:attribute name="user_id" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

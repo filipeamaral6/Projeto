@@ -5,7 +5,7 @@
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetClientByIdInput"/>
     <pd:startX>110</pd:startX>
-    <pd:startY>171</pd:startY>
+    <pd:startY>170</pd:startY>
     <pd:returnBindings>
         <pfx:GetClientByIdOutput>
             <output>
@@ -44,7 +44,7 @@
                                 <xsl:value-of select="address"/>
                             </xsl:attribute>
                             <xsl:attribute name="birthDate">
-                                <xsl:value-of select="birthDate"/>
+                                <xsl:value-of select="birthdate"/>
                             </xsl:attribute>
                             <xsl:attribute name="zip_code">
                                 <xsl:value-of select="zip_code"/>
@@ -64,17 +64,18 @@
                             <xsl:attribute name="notification">
                                 <xsl:value-of select="notification"/>
                             </xsl:attribute>
-                            <xsl:attribute name="login_password">
-                                <xsl:value-of select="login_password"/>
-                            </xsl:attribute>
                             <xsl:attribute name="transaction_password">
                                 <xsl:value-of select="transaction_password"/>
                             </xsl:attribute>
-                            <xsl:if test="created_at">
-                                <xsl:attribute name="created_at">
-                                    <xsl:value-of select="created_at"/>
-                                </xsl:attribute>
-                            </xsl:if>
+                            <xsl:attribute name="created_at">
+                                <xsl:value-of select="created_at"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="user_id">
+                                <xsl:value-of select="user_id"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="role">
+                                <xsl:value-of select="role"/>
+                            </xsl:attribute>
                         </ns2:inputClient>
                     </xsl:for-each>
                     <xsl:choose>
@@ -92,26 +93,28 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetClientByIdOutput"/>
-    <pd:endX>533</pd:endX>
-    <pd:endY>172</pd:endY>
+    <pd:endX>539</pd:endX>
+    <pd:endY>170</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677235789</pd:targetNamespace>
     <pd:activity name="Query_ClientById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>321</pd:x>
-        <pd:y>171</pd:y>
+        <pd:x>317</pd:x>
+        <pd:y>172</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT * FROM client WHERE id=?</statement>
+            <statement>SELECT client.*, user.username, user.email, user.password, user.role FROM client
+JOIN user ON client.user_id=user.id
+WHERE user_id=?</statement>
             <Prepared_Param_DataType>
                 <parameter>
-                    <parameterName>id</parameterName>
+                    <parameterName>user_id</parameterName>
                     <dataType>INTEGER</dataType>
                 </parameter>
             </Prepared_Param_DataType>
@@ -129,17 +132,9 @@
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>email</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>client_cc</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>username</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>phone_number</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
@@ -153,9 +148,9 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>birthDate</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaColumns>birthdate</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>zip_code</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
@@ -181,10 +176,6 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>login_password</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>transaction_password</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -192,11 +183,31 @@
             <QueryOutputCachedSchemaColumns>created_at</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>user_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>username</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>email</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>password</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>role</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
-                <id>
+                <user_id>
                     <xsl:choose>
                         <xsl:when test="exists($Start/pfx:GetClientByIdInput/input/ns:getById/@id)">
                             <xsl:value-of select="$Start/pfx:GetClientByIdInput/input/ns:getById/@id"/>
@@ -205,7 +216,7 @@
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
-                </id>
+                </user_id>
             </jdbcQueryActivityInput>
         </pd:inputBindings>
     </pd:activity>

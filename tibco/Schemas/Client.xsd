@@ -34,6 +34,8 @@
 			<xs:attribute name="login_password" type="xs:string"/>
 			<xs:attribute name="transaction_password" type="xs:string"/>
 			<xs:attribute name="created_at" type="xs:string"/>
+			<xs:attribute name="user_id" type="xs:string"/>
+			<xs:attribute name="role" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="outputClient">

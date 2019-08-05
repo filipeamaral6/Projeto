@@ -9,7 +9,7 @@
             <row isDefault="true" groupName="Default"/>
         </groups>
         <name>Service</name>
-        <serviceChange>Mon Aug 05 11:55:11 BST 2019</serviceChange>
+        <serviceChange>Mon Aug 05 17:53:50 BST 2019</serviceChange>
         <resourceType>service.definition</resourceType>
         <interfaceImpl>
             <tab>
@@ -39,7 +39,7 @@
                                                     <tabName>soap.service.transport.ui.transport.tab.label</tabName>
                                                     <tabType>transport</tabType>
                                                     <config>
-                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <sharedChannel>/Client/Http_Connection/HTTP Connection.sharedhttp</sharedChannel>
                                                         <transport>
                                                             <config>
                                                                 <useBasicAuthentication>false</useBasicAuthentication>
@@ -107,7 +107,7 @@
                                                     <tabName>soap.service.transport.ui.transport.tab.label</tabName>
                                                     <tabType>transport</tabType>
                                                     <config>
-                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <sharedChannel>/Client/Http_Connection/HTTP Connection.sharedhttp</sharedChannel>
                                                         <transport>
                                                             <config>
                                                                 <useBasicAuthentication>false</useBasicAuthentication>
@@ -175,7 +175,7 @@
                                                     <tabName>soap.service.transport.ui.transport.tab.label</tabName>
                                                     <tabType>transport</tabType>
                                                     <config>
-                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <sharedChannel>/Client/Http_Connection/HTTP Connection.sharedhttp</sharedChannel>
                                                         <transport>
                                                             <config>
                                                                 <useBasicAuthentication>false</useBasicAuthentication>
@@ -243,7 +243,7 @@
                                                     <tabName>soap.service.transport.ui.transport.tab.label</tabName>
                                                     <tabType>transport</tabType>
                                                     <config>
-                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <sharedChannel>/Client/Http_Connection/HTTP Connection.sharedhttp</sharedChannel>
                                                         <transport>
                                                             <config>
                                                                 <useBasicAuthentication>false</useBasicAuthentication>
@@ -311,7 +311,7 @@
                                                     <tabName>soap.service.transport.ui.transport.tab.label</tabName>
                                                     <tabType>transport</tabType>
                                                     <config>
-                                                        <sharedChannel>/Client/Http_Connection/Client_Http_Connection.sharedhttp</sharedChannel>
+                                                        <sharedChannel>/Client/Http_Connection/HTTP Connection.sharedhttp</sharedChannel>
                                                         <transport>
                                                             <config>
                                                                 <useBasicAuthentication>false</useBasicAuthentication>
