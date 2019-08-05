@@ -4,13 +4,13 @@
     <pd:name>Client/UpdateClient/UpdateClient.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:UpdateClientInput"/>
-    <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
+    <pd:startX>119</pd:startX>
+    <pd:startY>101</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:UpdateClientOutput"/>
-    <pd:endX>450</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endX>519</pd:endX>
+    <pd:endY>105</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677297813</pd:targetNamespace>

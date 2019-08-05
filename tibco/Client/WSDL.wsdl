@@ -14,10 +14,10 @@
         <part name="output" element="ns4:root"/>
     </message>
     <message name="GetClientByIdInput">
-        <part name="part1" element="ns5:getById"/>
+        <part name="input" element="ns5:getById"/>
     </message>
     <message name="GetClientByIdOutput">
-        <part name="output" element="ns4:inputClient"/>
+        <part name="output" element="ns4:root"/>
     </message>
     <message name="UpdateClientInput">
         <part name="input" element="ns4:inputClient"/>
@@ -35,7 +35,7 @@
         <part name="input" element="ns6:GetByClientCC"/>
     </message>
     <message name="GetClientByCcOutput">
-        <part name="output" element="ns4:inputClient"/>
+        <part name="output" element="ns4:root"/>
     </message>
     <portType name="PortType_CreateClient">
         <operation name="Operation">
