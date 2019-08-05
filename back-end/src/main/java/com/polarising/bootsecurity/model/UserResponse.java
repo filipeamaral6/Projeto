@@ -17,11 +17,14 @@ public class UserResponse {
 	private String token;
 	
 	private String message;
+	
+	private String role;
 
-	public UserResponse(String username, String token, String message) {
+	public UserResponse(String username, String token, String message, String role) {
 		this.username = username;
 		this.token = token;
 		this.message = message;
+		this.role = role;
 	}
 	
 	protected UserResponse(){}
@@ -49,4 +52,14 @@ public class UserResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	
 }
