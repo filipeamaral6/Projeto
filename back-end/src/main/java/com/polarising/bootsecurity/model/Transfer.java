@@ -7,11 +7,11 @@ public class Transfer {
 
 	private Long id;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private Transaction transation;
 
-	@NotBlank(message="Campo obrigatório")
-	@Size(min = 25, max = 25, message = "Número de caracteres obrigatórios (25)")
+	@NotBlank(message="${app.model.message.required}")
+	@Size(min = 25, max = 25, message = "${app.model.message.length}25")
 	private String destinationIBAN;
 
 	private Long employeeId;

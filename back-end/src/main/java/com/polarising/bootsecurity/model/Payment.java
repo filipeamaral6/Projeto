@@ -7,15 +7,15 @@ public class Payment {
 	
 	private Long id;
 	
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private Transaction transation;
 
-	@NotBlank(message="Campo obrigatório")
-	@Size(min=5, max=5, message="Número de caracteres obrigatorios (5)")
+	@NotBlank(message="${app.model.message.required}")
+	@Size(min=5, max=5, message="${app.model.message.length}5")
 	private Long entity;
 
-	@NotBlank(message="Campo obrigatório")
-	@Size(min=9, max=9, message="Número de caracteres obrigatórios (9)")
+	@NotBlank(message="${app.model.message.required}")
+	@Size(min=9, max=9, message="${app.model.message.length}9")
 	private Long reference;
 
 	// Add Payment

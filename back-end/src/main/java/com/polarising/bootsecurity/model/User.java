@@ -14,19 +14,19 @@ public class User {
 	
 	private long id;
 	
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String username;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String password;
 	
-	@NotBlank(message="Campo obrigatório")
-	@Email(message="Formato inválido")
+	@NotBlank(message="${app.model.message.required}")
+	@Email(message="${app.model.message.format}")
 	private String email;
 	
 	private int active;
 	
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String role;
 	
 

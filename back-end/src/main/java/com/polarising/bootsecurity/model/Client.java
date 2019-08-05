@@ -7,45 +7,45 @@ import javax.validation.constraints.Size;
 
 public class Client {
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private User user;
 
 	private Long id;
 
-	@NotBlank(message="Campo obrigatório")
-	@Size(max = 200, message="O número máximo de caracteres é 200")
+	@NotBlank(message="${app.model.message.required}")
+	@Size(max = 200, message="${app.model.message.max}200")
 	private String fullName;
 
-	@NotBlank(message="Campo obrigatório")
-	@Size(min = 9, max = 9, message="Número de caracteres obrigatórios (9)")
+	@NotBlank(message="${app.model.message.required}")
+	@Size(min = 9, max = 9, message="${app.model.message.length}9")
 	private Long nif;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private Date birthdate;
 
 	private Long phoneNumber;
 
 	private Long mobileNumber;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String address;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String county;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String country;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String nationality;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String status;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String notification;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String transactionPassword;
 
 	private Date createdAt;

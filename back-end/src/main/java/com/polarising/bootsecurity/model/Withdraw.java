@@ -6,10 +6,10 @@ public class Withdraw {
 
 	private Long id;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private Transaction transation;
 
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private Long employeeId;
 
 	// Add Withdraw

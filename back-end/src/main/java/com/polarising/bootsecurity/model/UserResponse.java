@@ -4,16 +4,16 @@ import javax.validation.constraints.NotBlank;
 
 public class UserResponse {
 	
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String username;
 	
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String token;
 	
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String message;
 	
-	@NotBlank(message="Campo obrigatório")
+	@NotBlank(message="${app.model.message.required}")
 	private String role;
 
 	public UserResponse(String username, String token, String message, String role) {

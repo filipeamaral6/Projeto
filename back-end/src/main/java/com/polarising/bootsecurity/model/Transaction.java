@@ -9,14 +9,14 @@ public class Transaction {
 	
 	private Long id;
 	
-	@NotBlank(message = "Campo obrigatório")
+	@NotBlank(message = "${app.model.message.required}")
 	private double value;
 	
-	@NotBlank(message = "Campo obrigatório")
-	@Size(min = 25, max = 25, message="Número de caracteres obrigatórios (25)")
+	@NotBlank(message = "${app.model.message.required}")
+	@Size(min = 25, max = 25, message="${app.model.message.length}25")
 	private String accountIBAN;
 
-	@Size(max = 200, message="Número de caracteres máximo (200)")
+	@Size(max = 200, message="${app.model.message.max}200")
 	private String description;
 	
 	private Date createdAt;
