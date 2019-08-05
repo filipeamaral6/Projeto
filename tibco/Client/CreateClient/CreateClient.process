@@ -79,7 +79,7 @@
         <pd:activity name="CreateClient">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>543</pd:x>
+            <pd:x>542</pd:x>
             <pd:y>144</pd:y>
             <config>
                 <timeout>10</timeout>

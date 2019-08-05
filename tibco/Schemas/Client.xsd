@@ -15,6 +15,7 @@
 	</xs:element>
 	<xs:element name="inputClient">
 		<xs:complexType>
+			<xs:attribute name="id" type="xs:string"/>
 			<xs:attribute name="full_name" type="xs:string"/>
 			<xs:attribute name="nif" type="xs:string"/>
 			<xs:attribute name="email" type="xs:string"/>
