@@ -7,16 +7,17 @@ public class Deposit {
 
 	private Long id;
 	
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
 	private Transaction transation;
 
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
 	private Long employeeId;
 
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
+	@Size(max = 200, message="Número de caracteres máximo (200)")
 	private String depositerName;
 
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
 	@Size(max = 8, min = 8, message = "Número de caracteres obrigatórios (8)")
 	private Long depositerCC;
 

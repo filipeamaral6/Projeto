@@ -1,5 +1,6 @@
 package com.polarising.bootsecurity.model;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +14,19 @@ public class User {
 	
 	private long id;
 	
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
 	private String username;
 
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
 	private String password;
 	
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
+	@Email(message="Formato inválido")
 	private String email;
 	
 	private int active;
 	
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
 	private String role;
 	
 

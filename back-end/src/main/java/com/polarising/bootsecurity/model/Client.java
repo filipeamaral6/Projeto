@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 public class Client {
 
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
 	private User user;
 
 	private Long id;

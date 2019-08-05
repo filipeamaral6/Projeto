@@ -5,13 +5,13 @@ import javax.validation.constraints.Size;
 
 public class Employee {
 
-	@NotBlank
+	@NotBlank(message="Campo obrigatório")
 	private User user;
 
 	private Long id;
 
 	@NotBlank(message = "Campo obrigatório")
-	@Size(max = 200, message = "O número máximo de caracteres é 200")
+	@Size(max = 200, message = "Número de caracteres máximo (200)")
 	private String fullName;
 
 	// Add Employee

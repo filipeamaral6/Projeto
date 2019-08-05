@@ -1,13 +1,19 @@
 package com.polarising.bootsecurity.model;
 
+import javax.validation.constraints.NotBlank;
+
 public class UserResponse {
 	
+	@NotBlank(message="Campo obrigatório")
 	private String username;
 	
+	@NotBlank(message="Campo obrigatório")
 	private String token;
 	
+	@NotBlank(message="Campo obrigatório")
 	private String message;
 	
+	@NotBlank(message="Campo obrigatório")
 	private String role;
 
 	public UserResponse(String username, String token, String message, String role) {
