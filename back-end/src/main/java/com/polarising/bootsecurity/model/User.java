@@ -1,22 +1,37 @@
 package com.polarising.bootsecurity.model;
 
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.polarising.bootsecurity.security.SecurityConfiguration;
 
 public class User {
 	
+	@Autowired
+	private SecurityConfiguration securityConfig;
+	
 	private long id;
 	
+	@NotBlank
 	private String username;
 
+	@NotBlank
 	private String password;
+	
+	@NotBlank
+	private String email;
 	
 	private int active;
 	
+	@NotBlank
 	private String role;
 	
 
-	public User(String username, String password, String role) {
+	public User(String username, String password, String email, String role) {
 		this.username = username;
-		this.password = password;
+		this.password = securityConfig.passwordEncoder().encode(password);
+		this.email = email;
 		this.active = 1;
 		this.role = role;
 	}
@@ -62,4 +77,14 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 }

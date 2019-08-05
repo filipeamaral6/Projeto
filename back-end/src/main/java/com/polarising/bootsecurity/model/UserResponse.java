@@ -1,15 +1,5 @@
 package com.polarising.bootsecurity.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class UserResponse {
 	
 	private String username;
@@ -60,6 +50,4 @@ public class UserResponse {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	
 }

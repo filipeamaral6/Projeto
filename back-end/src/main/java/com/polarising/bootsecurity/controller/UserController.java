@@ -28,7 +28,7 @@ public class UserController {
 //	}
 
 	@Autowired
-	SecurityConfiguration securityConfiguration;
+	private SecurityConfiguration securityConfiguration;
 	
     @GetMapping("admin")
     public String test1(){
@@ -42,8 +42,8 @@ public class UserController {
     
     @GetMapping("users-testing")
     public List<User> usersTesting() {
-    	User user = new User("user", securityConfiguration.passwordEncoder().encode("user"), "USER" );
-    	User admin = new User("admin", securityConfiguration.passwordEncoder().encode("admin"), "ADMIN" );
+    	User user = new User("user", securityConfiguration.passwordEncoder().encode("user"), "user@bankrising.com", "USER" );
+    	User admin = new User("admin", securityConfiguration.passwordEncoder().encode("admin"), "admin@bankrising.com", "ADMIN" );
     	List<User> users = Arrays.asList(user,admin);
     	return users;
     }
