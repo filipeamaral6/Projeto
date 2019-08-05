@@ -9,88 +9,99 @@
     <pd:returnBindings>
         <pfx:GetAllClientsOutput>
             <output>
-                <xsl:for-each select="$Query_SelectAllClients/resultSet/Record">
-                    <ns:inputClient>
-                        <xsl:attribute name="id">
-                            <xsl:value-of select="id"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="full_name">
-                            <xsl:value-of select="full_name"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="nif">
-                            <xsl:value-of select="nif"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="email">
-                            <xsl:value-of select="email"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="client_cc">
-                            <xsl:value-of select="client_cc"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="username">
-                            <xsl:value-of select="username"/>
-                        </xsl:attribute>
-                        <xsl:if test="phone_number">
-                            <xsl:attribute name="phone_number">
-                                <xsl:value-of select="phone_number"/>
+                <ns:root>
+                    <xsl:for-each select="$Query_SelectAllClients/resultSet/Record">
+                        <ns:inputClient>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="id"/>
                             </xsl:attribute>
-                        </xsl:if>
-                        <xsl:if test="mobile_number">
-                            <xsl:attribute name="mobile_number">
-                                <xsl:value-of select="mobile_number"/>
+                            <xsl:attribute name="full_name">
+                                <xsl:value-of select="full_name"/>
                             </xsl:attribute>
-                        </xsl:if>
-                        <xsl:attribute name="address">
-                            <xsl:value-of select="address"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="birthDate">
-                            <xsl:value-of select="birthDate"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="zip_code">
-                            <xsl:value-of select="zip_code"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="county">
-                            <xsl:value-of select="county"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="country">
-                            <xsl:value-of select="country"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="nationality">
-                            <xsl:value-of select="nationality"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="status">
-                            <xsl:value-of select="status"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="notification">
-                            <xsl:value-of select="notification"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="login_password">
-                            <xsl:value-of select="login_password"/>
-                        </xsl:attribute>
-                        <xsl:attribute name="transaction_password">
-                            <xsl:value-of select="transaction_password"/>
-                        </xsl:attribute>
-                        <xsl:if test="created_at">
-                            <xsl:attribute name="created_at">
-                                <xsl:value-of select="created_at"/>
+                            <xsl:attribute name="nif">
+                                <xsl:value-of select="nif"/>
                             </xsl:attribute>
-                        </xsl:if>
-                    </ns:inputClient>
-                </xsl:for-each>
+                            <xsl:attribute name="email">
+                                <xsl:value-of select="email"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="client_cc">
+                                <xsl:value-of select="client_cc"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="username">
+                                <xsl:value-of select="username"/>
+                            </xsl:attribute>
+                            <xsl:if test="phone_number">
+                                <xsl:attribute name="phone_number">
+                                    <xsl:value-of select="phone_number"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="mobile_number">
+                                <xsl:attribute name="mobile_number">
+                                    <xsl:value-of select="mobile_number"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:attribute name="address">
+                                <xsl:value-of select="address"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="birthDate">
+                                <xsl:value-of select="birthDate"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="zip_code">
+                                <xsl:value-of select="zip_code"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="county">
+                                <xsl:value-of select="county"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="country">
+                                <xsl:value-of select="country"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="nationality">
+                                <xsl:value-of select="nationality"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="status">
+                                <xsl:value-of select="status"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="notification">
+                                <xsl:value-of select="notification"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="login_password">
+                                <xsl:value-of select="login_password"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="transaction_password">
+                                <xsl:value-of select="transaction_password"/>
+                            </xsl:attribute>
+                            <xsl:if test="created_at">
+                                <xsl:attribute name="created_at">
+                                    <xsl:value-of select="created_at"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </ns:inputClient>
+                    </xsl:for-each>
+                    <xsl:choose>
+                        <xsl:when test="not(exists($Query_SelectAllClients/resultSet/Record))">
+                            <ns:outputClient>
+                                <xsl:attribute name="message">
+                                    <xsl:value-of select="&quot;Não foram encontrados resultados!&quot;"/>
+                                </xsl:attribute>
+                            </ns:outputClient>
+                        </xsl:when>
+                    </xsl:choose>
+                </ns:root>
             </output>
         </pfx:GetAllClientsOutput>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllClientsOutput"/>
-    <pd:endX>560</pd:endX>
-    <pd:endY>138</pd:endY>
+    <pd:endX>563</pd:endX>
+    <pd:endY>130</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677277982</pd:targetNamespace>
     <pd:activity name="Query_SelectAllClients">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>347</pd:x>
-        <pd:y>127</pd:y>
+        <pd:x>345</pd:x>
+        <pd:y>125</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
