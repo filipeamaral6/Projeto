@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670608293" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670608293" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:ns1="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <wsdl:import namespace="http://xmlns.example.com/1564670608293" location="/Client/WSDL.wsdl"/>
     <pd:name>Client/CreateClient/CreateClient.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:CreateClientInput"/>
-    <pd:startX>60</pd:startX>
-    <pd:startY>380</pd:startY>
+    <pd:startX>106</pd:startX>
+    <pd:startY>541</pd:startY>
     <pd:returnBindings>
         <pfx:CreateClientOutput>
             <output>
-                <ns:outputClient>
+                <ns1:outputClient>
                     <xsl:if test="$message/root/message">
                         <xsl:attribute name="message">
                             <xsl:value-of select="$message/root/message"/>
                         </xsl:attribute>
                     </xsl:if>
-                </ns:outputClient>
+                </ns1:outputClient>
             </output>
         </pfx:CreateClientOutput>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:CreateClientOutput"/>
-    <pd:endX>862</pd:endX>
-    <pd:endY>286</pd:endY>
+    <pd:endX>919</pd:endX>
+    <pd:endY>360</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -39,13 +39,14 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>426</pd:x>
-        <pd:y>9</pd:y>
+        <pd:x>469</pd:x>
+        <pd:y>72</pd:y>
         <pd:width>270</pd:width>
         <pd:height>148</pd:height>
-        <pd:collapsedWidth>52</pd:collapsedWidth>
-        <pd:collapsedHeight>69</pd:collapsedHeight>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
         <config>
             <pd:groupType>transactionGroup</pd:groupType>
             <pd:serializable>false</pd:serializable>
@@ -78,8 +79,8 @@
         <pd:activity name="CreateClient">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>503</pd:x>
-            <pd:y>79</pd:y>
+            <pd:x>543</pd:x>
+            <pd:y>144</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -161,8 +162,8 @@
                 <jdbcUpdateActivityInput>
                     <full_name>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@full_name)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@full_name"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@full_name)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@full_name"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -171,8 +172,8 @@
                     </full_name>
                     <nif>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@nif)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@nif"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@nif)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@nif"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -181,8 +182,8 @@
                     </nif>
                     <email>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@email)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@email"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@email)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@email"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -191,8 +192,8 @@
                     </email>
                     <client_cc>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@client_cc)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@client_cc"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@client_cc)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@client_cc"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -201,8 +202,8 @@
                     </client_cc>
                     <username>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@username)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@username"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@username)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@username"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -211,8 +212,8 @@
                     </username>
                     <phone_number>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@phone_number)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@phone_number"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@phone_number)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@phone_number"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -221,8 +222,8 @@
                     </phone_number>
                     <mobile_number>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@mobile_number)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@mobile_number"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@mobile_number)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@mobile_number"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -231,8 +232,8 @@
                     </mobile_number>
                     <address>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@address)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@address"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@address)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@address"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -241,8 +242,8 @@
                     </address>
                     <birthDate>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@birthDate)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@birthDate"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@birthDate)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@birthDate"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -251,8 +252,8 @@
                     </birthDate>
                     <zip_code>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@zip_code)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@zip_code"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@zip_code)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@zip_code"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -261,8 +262,8 @@
                     </zip_code>
                     <county>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@county)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@county"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@county)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@county"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -271,8 +272,8 @@
                     </county>
                     <country>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@country)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@country"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@country)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@country"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -281,8 +282,8 @@
                     </country>
                     <nationality>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@nationality)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@nationality"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@nationality)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@nationality"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -291,8 +292,8 @@
                     </nationality>
                     <status>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@status)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@status"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@status)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@status"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -301,8 +302,8 @@
                     </status>
                     <notification>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@notification)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@notification"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@notification)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@notification"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -311,8 +312,8 @@
                     </notification>
                     <login_password>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@login_password)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@login_password"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@login_password)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@login_password"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -321,8 +322,8 @@
                     </login_password>
                     <transaction_password>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@transaction_password)">
-                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@transaction_password"/>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@transaction_password)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@transaction_password"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -335,8 +336,8 @@
         <pd:activity name="Success">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>624</pd:x>
-            <pd:y>81</pd:y>
+            <pd:x>667</pd:x>
+            <pd:y>144</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -352,15 +353,15 @@
     <pd:activity name="CLIENTCC_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>541</pd:x>
-        <pd:y>380</pd:y>
+        <pd:x>648</pd:x>
+        <pd:y>555</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O número de indentificação civil que introduziu já está registado!&quot;"/>
+                    <xsl:value-of select="&quot;O número de indentificação civil que introduziu já foi registado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -368,15 +369,15 @@
     <pd:activity name="NIF_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>545</pd:x>
-        <pd:y>238</pd:y>
+        <pd:x>639</pd:x>
+        <pd:y>449</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O NIF que introduziu já está registado!&quot;"/>
+                    <xsl:value-of select="&quot;O NIF que introduziu já foi registado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -384,8 +385,8 @@
     <pd:activity name="Query_ClientCC_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>276</pd:x>
-        <pd:y>380</pd:y>
+        <pd:x>277</pd:x>
+        <pd:y>543</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -482,8 +483,8 @@
             <jdbcQueryActivityInput>
                 <client_cc>
                     <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@client_cc)">
-                            <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@client_cc"/>
+                        <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@client_cc)">
+                            <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@client_cc"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -496,8 +497,8 @@
     <pd:activity name="Query_NIF_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>304</pd:x>
-        <pd:y>227</pd:y>
+        <pd:x>292</pd:x>
+        <pd:y>411</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -594,8 +595,8 @@
             <jdbcQueryActivityInput>
                 <nif>
                     <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns:inputClient/@nif)">
-                            <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns:inputClient/@nif"/>
+                        <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@nif)">
+                            <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@nif"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -603,6 +604,134 @@
                     </xsl:choose>
                 </nif>
             </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Query_Username_EXISTS">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>329</pd:x>
+        <pd:y>269</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM client WHERE username=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>username</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>full_name</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>nif</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>email</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>client_cc</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>username</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>phone_number</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>mobile_number</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>address</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>birthDate</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>zip_code</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>county</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>country</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>nationality</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>notification</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>login_password</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>transaction_password</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>created_at</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <username>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@username)">
+                            <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@username"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </username>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Username_EXISTS">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>628</pd:x>
+        <pd:y>318</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="&quot;O username que introduziu já existe!&quot;"/>
+                </message>
+            </root>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>
@@ -659,10 +788,33 @@
     </pd:transition>
     <pd:transition>
         <pd:from>Query_NIF_EXISTS</pd:from>
-        <pd:to>Group</pd:to>
+        <pd:to>Query_Username_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>not(exists($Query_NIF_EXISTS/resultSet/Record/nif))</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_Username_EXISTS</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>not(exists($Query_Username_EXISTS/resultSet/Record/username))</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_Username_EXISTS</pd:from>
+        <pd:to>Username_EXISTS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($Query_Username_EXISTS/resultSet/Record/username)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Username_EXISTS</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
     </pd:transition>
 </pd:ProcessDefinition>

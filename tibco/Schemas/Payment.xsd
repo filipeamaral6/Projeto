@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	 xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd7"
-	 targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd7"
+	 xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd"
 	 elementFormDefault="qualified"
 	 attributeFormDefault="unqualified">
 	<xs:element name="root">

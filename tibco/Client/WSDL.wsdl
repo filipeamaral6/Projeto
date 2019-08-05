@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd" xmlns:tns="http://xmlns.example.com/1564670608293" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" targetNamespace="http://xmlns.example.com/1564670608293">
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" location="../Schemas/GetById.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" location="../Schemas/GetByClientCC.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd" location="../Schemas/Client.xsd"/>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns6="http://www.tibco.com/schemas/tibco/Schemas/GetByClientCC.xsd" xmlns:ns5="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd" xmlns:tns="http://xmlns.example.com/1564670608293" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" targetNamespace="http://xmlns.example.com/1564670608293">
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/GetByClientCC.xsd" location="../Schemas/GetByClientCC.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" location="../Schemas/Client.xsd"/>
     <message name="CreateClientInput">
-        <part name="input" element="ns:inputClient"/>
+        <part name="input" element="ns4:inputClient"/>
     </message>
     <message name="CreateClientOutput">
-        <part name="output" element="ns:outputClient"/>
+        <part name="output" element="ns4:outputClient"/>
     </message>
     <message name="GetAllClientsInput"/>
     <message name="GetAllClientsOutput">
-        <part name="output" element="ns:inputClient"/>
+        <part name="output" element="ns4:inputClient"/>
     </message>
     <message name="GetClientByIdInput">
-        <part name="part1" element="ns2:getById"/>
+        <part name="part1" element="ns5:getById"/>
     </message>
     <message name="GetClientByIdOutput">
-        <part name="output" element="ns:inputClient"/>
+        <part name="output" element="ns4:inputClient"/>
     </message>
-    <message name="UpdateClientInput"/>
-    <message name="UpdateClientOutput"/>
-    <message name="DeleteClientInput"/>
-    <message name="DeleteClientOutput"/>
+    <message name="UpdateClientInput">
+        <part name="input" element="ns4:inputClient"/>
+    </message>
+    <message name="UpdateClientOutput">
+        <part name="input" element="ns4:outputClient"/>
+    </message>
+    <message name="DeleteClientInput">
+        <part name="input" element="ns5:getById"/>
+    </message>
+    <message name="DeleteClientOutput">
+        <part name="output" element="ns4:outputClient"/>
+    </message>
     <message name="GetClientByCcInput">
-        <part name="input" element="ns3:GetByClientCC"/>
+        <part name="input" element="ns6:GetByClientCC"/>
     </message>
     <message name="GetClientByCcOutput">
-        <part name="output" element="ns:inputClient"/>
+        <part name="output" element="ns4:inputClient"/>
     </message>
     <portType name="PortType_CreateClient">
         <operation name="Operation">

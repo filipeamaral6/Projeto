@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	 xmlns="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd"
-	 targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd"
+	 xmlns="http://www.tibco.com/schemas/tibco/Schemas/GetByClientCC.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/GetByClientCC.xsd"
 	 elementFormDefault="qualified"
 	 attributeFormDefault="unqualified">
 	<xs:element name="root">
