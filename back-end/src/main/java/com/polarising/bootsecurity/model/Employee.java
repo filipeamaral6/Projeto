@@ -11,7 +11,7 @@ public class Employee {
 	private Long id;
 
 	@NotBlank(message = "${app.model.message.required}")
-	@Size(max = 200, message = "${app.model.message.max}200")
+	@Size(max = 200, message = "${app.model.message.max} 200")
 	private String fullName;
 
 	// Add Employee

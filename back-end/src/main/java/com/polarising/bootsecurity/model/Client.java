@@ -13,11 +13,11 @@ public class Client {
 	private Long id;
 
 	@NotBlank(message="${app.model.message.required}")
-	@Size(max = 200, message="${app.model.message.max}200")
+	@Size(max = 200, message="${app.model.message.max} 200")
 	private String fullName;
 
 	@NotBlank(message="${app.model.message.required}")
-	@Size(min = 9, max = 9, message="${app.model.message.length}9")
+	@Size(min = 9, max = 9, message="${app.model.message.length} 9")
 	private Long nif;
 
 	@NotBlank(message="${app.model.message.required}")

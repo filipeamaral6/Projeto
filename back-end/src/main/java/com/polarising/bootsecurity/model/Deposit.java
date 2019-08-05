@@ -14,11 +14,11 @@ public class Deposit {
 	private Long employeeId;
 
 	@NotBlank(message="${app.model.message.required}")
-	@Size(max = 200, message="${app.model.message.max}200")
+	@Size(max = 200, message="${app.model.message.max} 200")
 	private String depositerName;
 
 	@NotBlank(message="${app.model.message.required}")
-	@Size(max = 8, min = 8, message = "${app.model.message.length}8")
+	@Size(max = 8, min = 8, message = "${app.model.message.length} 8")
 	private Long depositerCC;
 
 	public Deposit(Transaction transation, Long employeeId, String depositerName, Long depositerCC) {

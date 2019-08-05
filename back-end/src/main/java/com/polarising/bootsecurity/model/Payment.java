@@ -11,11 +11,11 @@ public class Payment {
 	private Transaction transation;
 
 	@NotBlank(message="${app.model.message.required}")
-	@Size(min=5, max=5, message="${app.model.message.length}5")
+	@Size(min=5, max=5, message="${app.model.message.length} 5")
 	private Long entity;
 
 	@NotBlank(message="${app.model.message.required}")
-	@Size(min=9, max=9, message="${app.model.message.length}9")
+	@Size(min=9, max=9, message="${app.model.message.length} 9")
 	private Long reference;
 
 	// Add Payment

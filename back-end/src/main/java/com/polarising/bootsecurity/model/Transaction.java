@@ -13,10 +13,10 @@ public class Transaction {
 	private double value;
 	
 	@NotBlank(message = "${app.model.message.required}")
-	@Size(min = 25, max = 25, message="${app.model.message.length}25")
+	@Size(min = 25, max = 25, message="${app.model.message.length} 25")
 	private String accountIBAN;
 
-	@Size(max = 200, message="${app.model.message.max}200")
+	@Size(max = 200, message="${app.model.message.max} 200")
 	private String description;
 	
 	private Date createdAt;

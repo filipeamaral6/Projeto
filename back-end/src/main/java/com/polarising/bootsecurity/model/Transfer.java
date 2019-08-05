@@ -11,7 +11,7 @@ public class Transfer {
 	private Transaction transation;
 
 	@NotBlank(message="${app.model.message.required}")
-	@Size(min = 25, max = 25, message = "${app.model.message.length}25")
+	@Size(min = 25, max = 25, message = "${app.model.message.length} 25")
 	private String destinationIBAN;
 
 	private Long employeeId;
