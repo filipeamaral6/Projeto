@@ -49,8 +49,8 @@ public class ObjectFactory {
      * Create an instance of {@link Root }
      * 
      */
-//    public Root createRoot() {
-//        return new Root();
-//    }
+    public Root createRoot() {
+        return new Root();
+    }
 
 }

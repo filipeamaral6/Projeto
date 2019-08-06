@@ -1,5 +1,5 @@
 
-package com.tibco.schemas.bankrising.schemas.getbyid;
+package com.polarising.bootsecurity.soap.client.tibco.schemas.getbyid;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

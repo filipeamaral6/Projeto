@@ -5,8 +5,12 @@ import java.util.Date;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class Client {
+import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
 
+public class Client {
+	
+	private InputClient inputClient;
+	
 	@NotBlank(message="${app.model.message.required}")
 	private User user;
 
@@ -21,7 +25,7 @@ public class Client {
 	private Long nif;
 
 	@NotBlank(message="${app.model.message.required}")
-	private Date birthdate;
+	private String birthDate;
 
 	private Long phoneNumber;
 
@@ -47,19 +51,43 @@ public class Client {
 
 	@NotBlank(message="${app.model.message.required}")
 	private String transactionPassword;
+	
+	@NotBlank(message="${app.model.message.required}")
+	private String zipCode;
+	
+	@NotBlank(message="${app.model.message.required}")
+	private Long clientCC;
 
 	private Date createdAt;
+	
+	public Client(InputClient inputClient) {
+		this.user = new User(inputClient.getUsername(), inputClient.getLoginPassword(), inputClient.getEmail(), inputClient.getRole());
+		this.fullName = inputClient.getFullName();
+		this.nif = Long.parseLong(inputClient.getNif());
+		this.birthDate = inputClient.getBirthDate();
+		this.phoneNumber = Long.parseLong(inputClient.getPhoneNumber());
+		this.mobileNumber = Long.parseLong(inputClient.getMobileNumber());
+		this.address = inputClient.getAddress();
+		this.county = inputClient.getCounty();
+		this.country = inputClient.getCountry();
+		this.nationality = inputClient.getNationality();
+		this.status = inputClient.getStatus();
+		this.notification = inputClient.getNotification();
+		this.transactionPassword = inputClient.getTransactionPassword();
+		this.clientCC = Long.parseLong(inputClient.getZipCode());
+		this.zipCode = inputClient.getZipCode();
+	}
 
 
 	// Add Client
-	public Client(User user, String fullName, Long nif, Date birthdate, Long phoneNumber, Long mobileNumber,
+	public Client(String username, String password, String email, String role, String fullName, Long nif, String birthDate, Long phoneNumber, Long mobileNumber,
 			String address, String county, String country, String nationality, String status, String notification,
-			String transactionPassword) {
+			String transactionPassword, String zipCode, Long clientCC) {
 		super();
-		this.user = user;
+		this.user = new User(username, password, email, role);
 		this.fullName = fullName;
 		this.nif = nif;
-		this.birthdate = birthdate;
+		this.birthDate = birthDate;
 		this.phoneNumber = phoneNumber;
 		this.mobileNumber = mobileNumber;
 		this.address = address;
@@ -69,10 +97,12 @@ public class Client {
 		this.status = status;
 		this.notification = notification;
 		this.transactionPassword = transactionPassword;
+		this.zipCode = zipCode;
+		this.clientCC = clientCC;
 	}
 
 	// Get Client
-	public Client(User user, Long id, String fullName, Long nif, Date birthdate, Long phoneNumber, Long mobileNumber,
+	public Client(User user, Long id, String fullName, Long nif, String birthDate, Long phoneNumber, Long mobileNumber,
 			String address, String county, String country, String nationality, String status, String notification,
 			String transactionPassword, Date createdAt) {
 		super();
@@ -80,7 +110,7 @@ public class Client {
 		this.id = id;
 		this.fullName = fullName;
 		this.nif = nif;
-		this.birthdate = birthdate;
+		this.birthDate = birthDate;
 		this.phoneNumber = phoneNumber;
 		this.mobileNumber = mobileNumber;
 		this.address = address;
@@ -92,6 +122,28 @@ public class Client {
 		this.transactionPassword = transactionPassword;
 		this.createdAt = createdAt;
 	}
+	
+	
+
+	public Long getClientCC() {
+		return clientCC;
+	}
+
+
+	public void setClientCC(Long clientCC) {
+		this.clientCC = clientCC;
+	}
+
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
 
 	public Long getId() {
 		return id;
@@ -117,12 +169,12 @@ public class Client {
 		this.nif = nif;
 	}
 
-	public Date getBirthdate() {
-		return birthdate;
+	public String getbirthDate() {
+		return birthDate;
 	}
 
-	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
+	public void setbirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public Long getPhoneNumber() {

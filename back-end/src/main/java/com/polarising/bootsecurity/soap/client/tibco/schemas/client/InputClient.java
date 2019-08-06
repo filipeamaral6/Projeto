@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
+
 /**
  * <p>Java class for anonymous complex type.
  * 
@@ -101,6 +102,7 @@ public class InputClient {
      *     {@link String }
      *     
      */
+    
     public String getAddress() {
         return address;
     }
