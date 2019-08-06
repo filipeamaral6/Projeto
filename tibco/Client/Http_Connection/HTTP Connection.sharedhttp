@@ -3,7 +3,7 @@
     <config>
         <Host>localhost</Host>
         <serverType>HttpComponent</serverType>
-        <Port>8095</Port>
+        <Port>8081</Port>
         <HttpConnectionProperties>
             <row>
                 <PropertyName>uriEncoding</PropertyName>
