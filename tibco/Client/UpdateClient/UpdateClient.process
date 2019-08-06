@@ -5,7 +5,7 @@
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:UpdateClientInput"/>
     <pd:startX>39</pd:startX>
-    <pd:startY>884</pd:startY>
+    <pd:startY>877</pd:startY>
     <pd:returnBindings>
         <pfx:UpdateClientOutput>
             <input>
@@ -85,7 +85,7 @@
     <pd:activity name="Query_ClientById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>211</pd:x>
+        <pd:x>212</pd:x>
         <pd:y>743</pd:y>
         <config>
             <timeout>10</timeout>
@@ -190,7 +190,7 @@
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>216</pd:x>
-        <pd:y>413</pd:y>
+        <pd:y>414</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -290,11 +290,11 @@
             </jdbcQueryActivityInput>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="Query_Email_EXISTS">
+    <pd:activity name="QueryEmailEXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>216</pd:x>
-        <pd:y>633</pd:y>
+        <pd:x>213</pd:x>
+        <pd:y>631</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -349,8 +349,8 @@
     <pd:activity name="Query_Username_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>215</pd:x>
-        <pd:y>527</pd:y>
+        <pd:x>219</pd:x>
+        <pd:y>531</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -541,8 +541,8 @@
     <pd:activity name="Query_UserById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>208</pd:x>
-        <pd:y>885</pd:y>
+        <pd:x>214</pd:x>
+        <pd:y>879</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -552,7 +552,7 @@
             <statement>SELECT * FROM user WHERE id=?</statement>
             <Prepared_Param_DataType>
                 <parameter>
-                    <parameterName>user_id</parameterName>
+                    <parameterName>id</parameterName>
                     <dataType>INTEGER</dataType>
                 </parameter>
             </Prepared_Param_DataType>
@@ -581,7 +581,7 @@
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
-                <user_id>
+                <id>
                     <xsl:choose>
                         <xsl:when test="exists($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id)">
                             <xsl:value-of select="$Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id"/>
@@ -590,14 +590,14 @@
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
-                </user_id>
+                </id>
             </jdbcQueryActivityInput>
         </pd:inputBindings>
     </pd:activity>
     <pd:activity name="user_id_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>508</pd:x>
+        <pd:x>507</pd:x>
         <pd:y>875</pd:y>
         <config>
             <variableName>message</variableName>
@@ -907,7 +907,7 @@ WHERE user_id=?</statement>
         <pd:activity name="Update_User">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>518</pd:x>
+            <pd:x>519</pd:x>
             <pd:y>139</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -1019,35 +1019,11 @@ WHERE id=?</statement>
     </pd:transition>
     <pd:transition>
         <pd:from>Query_ClientById</pd:from>
-        <pd:to>Query_Email_EXISTS</pd:to>
+        <pd:to>QueryEmailEXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>exists($Query_ClientById/resultSet/Record)</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_Email_EXISTS</pd:from>
-        <pd:to>Email_EXISTS</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_Email_EXISTS/resultSet/Record)</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_Email_EXISTS</pd:from>
-        <pd:to>Query_Username_EXISTS</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_Email_EXISTS/resultSet/Record))</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_Username_EXISTS</pd:from>
-        <pd:to>Username_EXISTS</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_Username_EXISTS/resultSet/Record)</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Username_EXISTS</pd:from>
@@ -1064,43 +1040,11 @@ WHERE id=?</statement>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>Query_Username_EXISTS</pd:from>
-        <pd:to>Query_ClientCc_EXISTS</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_Username_EXISTS/resultSet/Record))</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_ClientCc_EXISTS</pd:from>
-        <pd:to>ClientCC_EXISTS</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_ClientCc_EXISTS/resultSet/Record)</pd:xpath>
-    </pd:transition>
-    <pd:transition>
         <pd:from>ClientCC_EXISTS</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_ClientCc_EXISTS</pd:from>
-        <pd:to>Query_Nif_EXISTS</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_ClientCc_EXISTS/resultSet/Record))</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_Nif_EXISTS</pd:from>
-        <pd:to>NIF_EXISTS</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_Nif_EXISTS/resultSet/Record)</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>NIF_EXISTS</pd:from>
@@ -1138,7 +1082,7 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_Nif_EXISTS/resultSet/Record))</pd:xpath>
+        <pd:xpath>($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id = $Query_Nif_EXISTS/resultSet/Record/user_id) or not(exists($Query_Nif_EXISTS/resultSet/Record))</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Group</pd:from>
@@ -1146,5 +1090,61 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_Username_EXISTS</pd:from>
+        <pd:to>Username_EXISTS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id !=$Query_Username_EXISTS/resultSet/Record/id</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>QueryEmailEXISTS</pd:from>
+        <pd:to>Query_Username_EXISTS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id =$QueryEmailEXISTS/resultSet/Record/id) or not(exists($QueryEmailEXISTS/resultSet/Record))</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_Username_EXISTS</pd:from>
+        <pd:to>Query_ClientCc_EXISTS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id = $Query_Username_EXISTS/resultSet/Record/id) or not(exists($Query_Username_EXISTS/resultSet/Record))</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_ClientCc_EXISTS</pd:from>
+        <pd:to>ClientCC_EXISTS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id !=$Query_ClientCc_EXISTS/resultSet/Record/user_id</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_ClientCc_EXISTS</pd:from>
+        <pd:to>Query_Nif_EXISTS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id = $Query_ClientCc_EXISTS/resultSet/Record/user_id) or not(exists($Query_ClientCc_EXISTS/resultSet/Record))</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_Nif_EXISTS</pd:from>
+        <pd:to>NIF_EXISTS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id !=$Query_Nif_EXISTS/resultSet/Record/user_id</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>QueryEmailEXISTS</pd:from>
+        <pd:to>Email_EXISTS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id !=$QueryEmailEXISTS/resultSet/Record/id</pd:xpath>
     </pd:transition>
 </pd:ProcessDefinition>

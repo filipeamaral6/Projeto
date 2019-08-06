@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670902359" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <wsdl:import namespace="http://xmlns.example.com/1564670902359" location="/Employee/WSDL.wsdl"/>
-    <pd:name>Employee/UpdateAccount/UpdateEmployee.process</pd:name>
+    <pd:name>Employee/UpdateEmployee/UpdateEmployee.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:UpdateEmployeeInput"/>
     <pd:startX>48</pd:startX>
@@ -149,8 +149,8 @@ WHERE user_id=?</statement>
         <pd:activity name="Update_User">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>500</pd:x>
-            <pd:y>112</pd:y>
+            <pd:x>497</pd:x>
+            <pd:y>115</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -225,8 +225,8 @@ WHERE id=?</statement>
                     </role>
                     <id>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@id)">
-                                <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@id"/>
+                            <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id)">
+                                <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -248,7 +248,7 @@ WHERE id=?</statement>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O email que introduziu já foi registado!&quot;"/>
+                    <xsl:value-of select="&quot;O email que introduziu já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -272,7 +272,7 @@ WHERE id=?</statement>
     <pd:activity name="Query_Email_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>299</pd:x>
+        <pd:x>300</pd:x>
         <pd:y>201</pd:y>
         <config>
             <timeout>10</timeout>
@@ -314,8 +314,8 @@ WHERE id=?</statement>
             <jdbcQueryActivityInput>
                 <email>
                     <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:UpdateClientInput/input/ns:inputClient/@email)">
-                            <xsl:value-of select="$Start/pfx:UpdateClientInput/input/ns:inputClient/@email"/>
+                        <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@email)">
+                            <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@email"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -329,7 +329,7 @@ WHERE id=?</statement>
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>277</pd:x>
-        <pd:y>629</pd:y>
+        <pd:y>632</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -474,8 +474,8 @@ WHERE id=?</statement>
             <jdbcQueryActivityInput>
                 <username>
                     <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:UpdateClientInput/input/ns:inputClient/@username)">
-                            <xsl:value-of select="$Start/pfx:UpdateClientInput/input/ns:inputClient/@username"/>
+                        <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@username)">
+                            <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@username"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -553,7 +553,7 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_Username_EXISTS-1/resultSet/Record)</pd:xpath>
+        <pd:xpath>$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id !=$Query_Username_EXISTS-1/resultSet/Record/id</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Username_EXISTS</pd:from>
@@ -591,7 +591,7 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_Username_EXISTS-1/resultSet/Record))</pd:xpath>
+        <pd:xpath>($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id = $Query_Username_EXISTS-1/resultSet/Record/id) or not(exists($Query_Username_EXISTS-1/resultSet/Record))</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Query_Email_EXISTS</pd:from>
@@ -599,7 +599,7 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_Email_EXISTS/resultSet/Record)</pd:xpath>
+        <pd:xpath>$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id !=$Query_Email_EXISTS/resultSet/Record/id</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Email_EXISTS</pd:from>
@@ -614,7 +614,7 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_Email_EXISTS/resultSet/Record))</pd:xpath>
+        <pd:xpath>($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id = $Query_Email_EXISTS/resultSet/Record/id) or not(exists($Query_Email_EXISTS/resultSet/Record))</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Group</pd:from>
