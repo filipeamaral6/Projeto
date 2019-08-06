@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Deposit.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Deposit.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="inputDeposit" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputDeposit" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="inputDeposit">
+		<xs:complexType>
+			<xs:attribute name="employee_id" type="xs:string"/>
+			<xs:attribute name="transaction_id" type="xs:string"/>
+			<xs:attribute name="depositer_name" type="xs:string"/>
+			<xs:attribute name="depositer_cc_number" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="outputDeposit">
+		<xs:complexType>
+			<xs:attribute name="message" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

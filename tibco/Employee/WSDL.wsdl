@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd3" xmlns:tns="http://xmlns.example.com/1564670902359" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" targetNamespace="http://xmlns.example.com/1564670902359">
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" location="../Schemas/GetById.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd3" location="../Schemas/Employee.xsd"/>
+    <message name="CreateEmployeeInput">
+        <part name="input" element="ns:InputEmployee"/>
+    </message>
+    <message name="CreateEmployeeOutput">
+        <part name="output" element="ns:OutputEmployee"/>
+    </message>
+    <message name="GetEmployeeByIdInput">
+        <part name="input" element="ns2:getById"/>
+    </message>
+    <message name="GetEmployeeByIdOutput">
+        <part name="output" element="ns:InputEmployee"/>
+    </message>
+    <message name="GetAllEmployeesInput"/>
+    <message name="GetAllEmployeesOutput">
+        <part name="output" element="ns:InputEmployee"/>
+    </message>
+    <message name="UpdateEmployeeInput">
+        <part name="input" element="ns:InputEmployee"/>
+    </message>
+    <message name="UpdateEmployeeOuput">
+        <part name="output" element="ns:OutputEmployee"/>
+    </message>
+    <portType name="PortType_Employee">
+        <operation name="Operation">
+            <input message="tns:CreateEmployeeInput"/>
+            <output message="tns:CreateEmployeeOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetEmployee">
+        <operation name="Operation">
+            <input message="tns:GetEmployeeByIdInput"/>
+            <output message="tns:GetEmployeeByIdOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_UpdateEmployee">
+        <operation name="Operation">
+            <input message="tns:UpdateEmployeeInput"/>
+            <output message="tns:UpdateEmployeeOuput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetAllEmployees">
+        <operation name="Operation">
+            <input message="tns:GetAllEmployeesInput"/>
+            <output message="tns:GetAllEmployeesOutput"/>
+        </operation>
+    </portType>
+</definitions>

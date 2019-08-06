@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="inputClient" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputClient" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="inputClient">
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string"/>
+			<xs:attribute name="full_name" type="xs:string"/>
+			<xs:attribute name="nif" type="xs:string"/>
+			<xs:attribute name="email" type="xs:string"/>
+			<xs:attribute name="client_cc" type="xs:string"/>
+			<xs:attribute name="username" type="xs:string"/>
+			<xs:attribute name="phone_number" type="xs:string"/>
+			<xs:attribute name="mobile_number" type="xs:string"/>
+			<xs:attribute name="address" type="xs:string"/>
+			<xs:attribute name="birthDate" type="xs:string"/>
+			<xs:attribute name="zip_code" type="xs:string"/>
+			<xs:attribute name="county" type="xs:string"/>
+			<xs:attribute name="country" type="xs:string"/>
+			<xs:attribute name="nationality" type="xs:string"/>
+			<xs:attribute name="status" type="xs:string"/>
+			<xs:attribute name="notification" type="xs:string"/>
+			<xs:attribute name="login_password" type="xs:string"/>
+			<xs:attribute name="transaction_password" type="xs:string"/>
+			<xs:attribute name="created_at" type="xs:string"/>
+			<xs:attribute name="user_id" type="xs:string"/>
+			<xs:attribute name="role" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="outputClient">
+		<xs:complexType>
+			<xs:attribute name="message" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

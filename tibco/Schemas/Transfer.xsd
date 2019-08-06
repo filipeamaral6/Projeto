@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Transfer.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transfer.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="inputTransfer" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputTransfer" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="inputTransfer">
+		<xs:complexType>
+			<xs:attribute name="destination_iban" type="xs:string"/>
+			<xs:attribute name="transaction_id" type="xs:string"/>
+			<xs:attribute name="employee_id" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="outputTransfer">
+		<xs:complexType>
+			<xs:attribute name="message" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

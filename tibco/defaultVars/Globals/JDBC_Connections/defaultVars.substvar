@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>Port</name>
+			<value>3306</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<modTime>1564672343892</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Url</name>
+			<value>jdbc:mysql://localhost:3306/bankrising</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1564758688012</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>username</name>
+			<value>root</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1564672344008</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

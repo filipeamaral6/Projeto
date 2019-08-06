@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd4" xmlns:tns="http://xmlns.example.com/1564670098615" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" targetNamespace="http://xmlns.example.com/1564670098615">
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" location="../Schemas/GetById.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" location="../Schemas/GetByIban.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd4" location="../Schemas/Account.xsd"/>
+    <message name="CreateAccountInput">
+        <part name="input" element="ns:inputAccount"/>
+    </message>
+    <message name="CreateAccountOutput">
+        <part name="output" element="ns:outputAccount"/>
+    </message>
+    <message name="GetAccountByIdInput">
+        <part name="input" element="ns2:getById"/>
+    </message>
+    <message name="GetAccountByIdOutput">
+        <part name="output" element="ns:inputAccount"/>
+    </message>
+    <message name="GetAllAccountsInput"/>
+    <message name="GetAllAccountsOutput">
+        <part name="output" element="ns:inputAccount"/>
+    </message>
+    <message name="UpdateAccountInput">
+        <part name="input" element="ns:inputAccount"/>
+    </message>
+    <message name="UpdateAccountOutput">
+        <part name="output" element="ns:outputAccount"/>
+    </message>
+    <message name="GetAccountByIbanInput">
+        <part name="input" element="ns3:getByIban"/>
+    </message>
+    <message name="GetAccountByIbanOutput">
+        <part name="output" element="ns:inputAccount"/>
+    </message>
+    <portType name="PortType_CreateAccount">
+        <operation name="Operation">
+            <input message="tns:CreateAccountInput"/>
+            <output message="tns:CreateAccountOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetAccountById">
+        <operation name="Operation_GetAccountById">
+            <input message="tns:GetAccountByIdInput"/>
+            <output message="tns:GetAccountByIdOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetAllAccounts">
+        <operation name="Operation">
+            <input message="tns:GetAllAccountsInput"/>
+            <output message="tns:GetAllAccountsOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_UpdateAccount">
+        <operation name="Operation">
+            <input message="tns:UpdateAccountInput"/>
+            <output message="tns:UpdateAccountOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetAccountByIban">
+        <operation name="Operation">
+            <input message="tns:GetAccountByIbanInput"/>
+            <output message="tns:GetAccountByIbanOutput"/>
+        </operation>
+    </portType>
+</definitions>

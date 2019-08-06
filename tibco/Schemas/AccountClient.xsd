@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/AccountClient.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/AccountClient.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="inputAccountClient" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputAccountClient" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="inputAccountClient">
+		<xs:complexType>
+			<xs:attribute name="account_id" type="xs:string"/>
+			<xs:attribute name="client_id" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="outputAccountClient">
+		<xs:complexType>
+			<xs:attribute name="message" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

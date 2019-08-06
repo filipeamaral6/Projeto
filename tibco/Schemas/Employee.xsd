@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="InputEmployee" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="OutputEmployee" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InputEmployee">
+		<xs:complexType>
+			<xs:attribute name="full_name" type="xs:string"/>
+			<xs:attribute name="email" type="xs:string"/>
+			<xs:attribute name="username" type="xs:string"/>
+			<xs:attribute name="password" type="xs:string"/>
+			<xs:attribute name="admin" type="xs:string"/>
+			<xs:attribute name="role" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OutputEmployee">
+		<xs:complexType>
+			<xs:attribute name="message" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

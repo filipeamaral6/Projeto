@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="inputPayment" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputPayment" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="inputPayment">
+		<xs:complexType>
+			<xs:attribute name="entity" type="xs:string"/>
+			<xs:attribute name="reference" type="xs:string"/>
+			<xs:attribute name="transaction_id" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="outputPayment">
+		<xs:complexType>
+			<xs:attribute name="message" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

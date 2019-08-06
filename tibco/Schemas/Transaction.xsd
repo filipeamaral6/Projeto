@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="inputTransaction" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="outputTransaction" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="inputTransaction">
+		<xs:complexType>
+			<xs:attribute name="value" type="xs:string"/>
+			<xs:attribute name="account_iban" type="xs:string"/>
+			<xs:attribute name="created_at" type="xs:string"/>
+			<xs:attribute name="client_cc" type="xs:string"/>
+			<xs:attribute name="description" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="outputTransaction">
+		<xs:complexType>
+			<xs:attribute name="message" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

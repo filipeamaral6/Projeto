@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/tibco/Schemas/GetByClientCC.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/GetByClientCC.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="GetByClientCC"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetByClientCC">
+		<xs:complexType>
+			<xs:attribute name="client_cc" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
