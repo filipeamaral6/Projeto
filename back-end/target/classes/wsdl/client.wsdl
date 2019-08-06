@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1564670621329" xmlns:ns0="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/GetByClientCC.xsd" xmlns:ns1="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" name="Untitled" targetNamespace="http://xmlns.example.com/1564670621329">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="getById">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:getById"/>
+                        <xs:element ref="ns0:user_id"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="user_id">
+                <xs:complexType>
+                    <xs:attribute name="user_id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="inputClient">
+                <xs:complexType>
+                    <xs:attribute name="address" type="xs:string"/>
+                    <xs:attribute name="birthDate" type="xs:string"/>
+                    <xs:attribute name="client_cc" type="xs:string"/>
+                    <xs:attribute name="country" type="xs:string"/>
+                    <xs:attribute name="county" type="xs:string"/>
+                    <xs:attribute name="created_at" type="xs:string"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="full_name" type="xs:string"/>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="login_password" type="xs:string"/>
+                    <xs:attribute name="mobile_number" type="xs:string"/>
+                    <xs:attribute name="nationality" type="xs:string"/>
+                    <xs:attribute name="nif" type="xs:string"/>
+                    <xs:attribute name="notification" type="xs:string"/>
+                    <xs:attribute name="phone_number" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                    <xs:attribute name="status" type="xs:string"/>
+                    <xs:attribute name="transaction_password" type="xs:string"/>
+                    <xs:attribute name="user_id" type="xs:string"/>
+                    <xs:attribute name="username" type="xs:string"/>
+                    <xs:attribute name="zip_code" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="outputClient">
+                <xs:complexType>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:inputClient" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="ns1:outputClient" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/tibco/Schemas/GetByClientCC.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/tibco/Schemas/GetByClientCC.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="GetByClientCC">
+                <xs:complexType>
+                    <xs:attribute name="client_cc" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns2:GetByClientCC"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="Service">
+        <wsdl:port name="PortType_GetClientByIdEndpoint1" binding="tns:PortType_GetClientByIdEndpoint1Binding">
+            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_GetClientByIdEndpoint1"/>
+        </wsdl:port>
+        <wsdl:port name="PortType_GetAllClientsEndpoint1" binding="tns:PortType_GetAllClientsEndpoint1Binding">
+            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_GetAllClientsEndpoint1"/>
+        </wsdl:port>
+        <wsdl:port name="PortType_CreateClientEndpoint1" binding="tns:PortType_CreateClientEndpoint1Binding">
+            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_CreateClientEndpoint1"/>
+        </wsdl:port>
+        <wsdl:port name="PortType_UpdateClientEndpoint1" binding="tns:PortType_UpdateClientEndpoint1Binding">
+            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_UpdateClientEndpoint1"/>
+        </wsdl:port>
+        <wsdl:port name="PortType_GetClientByCcEndpoint1" binding="tns:PortType_GetClientByCcEndpoint1Binding">
+            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_GetClientByCcEndpoint1"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="PortType_GetClientById">
+        <wsdl:operation name="Operation">
+            <wsdl:input message="tns:GetClientByIdInput"/>
+            <wsdl:output message="tns:GetClientByIdOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="PortType_GetAllClients">
+        <wsdl:operation name="Operation">
+            <wsdl:input message="tns:GetAllClientsInput"/>
+            <wsdl:output message="tns:GetAllClientsOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="PortType_CreateClient">
+        <wsdl:operation name="Operation">
+            <wsdl:input message="tns:CreateClientInput"/>
+            <wsdl:output message="tns:CreateClientOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="PortType_UpdateClient">
+        <wsdl:operation name="Operation">
+            <wsdl:input message="tns:UpdateClientInput"/>
+            <wsdl:output message="tns:UpdateClientOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="PortType_GetClientByCc">
+        <wsdl:operation name="Operation">
+            <wsdl:input message="tns:GetClientByCcInput"/>
+            <wsdl:output message="tns:GetClientByCcOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PortType_GetClientByIdEndpoint1Binding" type="tns:PortType_GetClientById">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Operation">
+            <soap:operation style="document" soapAction="/Client/Service.serviceagent/PortType_GetClientByIdEndpoint1/Operation"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="PortType_GetAllClientsEndpoint1Binding" type="tns:PortType_GetAllClients">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Operation">
+            <soap:operation style="document" soapAction="/Client/Service.serviceagent/PortType_GetAllClientsEndpoint1/Operation"/>
+            <wsdl:input>
+                <soap:body use="literal" parts=""/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="PortType_CreateClientEndpoint1Binding" type="tns:PortType_CreateClient">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Operation">
+            <soap:operation style="document" soapAction="/Client/Service.serviceagent/PortType_CreateClientEndpoint1/Operation"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="PortType_UpdateClientEndpoint1Binding" type="tns:PortType_UpdateClient">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Operation">
+            <soap:operation style="document" soapAction="/Client/Service.serviceagent/PortType_UpdateClientEndpoint1/Operation"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="PortType_GetClientByCcEndpoint1Binding" type="tns:PortType_GetClientByCc">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Operation">
+            <soap:operation style="document" soapAction="/Client/Service.serviceagent/PortType_GetClientByCcEndpoint1/Operation"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="GetClientByIdInput">
+        <wsdl:part name="input" element="ns0:getById"/>
+    </wsdl:message>
+    <wsdl:message name="GetClientByIdOutput">
+        <wsdl:part name="output" element="ns1:root"/>
+    </wsdl:message>
+    <wsdl:message name="GetAllClientsInput"/>
+    <wsdl:message name="GetAllClientsOutput">
+        <wsdl:part name="output" element="ns1:root"/>
+    </wsdl:message>
+    <wsdl:message name="CreateClientInput">
+        <wsdl:part name="input" element="ns1:inputClient"/>
+    </wsdl:message>
+    <wsdl:message name="CreateClientOutput">
+        <wsdl:part name="output" element="ns1:outputClient"/>
+    </wsdl:message>
+    <wsdl:message name="UpdateClientInput">
+        <wsdl:part name="input" element="ns1:inputClient"/>
+    </wsdl:message>
+    <wsdl:message name="UpdateClientOutput">
+        <wsdl:part name="input" element="ns1:outputClient"/>
+    </wsdl:message>
+    <wsdl:message name="GetClientByCcInput">
+        <wsdl:part name="input" element="ns2:GetByClientCC"/>
+    </wsdl:message>
+    <wsdl:message name="GetClientByCcOutput">
+        <wsdl:part name="output" element="ns1:root"/>
+    </wsdl:message>
+</wsdl:definitions>
