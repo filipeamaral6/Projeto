@@ -1,5 +1,5 @@
 
-package com.polarising.bootsecurity.soap.client.tibco.schemas.getbyid;
+package com.tibco.schemas.bankrising.schemas.getbyid;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
     "userId"
 })
 @XmlRootElement(name = "root")
-public class RootGetById {
+public class Root {
 
     @XmlElement(required = true)
     protected GetById getById;

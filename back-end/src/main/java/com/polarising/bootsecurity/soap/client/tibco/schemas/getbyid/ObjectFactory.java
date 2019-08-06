@@ -46,11 +46,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RootGetById }
+     * Create an instance of {@link Root }
      * 
      */
-    public RootGetById createRoot() {
-        return new RootGetById();
-    }
+//    public Root createRoot() {
+//        return new Root();
+//    }
 
 }

@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.polarising.bootsecurity.soap.client.example.xmlns._1564670621329.Service;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.Root;
-import com.polarising.bootsecurity.soap.client.tibco.schemas.getbyid.GetById;
-import com.polarising.bootsecurity.soap.client.tibco.schemas.getbyid.RootGetById;
-import com.polarising.bootsecurity.soap.client.tibco.schemas.getbyid.UserId;
+
 
 @RestController
 @RequestMapping("/")

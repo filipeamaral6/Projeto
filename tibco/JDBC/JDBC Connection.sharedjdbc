@@ -10,5 +10,6 @@
         <UseSharedJndiConfig>false</UseSharedJndiConfig>
         <location>%%Globals/JDBC_Connections/Url%%</location>
         <user>root</user>
+        <password>#!woRzBtrhflC0a8kkVX8O1lQLaORLxTPzQZPAbQa1HII=</password>
     </config>
 </BWSharedResource>
