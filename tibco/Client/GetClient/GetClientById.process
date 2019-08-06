@@ -4,7 +4,7 @@
     <pd:name>Client/GetClient/GetClientById.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetClientByIdInput"/>
-    <pd:startX>110</pd:startX>
+    <pd:startX>111</pd:startX>
     <pd:startY>170</pd:startY>
     <pd:returnBindings>
         <pfx:GetClientByIdOutput>
@@ -76,6 +76,9 @@
                             <xsl:attribute name="role">
                                 <xsl:value-of select="role"/>
                             </xsl:attribute>
+                            <xsl:attribute name="login_password">
+                                <xsl:value-of select="password"/>
+                            </xsl:attribute>
                         </ns2:inputClient>
                     </xsl:for-each>
                     <xsl:choose>
@@ -94,14 +97,14 @@
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetClientByIdOutput"/>
     <pd:endX>539</pd:endX>
-    <pd:endY>170</pd:endY>
+    <pd:endY>171</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677235789</pd:targetNamespace>
     <pd:activity name="Query_ClientById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>317</pd:x>
+        <pd:x>314</pd:x>
         <pd:y>172</pd:y>
         <config>
             <timeout>10</timeout>

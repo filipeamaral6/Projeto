@@ -4,8 +4,8 @@
     <pd:name>Client/UpdateClient/UpdateClient.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:UpdateClientInput"/>
-    <pd:startX>27</pd:startX>
-    <pd:startY>876</pd:startY>
+    <pd:startX>39</pd:startX>
+    <pd:startY>884</pd:startY>
     <pd:returnBindings>
         <pfx:UpdateClientOutput>
             <input>
@@ -907,8 +907,8 @@ WHERE user_id=?</statement>
         <pd:activity name="Update_User">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>516</pd:x>
-            <pd:y>140</pd:y>
+            <pd:x>518</pd:x>
+            <pd:y>139</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
