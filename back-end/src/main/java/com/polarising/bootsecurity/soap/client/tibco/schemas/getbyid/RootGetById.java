@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
     "userId"
 })
 @XmlRootElement(name = "root")
-public class Root {
+public class RootGetById {
 
     @XmlElement(required = true)
     protected GetById getById;
