@@ -15,6 +15,7 @@
 	</xs:element>
 	<xs:element name="inputAccount">
 		<xs:complexType>
+			<xs:attribute name="id" type="xs:string"/>
 			<xs:attribute name="type" type="xs:string"/>
 			<xs:attribute name="iban" type="xs:string"/>
 			<xs:attribute name="account_number" type="xs:string"/>

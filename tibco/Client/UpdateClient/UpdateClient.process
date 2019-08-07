@@ -349,7 +349,7 @@
     <pd:activity name="Query_Username_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>219</pd:x>
+        <pd:x>220</pd:x>
         <pd:y>531</pd:y>
         <config>
             <timeout>10</timeout>
@@ -661,7 +661,7 @@
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
             <pd:x>641</pd:x>
-            <pd:y>144</pd:y>
+            <pd:y>141</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -908,13 +908,14 @@ WHERE user_id=?</statement>
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
             <pd:x>519</pd:x>
-            <pd:y>139</pd:y>
+            <pd:y>141</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
                 <emptyStrAsNil>false</emptyStrAsNil>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-                <statement>UPDATE user SET username=(?), password=(?), email=(?), role=(?)
+                <statement>UPDATE user 
+SET username=(?), password=(?), email=(?), role=(?)
 WHERE id=?</statement>
                 <Prepared_Param_DataType>
                     <parameter>
