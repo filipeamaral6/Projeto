@@ -41,9 +41,10 @@
         <pd:y>265</pd:y>
         <pd:width>671</pd:width>
         <pd:height>143</pd:height>
-        <pd:collapsedWidth>52</pd:collapsedWidth>
-        <pd:collapsedHeight>69</pd:collapsedHeight>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
         <config>
             <pd:groupType>transactionGroup</pd:groupType>
             <pd:serializable>false</pd:serializable>
@@ -254,7 +255,7 @@
         <pd:activity name="GET_LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>592</pd:x>
+            <pd:x>591</pd:x>
             <pd:y>329</pd:y>
             <config>
                 <timeout>10</timeout>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd8" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd9" xmlns:ns3="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd7" xmlns:ns6="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns5="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd10" xmlns:ns8="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd" xmlns:ns7="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" xmlns:ns13="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" xmlns:ns9="http://www.tibco.com/schemas/Bankrising/Schemas/Deposit.xsd" xmlns:ns12="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:ns11="http://www.tibco.com/schemas/Bankrising/Schemas/Transfer.xsd" xmlns:ns10="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd" xmlns:tns="http://xmlns.example.com/1564671163059" targetNamespace="http://xmlns.example.com/1564671163059">
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd10" location="../Schemas/Withdraw.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Deposit.xsd" location="../Schemas/Deposit.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transfer.xsd" location="../Schemas/Transfer.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd" location="../Schemas/Payment.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
     <import namespace="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" location="../Schemas/GetByIban.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd" location="../Schemas/Transaction.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Deposit.xsd" location="../Schemas/Deposit.xsd"/>
     <message name="WriteDepositInput">
-        <part name="input" element="ns8:inputTransaction"/>
+        <part name="input" element="ns9:inputDeposit"/>
     </message>
     <message name="WriteDepositOutput">
-        <part name="output" element="ns8:root"/>
+        <part name="output" element="ns9:outputDeposit"/>
     </message>
     <message name="WritePaymentInput">
         <part name="input" element="ns8:inputTransaction"/>

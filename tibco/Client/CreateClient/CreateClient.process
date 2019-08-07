@@ -78,13 +78,13 @@
         </pd:transition>
         <pd:transition>
             <pd:from>CreateUser</pd:from>
-            <pd:to>SELECT_Last_Inserted_ID</pd:to>
+            <pd:to>Last_Insert_ID</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
         </pd:transition>
         <pd:transition>
-            <pd:from>SELECT_Last_Inserted_ID</pd:from>
+            <pd:from>Last_Insert_ID</pd:from>
             <pd:to>CreateClient</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
@@ -309,8 +309,8 @@
                     </transaction_password>
                     <user_id>
                         <xsl:choose>
-                            <xsl:when test="exists($SELECT_Last_Inserted_ID/resultSet/Record[1]/LAST_INSERT_ID)">
-                                <xsl:value-of select="$SELECT_Last_Inserted_ID/resultSet/Record[1]/LAST_INSERT_ID"/>
+                            <xsl:when test="exists($Last_Insert_ID/resultSet/Record[1]/LAST_INSERT_ID)">
+                                <xsl:value-of select="$Last_Insert_ID/resultSet/Record[1]/LAST_INSERT_ID"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -411,10 +411,10 @@
                 </jdbcUpdateActivityInput>
             </pd:inputBindings>
         </pd:activity>
-        <pd:activity name="SELECT_Last_Inserted_ID">
+        <pd:activity name="Last_Insert_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>653</pd:x>
+            <pd:x>654</pd:x>
             <pd:y>107</pd:y>
             <config>
                 <timeout>10</timeout>

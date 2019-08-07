@@ -15,6 +15,14 @@
 	</xs:element>
 	<xs:element name="inputPayment">
 		<xs:complexType>
+			<xs:attribute name="id" type="xs:string"/>
+			<xs:attribute name="account_id" type="xs:string"/>
+			<xs:attribute name="value" type="xs:string"/>
+			<xs:attribute name="account_iban" type="xs:string"/>
+			<xs:attribute name="created_at" type="xs:string"/>
+			<xs:attribute name="user_id" type="xs:string"/>
+			<xs:attribute name="type" type="xs:string"/>
+			<xs:attribute name="description" type="xs:string"/>
 			<xs:attribute name="entity" type="xs:string"/>
 			<xs:attribute name="reference" type="xs:string"/>
 			<xs:attribute name="transaction_id" type="xs:string"/>
