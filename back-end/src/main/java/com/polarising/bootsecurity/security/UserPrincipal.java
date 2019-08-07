@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.polarising.bootsecurity.model.User;
+import com.polarising.bootsecurity.soap.user.tibco.schemas.user.InputUsers;
 
 public class UserPrincipal implements UserDetails {
 
@@ -22,6 +23,7 @@ public class UserPrincipal implements UserDetails {
 
 	public UserPrincipal() {
 	}
+
 
 	@Override
 	public String getPassword() {

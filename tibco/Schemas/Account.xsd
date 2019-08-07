@@ -22,6 +22,7 @@
 			<xs:attribute name="interest" type="xs:string"/>
 			<xs:attribute name="status" type="xs:string"/>
 			<xs:attribute name="created_at" type="xs:string"/>
+			<xs:attribute name="user_id" type="xs:string"/>
 			<xs:attribute name="employee_id" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>

@@ -1,17 +1,18 @@
 package com.polarising.bootsecurity.security;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.polarising.bootsecurity.exceptions.CustomRestExceptionMessage;
+import com.polarising.bootsecurity.exceptions.CustomExceptionMessage;
 import com.polarising.bootsecurity.model.User;
+import com.polarising.bootsecurity.soap.user.example.xmlns._1565108737830.UserService;
+import com.polarising.bootsecurity.soap.user.tibco.schemas.user.InputUsers;
+import com.polarising.bootsecurity.soap.user.tibco.schemas.user.Root;
 
 @Service
 public class UserPrincipalDetailsService implements UserDetailsService {
@@ -24,37 +25,43 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 
 		try {
 
-			return getUserPrincipal(username);
-
-		} catch (CustomRestExceptionMessage e) {
-			throw new CustomRestExceptionMessage(e.getLocalizedMessage());
-		} catch (Exception e) {
-			throw new CustomRestExceptionMessage("Invalid username/password combination");
-		}
-	}
-
-	public UserPrincipal getUserPrincipal(String username) {
-
-		RestTemplate restTemplate = new RestTemplate();
-		ObjectMapper mapper = new ObjectMapper();
-
-		try {
-			ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:8074/users-testing", String.class);
-			List<User> users = mapper.readValue(response.getBody(), mapper.getTypeFactory().constructCollectionType(List.class, User.class));
-		
-			UserPrincipal userPrincipalToReturn = new UserPrincipal();
+			boolean foundUsername = false;
 			
-			for (User user : users) {
-				System.out.println(user.getUsername());
-				if (user.getUsername().equals(username)) {
-					userPrincipalToReturn = new UserPrincipal(user);
+			UserPrincipal userPrincipalToReturn = new UserPrincipal();
+			UserService userService = new UserService();
+			Root getUsers = userService.getPortTypeGetAllUsersEndpoint1().operation();
+
+			List<User> users = new ArrayList<User>();
+
+			if (!getUsers.getInputUsers().isEmpty()) {
+				for (InputUsers inputUser : getUsers.getInputUsers()) {
+					User user = new User(inputUser.getUsername(), inputUser.getPassword(), inputUser.getEmail(),
+							inputUser.getRole());
+					users.add(user);
 				}
+			}
+
+			for (User userPrincipal : users) {
+				if (userPrincipal.getUsername().equals(username)) {
+					userPrincipalToReturn = new UserPrincipal(userPrincipal);
+					foundUsername = true;
+					return userPrincipalToReturn;
+				}  			
+			}
+			
+			if(!foundUsername){
+				throw new UsernameNotFoundException("Invalid username/password combination");
 			}
 			
 			return userPrincipalToReturn;
 
+
+		} catch (CustomExceptionMessage e) {
+			throw new CustomExceptionMessage(e.getLocalizedMessage());
 		} catch (Exception e) {
-			throw new CustomRestExceptionMessage("Failed to send REST request");
+			throw new CustomExceptionMessage("Invalid username/password combination");
 		}
 	}
 }
+
+	
