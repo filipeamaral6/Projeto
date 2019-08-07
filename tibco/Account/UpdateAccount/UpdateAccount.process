@@ -126,8 +126,8 @@ WHERE id=?</statement>
     <pd:activity name="Update_Account">
         <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-        <pd:x>260</pd:x>
-        <pd:y>210</pd:y>
+        <pd:x>256</pd:x>
+        <pd:y>217</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
