@@ -2,11 +2,15 @@ package com.polarising.bootsecurity.model;
 
 import java.util.Date;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.stereotype.Component;
+
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
 
+@Component
 public class Client {
 	
 	private InputClient inputClient;
@@ -60,46 +64,47 @@ public class Client {
 
 	private Date createdAt;
 	
-	public Client(InputClient inputClient) {
-		this.user = new User(inputClient.getUsername(), inputClient.getLoginPassword(), inputClient.getEmail(), inputClient.getRole());
-		this.fullName = inputClient.getFullName();
-		this.nif = Long.parseLong(inputClient.getNif());
-		this.birthDate = inputClient.getBirthDate();
-		this.phoneNumber = Long.parseLong(inputClient.getPhoneNumber());
-		this.mobileNumber = Long.parseLong(inputClient.getMobileNumber());
-		this.address = inputClient.getAddress();
-		this.county = inputClient.getCounty();
-		this.country = inputClient.getCountry();
-		this.nationality = inputClient.getNationality();
-		this.status = inputClient.getStatus();
-		this.notification = inputClient.getNotification();
-		this.transactionPassword = inputClient.getTransactionPassword();
-		this.clientCC = Long.parseLong(inputClient.getZipCode());
-		this.zipCode = inputClient.getZipCode();
+	public Client(@ Valid InputClient inputClient) {
+		this.inputClient = inputClient;
+		this.user = new User(this.inputClient.getUsername(), this.inputClient.getLoginPassword(), this.inputClient.getEmail(), this.inputClient.getRole());
+		this.fullName = this.inputClient.getFullName();
+		this.nif = Long.parseLong(this.inputClient.getNif());
+		this.birthDate = this.inputClient.getBirthDate();
+		this.phoneNumber = Long.parseLong(this.inputClient.getPhoneNumber());
+		this.mobileNumber = Long.parseLong(this.inputClient.getMobileNumber());
+		this.address = this.inputClient.getAddress();
+		this.county = this.inputClient.getCounty();
+		this.country = this.inputClient.getCountry();
+		this.nationality = this.inputClient.getNationality();
+		this.status = this.inputClient.getStatus();
+		this.notification = this.inputClient.getNotification();
+		this.transactionPassword = this.inputClient.getTransactionPassword();
+		this.clientCC = Long.parseLong(this.inputClient.getClientCc());
+		this.zipCode = this.inputClient.getZipCode();
 	}
 
 
-	// Add Client
-	public Client(String username, String password, String email, String role, String fullName, Long nif, String birthDate, Long phoneNumber, Long mobileNumber,
-			String address, String county, String country, String nationality, String status, String notification,
-			String transactionPassword, String zipCode, Long clientCC) {
-		super();
-		this.user = new User(username, password, email, role);
-		this.fullName = fullName;
-		this.nif = nif;
-		this.birthDate = birthDate;
-		this.phoneNumber = phoneNumber;
-		this.mobileNumber = mobileNumber;
-		this.address = address;
-		this.county = county;
-		this.country = country;
-		this.nationality = nationality;
-		this.status = status;
-		this.notification = notification;
-		this.transactionPassword = transactionPassword;
-		this.zipCode = zipCode;
-		this.clientCC = clientCC;
-	}
+//	// Add Client
+//	public Client(String username, String password, String email, String role, String fullName, Long nif, String birthDate, Long phoneNumber, Long mobileNumber,
+//			String address, String county, String country, String nationality, String status, String notification,
+//			String transactionPassword, String zipCode, Long clientCC) {
+//		super();
+//		this.user = new User(username, password, email, role);
+//		this.fullName = fullName;
+//		this.nif = nif;
+//		this.birthDate = birthDate;
+//		this.phoneNumber = phoneNumber;
+//		this.mobileNumber = mobileNumber;
+//		this.address = address;
+//		this.county = county;
+//		this.country = country;
+//		this.nationality = nationality;
+//		this.status = status;
+//		this.notification = notification;
+//		this.transactionPassword = transactionPassword;
+//		this.zipCode = zipCode;
+//		this.clientCC = clientCC;
+//	}
 
 	// Get Client
 	public Client(User user, Long id, String fullName, Long nif, String birthDate, Long phoneNumber, Long mobileNumber,
@@ -124,6 +129,17 @@ public class Client {
 	}
 	
 	
+	
+
+	public InputClient getInputClient() {
+		return inputClient;
+	}
+
+
+	public void setInputClient(InputClient inputClient) {
+		this.inputClient = inputClient;
+	}
+
 
 	public Long getClientCC() {
 		return clientCC;

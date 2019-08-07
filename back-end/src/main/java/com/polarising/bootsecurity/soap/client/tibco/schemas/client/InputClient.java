@@ -1,6 +1,9 @@
 
 package com.polarising.bootsecurity.soap.client.tibco.schemas.client;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -51,46 +54,87 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "inputClient")
 public class InputClient {
 
+	@NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "address")
     protected String address;
+	
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "birthDate")
     protected String birthDate;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "client_cc")
     protected String clientCc;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "country")
     protected String country;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "county")
     protected String county;
+    
     @XmlAttribute(name = "created_at")
     protected String createdAt;
+    
+    @NotBlank(message="Campo obrigatório")
+	@Email(message="Formato inválido")
     @XmlAttribute(name = "email")
     protected String email;
+    
+    @NotBlank(message="Campo obrigatório")
+	@Size(max = 200, message="Número de caracteres máximo (200)")
     @XmlAttribute(name = "full_name")
     protected String fullName;
+    
     @XmlAttribute(name = "id")
     protected String id;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "login_password")
     protected String loginPassword;
+    
+    @Size(min = 9, max = 9, message="Número de caracteres obrigatórios")
     @XmlAttribute(name = "mobile_number")
     protected String mobileNumber;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "nationality")
     protected String nationality;
+    
+    @NotBlank(message="Campo obrigatório")
+	@Size(min = 9, max = 9, message="Número de caracteres obrigatórios")
     @XmlAttribute(name = "nif")
     protected String nif;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "notification")
     protected String notification;
+    
+    @Size(min = 9, max = 9, message="Número de caracteres obrigatórios")
     @XmlAttribute(name = "phone_number")
     protected String phoneNumber;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "role")
     protected String role;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "status")
     protected String status;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "transaction_password")
     protected String transactionPassword;
+    
     @XmlAttribute(name = "user_id")
     protected String userId;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "username")
     protected String username;
+    
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "zip_code")
     protected String zipCode;
 

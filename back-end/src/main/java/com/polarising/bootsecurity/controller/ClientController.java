@@ -1,10 +1,16 @@
 package com.polarising.bootsecurity.controller;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.polarising.bootsecurity.model.Client;
+import com.google.gson.JsonObject;
 import com.polarising.bootsecurity.soap.client.example.xmlns._1564670621329.Service;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.OutputClient;
@@ -27,21 +33,32 @@ import com.polarising.bootsecurity.soap.client.tibco.schemas.getbyid.GetById;
 @CrossOrigin
 public class ClientController {
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	// Add Client
 	@PostMapping("clients/add")
-	public Object AddClient(@RequestBody InputClient inputClient) {
+	public Object AddClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
 
-		@Valid
-		Client client = new Client(inputClient);
-		
-		Service clientService = new Service();
+		if (!result.hasErrors()) {
 
-		OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
+			inputClient.setLoginPassword(passwordEncoder.encode(inputClient.getLoginPassword()));
+			inputClient.setTransactionPassword(passwordEncoder.encode(inputClient.getTransactionPassword()));
 
-		return message;
+			Service clientService = new Service();
 
+			OutputClient message = clientService.getPortTypeCreateClientEndpoint1().operation(inputClient);
+			return message;
+
+		}
+
+		HashMap<String, String> error = new HashMap<>();
+		error.put("field", result.getFieldError().getField());
+		error.put("message", result.getFieldError().getDefaultMessage());
+
+		return error;
 	}
-	
+
 	// Get Clients
 	@GetMapping("clients")
 	public List<Object> getClients() {
@@ -97,39 +114,76 @@ public class ClientController {
 
 	// Update Client
 	@PutMapping("clients/update")
-	public Object updateClient(@RequestBody InputClient client) {
+	public Object updateClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
 
-		Service clientService = new Service();
+		if (!result.hasErrors()) {
 
-		OutputClient updateClient = clientService.getPortTypeUpdateClientEndpoint1().operation(client);
+			inputClient.setLoginPassword(passwordEncoder.encode(inputClient.getLoginPassword()));
+			inputClient.setTransactionPassword(passwordEncoder.encode(inputClient.getTransactionPassword()));
 
-		return updateClient;
+			Service clientService = new Service();
+
+			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
+
+			return message;
+
+		}
+
+		HashMap<String, String> error = new HashMap<>();
+		error.put("field", result.getFieldError().getField());
+		error.put("message", result.getFieldError().getDefaultMessage());
+
+		return error;
 
 	}
 
 	// Deactivate Client
 	@PutMapping("clients/deactivate")
-	public Object deactivateClient(@RequestBody InputClient client) {
+	public Object deactivateClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
 
-		Service clientService = new Service();
+		if (!result.hasErrors()) {
 
-		client.setStatus("INACTIVE");
-		OutputClient updateClient = clientService.getPortTypeUpdateClientEndpoint1().operation(client);
+			inputClient.setLoginPassword(passwordEncoder.encode(inputClient.getLoginPassword()));
+			inputClient.setTransactionPassword(passwordEncoder.encode(inputClient.getTransactionPassword()));
+			inputClient.setStatus("INACTIVE");
 
-		return updateClient;
+			Service clientService = new Service();
 
+			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
+
+			return message;
+
+		}
+
+		HashMap<String, String> error = new HashMap<>();
+		error.put("field", result.getFieldError().getField());
+		error.put("message", result.getFieldError().getDefaultMessage());
+
+		return error;
 	}
 
 	// Activate client
 	@PutMapping("clients/activate")
-	public Object activateClient(@RequestBody InputClient client) {
+	public Object activateClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
 
-		Service clientService = new Service();
+		if (!result.hasErrors()) {
 
-		client.setStatus("ACTIVE");
-		OutputClient updateClient = clientService.getPortTypeUpdateClientEndpoint1().operation(client);
+			inputClient.setLoginPassword(passwordEncoder.encode(inputClient.getLoginPassword()));
+			inputClient.setTransactionPassword(passwordEncoder.encode(inputClient.getTransactionPassword()));
+			inputClient.setStatus("ACTIVE");
 
-		return updateClient;
+			Service clientService = new Service();
 
+			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
+
+			return message;
+
+		}
+
+		HashMap<String, String> error = new HashMap<>();
+		error.put("field", result.getFieldError().getField());
+		error.put("message", result.getFieldError().getDefaultMessage());
+
+		return error;
 	}
 }

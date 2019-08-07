@@ -3,14 +3,11 @@ package com.polarising.bootsecurity.model;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.polarising.bootsecurity.security.SecurityConfiguration;
 
+@Component
 public class User {
-	
-	@Autowired
-	private SecurityConfiguration securityConfig;
 	
 	private long id;
 	
@@ -32,7 +29,7 @@ public class User {
 
 	public User(String username, String password, String email, String role) {
 		this.username = username;
-		this.password = securityConfig.passwordEncoder().encode(password);
+		this.password = password;
 		this.email = email;
 		this.active = 1;
 		this.role = role;

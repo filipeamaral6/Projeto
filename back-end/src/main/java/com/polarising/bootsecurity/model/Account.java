@@ -164,10 +164,4 @@ public Long getId() {
 
 		return countryCode + b + a + c + k;
 	}
-	
-
-
-	
-	
-	
 }
