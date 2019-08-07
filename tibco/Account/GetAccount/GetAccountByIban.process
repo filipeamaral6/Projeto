@@ -1,17 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670098615" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670098615" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <wsdl:import namespace="http://xmlns.example.com/1564670098615" location="/Account/WSDL.wsdl"/>
     <pd:name>Account/GetAccount/GetAccountByIban.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetAccountByIbanInput"/>
-    <pd:startX>154</pd:startX>
-    <pd:startY>69</pd:startY>
-    <pd:returnBindings/>
+    <pd:startX>115</pd:startX>
+    <pd:startY>125</pd:startY>
+    <pd:returnBindings>
+        <pfx:GetAccountByIbanOutput>
+            <output>
+                <ns2:root>
+                    <xsl:for-each select="$Query_GetAccountByIban/resultSet/Record">
+                        <ns2:inputAccount>
+                            <xsl:if test="@xsi:type">
+                                <xsl:attribute name="type">
+                                    <xsl:value-of select="@xsi:type"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:attribute name="iban">
+                                <xsl:value-of select="iban"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="account_number">
+                                <xsl:value-of select="account_number"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="balance">
+                                <xsl:value-of select="balance"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="interest">
+                                <xsl:value-of select="interest"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="status">
+                                <xsl:value-of select="status"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="created_at">
+                                <xsl:value-of select="created_at"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="employee_id">
+                                <xsl:value-of select="employee_id"/>
+                            </xsl:attribute>
+                        </ns2:inputAccount>
+                    </xsl:for-each>
+                    <xsl:choose>
+                        <xsl:when test="not(exists($Query_GetAccountByIban/resultSet/Record))">
+                            <ns2:outputAccount>
+                                <xsl:attribute name="message">
+                                    <xsl:value-of select="&quot;Nenhum resultado encontrado!&quot;"/>
+                                </xsl:attribute>
+                            </ns2:outputAccount>
+                        </xsl:when>
+                    </xsl:choose>
+                </ns2:root>
+            </output>
+        </pfx:GetAccountByIbanOutput>
+    </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAccountByIbanOutput"/>
-    <pd:endX>450</pd:endX>
-    <pd:endY>68</pd:endY>
+    <pd:endX>521</pd:endX>
+    <pd:endY>125</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564744425676</pd:targetNamespace>
+    <pd:activity name="Query_GetAccountByIban">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>318</pd:x>
+        <pd:y>126</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM account WHERE iban=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>iban</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>type</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>iban</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>account_number</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>balance</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>8</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DOUBLE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>interest</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>8</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DOUBLE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>created_at</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <iban>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:GetAccountByIbanInput/input/ns:getByIban/@iban)">
+                            <xsl:value-of select="$Start/pfx:GetAccountByIbanInput/input/ns:getByIban/@iban"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </iban>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Query_GetAccountByIban</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_GetAccountByIban</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
 </pd:ProcessDefinition>

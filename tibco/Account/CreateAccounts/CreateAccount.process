@@ -4,13 +4,13 @@
     <pd:name>Account/CreateAccounts/CreateAccount.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:CreateAccountInput"/>
-    <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
+    <pd:startX>105</pd:startX>
+    <pd:startY>124</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:CreateAccountOutput"/>
-    <pd:endX>450</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endX>723</pd:endX>
+    <pd:endY>130</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677317694</pd:targetNamespace>
