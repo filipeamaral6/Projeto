@@ -4,13 +4,13 @@
     <pd:name>Transactions/Transfer/WriteTransfer.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:WriteTransferInput"/>
-    <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
+    <pd:startX>154</pd:startX>
+    <pd:startY>66</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:WriteTransferOutput"/>
     <pd:endX>450</pd:endX>
-    <pd:endY>66</pd:endY>
+    <pd:endY>68</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677781515</pd:targetNamespace>

@@ -4,13 +4,13 @@
     <pd:name>Transactions/Payment/WritePayment.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:WritePaymentInput"/>
-    <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
+    <pd:startX>54</pd:startX>
+    <pd:startY>148</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endType wsMsgRef="pfx:WirtePaymentOutput"/>
-    <pd:endX>449</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endType wsMsgRef="pfx:WritePaymentOutput"/>
+    <pd:endX>487</pd:endX>
+    <pd:endY>150</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677736651</pd:targetNamespace>

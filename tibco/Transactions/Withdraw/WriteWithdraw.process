@@ -4,8 +4,8 @@
     <pd:name>Transactions/Withdraw/WriteWithdraw.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:WriteWithdrawInput"/>
-    <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
+    <pd:startX>151</pd:startX>
+    <pd:startY>65</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:WriteWithdrawOutput"/>

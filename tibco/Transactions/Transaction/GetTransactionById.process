@@ -4,7 +4,7 @@
     <pd:name>Transactions/Transaction/GetTransactionById.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetTransactionByIdInput"/>
-    <pd:startX>150</pd:startX>
+    <pd:startX>152</pd:startX>
     <pd:startY>64</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>

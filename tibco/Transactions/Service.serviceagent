@@ -8,7 +8,8 @@
         <groups>
             <row isDefault="true" groupName="Default"/>
         </groups>
-        <serviceChange>Fri Aug 02 13:10:43 BST 2019</serviceChange>
+        <serviceChange>Wed Aug 07 16:22:29 BST 2019</serviceChange>
+        <name>Service</name>
         <interfaceImpl>
             <tab>
                 <tabName>PortType_Deposit</tabName>
@@ -376,5 +377,6 @@
                 </config>
             </tab>
         </interfaceImpl>
+        <resourceType>service.definition</resourceType>
     </config>
 </serviceResource>

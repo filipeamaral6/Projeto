@@ -43,6 +43,16 @@
     <message name="GetTransactionsByIbanOutput">
         <part name="output" element="ns8:root"/>
     </message>
+    <message name="GetAllTransactionsInput"/>
+    <message name="GetAllTransactionsOutput">
+        <part name="output" element="ns8:root"/>
+    </message>
+    <message name="WriteTransactionInput">
+        <part name="input" element="ns8:inputTransaction"/>
+    </message>
+    <message name="WriteTransactionOutpu">
+        <part name="output" element="ns8:root"/>
+    </message>
     <portType name="PortType_Deposit">
         <operation name="WriteDeposit">
             <input message="tns:WriteDepositInput"/>
@@ -77,6 +87,18 @@
         <operation name="Operation">
             <input message="tns:GetTransactionsByIbanInput"/>
             <output message="tns:GetTransactionsByIbanOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetAllTransactions">
+        <operation name="Operation">
+            <input message="tns:GetAllTransactionsInput"/>
+            <output message="tns:GetAllTransactionsOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_WriteTransaction">
+        <operation name="Operation">
+            <input message="tns:WriteTransactionInput"/>
+            <output message="tns:WriteTransactionOutpu"/>
         </operation>
     </portType>
 </definitions>

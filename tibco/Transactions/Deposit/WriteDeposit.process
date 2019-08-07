@@ -4,13 +4,13 @@
     <pd:name>Transactions/Deposit/WriteDeposit.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:WriteDepositInput"/>
-    <pd:startX>100</pd:startX>
-    <pd:startY>98</pd:startY>
+    <pd:startX>76</pd:startX>
+    <pd:startY>142</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:WriteDepositOutput"/>
-    <pd:endX>493</pd:endX>
-    <pd:endY>91</pd:endY>
+    <pd:endX>607</pd:endX>
+    <pd:endY>142</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677670362</pd:targetNamespace>
