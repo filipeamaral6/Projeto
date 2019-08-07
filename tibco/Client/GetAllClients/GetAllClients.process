@@ -106,8 +106,8 @@
     <pd:activity name="Query_SelectAllClients">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>352</pd:x>
-        <pd:y>133</pd:y>
+        <pd:x>354</pd:x>
+        <pd:y>132</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

@@ -55,7 +55,7 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAccountByIbanOutput"/>
-    <pd:endX>521</pd:endX>
+    <pd:endX>523</pd:endX>
     <pd:endY>125</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>

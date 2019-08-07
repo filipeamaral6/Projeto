@@ -20,10 +20,10 @@
         <part name="output" element="ns4:root"/>
     </message>
     <message name="UpdateAccountInput">
-        <part name="input" element="ns:inputAccount"/>
+        <part name="input" element="ns4:inputAccount"/>
     </message>
     <message name="UpdateAccountOutput">
-        <part name="output" element="ns4:inputAccount"/>
+        <part name="output" element="ns4:outputAccount"/>
     </message>
     <message name="GetAccountByIbanInput">
         <part name="input" element="ns6:getByIban"/>

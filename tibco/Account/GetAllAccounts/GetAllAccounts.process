@@ -33,6 +33,9 @@
                             <xsl:attribute name="created_at">
                                 <xsl:value-of select="created_at"/>
                             </xsl:attribute>
+                            <xsl:attribute name="user_id">
+                                <xsl:value-of select="user_id"/>
+                            </xsl:attribute>
                             <xsl:attribute name="employee_id">
                                 <xsl:value-of select="employee_id"/>
                             </xsl:attribute>
@@ -53,7 +56,7 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllAccountsOutput"/>
-    <pd:endX>532</pd:endX>
+    <pd:endX>530</pd:endX>
     <pd:endY>117</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
@@ -61,7 +64,7 @@
     <pd:activity name="Query_GetAllAccounts">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>301</pd:x>
+        <pd:x>303</pd:x>
         <pd:y>117</pd:y>
         <config>
             <timeout>10</timeout>
@@ -69,7 +72,8 @@
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT * FROM account</statement>
+            <statement>SELECT account.*, account_client.user_id FROM account, account_client WHERE account.id=account_client.account_id
+</statement>
             <oraObjects/>
             <oraTables/>
             <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
@@ -105,6 +109,10 @@
             <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>user_id</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>

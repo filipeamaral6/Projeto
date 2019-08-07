@@ -339,7 +339,7 @@
         <pd:activity name="CreateUser">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>513</pd:x>
+            <pd:x>512</pd:x>
             <pd:y>110</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -414,7 +414,7 @@
         <pd:activity name="SELECT_Last_Inserted_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>652</pd:x>
+            <pd:x>653</pd:x>
             <pd:y>107</pd:y>
             <config>
                 <timeout>10</timeout>
