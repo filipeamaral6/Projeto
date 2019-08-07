@@ -824,8 +824,7 @@
         <pd:to>CLIENTCC_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_ClientCC_EXISTS/resultSet/Record/client_cc)</pd:xpath>
+        <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
         <pd:from>CLIENTCC_EXISTS</pd:from>
