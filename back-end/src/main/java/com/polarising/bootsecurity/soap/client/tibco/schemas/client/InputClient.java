@@ -94,7 +94,7 @@ public class InputClient {
     @XmlAttribute(name = "login_password")
     protected String loginPassword;
     
-    @Size(min = 9, max = 9, message="Número de caracteres obrigatórios")
+    @Size(min = 9, max = 9, message="Número de caracteres obrigatórios (9)")
     @XmlAttribute(name = "mobile_number")
     protected String mobileNumber;
     
@@ -103,7 +103,7 @@ public class InputClient {
     protected String nationality;
     
     @NotBlank(message="Campo obrigatório")
-	@Size(min = 9, max = 9, message="Número de caracteres obrigatórios")
+	@Size(min = 9, max = 9, message="Número de caracteres obrigatórios (9)")
     @XmlAttribute(name = "nif")
     protected String nif;
     
@@ -111,7 +111,7 @@ public class InputClient {
     @XmlAttribute(name = "notification")
     protected String notification;
     
-    @Size(min = 9, max = 9, message="Número de caracteres obrigatórios")
+    @Size(min = 9, max = 9, message="Número de caracteres obrigatórios (9)")
     @XmlAttribute(name = "phone_number")
     protected String phoneNumber;
     
