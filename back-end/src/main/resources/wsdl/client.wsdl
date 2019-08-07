@@ -79,19 +79,19 @@
     </wsdl:types>
     <wsdl:service name="Service">
         <wsdl:port name="PortType_GetClientByIdEndpoint1" binding="tns:PortType_GetClientByIdEndpoint1Binding">
-            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_GetClientByIdEndpoint1"/>
+            <soap:address location="http://localhost:8098/Client/Service.serviceagent/PortType_GetClientByIdEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_GetAllClientsEndpoint1" binding="tns:PortType_GetAllClientsEndpoint1Binding">
-            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_GetAllClientsEndpoint1"/>
+            <soap:address location="http://localhost:8098/Client/Service.serviceagent/PortType_GetAllClientsEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_CreateClientEndpoint1" binding="tns:PortType_CreateClientEndpoint1Binding">
-            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_CreateClientEndpoint1"/>
+            <soap:address location="http://localhost:8098/Client/Service.serviceagent/PortType_CreateClientEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_UpdateClientEndpoint1" binding="tns:PortType_UpdateClientEndpoint1Binding">
-            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_UpdateClientEndpoint1"/>
+            <soap:address location="http://localhost:8098/Client/Service.serviceagent/PortType_UpdateClientEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_GetClientByCcEndpoint1" binding="tns:PortType_GetClientByCcEndpoint1Binding">
-            <soap:address location="http://localhost:8095/Client/Service.serviceagent/PortType_GetClientByCcEndpoint1"/>
+            <soap:address location="http://localhost:8098/Client/Service.serviceagent/PortType_GetClientByCcEndpoint1"/>
         </wsdl:port>
     </wsdl:service>
     <wsdl:portType name="PortType_GetClientById">

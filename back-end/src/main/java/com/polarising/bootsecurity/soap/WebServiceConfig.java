@@ -42,5 +42,12 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		return wsdl11Definition;
 	}
 	
-	
+	@Bean(name = "employee")
+	public Wsdl11Definition employeeWsdl11Definition() {
+		SimpleWsdl11Definition wsdl11Definition = new SimpleWsdl11Definition();
+
+		wsdl11Definition.setWsdl(new ClassPathResource("/wsdl/employee.wsdl"));
+
+		return wsdl11Definition;
+	}
 }
