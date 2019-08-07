@@ -1,0 +1,110 @@
+<div class="col-md-8">
+  <form>
+    <div class="col-md-12">
+      <div class="card card-user-login col-md-8">
+        <div class="card-header">
+          <h5 class="card-title">Dados Login</h5>
+        </div>
+        <div class="card-body col-md-12">
+          <div class="row col-md-12">
+            <div class="col-md-6">
+              <div class="form-group" style="margin-right: 5%">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" value="{{user.email}}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" value="{{user.username}}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-user-data col-md-8">
+        <div class="card-header">
+          <h5 class="card-title">Dados Pessoais</h5>
+        </div>
+        <div class="card-body col-md-12">
+          <div class="row col-md-12">
+            <div class="col-md-8">
+              <div class="form-group" style="margin-right: 5%">
+                <label for="fullName">Nome Completo</label>
+                <input type="text" class="form-control" value="{{user.fullName}}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="nif">Nacionalidade</label>
+                <input type="text" class="form-control" value="{{user.nationality}}">
+              </div>
+            </div>
+          </div>
+          <div class="row col-md-12">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="nif">NIF</label>
+                <input type="text" class="form-control" value="{{user.nif}}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="nif">Telefone</label>
+                <input type="text" class="form-control" value="{{user.phoneNumber}}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="nif">Telemóvel</label>
+                <input type="text" class="form-control" value="{{user.mobileNumber}}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-user-address col-md-8">
+        <div class="card-header">
+          <h5 class="card-title">Morada</h5>
+        </div>
+        <div class="card-body col-md-12">
+          <div class="row col-md-12">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="address">Morada</label>
+                <input type="text" class="form-control" value="{{user.address}}">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="zipCode">Código Postal</label>
+                <input type="text" class="form-control" value="{{user.zipCode}}">
+              </div>
+            </div>
+          </div>
+          <div class="row col-md-12">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="county">Localidade</label>
+                <input type="text" class="form-control" value="{{user.county}}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="country">País</label>
+                <input type="text" class="form-control" value="{{user.country}}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="update mr-auto ml-auto">
+            <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

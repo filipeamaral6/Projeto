@@ -1,0 +1,51 @@
+<div class="row col-md-12">
+  <div class="col-md-3" *ngFor="let account of accounts; let i = index">
+    <button id="account" type="button btn-primary" (click)="onSelectAccount(i)">
+      <div class="card card-stats col-md-12" style="margin-bottom: 0">
+        <div class="card-header">
+          <h6 class="card-title">Conta: {{account.id}}</h6>
+        </div>
+        <div class="card-body ">
+          <div class="row">
+            <div class="icon-big text-center icon-warning col-md-2">
+              <i class="nc-icon nc-money-coins text-success"></i>
+            </div>
+            <div class="numbers col-md-10">
+              <p class="card-category">Saldo</p>
+              <p>{{account.balance}} €
+            </div>
+          </div>
+        </div>
+      </div>
+    </button>
+  </div>
+</div>
+<div class="row col-md-12" style="margin-top: 2%">
+  <div class="card card-movements col-md-12">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class=" text-primary">
+          <tr>
+            <th> Name </th>
+            <th> Country </th>
+            <th> City </th>
+            <th class="text-right"> Salary </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> Dakota Rice </td>
+            <td> Niger </td>
+            <td> Oud-Turnhout </td>
+            <td class="text-right"> $36,738 </td>
+          </tr>
+          <tr>
+            <td> Minerva Hooper </td>
+            <td> Curaçao </td>
+            <td> Sinaai-Waas </td>
+            <td class="text-right"> $23,789 </td>
+          </tr>
+      </table>
+    </div>
+  </div>
+</div>
