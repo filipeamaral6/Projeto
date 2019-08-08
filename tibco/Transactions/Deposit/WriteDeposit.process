@@ -20,7 +20,7 @@
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:WriteDepositOutput"/>
     <pd:endX>968</pd:endX>
-    <pd:endY>280</pd:endY>
+    <pd:endY>281</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -217,9 +217,10 @@
         <pd:y>11</pd:y>
         <pd:width>820</pd:width>
         <pd:height>154</pd:height>
-        <pd:collapsedWidth>52</pd:collapsedWidth>
-        <pd:collapsedHeight>69</pd:collapsedHeight>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
         <config>
             <pd:groupType>transactionGroup</pd:groupType>
             <pd:serializable>false</pd:serializable>
@@ -481,7 +482,7 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1012</pd:x>
+            <pd:x>1013</pd:x>
             <pd:y>89</pd:y>
             <config>
                 <variableName>message</variableName>
@@ -489,7 +490,7 @@
             <pd:inputBindings>
                 <root>
                     <message>
-                        <xsl:value-of select="&quot;Depósito executado!&quot;"/>
+                        <xsl:value-of select="&quot;Pagamento executado!&quot;"/>
                     </message>
                 </root>
             </pd:inputBindings>
@@ -497,8 +498,8 @@
         <pd:activity name="UPDATE_ACCOUNT">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>861</pd:x>
-            <pd:y>84</pd:y>
+            <pd:x>862</pd:x>
+            <pd:y>88</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
