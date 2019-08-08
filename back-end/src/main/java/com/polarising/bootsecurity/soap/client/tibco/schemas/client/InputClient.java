@@ -94,7 +94,7 @@ public class InputClient {
     @XmlAttribute(name = "login_password")
     protected String loginPassword;
     
-    @Size(min = 9, max = 9, message="Número de caracteres obrigatórios (9)")
+    @Size(min = 12, max = 12, message="Número de caracteres obrigatórios (9)")
     @XmlAttribute(name = "mobile_number")
     protected String mobileNumber;
     

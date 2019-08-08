@@ -118,9 +118,6 @@ public class ClientController {
 
 		if (!result.hasErrors()) {
 
-			inputClient.setLoginPassword(passwordEncoder.encode(inputClient.getLoginPassword()));
-			inputClient.setTransactionPassword(passwordEncoder.encode(inputClient.getTransactionPassword()));
-
 			Service clientService = new Service();
 
 			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
@@ -156,6 +153,7 @@ public class ClientController {
 		}
 
 		HashMap<String, String> error = new HashMap<>();
+		
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
