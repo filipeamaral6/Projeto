@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670608293" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd">
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670608293" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <wsdl:import namespace="http://xmlns.example.com/1564670608293" location="/Client/WSDL.wsdl"/>
     <pd:name>Client/GetAllClients/GetAllClients.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetAllClientsInput"/>
-    <pd:startX>143</pd:startX>
-    <pd:startY>131</pd:startY>
+    <pd:startX>149</pd:startX>
+    <pd:startY>175</pd:startY>
     <pd:returnBindings>
         <pfx:GetAllClientsOutput>
             <output>
@@ -98,16 +98,53 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllClientsOutput"/>
-    <pd:endX>570</pd:endX>
-    <pd:endY>136</pd:endY>
+    <pd:endX>540</pd:endX>
+    <pd:endY>176</pd:endY>
     <pd:errorSchemas/>
-    <pd:processVariables/>
+    <pd:processVariables>
+        <message>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </message>
+    </pd:processVariables>
     <pd:targetNamespace>http://xmlns.example.com/1564677277982</pd:targetNamespace>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>907</pd:x>
+        <pd:y>175</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>710</pd:x>
+        <pd:y>177</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:activity name="Query_SelectAllClients">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>356</pd:x>
-        <pd:y>134</pd:y>
+        <pd:x>362</pd:x>
+        <pd:y>175</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -217,6 +254,20 @@ FROM user, client WHERE user.id=client.user_id
     </pd:transition>
     <pd:transition>
         <pd:from>Query_SelectAllClients</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>ERROR</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ERROR</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

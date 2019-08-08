@@ -213,7 +213,7 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>373</pd:x>
+        <pd:x>380</pd:x>
         <pd:y>1</pd:y>
         <pd:width>775</pd:width>
         <pd:height>206</pd:height>
@@ -231,7 +231,7 @@
         <pd:expanded>true</pd:expanded>
         <pd:transition>
             <pd:from>start</pd:from>
-            <pd:to>WriteTransaction</pd:to>
+            <pd:to>GetAccountBalance</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
@@ -265,15 +265,8 @@
             <pd:conditionType>always</pd:conditionType>
         </pd:transition>
         <pd:transition>
-            <pd:from>WriteWithdraw</pd:from>
-            <pd:to>GetAccountBalance</pd:to>
-            <pd:lineType>Default</pd:lineType>
-            <pd:lineColor>-16777216</pd:lineColor>
-            <pd:conditionType>always</pd:conditionType>
-        </pd:transition>
-        <pd:transition>
             <pd:from>UPDATE_ACCOUNT</pd:from>
-            <pd:to>SUCCESS</pd:to>
+            <pd:to>WriteTransaction</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
@@ -294,11 +287,18 @@
             <pd:conditionType>xpath</pd:conditionType>
             <pd:xpath>($GetAccountBalance/resultSet/Record[1]/balance - $Start/pfx:WriteWithdrawInput/input/ns1:inputWithdraw/@value) &lt; 0</pd:xpath>
         </pd:transition>
+        <pd:transition>
+            <pd:from>WriteWithdraw</pd:from>
+            <pd:to>SUCCESS</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
         <pd:activity name="WriteTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>457</pd:x>
-            <pd:y>59</pd:y>
+            <pd:x>641</pd:x>
+            <pd:y>151</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -400,8 +400,8 @@
         <pd:activity name="LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>608</pd:x>
-            <pd:y>56</pd:y>
+            <pd:x>790</pd:x>
+            <pd:y>151</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -423,8 +423,8 @@
         <pd:activity name="WriteWithdraw">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>606</pd:x>
-            <pd:y>153</pd:y>
+            <pd:x>917</pd:x>
+            <pd:y>150</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -470,8 +470,8 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1075</pd:x>
-            <pd:y>152</pd:y>
+            <pd:x>1049</pd:x>
+            <pd:y>150</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -486,8 +486,8 @@
         <pd:activity name="UPDATE_ACCOUNT">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>921</pd:x>
-            <pd:y>150</pd:y>
+            <pd:x>489</pd:x>
+            <pd:y>153</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -526,8 +526,8 @@
         <pd:activity name="GetAccountBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>753</pd:x>
-            <pd:y>99</pd:y>
+            <pd:x>488</pd:x>
+            <pd:y>56</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -566,7 +566,7 @@
         <pd:activity name="NOMONEY">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>933</pd:x>
+            <pd:x>800</pd:x>
             <pd:y>56</pd:y>
             <config>
                 <variableName>message</variableName>

@@ -19,8 +19,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:CreateAccountOutput"/>
-    <pd:endX>1054</pd:endX>
-    <pd:endY>191</pd:endY>
+    <pd:endX>1093</pd:endX>
+    <pd:endY>128</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -37,8 +37,8 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>287</pd:x>
-        <pd:y>209</pd:y>
+        <pd:x>124</pd:x>
+        <pd:y>241</pd:y>
         <pd:width>671</pd:width>
         <pd:height>143</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
@@ -91,8 +91,8 @@
         <pd:activity name="CreateAccount">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>393</pd:x>
-            <pd:y>270</pd:y>
+            <pd:x>229</pd:x>
+            <pd:y>301</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -208,8 +208,8 @@
         <pd:activity name="Update_Account_Client">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>696</pd:x>
-            <pd:y>274</pd:y>
+            <pd:x>532</pd:x>
+            <pd:y>305</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -255,8 +255,8 @@
         <pd:activity name="GET_LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>549</pd:x>
-            <pd:y>272</pd:y>
+            <pd:x>385</pd:x>
+            <pd:y>303</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -278,8 +278,8 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>826</pd:x>
-            <pd:y>277</pd:y>
+            <pd:x>662</pd:x>
+            <pd:y>308</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -383,8 +383,8 @@
     <pd:activity name="Query_AccountNumber_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>240</pd:x>
-        <pd:y>141</pd:y>
+        <pd:x>241</pd:x>
+        <pd:y>140</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -468,6 +468,33 @@
             </root>
         </pd:inputBindings>
     </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>913</pd:x>
+        <pd:y>251</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>1039</pd:x>
+        <pd:y>250</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
         <pd:to>Query_IBAN_EXISTS</pd:to>
@@ -527,5 +554,19 @@
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>not(exists($Query_AccountNumber_EXISTS/resultSet/Record))</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>ERROR</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ERROR</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
     </pd:transition>
 </pd:ProcessDefinition>

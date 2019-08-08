@@ -123,18 +123,6 @@ WHERE id=?</statement>
             </root>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="Catch">
-        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
-        <pd:resourceType>ae.activities.catch</pd:resourceType>
-        <pd:x>816</pd:x>
-        <pd:y>126</pd:y>
-        <pd:handler>true</pd:handler>
-        <config>
-            <fault>localname=JDBCConnectionNotFoundException namespace=http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions</fault>
-            <catchAll>false</catchAll>
-        </config>
-        <pd:inputBindings/>
-    </pd:activity>
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.CriticalSectionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
@@ -253,6 +241,33 @@ WHERE id=?</statement>
             </pd:inputBindings>
         </pd:activity>
     </pd:group>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>915</pd:x>
+        <pd:y>127</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>777</pd:x>
+        <pd:y>126</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>Query_AccountById</pd:from>
         <pd:to>AccountNotFound</pd:to>
@@ -276,13 +291,6 @@ WHERE id=?</statement>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>Catch</pd:from>
-        <pd:to>End</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
         <pd:from>Query_AccountById</pd:from>
         <pd:to>Group</pd:to>
         <pd:lineType>Default</pd:lineType>
@@ -292,6 +300,20 @@ WHERE id=?</statement>
     </pd:transition>
     <pd:transition>
         <pd:from>Group</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>ERROR</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ERROR</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

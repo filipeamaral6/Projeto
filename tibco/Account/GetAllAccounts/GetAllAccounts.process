@@ -5,7 +5,7 @@
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetAllAccountsInput"/>
     <pd:startX>105</pd:startX>
-    <pd:startY>117</pd:startY>
+    <pd:startY>118</pd:startY>
     <pd:returnBindings>
         <pfx:GetAllAccountsOutput>
             <output>
@@ -57,15 +57,42 @@
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllAccountsOutput"/>
     <pd:endX>530</pd:endX>
-    <pd:endY>117</pd:endY>
+    <pd:endY>118</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677349910</pd:targetNamespace>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>846</pd:x>
+        <pd:y>118</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>679</pd:x>
+        <pd:y>118</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:activity name="Query_GetAllAccounts">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>303</pd:x>
-        <pd:y>117</pd:y>
+        <pd:y>118</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -130,6 +157,20 @@
     </pd:transition>
     <pd:transition>
         <pd:from>Query_GetAllAccounts</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>ERROR</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ERROR</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

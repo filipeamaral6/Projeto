@@ -4,8 +4,8 @@
     <pd:name>Transactions/Payment/WritePayment.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:WritePaymentInput"/>
-    <pd:startX>27</pd:startX>
-    <pd:startY>202</pd:startY>
+    <pd:startX>76</pd:startX>
+    <pd:startY>279</pd:startY>
     <pd:returnBindings>
         <pfx:WritePaymentOutput>
             <output>
@@ -19,8 +19,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:WritePaymentOutput"/>
-    <pd:endX>1053</pd:endX>
-    <pd:endY>202</pd:endY>
+    <pd:endX>855</pd:endX>
+    <pd:endY>361</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -37,8 +37,8 @@
     <pd:activity name="Query_IBAN_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>172</pd:x>
-        <pd:y>205</pd:y>
+        <pd:x>229</pd:x>
+        <pd:y>282</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -109,8 +109,8 @@
     <pd:activity name="Query_account_id_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>285</pd:x>
-        <pd:y>91</pd:y>
+        <pd:x>266</pd:x>
+        <pd:y>121</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -181,8 +181,8 @@
     <pd:activity name="IBAN_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>531</pd:x>
-        <pd:y>366</pd:y>
+        <pd:x>412</pd:x>
+        <pd:y>355</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -197,8 +197,8 @@
     <pd:activity name="ID_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>545</pd:x>
-        <pd:y>223</pd:y>
+        <pd:x>475</pd:x>
+        <pd:y>262</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -213,10 +213,10 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>426</pd:x>
-        <pd:y>4</pd:y>
+        <pd:x>442</pd:x>
+        <pd:y>1</pd:y>
         <pd:width>731</pd:width>
-        <pd:height>150</pd:height>
+        <pd:height>219</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
         <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
@@ -231,7 +231,14 @@
         <pd:expanded>true</pd:expanded>
         <pd:transition>
             <pd:from>start</pd:from>
-            <pd:to>WriteTransaction</pd:to>
+            <pd:to>GetAccountBalance</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>NO_MONEY</pd:from>
+            <pd:to>end</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
@@ -258,15 +265,8 @@
             <pd:conditionType>always</pd:conditionType>
         </pd:transition>
         <pd:transition>
-            <pd:from>WritePayment</pd:from>
-            <pd:to>GetAccountBalance</pd:to>
-            <pd:lineType>Default</pd:lineType>
-            <pd:lineColor>-16777216</pd:lineColor>
-            <pd:conditionType>always</pd:conditionType>
-        </pd:transition>
-        <pd:transition>
             <pd:from>UPDATE_ACCOUNT</pd:from>
-            <pd:to>SUCCESS</pd:to>
+            <pd:to>WriteTransaction</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
@@ -276,13 +276,29 @@
             <pd:to>UPDATE_ACCOUNT</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>xpath</pd:conditionType>
+            <pd:xpath>($GetAccountBalance/resultSet/Record[1]/balance - $Start/pfx:WritePaymentInput/input/ns1:inputPayment/@value) &gt;= 0</pd:xpath>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>WritePayment</pd:from>
+            <pd:to>SUCCESS</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>GetAccountBalance</pd:from>
+            <pd:to>NO_MONEY</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>xpath</pd:conditionType>
+            <pd:xpath>($GetAccountBalance/resultSet/Record[1]/balance - $Start/pfx:WritePaymentInput/input/ns1:inputPayment/@value) &lt; 0</pd:xpath>
         </pd:transition>
         <pd:activity name="WriteTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>504</pd:x>
-            <pd:y>69</pd:y>
+            <pd:x>684</pd:x>
+            <pd:y>158</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -384,8 +400,8 @@
         <pd:activity name="LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>619</pd:x>
-            <pd:y>71</pd:y>
+            <pd:x>833</pd:x>
+            <pd:y>160</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -407,8 +423,8 @@
         <pd:activity name="WritePayment">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>727</pd:x>
-            <pd:y>69</pd:y>
+            <pd:x>961</pd:x>
+            <pd:y>162</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -482,8 +498,8 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1082</pd:x>
-            <pd:y>72</pd:y>
+            <pd:x>1084</pd:x>
+            <pd:y>159</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -498,8 +514,8 @@
         <pd:activity name="UPDATE_ACCOUNT">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>973</pd:x>
-            <pd:y>74</pd:y>
+            <pd:x>529</pd:x>
+            <pd:y>158</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -538,8 +554,8 @@
         <pd:activity name="GetAccountBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>849</pd:x>
-            <pd:y>72</pd:y>
+            <pd:x>525</pd:x>
+            <pd:y>61</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -575,7 +591,50 @@
                 </jdbcQueryActivityInput>
             </pd:inputBindings>
         </pd:activity>
+        <pd:activity name="NO_MONEY">
+            <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+            <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+            <pd:x>1074</pd:x>
+            <pd:y>60</pd:y>
+            <config>
+                <variableName>message</variableName>
+            </config>
+            <pd:inputBindings>
+                <root>
+                    <message>
+                        <xsl:value-of select="&quot;Não tem saldo suficiente para fazer esta operação!&quot;"/>
+                    </message>
+                </root>
+            </pd:inputBindings>
+        </pd:activity>
     </pd:group>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>1131</pd:x>
+        <pd:y>366</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>967</pd:x>
+        <pd:y>364</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
         <pd:to>Query_IBAN_EXISTS</pd:to>
@@ -635,5 +694,19 @@
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>exists($Query_account_id_EXISTS/resultSet/Record)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>ERROR</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ERROR</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
     </pd:transition>
 </pd:ProcessDefinition>
