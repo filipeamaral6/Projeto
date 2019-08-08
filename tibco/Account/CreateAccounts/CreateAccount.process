@@ -37,13 +37,14 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>333</pd:x>
-        <pd:y>280</pd:y>
+        <pd:x>328</pd:x>
+        <pd:y>265</pd:y>
         <pd:width>671</pd:width>
         <pd:height>143</pd:height>
-        <pd:collapsedWidth>52</pd:collapsedWidth>
-        <pd:collapsedHeight>69</pd:collapsedHeight>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
         <config>
             <pd:groupType>transactionGroup</pd:groupType>
             <pd:serializable>false</pd:serializable>
@@ -90,8 +91,8 @@
         <pd:activity name="CreateAccount">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>441</pd:x>
-            <pd:y>343</pd:y>
+            <pd:x>435</pd:x>
+            <pd:y>327</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -207,8 +208,8 @@
         <pd:activity name="Update_Account_Client">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>744</pd:x>
-            <pd:y>347</pd:y>
+            <pd:x>738</pd:x>
+            <pd:y>331</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -254,8 +255,8 @@
         <pd:activity name="GET_LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>598</pd:x>
-            <pd:y>345</pd:y>
+            <pd:x>591</pd:x>
+            <pd:y>329</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -277,15 +278,15 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>875</pd:x>
-            <pd:y>350</pd:y>
+            <pd:x>868</pd:x>
+            <pd:y>334</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
             <pd:inputBindings>
                 <root>
                     <message>
-                        <xsl:value-of select="&quot;Conta regista!&quot;"/>
+                        <xsl:value-of select="&quot;Conta registada com sucesso!&quot;"/>
                     </message>
                 </root>
             </pd:inputBindings>
@@ -487,7 +488,7 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Start/pfx:CreateAccountInput/input/ns:inputAccount/@iban !=$Query_IBAN_EXISTS/resultSet/Record/iban</pd:xpath>
+        <pd:xpath>exists($Query_IBAN_EXISTS/resultSet/Record)</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>IBAN_EXISTS</pd:from>
@@ -502,7 +503,7 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>($Start/pfx:CreateAccountInput/input/ns:inputAccount/@iban = $Query_IBAN_EXISTS/resultSet/Record/iban) or not(exists($Query_IBAN_EXISTS/resultSet/Record))</pd:xpath>
+        <pd:xpath>not(exists($Query_IBAN_EXISTS/resultSet/Record))</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Query_AccountNumber_EXISTS</pd:from>
@@ -510,7 +511,7 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Start/pfx:CreateAccountInput/input/ns:inputAccount/@account_number !=$Query_AccountNumber_EXISTS/resultSet/Record/account_number</pd:xpath>
+        <pd:xpath>exists($Query_AccountNumber_EXISTS/resultSet/Record)</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>AccountNumber_EXISTS</pd:from>
@@ -525,6 +526,6 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>($Start/pfx:CreateAccountInput/input/ns:inputAccount/@account_number = $Query_AccountNumber_EXISTS/resultSet/Record/account_number) or not(exists($Query_AccountNumber_EXISTS/resultSet/Record))</pd:xpath>
+        <pd:xpath>not(exists($Query_AccountNumber_EXISTS/resultSet/Record))</pd:xpath>
     </pd:transition>
 </pd:ProcessDefinition>

@@ -1,47 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns6="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns5="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd10" xmlns:ns7="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd6" xmlns:tns="http://xmlns.example.com/1564671163059" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd8" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd9" xmlns:ns3="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd7" targetNamespace="http://xmlns.example.com/1564671163059">
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd6" location="../Schemas/Deposit.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd7" location="../Schemas/Payment.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd9" location="../Schemas/Transfer.xsd"/>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd8" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd9" xmlns:ns3="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd7" xmlns:ns6="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns5="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd10" xmlns:ns8="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd" xmlns:ns7="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" xmlns:ns13="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" xmlns:ns9="http://www.tibco.com/schemas/Bankrising/Schemas/Deposit.xsd" xmlns:ns12="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:ns11="http://www.tibco.com/schemas/Bankrising/Schemas/Transfer.xsd" xmlns:ns10="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd" xmlns:tns="http://xmlns.example.com/1564671163059" targetNamespace="http://xmlns.example.com/1564671163059">
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd10" location="../Schemas/Withdraw.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" location="../Schemas/GetById.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" location="../Schemas/GetByIban.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd8" location="../Schemas/Transaction.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transfer.xsd" location="../Schemas/Transfer.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" location="../Schemas/GetByIban.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Deposit.xsd" location="../Schemas/Deposit.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd" location="../Schemas/Payment.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd" location="../Schemas/Transaction.xsd"/>
     <message name="WriteDepositInput">
-        <part name="input" element="ns:inputDeposit"/>
+        <part name="input" element="ns9:inputDeposit"/>
     </message>
     <message name="WriteDepositOutput">
-        <part name="output" element="ns:outputDeposit"/>
+        <part name="output" element="ns9:outputDeposit"/>
     </message>
     <message name="WritePaymentInput">
-        <part name="input" element="ns3:inputPayment"/>
+        <part name="input" element="ns10:inputPayment"/>
     </message>
-    <message name="WirtePaymentOutput">
-        <part name="output" element="ns3:outputPayment"/>
+    <message name="WritePaymentOutput">
+        <part name="output" element="ns10:outputPayment"/>
     </message>
     <message name="WriteTransferInput">
-        <part name="input" element="ns4:inputTransfer"/>
+        <part name="input" element="ns8:inputTransaction"/>
     </message>
     <message name="WriteTransferOutput">
-        <part name="output" element="ns4:outputTransfer"/>
+        <part name="output" element="ns8:root"/>
     </message>
     <message name="WriteWithdrawInput">
-        <part name="input" element="ns5:inputWithdraw"/>
+        <part name="input" element="ns8:inputTransaction"/>
     </message>
     <message name="WriteWithdrawOutput">
-        <part name="output" element="ns5:outputWithdraw"/>
+        <part name="output" element="ns8:outputTransaction"/>
     </message>
     <message name="GetTransactionByIdInput">
-        <part name="input" element="ns6:getById"/>
+        <part name="input" element="ns12:getById"/>
     </message>
     <message name="GetTransactionByIdOuput">
-        <part name="output" element="ns2:inputTransaction"/>
+        <part name="output" element="ns8:root"/>
     </message>
     <message name="GetTransactionsByIbanInput">
-        <part name="input" element="ns7:getByIban"/>
+        <part name="input" element="ns13:getByIban"/>
     </message>
     <message name="GetTransactionsByIbanOutput">
-        <part name="output" element="ns2:inputTransaction"/>
+        <part name="output" element="ns8:root"/>
+    </message>
+    <message name="GetAllTransactionsInput"/>
+    <message name="GetAllTransactionsOutput">
+        <part name="output" element="ns8:root"/>
+    </message>
+    <message name="WriteTransactionOutpu">
+        <part name="output" element="ns8:root"/>
     </message>
     <portType name="PortType_Deposit">
         <operation name="WriteDeposit">
@@ -58,7 +65,7 @@
     <portType name="PortType_Payment">
         <operation name="WritePayment">
             <input message="tns:WritePaymentInput"/>
-            <output message="tns:WirtePaymentOutput"/>
+            <output message="tns:WritePaymentOutput"/>
         </operation>
     </portType>
     <portType name="PortType_Transfer">
@@ -77,6 +84,12 @@
         <operation name="Operation">
             <input message="tns:GetTransactionsByIbanInput"/>
             <output message="tns:GetTransactionsByIbanOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetAllTransactions">
+        <operation name="Operation">
+            <input message="tns:GetAllTransactionsInput"/>
+            <output message="tns:GetAllTransactionsOutput"/>
         </operation>
     </portType>
 </definitions>
