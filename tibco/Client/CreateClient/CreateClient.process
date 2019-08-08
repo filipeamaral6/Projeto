@@ -100,7 +100,7 @@
                 <commit>false</commit>
                 <emptyStrAsNil>false</emptyStrAsNil>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-                <statement>INSERT INTO client (full_name, nif, client_cc, phone_number, mobile_number, address, birthDate, zip_code, county, country, nationality, status, notification, transaction_password, user_id)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                <statement>INSERT INTO client (full_name, nif, client_cc, phone_number, mobile_number, address, birthDate, zip_code, county, country, nationality, notification, transaction_password, user_id)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
 </statement>
                 <Prepared_Param_DataType>
                     <parameter>
@@ -145,10 +145,6 @@
                     </parameter>
                     <parameter>
                         <parameterName>nationality</parameterName>
-                        <dataType>VARCHAR</dataType>
-                    </parameter>
-                    <parameter>
-                        <parameterName>status</parameterName>
                         <dataType>VARCHAR</dataType>
                     </parameter>
                     <parameter>
@@ -339,13 +335,13 @@
         <pd:activity name="CreateUser">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>512</pd:x>
-            <pd:y>110</pd:y>
+            <pd:x>508</pd:x>
+            <pd:y>114</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
                 <emptyStrAsNil>false</emptyStrAsNil>
-                <statement>INSERT INTO user (username, password, email, role) VALUES (?, ?, ?, ?)</statement>
+                <statement>INSERT INTO user (username, password, email, role, status) VALUES (?, ?, ?, ?,?)</statement>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
                 <Prepared_Param_DataType>
                     <parameter>
@@ -362,6 +358,10 @@
                     </parameter>
                     <parameter>
                         <parameterName>role</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>status</parameterName>
                         <dataType>VARCHAR</dataType>
                     </parameter>
                 </Prepared_Param_DataType>
@@ -408,6 +408,16 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </role>
+                    <status>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:CreateClientInput/input/ns1:inputClient/@status)">
+                                <xsl:value-of select="$Start/pfx:CreateClientInput/input/ns1:inputClient/@status"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </status>
                 </jdbcUpdateActivityInput>
             </pd:inputBindings>
         </pd:activity>

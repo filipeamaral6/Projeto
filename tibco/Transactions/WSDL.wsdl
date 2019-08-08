@@ -4,9 +4,9 @@
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transfer.xsd" location="../Schemas/Transfer.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
     <import namespace="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" location="../Schemas/GetByIban.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd" location="../Schemas/Transaction.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Deposit.xsd" location="../Schemas/Deposit.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd" location="../Schemas/Payment.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd" location="../Schemas/Transaction.xsd"/>
     <message name="WriteDepositInput">
         <part name="input" element="ns9:inputDeposit"/>
     </message>
@@ -29,7 +29,7 @@
         <part name="input" element="ns8:inputTransaction"/>
     </message>
     <message name="WriteWithdrawOutput">
-        <part name="output" element="ns8:root"/>
+        <part name="output" element="ns8:outputTransaction"/>
     </message>
     <message name="GetTransactionByIdInput">
         <part name="input" element="ns12:getById"/>
@@ -46,9 +46,6 @@
     <message name="GetAllTransactionsInput"/>
     <message name="GetAllTransactionsOutput">
         <part name="output" element="ns8:root"/>
-    </message>
-    <message name="WriteTransactionInput">
-        <part name="input" element="ns8:inputTransaction"/>
     </message>
     <message name="WriteTransactionOutpu">
         <part name="output" element="ns8:root"/>
@@ -93,12 +90,6 @@
         <operation name="Operation">
             <input message="tns:GetAllTransactionsInput"/>
             <output message="tns:GetAllTransactionsOutput"/>
-        </operation>
-    </portType>
-    <portType name="PortType_WriteTransaction">
-        <operation name="Operation">
-            <input message="tns:WriteTransactionInput"/>
-            <output message="tns:WriteTransactionOutpu"/>
         </operation>
     </portType>
 </definitions>

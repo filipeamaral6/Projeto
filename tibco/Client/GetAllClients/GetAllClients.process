@@ -98,23 +98,23 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllClientsOutput"/>
-    <pd:endX>569</pd:endX>
-    <pd:endY>137</pd:endY>
+    <pd:endX>570</pd:endX>
+    <pd:endY>136</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1564677277982</pd:targetNamespace>
     <pd:activity name="Query_SelectAllClients">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>354</pd:x>
-        <pd:y>132</pd:y>
+        <pd:x>355</pd:x>
+        <pd:y>134</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT user.id, user.email, user.password, user.username, user.role, client.full_name, client.nif, client.client_cc, client.birthDate, client.phone_number, client.mobile_number, client.address, client.zip_code, client.county, client.country, client.nationality, client.status, client.notification, client.transaction_password, client.created_at, client.user_id 
+            <statement>SELECT user.id, user.email, user.password, user.username, user.role, user.status, client.full_name, client.nif, client.client_cc, client.birthDate, client.phone_number, client.mobile_number, client.address, client.zip_code, client.county, client.country, client.nationality, client.notification, client.transaction_password, client.created_at, client.user_id 
 FROM user, client WHERE user.id=client.user_id
 </statement>
             <oraObjects/>

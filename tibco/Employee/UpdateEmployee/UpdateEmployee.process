@@ -84,7 +84,7 @@
         <pd:activity name="Update_Employee">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>620</pd:x>
+            <pd:x>621</pd:x>
             <pd:y>111</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -149,14 +149,14 @@ WHERE user_id=?</statement>
         <pd:activity name="Update_User">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>497</pd:x>
+            <pd:x>499</pd:x>
             <pd:y>115</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
                 <emptyStrAsNil>false</emptyStrAsNil>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-                <statement>UPDATE user SET username=(?), password=(?), email=(?), role=(?)
+                <statement>UPDATE user SET username=(?), password=(?), email=(?), role=(?), status=(?)
 WHERE id=?</statement>
                 <Prepared_Param_DataType>
                     <parameter>
@@ -173,6 +173,10 @@ WHERE id=?</statement>
                     </parameter>
                     <parameter>
                         <parameterName>role</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>status</parameterName>
                         <dataType>VARCHAR</dataType>
                     </parameter>
                     <parameter>
@@ -223,6 +227,16 @@ WHERE id=?</statement>
                             </xsl:otherwise>
                         </xsl:choose>
                     </role>
+                    <status>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@status)">
+                                <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@status"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </status>
                     <id>
                         <xsl:choose>
                             <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id)">
@@ -376,7 +390,7 @@ WHERE id=?</statement>
     <pd:activity name="Query_UserById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>279</pd:x>
+        <pd:x>280</pd:x>
         <pd:y>492</pd:y>
         <config>
             <timeout>10</timeout>
