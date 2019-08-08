@@ -4,8 +4,8 @@
     <pd:name>Account/CreateAccounts/CreateAccount.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:CreateAccountInput"/>
-    <pd:startX>44</pd:startX>
-    <pd:startY>43</pd:startY>
+    <pd:startX>46</pd:startX>
+    <pd:startY>35</pd:startY>
     <pd:returnBindings>
         <pfx:CreateAccountOutput>
             <output>
@@ -37,8 +37,8 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>328</pd:x>
-        <pd:y>265</pd:y>
+        <pd:x>287</pd:x>
+        <pd:y>209</pd:y>
         <pd:width>671</pd:width>
         <pd:height>143</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
@@ -91,8 +91,8 @@
         <pd:activity name="CreateAccount">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>435</pd:x>
-            <pd:y>327</pd:y>
+            <pd:x>393</pd:x>
+            <pd:y>270</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -208,8 +208,8 @@
         <pd:activity name="Update_Account_Client">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>738</pd:x>
-            <pd:y>331</pd:y>
+            <pd:x>696</pd:x>
+            <pd:y>274</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -255,8 +255,8 @@
         <pd:activity name="GET_LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>591</pd:x>
-            <pd:y>329</pd:y>
+            <pd:x>549</pd:x>
+            <pd:y>272</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -278,8 +278,8 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>868</pd:x>
-            <pd:y>334</pd:y>
+            <pd:x>826</pd:x>
+            <pd:y>277</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -295,8 +295,8 @@
     <pd:activity name="Query_IBAN_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>225</pd:x>
-        <pd:y>44</pd:y>
+        <pd:x>227</pd:x>
+        <pd:y>36</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -367,8 +367,8 @@
     <pd:activity name="IBAN_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>824</pd:x>
-        <pd:y>50</pd:y>
+        <pd:x>826</pd:x>
+        <pd:y>42</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -383,8 +383,8 @@
     <pd:activity name="Query_AccountNumber_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>244</pd:x>
-        <pd:y>167</pd:y>
+        <pd:x>240</pd:x>
+        <pd:y>141</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -455,8 +455,8 @@
     <pd:activity name="AccountNumber_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>827</pd:x>
-        <pd:y>170</pd:y>
+        <pd:x>823</pd:x>
+        <pd:y>144</pd:y>
         <config>
             <variableName>message</variableName>
         </config>

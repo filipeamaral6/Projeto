@@ -4,7 +4,7 @@
     <pd:name>Account/UpdateAccount/UpdateAccount.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:UpdateAccountInput"/>
-    <pd:startX>79</pd:startX>
+    <pd:startX>82</pd:startX>
     <pd:startY>74</pd:startY>
     <pd:returnBindings>
         <pfx:UpdateAccountOutput>
@@ -37,8 +37,8 @@
     <pd:activity name="Query_AccountById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>258</pd:x>
-        <pd:y>74</pd:y>
+        <pd:x>259</pd:x>
+        <pd:y>76</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -123,85 +123,6 @@ WHERE id=?</statement>
             </root>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="Update_Account">
-        <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
-        <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-        <pd:x>256</pd:x>
-        <pd:y>217</pd:y>
-        <config>
-            <timeout>10</timeout>
-            <commit>false</commit>
-            <emptyStrAsNil>false</emptyStrAsNil>
-            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>UPDATE  account 
-SET status=(?), type=(?)
-WHERE id=?</statement>
-            <Prepared_Param_DataType>
-                <parameter>
-                    <parameterName>id</parameterName>
-                    <dataType>INTEGER</dataType>
-                </parameter>
-                <parameter>
-                    <parameterName>status</parameterName>
-                    <dataType>VARCHAR</dataType>
-                </parameter>
-                <parameter>
-                    <parameterName>type</parameterName>
-                    <dataType>VARCHAR</dataType>
-                </parameter>
-            </Prepared_Param_DataType>
-        </config>
-        <pd:inputBindings>
-            <jdbcUpdateActivityInput>
-                <id>
-                    <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@id)">
-                            <xsl:value-of select="$Start/pfx:UpdateAccountInput/input/ns:inputAccount/@id"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </id>
-                <status>
-                    <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@status)">
-                            <xsl:value-of select="$Start/pfx:UpdateAccountInput/input/ns:inputAccount/@status"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </status>
-                <type>
-                    <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@type)">
-                            <xsl:value-of select="$Start/pfx:UpdateAccountInput/input/ns:inputAccount/@type"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </type>
-            </jdbcUpdateActivityInput>
-        </pd:inputBindings>
-    </pd:activity>
-    <pd:activity name="Account_UPDATED">
-        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
-        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>466</pd:x>
-        <pd:y>217</pd:y>
-        <config>
-            <variableName>message</variableName>
-        </config>
-        <pd:inputBindings>
-            <root>
-                <message>
-                    <xsl:value-of select="&quot;A conta foi actualizada!&quot;"/>
-                </message>
-            </root>
-        </pd:inputBindings>
-    </pd:activity>
     <pd:activity name="Catch">
         <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
         <pd:resourceType>ae.activities.catch</pd:resourceType>
@@ -214,6 +135,124 @@ WHERE id=?</statement>
         </config>
         <pd:inputBindings/>
     </pd:activity>
+    <pd:group name="Group">
+        <pd:type>com.tibco.pe.core.CriticalSectionGroup</pd:type>
+        <pd:resourceType>ae.process.group</pd:resourceType>
+        <pd:x>188</pd:x>
+        <pd:y>166</pd:y>
+        <pd:width>386</pd:width>
+        <pd:height>140</pd:height>
+        <pd:collapsedWidth>52</pd:collapsedWidth>
+        <pd:collapsedHeight>69</pd:collapsedHeight>
+        <pd:groupVariables/>
+        <config>
+            <pd:groupType>criticalSection</pd:groupType>
+            <pd:serializable>false</pd:serializable>
+            <pd:scope>single</pd:scope>
+        </config>
+        <pd:inputBindings/>
+        <pd:expanded>true</pd:expanded>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>Update_Account</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Account_UPDATED</pd:from>
+            <pd:to>end</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Update_Account</pd:from>
+            <pd:to>Account_UPDATED</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:activity name="Update_Account">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>262</pd:x>
+            <pd:y>232</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <statement>UPDATE  account 
+SET status=(?), employee_id=(?)
+WHERE id=?</statement>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>status</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>employee_id</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>id</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput>
+                    <status>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@status)">
+                                <xsl:value-of select="$Start/pfx:UpdateAccountInput/input/ns:inputAccount/@status"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </status>
+                    <employee_id>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@employee_id)">
+                                <xsl:value-of select="$Start/pfx:UpdateAccountInput/input/ns:inputAccount/@employee_id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </employee_id>
+                    <id>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@id)">
+                                <xsl:value-of select="$Start/pfx:UpdateAccountInput/input/ns:inputAccount/@id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </id>
+                </jdbcUpdateActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Account_UPDATED">
+            <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+            <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+            <pd:x>473</pd:x>
+            <pd:y>230</pd:y>
+            <config>
+                <variableName>message</variableName>
+            </config>
+            <pd:inputBindings>
+                <root>
+                    <message>
+                        <xsl:value-of select="&quot;A conta foi actualizada!&quot;"/>
+                    </message>
+                </root>
+            </pd:inputBindings>
+        </pd:activity>
+    </pd:group>
     <pd:transition>
         <pd:from>Query_AccountById</pd:from>
         <pd:to>AccountNotFound</pd:to>
@@ -230,28 +269,6 @@ WHERE id=?</statement>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>Query_AccountById</pd:from>
-        <pd:to>Update_Account</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_AccountById/resultSet/Record)</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Update_Account</pd:from>
-        <pd:to>Account_UPDATED</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Account_UPDATED</pd:from>
-        <pd:to>End</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
         <pd:from>Start</pd:from>
         <pd:to>Query_AccountById</pd:to>
         <pd:lineType>Default</pd:lineType>
@@ -260,6 +277,21 @@ WHERE id=?</statement>
     </pd:transition>
     <pd:transition>
         <pd:from>Catch</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_AccountById</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($Query_AccountById/resultSet/Record)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Group</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

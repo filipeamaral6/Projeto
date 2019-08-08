@@ -25,12 +25,6 @@
     <message name="UpdateEmployeeOuput">
         <part name="output" element="ns3:OutputEmployee"/>
     </message>
-    <message name="DeleteEmployeeInput">
-        <part name="input" element="ns5:inputUsers"/>
-    </message>
-    <message name="DeleteEmployeeOutput">
-        <part name="output" element="ns3:OutputEmployee"/>
-    </message>
     <portType name="PortType_Employee">
         <operation name="Operation">
             <input message="tns:CreateEmployeeInput"/>
@@ -53,12 +47,6 @@
         <operation name="Operation">
             <input message="tns:GetAllEmployeesInput"/>
             <output message="tns:GetAllEmployeesOutput"/>
-        </operation>
-    </portType>
-    <portType name="PortType_DeleteEmployee">
-        <operation name="Operation">
-            <input message="tns:DeleteEmployeeInput"/>
-            <output message="tns:DeleteEmployeeOutput"/>
         </operation>
     </portType>
 </definitions>

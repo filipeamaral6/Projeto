@@ -37,10 +37,10 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>146</pd:x>
-        <pd:y>-4</pd:y>
-        <pd:width>979</pd:width>
-        <pd:height>155</pd:height>
+        <pd:x>16</pd:x>
+        <pd:y>-8</pd:y>
+        <pd:width>1154</pd:width>
+        <pd:height>157</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
         <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
@@ -82,13 +82,6 @@
             <pd:conditionType>always</pd:conditionType>
         </pd:transition>
         <pd:transition>
-            <pd:from>WriteTransfer</pd:from>
-            <pd:to>GetOriginAccountBalance</pd:to>
-            <pd:lineType>Default</pd:lineType>
-            <pd:lineColor>-16777216</pd:lineColor>
-            <pd:conditionType>always</pd:conditionType>
-        </pd:transition>
-        <pd:transition>
             <pd:from>UPDATE_Origin_Account</pd:from>
             <pd:to>GetDestinationBalance</pd:to>
             <pd:lineType>Default</pd:lineType>
@@ -116,10 +109,31 @@
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
         </pd:transition>
+        <pd:transition>
+            <pd:from>DestinationTransaction</pd:from>
+            <pd:to>GetOriginAccountBalance</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>WriteTransfer</pd:from>
+            <pd:to>GetDestinationAccountId</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>GetDestinationAccountId</pd:from>
+            <pd:to>DestinationTransaction</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
         <pd:activity name="WriteTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>221</pd:x>
+            <pd:x>87</pd:x>
             <pd:y>56</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -222,8 +236,8 @@
         <pd:activity name="LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>342</pd:x>
-            <pd:y>60</pd:y>
+            <pd:x>196</pd:x>
+            <pd:y>58</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -245,8 +259,8 @@
         <pd:activity name="WriteTransfer">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>450</pd:x>
-            <pd:y>58</pd:y>
+            <pd:x>298</pd:x>
+            <pd:y>59</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -306,8 +320,8 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1061</pd:x>
-            <pd:y>71</pd:y>
+            <pd:x>1095</pd:x>
+            <pd:y>58</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -322,8 +336,8 @@
         <pd:activity name="UPDATE_Origin_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>702</pd:x>
-            <pd:y>65</pd:y>
+            <pd:x>760</pd:x>
+            <pd:y>58</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -369,8 +383,8 @@
         <pd:activity name="GetOriginAccountBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>577</pd:x>
-            <pd:y>64</pd:y>
+            <pd:x>641</pd:x>
+            <pd:y>58</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -409,8 +423,8 @@
         <pd:activity name="UPDATE_Destination_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>950</pd:x>
-            <pd:y>65</pd:y>
+            <pd:x>996</pd:x>
+            <pd:y>58</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -456,8 +470,8 @@
         <pd:activity name="GetDestinationBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>833</pd:x>
-            <pd:y>63</pd:y>
+            <pd:x>879</pd:x>
+            <pd:y>57</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -476,6 +490,149 @@
                 <QueryOutputCachedSchemaColumns>balance</QueryOutputCachedSchemaColumns>
                 <QueryOutputCachedSchemaDataTypes>8</QueryOutputCachedSchemaDataTypes>
                 <QueryOutputCachedSchemaDataTypesName>DOUBLE</QueryOutputCachedSchemaDataTypesName>
+                <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            </config>
+            <pd:inputBindings>
+                <jdbcQueryActivityInput>
+                    <iban>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@destination_iban)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@destination_iban"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </iban>
+                </jdbcQueryActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="DestinationTransaction">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>518</pd:x>
+            <pd:y>57</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <statement>INSERT INTO transaction (account_id, value, account_iban, user_id, type, description) VALUES (?,?,?,?,?,?) </statement>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>account_id</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>value</parameterName>
+                        <dataType>DOUBLE</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>account_iban</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>user_id</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>type</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>description</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput>
+                    <account_id>
+                        <xsl:choose>
+                            <xsl:when test="exists($GetDestinationAccountId/resultSet/Record[1]/id)">
+                                <xsl:value-of select="$GetDestinationAccountId/resultSet/Record[1]/id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </account_id>
+                    <value>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </value>
+                    <account_iban>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@destination_iban)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@destination_iban"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </account_iban>
+                    <user_id>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@user_id)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@user_id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </user_id>
+                    <type>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@type)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@type"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </type>
+                    <description>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@description)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@description"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </description>
+                </jdbcUpdateActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="GetDestinationAccountId">
+            <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+            <pd:x>402</pd:x>
+            <pd:y>58</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <maxRows>100</maxRows>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <statement>SELECT (id) FROM account WHERE iban=?</statement>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>iban</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+                <oraObjects/>
+                <oraTables/>
+                <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+                <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+                <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
                 <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             </config>
             <pd:inputBindings>

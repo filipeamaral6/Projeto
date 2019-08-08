@@ -4,23 +4,23 @@
     <pd:name>Transactions/Withdraw/WriteWithdraw.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:WriteWithdrawInput"/>
-    <pd:startX>32</pd:startX>
-    <pd:startY>284</pd:startY>
+    <pd:startX>77</pd:startX>
+    <pd:startY>356</pd:startY>
     <pd:returnBindings>
         <pfx:WriteWithdrawOutput>
             <output>
-                <ns:outputTransaction>
+                <ns1:outputWithdraw>
                     <xsl:attribute name="message">
                         <xsl:value-of select="$message/root/message"/>
                     </xsl:attribute>
-                </ns:outputTransaction>
+                </ns1:outputWithdraw>
             </output>
         </pfx:WriteWithdrawOutput>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:WriteWithdrawOutput"/>
-    <pd:endX>997</pd:endX>
-    <pd:endY>274</pd:endY>
+    <pd:endX>1040</pd:endX>
+    <pd:endY>346</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -37,8 +37,8 @@
     <pd:activity name="Query_IBAN_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>253</pd:x>
-        <pd:y>285</pd:y>
+        <pd:x>298</pd:x>
+        <pd:y>357</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -95,8 +95,8 @@
             <jdbcQueryActivityInput>
                 <iban>
                     <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:WriteWithdrawInput/input/ns:inputTransaction/@account_iban)">
-                            <xsl:value-of select="$Start/pfx:WriteWithdrawInput/input/ns:inputTransaction/@account_iban"/>
+                        <xsl:when test="exists($Start/pfx:WriteWithdrawInput/input/ns1:inputWithdraw/@account_iban)">
+                            <xsl:value-of select="$Start/pfx:WriteWithdrawInput/input/ns1:inputWithdraw/@account_iban"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -109,8 +109,8 @@
     <pd:activity name="Query_account_id_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>375</pd:x>
-        <pd:y>190</pd:y>
+        <pd:x>307</pd:x>
+        <pd:y>244</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -167,8 +167,8 @@
             <jdbcQueryActivityInput>
                 <id>
                     <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:WriteWithdrawInput/input/ns:inputTransaction/@account_id)">
-                            <xsl:value-of select="$Start/pfx:WriteWithdrawInput/input/ns:inputTransaction/@account_id"/>
+                        <xsl:when test="exists($Start/pfx:WriteWithdrawInput/input/ns1:inputWithdraw/@account_id)">
+                            <xsl:value-of select="$Start/pfx:WriteWithdrawInput/input/ns1:inputWithdraw/@account_id"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -181,8 +181,8 @@
     <pd:activity name="IBAN_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>696</pd:x>
-        <pd:y>321</pd:y>
+        <pd:x>741</pd:x>
+        <pd:y>393</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -197,8 +197,8 @@
     <pd:activity name="ID_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>692</pd:x>
-        <pd:y>220</pd:y>
+        <pd:x>737</pd:x>
+        <pd:y>292</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -213,10 +213,10 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>311</pd:x>
-        <pd:y>2</pd:y>
+        <pd:x>373</pd:x>
+        <pd:y>1</pd:y>
         <pd:width>775</pd:width>
-        <pd:height>147</pd:height>
+        <pd:height>206</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
         <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
@@ -232,6 +232,13 @@
         <pd:transition>
             <pd:from>start</pd:from>
             <pd:to>WriteTransaction</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>NOMONEY</pd:from>
+            <pd:to>end</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
@@ -276,13 +283,22 @@
             <pd:to>UPDATE_ACCOUNT</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
-            <pd:conditionType>always</pd:conditionType>
+            <pd:conditionType>xpath</pd:conditionType>
+            <pd:xpath>($GetAccountBalance/resultSet/Record[1]/balance - $Start/pfx:WriteWithdrawInput/input/ns1:inputWithdraw/@value) &gt;= 0</pd:xpath>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>GetAccountBalance</pd:from>
+            <pd:to>NOMONEY</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>xpath</pd:conditionType>
+            <pd:xpath>($GetAccountBalance/resultSet/Record[1]/balance - $Start/pfx:WriteWithdrawInput/input/ns1:inputWithdraw/@value) &lt; 0</pd:xpath>
         </pd:transition>
         <pd:activity name="WriteTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>418</pd:x>
-            <pd:y>69</pd:y>
+            <pd:x>457</pd:x>
+            <pd:y>59</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -384,8 +400,8 @@
         <pd:activity name="LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>547</pd:x>
-            <pd:y>70</pd:y>
+            <pd:x>608</pd:x>
+            <pd:y>56</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -407,8 +423,8 @@
         <pd:activity name="WriteWithdraw">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>661</pd:x>
-            <pd:y>71</pd:y>
+            <pd:x>606</pd:x>
+            <pd:y>153</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -430,8 +446,8 @@
                 <jdbcUpdateActivityInput>
                     <transaction_id>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:WriteWithdrawInput/input/ns1:inputWithdraw/@transaction_id)">
-                                <xsl:value-of select="$Start/pfx:WriteWithdrawInput/input/ns1:inputWithdraw/@transaction_id"/>
+                            <xsl:when test="exists($LAST_INSERT_ID/resultSet/Record[1]/LAST_INSERT_ID)">
+                                <xsl:value-of select="$LAST_INSERT_ID/resultSet/Record[1]/LAST_INSERT_ID"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -454,8 +470,8 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1011</pd:x>
-            <pd:y>68</pd:y>
+            <pd:x>1075</pd:x>
+            <pd:y>152</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -470,8 +486,8 @@
         <pd:activity name="UPDATE_ACCOUNT">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>905</pd:x>
-            <pd:y>70</pd:y>
+            <pd:x>921</pd:x>
+            <pd:y>150</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -510,8 +526,8 @@
         <pd:activity name="GetAccountBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>782</pd:x>
-            <pd:y>73</pd:y>
+            <pd:x>753</pd:x>
+            <pd:y>99</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -545,6 +561,22 @@
                         </xsl:choose>
                     </id>
                 </jdbcQueryActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="NOMONEY">
+            <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+            <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+            <pd:x>933</pd:x>
+            <pd:y>56</pd:y>
+            <config>
+                <variableName>message</variableName>
+            </config>
+            <pd:inputBindings>
+                <root>
+                    <message>
+                        <xsl:value-of select="&quot;O seu saldo não lhe permite fazer esta operação!&quot;"/>
+                    </message>
+                </root>
             </pd:inputBindings>
         </pd:activity>
     </pd:group>

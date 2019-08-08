@@ -661,7 +661,7 @@
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
             <pd:x>640</pd:x>
-            <pd:y>140</pd:y>
+            <pd:y>139</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -893,7 +893,7 @@ WHERE user_id=?</statement>
         <pd:activity name="Update_User">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>522</pd:x>
+            <pd:x>525</pd:x>
             <pd:y>140</pd:y>
             <config>
                 <timeout>10</timeout>
