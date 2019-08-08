@@ -1,22 +1,33 @@
 import { Routes } from '@angular/router';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { Component } from '@angular/core';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent} from './pages/home/home.component'
 
 export const AppRoutes: Routes = [
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  }, {
-    path: '',
-    component: AdminLayoutComponent,
-    children: [
-        {
-      path: '',
-      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-  }]},
+    path: 'login',
+    component: LoginComponent
+  },
   {
-    path: '**',
-    redirectTo: 'dashboard'
-  }
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'dashboard',
+    redirectTo: 'dashboard',
+//    pathMatch: 'full',
+  },
+  // {
+  //   path: '',
+  //   component: AdminLayoutComponent,
+  //   children: [
+  //       {
+  //     path: '',
+  //     loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+  // }]},
+//  {
+//    path: '**',
+//    redirectTo: 'dashboard'
+//  }
 ]

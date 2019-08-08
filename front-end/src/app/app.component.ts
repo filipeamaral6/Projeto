@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from './shared/model/user.model';
+import { CurrentUser } from './models/CurrentUser';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,11 @@ import { User } from './shared/model/user.model';
 })
 
 export class AppComponent {
-  user: User = {
+
+  currentUser: CurrentUser;
+  userLocalStorage: string;
+
+    user: User = {
     fullName: 'Zé Mário',
     email: 'ze_mario@gmail.com',
     username: 'ze.mario',

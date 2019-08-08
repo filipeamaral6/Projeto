@@ -3,6 +3,8 @@ import Chart from 'chart.js';
 import { Account } from 'app/shared/model/account.model';
 import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
 import { AppComponent } from 'app/app.component';
+import { CurrentUser } from 'app/models/CurrentUser';
+import { AuthenticationService } from 'app/services/authentication.service';
 
 
 @Component({
@@ -13,7 +15,12 @@ import { AppComponent } from 'app/app.component';
 
 export class DashboardComponent implements OnInit {
 
-  constructor(private appComponent: AppComponent) {}
+  currentUser: CurrentUser;
+
+  constructor(
+    private appComponent: AppComponent,
+    private authenticationService: AuthenticationService,
+    ) {}
 
   accounts: any[];
 
@@ -73,7 +80,7 @@ export class DashboardComponent implements OnInit {
       },
     };
 
-    var lineChart = new Chart(speedCanvas, {
+    let lineChart = new Chart(speedCanvas, {
       type: 'line',
       hover: false,
       data: speedData,
@@ -82,7 +89,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private isLeapYear(year) {
-    return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+    return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
   }
 
   private getDaysInCurrentMonth() {
@@ -106,6 +113,16 @@ export class DashboardComponent implements OnInit {
   }
 
   private getRandomColor() {
-    return "#000000".replace(/0/g, function () { return (~~(Math.random() * 16)).toString(16); });
+    return '#000000'.replace(/0/g, function () { return (~~(Math.random() * 16)).toString(16); });
+  }
+
+  isLoggedIn() {
+
+    if (!localStorage.getItem('currentUser')) {
+      return false;
+    }
+    this.currentUser = this.authenticationService.currentUserValue;
+    return true;
+
   }
 }
