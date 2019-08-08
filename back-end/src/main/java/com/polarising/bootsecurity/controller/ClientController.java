@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.JsonObject;
 import com.polarising.bootsecurity.jwt.JwtAuthenticationFilter;
 import com.polarising.bootsecurity.model.Login;
-import com.polarising.bootsecurity.soap.client.example.xmlns._1564670621329.Service;
+import com.polarising.bootsecurity.soap.client.example.xmlns._1564670621329.ClientService;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.OutputClient;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.Root;
@@ -52,7 +52,7 @@ public class ClientController {
 			inputClient.setLoginPassword(passwordEncoder.encode(inputClient.getLoginPassword()));
 			inputClient.setTransactionPassword(passwordEncoder.encode(inputClient.getTransactionPassword()));
 
-			Service clientService = new Service();
+			ClientService clientService = new ClientService();
 
 			OutputClient message = clientService.getPortTypeCreateClientEndpoint1().operation(inputClient);
 			return message;
@@ -70,7 +70,7 @@ public class ClientController {
 	@GetMapping("clients")
 	public List<Object> getClients() {
 
-		Service clientService = new Service();
+		ClientService clientService = new ClientService();
 		Root getClients = clientService.getPortTypeGetAllClientsEndpoint1().operation();
 
 		List<Object> message = new ArrayList<Object>();
@@ -90,7 +90,7 @@ public class ClientController {
 	@GetMapping("clients/id/{id}")
 	public Object getClientById(@PathVariable String id) {
 
-		Service clientService = new Service();
+		ClientService clientService = new ClientService();
 		GetById getById = new GetById();
 		getById.setId(id);
 		Root getClientById = clientService.getPortTypeGetClientByIdEndpoint1().operation(getById);
@@ -107,7 +107,7 @@ public class ClientController {
 	@GetMapping("clients/cc/{cc}")
 	public Object getClientByCC(@PathVariable String cc) {
 
-		Service clientService = new Service();
+		ClientService clientService = new ClientService();
 		GetByClientCC getByCC = new GetByClientCC();
 		getByCC.setClientCc(cc);
 		Root getClientByCC = clientService.getPortTypeGetClientByCcEndpoint1().operation(getByCC);
@@ -125,7 +125,7 @@ public class ClientController {
 
 		if (!result.hasErrors()) {
 
-			Service clientService = new Service();
+			ClientService clientService = new ClientService();
 
 			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
 
@@ -151,7 +151,7 @@ public class ClientController {
 			inputClient.setTransactionPassword(passwordEncoder.encode(inputClient.getTransactionPassword()));
 			inputClient.setStatus("INACTIVE");
 
-			Service clientService = new Service();
+			ClientService clientService = new ClientService();
 
 			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
 
@@ -177,7 +177,7 @@ public class ClientController {
 			inputClient.setTransactionPassword(passwordEncoder.encode(inputClient.getTransactionPassword()));
 			inputClient.setStatus("ACTIVE");
 
-			Service clientService = new Service();
+			ClientService clientService = new ClientService();
 
 			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
 

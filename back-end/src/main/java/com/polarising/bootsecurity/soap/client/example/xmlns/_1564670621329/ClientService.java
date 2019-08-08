@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * 
  */
 @WebServiceClient(name = "Service", targetNamespace = "http://xmlns.example.com/1564670621329", wsdlLocation = "http://localhost:8074/bankrising/ws/client.wsdl")
-public class Service
+public class ClientService
     extends javax.xml.ws.Service
 {
 
@@ -37,27 +37,27 @@ public class Service
         SERVICE_EXCEPTION = e;
     }
 
-    public Service() {
+    public ClientService() {
         super(__getWsdlLocation(), SERVICE_QNAME);
     }
 
-    public Service(WebServiceFeature... features) {
+    public ClientService(WebServiceFeature... features) {
         super(__getWsdlLocation(), SERVICE_QNAME, features);
     }
 
-    public Service(URL wsdlLocation) {
+    public ClientService(URL wsdlLocation) {
         super(wsdlLocation, SERVICE_QNAME);
     }
 
-    public Service(URL wsdlLocation, WebServiceFeature... features) {
+    public ClientService(URL wsdlLocation, WebServiceFeature... features) {
         super(wsdlLocation, SERVICE_QNAME, features);
     }
 
-    public Service(URL wsdlLocation, QName serviceName) {
+    public ClientService(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
 
-    public Service(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+    public ClientService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
         super(wsdlLocation, serviceName, features);
     }
 

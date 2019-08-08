@@ -9,7 +9,7 @@ import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 import com.polarising.bootsecurity.soap.employee.tibco.schemas.getbyid.GetById;
-import com.polarising.bootsecurity.soap.employee.tibco.schemas.getbyid.Root;
+import com.polarising.bootsecurity.soap.employee.tibco.schemas.employee.Root;
 
 
 
