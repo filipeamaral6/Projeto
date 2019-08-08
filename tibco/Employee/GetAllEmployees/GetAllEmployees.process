@@ -61,8 +61,8 @@
     <pd:activity name="Query_SelectAllEmployees">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>307</pd:x>
-        <pd:y>69</pd:y>
+        <pd:x>308</pd:x>
+        <pd:y>70</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

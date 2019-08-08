@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 	
-	private long id;
+	private Long id;
 	
 	@NotBlank(message="${app.model.message.required}")
 	private String username;
@@ -33,6 +33,15 @@ public class User {
 		this.email = email;
 		this.active = 1;
 		this.role = role;
+	}
+	
+	public User(Long id, String username, String password, String email, String role) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.active = 1;
+		this.role = role;
+		this.id = id;
 	}
 	
 	protected User(){}

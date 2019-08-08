@@ -5,6 +5,9 @@ import javax.validation.constraints.NotBlank;
 public class UserResponse {
 	
 	@NotBlank(message="${app.model.message.required}")
+	private Long id;
+	
+	@NotBlank(message="${app.model.message.required}")
 	private String username;
 	
 	@NotBlank(message="${app.model.message.required}")
@@ -16,14 +19,25 @@ public class UserResponse {
 	@NotBlank(message="${app.model.message.required}")
 	private String role;
 
-	public UserResponse(String username, String token, String message, String role) {
+	public UserResponse(Long id, String username, String token, String message, String role) {
 		this.username = username;
 		this.token = token;
 		this.message = message;
 		this.role = role;
+		this.id = id;
 	}
 	
 	protected UserResponse(){}
+	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;

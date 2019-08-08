@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.JsonObject;
+import com.polarising.bootsecurity.jwt.JwtAuthenticationFilter;
+import com.polarising.bootsecurity.model.Login;
 import com.polarising.bootsecurity.soap.client.example.xmlns._1564670621329.Service;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.OutputClient;
@@ -30,12 +36,13 @@ import com.polarising.bootsecurity.soap.client.tibco.schemas.getbyid.GetById;
 
 @RestController
 @RequestMapping("/")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class ClientController {
 
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	
 	// Add Client
 	@PostMapping("clients/add")
 	public Object AddClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {

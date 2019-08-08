@@ -15,9 +15,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -27,6 +28,8 @@ import com.polarising.bootsecurity.security.UserPrincipal;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authenticationManager;
+	
+	private static final String ORIGIN = "Origin";
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -35,9 +38,19 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     /* Trigger when we issue POST request to /login
     We also need to pass in {"username":"dan", "password":"dan123"} in the request body
      */
+    
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
+    	if (request.getHeader(ORIGIN) != null) {
+            String origin = request.getHeader(ORIGIN);
+            response.addHeader("Access-Control-Allow-Origin", origin);
+            response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+            response.addHeader("Access-Control-Allow-Credentials", "true");
+            response.addHeader("Access-Control-Allow-Headers",
+            request.getHeader("Access-Control-Request-Headers"));
+        }
+    
         // Grab credentials and map them to login viewmodel
         Login credentials = null;
         try {
@@ -60,7 +73,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        // Grab principal
+    	
+    	// Grab principal
         UserPrincipal principal = (UserPrincipal) authResult.getPrincipal();
 
         // Create JWT Token
@@ -73,7 +87,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         splitRole = splitRole[0].split("_");
         
         // Build response body
-        UserResponse userResponse = new UserResponse(principal.getUsername(), token, "User signed in sucessfully", splitRole[1]);
+        UserResponse userResponse = new UserResponse(principal.getUser().getId(), principal.getUsername(), token, "User signed in sucessfully", splitRole[1]);
         String userJsonString = new Gson().toJson(userResponse);
 
         // Add token and body to the response

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.polarising.bootsecurity.exceptions.CustomExceptionMessage;
 import com.polarising.bootsecurity.model.User;
@@ -14,6 +15,7 @@ import com.polarising.bootsecurity.soap.user.example.xmlns._1565108737830.UserSe
 import com.polarising.bootsecurity.soap.user.tibco.schemas.user.InputUsers;
 import com.polarising.bootsecurity.soap.user.tibco.schemas.user.Root;
 
+@CrossOrigin(origins = "*")
 @Service
 public class UserPrincipalDetailsService implements UserDetailsService {
 
@@ -35,7 +37,7 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 
 			if (!getUsers.getInputUsers().isEmpty()) {
 				for (InputUsers inputUser : getUsers.getInputUsers()) {
-					User user = new User(inputUser.getUsername(), inputUser.getPassword(), inputUser.getEmail(),
+					User user = new User(Long.parseLong(inputUser.getId()), inputUser.getUsername(), inputUser.getPassword(), inputUser.getEmail(),
 							inputUser.getRole());
 					users.add(user);
 				}
