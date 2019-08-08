@@ -18,6 +18,14 @@
 			<modTime>1564758688012</modTime>
 		</globalVariable>
 		<globalVariable>
+			<name>password</name>
+			<value></value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1565264693152</modTime>
+		</globalVariable>
+		<globalVariable>
 			<name>username</name>
 			<value>root</value>
 			<deploymentSettable>true</deploymentSettable>

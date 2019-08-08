@@ -1,17 +1,213 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564671163059" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564671163059" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <wsdl:import namespace="http://xmlns.example.com/1564671163059" location="/Transactions/WSDL.wsdl"/>
     <pd:name>Transactions/Transaction/GetAllTransactions.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetAllTransactionsInput"/>
-    <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
-    <pd:returnBindings/>
+    <pd:startX>56</pd:startX>
+    <pd:startY>176</pd:startY>
+    <pd:returnBindings>
+        <pfx:GetAllTransactionsOutput>
+            <output>
+                <ns:root>
+                    <xsl:for-each select="$Query_GetAllTransactions/resultSet/Record">
+                        <ns:inputTransaction>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="id"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="account_id">
+                                <xsl:value-of select="account_id"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="value">
+                                <xsl:value-of select="value"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="account_iban">
+                                <xsl:value-of select="account_iban"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="created_at">
+                                <xsl:value-of select="created_at"/>
+                            </xsl:attribute>
+                            <xsl:if test="user_id">
+                                <xsl:attribute name="user_id">
+                                    <xsl:value-of select="user_id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:attribute name="type">
+                                <xsl:value-of select="type"/>
+                            </xsl:attribute>
+                            <xsl:if test="description">
+                                <xsl:attribute name="description">
+                                    <xsl:value-of select="description"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </ns:inputTransaction>
+                    </xsl:for-each>
+                    <xsl:choose>
+                        <xsl:when test="$_error_Query_GetAllTransactions/ActivityErrors or not(exists($Query_GetAllTransactions/resultSet/Record))">
+                            <ns:outputTransaction>
+                                <xsl:attribute name="message">
+                                    <xsl:value-of select="$message/root/message"/>
+                                </xsl:attribute>
+                            </ns:outputTransaction>
+                        </xsl:when>
+                    </xsl:choose>
+                </ns:root>
+            </output>
+        </pfx:GetAllTransactionsOutput>
+    </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllTransactionsOutput"/>
-    <pd:endX>450</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endX>488</pd:endX>
+    <pd:endY>178</pd:endY>
     <pd:errorSchemas/>
-    <pd:processVariables/>
+    <pd:processVariables>
+        <message>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </message>
+    </pd:processVariables>
     <pd:targetNamespace>http://xmlns.example.com/1565191531340</pd:targetNamespace>
+    <pd:activity name="Query_GetAllTransactions">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>261</pd:x>
+        <pd:y>176</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM transaction</statement>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>account_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>value</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>8</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DOUBLE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>account_iban</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>created_at</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATETIME</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>user_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>type</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>description</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>845</pd:x>
+        <pd:y>176</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>653</pd:x>
+        <pd:y>181</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="&quot;Ocorreu um erro! Por Favor, tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="NOT_FOUND">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>488</pd:x>
+        <pd:y>48</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="&quot;Nenhum resultado encontrado!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Query_GetAllTransactions</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_GetAllTransactions</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($Query_GetAllTransactions/resultSet/Record)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>ERROR</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ERROR</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>NOT_FOUND</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_GetAllTransactions</pd:from>
+        <pd:to>NOT_FOUND</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>not(exists($Query_GetAllTransactions/resultSet/Record))</pd:xpath>
+    </pd:transition>
 </pd:ProcessDefinition>

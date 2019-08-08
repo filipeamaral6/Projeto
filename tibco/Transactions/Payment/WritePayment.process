@@ -197,7 +197,7 @@
     <pd:activity name="ID_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>544</pd:x>
+        <pd:x>545</pd:x>
         <pd:y>223</pd:y>
         <config>
             <variableName>message</variableName>
@@ -483,14 +483,14 @@
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
             <pd:x>1082</pd:x>
-            <pd:y>71</pd:y>
+            <pd:y>72</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
             <pd:inputBindings>
                 <root>
                     <message>
-                        <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Depósito executado!&quot;"/>
+                        <xsl:value-of select="&quot;Pagamento executado!&quot;"/>
                     </message>
                 </root>
             </pd:inputBindings>
