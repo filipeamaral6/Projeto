@@ -61,7 +61,7 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAccountByIdOutput"/>
-    <pd:endX>469</pd:endX>
+    <pd:endX>468</pd:endX>
     <pd:endY>156</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
