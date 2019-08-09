@@ -56,8 +56,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllAccountsOutput"/>
-    <pd:endX>530</pd:endX>
-    <pd:endY>118</pd:endY>
+    <pd:endX>529</pd:endX>
+    <pd:endY>117</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -85,8 +85,8 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>679</pd:x>
-        <pd:y>118</pd:y>
+        <pd:x>678</pd:x>
+        <pd:y>117</pd:y>
         <config>
             <variableName>message</variableName>
         </config>

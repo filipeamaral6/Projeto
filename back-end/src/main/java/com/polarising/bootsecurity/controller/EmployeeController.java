@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.polarising.bootsecurity.soap.client.tibco.schemas.client.OutputClient;
 import com.polarising.bootsecurity.soap.employee.example.xmlns._1564670906833.EmployeeService;
 import com.polarising.bootsecurity.soap.employee.tibco.schemas.employee.InputEmployee;
 import com.polarising.bootsecurity.soap.employee.tibco.schemas.employee.OutputEmployee;
@@ -30,7 +32,7 @@ public class EmployeeController {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	
+
 	// Add Client
 	@PostMapping("employees/add")
 	public Object AddEmployee(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
@@ -89,5 +91,27 @@ public class EmployeeController {
 		} else {
 			return getEmployeeById.getInputEmployee();
 		}
+	}
+
+	// Update Client
+	@PutMapping("employees/update")
+	public Object updateClient(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
+
+		if (!result.hasErrors()) {
+
+			EmployeeService employeeService = new EmployeeService();
+
+			OutputEmployee message = employeeService.getPortTypeUpdateEmployeeEndpoint1().operation(inputEmployee);
+
+			return message;
+
+		}
+
+		HashMap<String, String> error = new HashMap<>();
+		error.put("field", result.getFieldError().getField());
+		error.put("message", result.getFieldError().getDefaultMessage());
+
+		return error;
+
 	}
 }

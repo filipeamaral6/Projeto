@@ -173,16 +173,12 @@ WHERE id=?</statement>
                 <emptyStrAsNil>false</emptyStrAsNil>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
                 <statement>UPDATE  account 
-SET status=(?), employee_id=(?)
+SET status=(?)
 WHERE id=?</statement>
                 <Prepared_Param_DataType>
                     <parameter>
                         <parameterName>status</parameterName>
                         <dataType>VARCHAR</dataType>
-                    </parameter>
-                    <parameter>
-                        <parameterName>employee_id</parameterName>
-                        <dataType>INTEGER</dataType>
                     </parameter>
                     <parameter>
                         <parameterName>id</parameterName>
@@ -202,16 +198,6 @@ WHERE id=?</statement>
                             </xsl:otherwise>
                         </xsl:choose>
                     </status>
-                    <employee_id>
-                        <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@employee_id)">
-                                <xsl:value-of select="$Start/pfx:UpdateAccountInput/input/ns:inputAccount/@employee_id"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </employee_id>
                     <id>
                         <xsl:choose>
                             <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@id)">
