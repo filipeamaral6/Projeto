@@ -125,7 +125,7 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>686</pd:x>
+        <pd:x>687</pd:x>
         <pd:y>177</pd:y>
         <config>
             <variableName>message</variableName>

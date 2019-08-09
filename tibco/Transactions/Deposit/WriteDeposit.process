@@ -598,7 +598,7 @@
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
         <pd:x>928</pd:x>
-        <pd:y>277</pd:y>
+        <pd:y>278</pd:y>
         <config>
             <variableName>message</variableName>
         </config>

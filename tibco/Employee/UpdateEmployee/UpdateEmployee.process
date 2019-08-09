@@ -287,7 +287,7 @@ WHERE id=?</statement>
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>301</pd:x>
-        <pd:y>197</pd:y>
+        <pd:y>198</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -451,11 +451,11 @@ WHERE id=?</statement>
             </jdbcQueryActivityInput>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="Query_Username_EXISTS-1">
+    <pd:activity name="Query_Username_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>277</pd:x>
-        <pd:y>349</pd:y>
+        <pd:y>348</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -557,8 +557,8 @@ WHERE id=?</statement>
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>933</pd:x>
-        <pd:y>389</pd:y>
+        <pd:x>934</pd:x>
+        <pd:y>391</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -594,19 +594,19 @@ WHERE id=?</statement>
     </pd:transition>
     <pd:transition>
         <pd:from>Query_UserById</pd:from>
-        <pd:to>Query_Username_EXISTS-1</pd:to>
+        <pd:to>Query_Username_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>exists($Query_UserById/resultSet/Record)</pd:xpath>
     </pd:transition>
     <pd:transition>
-        <pd:from>Query_Username_EXISTS-1</pd:from>
+        <pd:from>Query_Username_EXISTS</pd:from>
         <pd:to>Username_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id !=$Query_Username_EXISTS-1/resultSet/Record/id</pd:xpath>
+        <pd:xpath>$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id !=$Query_Username_EXISTS/resultSet/Record/id</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Username_EXISTS</pd:from>
@@ -639,12 +639,12 @@ WHERE id=?</statement>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>Query_Username_EXISTS-1</pd:from>
+        <pd:from>Query_Username_EXISTS</pd:from>
         <pd:to>Query_Email_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id = $Query_Username_EXISTS-1/resultSet/Record/id) or not(exists($Query_Username_EXISTS-1/resultSet/Record))</pd:xpath>
+        <pd:xpath>($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id = $Query_Username_EXISTS/resultSet/Record/id) or not(exists($Query_Username_EXISTS/resultSet/Record))</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Query_Email_EXISTS</pd:from>

@@ -295,8 +295,8 @@
     <pd:activity name="Query_IBAN_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>227</pd:x>
-        <pd:y>36</pd:y>
+        <pd:x>228</pd:x>
+        <pd:y>35</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -471,7 +471,7 @@
     <pd:activity name="Catch">
         <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
         <pd:resourceType>ae.activities.catch</pd:resourceType>
-        <pd:x>913</pd:x>
+        <pd:x>911</pd:x>
         <pd:y>251</pd:y>
         <pd:handler>true</pd:handler>
         <config>
@@ -482,8 +482,8 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>1039</pd:x>
-        <pd:y>250</pd:y>
+        <pd:x>1036</pd:x>
+        <pd:y>251</pd:y>
         <config>
             <variableName>message</variableName>
         </config>

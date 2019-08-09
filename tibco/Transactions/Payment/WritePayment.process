@@ -4,8 +4,8 @@
     <pd:name>Transactions/Payment/WritePayment.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:WritePaymentInput"/>
-    <pd:startX>76</pd:startX>
-    <pd:startY>279</pd:startY>
+    <pd:startX>27</pd:startX>
+    <pd:startY>418</pd:startY>
     <pd:returnBindings>
         <pfx:WritePaymentOutput>
             <output>
@@ -37,8 +37,8 @@
     <pd:activity name="Query_IBAN_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>229</pd:x>
-        <pd:y>282</pd:y>
+        <pd:x>194</pd:x>
+        <pd:y>416</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -109,8 +109,8 @@
     <pd:activity name="Query_account_id_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>266</pd:x>
-        <pd:y>121</pd:y>
+        <pd:x>216</pd:x>
+        <pd:y>297</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -181,8 +181,8 @@
     <pd:activity name="IBAN_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>412</pd:x>
-        <pd:y>355</pd:y>
+        <pd:x>411</pd:x>
+        <pd:y>459</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -197,8 +197,8 @@
     <pd:activity name="ID_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>475</pd:x>
-        <pd:y>262</pd:y>
+        <pd:x>423</pd:x>
+        <pd:y>345</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -622,8 +622,8 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>967</pd:x>
-        <pd:y>364</pd:y>
+        <pd:x>965</pd:x>
+        <pd:y>365</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -631,6 +631,80 @@
             <root>
                 <message>
                     <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Query_AccountCient_EXISTS">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>249</pd:x>
+        <pd:y>161</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM account_client WHERE user_id=? AND account_id=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>user_id</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>account_id</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>account_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>user_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <user_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:WritePaymentInput/input/ns1:inputPayment/@user_id)">
+                            <xsl:value-of select="$Start/pfx:WritePaymentInput/input/ns1:inputPayment/@user_id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </user_id>
+                <account_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:WritePaymentInput/input/ns1:inputPayment/@account_id)">
+                            <xsl:value-of select="$Start/pfx:WritePaymentInput/input/ns1:inputPayment/@account_id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </account_id>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="CANT_ACCESS">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>433</pd:x>
+        <pd:y>251</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="&quot;Não tem acesso a esta conta!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -689,7 +763,7 @@
     </pd:transition>
     <pd:transition>
         <pd:from>Query_account_id_EXISTS</pd:from>
-        <pd:to>Group</pd:to>
+        <pd:to>Query_AccountCient_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
@@ -704,6 +778,29 @@
     </pd:transition>
     <pd:transition>
         <pd:from>ERROR</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_AccountCient_EXISTS</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($Query_AccountCient_EXISTS/resultSet/Record)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_AccountCient_EXISTS</pd:from>
+        <pd:to>CANT_ACCESS</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>not(exists($Query_AccountCient_EXISTS/resultSet/Record))</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>CANT_ACCESS</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

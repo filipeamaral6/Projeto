@@ -75,7 +75,7 @@
     <pd:activity name="Query_GetAllTransactions">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>261</pd:x>
+        <pd:x>260</pd:x>
         <pd:y>176</pd:y>
         <config>
             <timeout>10</timeout>
@@ -138,7 +138,7 @@
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
         <pd:x>651</pd:x>
-        <pd:y>181</pd:y>
+        <pd:y>183</pd:y>
         <config>
             <variableName>message</variableName>
         </config>

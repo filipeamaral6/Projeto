@@ -130,9 +130,10 @@ WHERE id=?</statement>
         <pd:y>166</pd:y>
         <pd:width>386</pd:width>
         <pd:height>140</pd:height>
-        <pd:collapsedWidth>52</pd:collapsedWidth>
-        <pd:collapsedHeight>69</pd:collapsedHeight>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
         <config>
             <pd:groupType>criticalSection</pd:groupType>
             <pd:serializable>false</pd:serializable>
@@ -255,8 +256,8 @@ WHERE id=?</statement>
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>777</pd:x>
-        <pd:y>126</pd:y>
+        <pd:x>779</pd:x>
+        <pd:y>125</pd:y>
         <config>
             <variableName>message</variableName>
         </config>

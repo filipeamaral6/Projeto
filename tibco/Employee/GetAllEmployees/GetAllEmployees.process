@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670902359" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd">
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670902359" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <wsdl:import namespace="http://xmlns.example.com/1564670902359" location="/Employee/WSDL.wsdl"/>
     <pd:name>Employee/GetAllEmployees/GetAllEmployees.process</pd:name>
     <pd:startName>Start</pd:startName>
@@ -56,7 +56,17 @@
     <pd:endX>455</pd:endX>
     <pd:endY>71</pd:endY>
     <pd:errorSchemas/>
-    <pd:processVariables/>
+    <pd:processVariables>
+        <message>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </message>
+    </pd:processVariables>
     <pd:targetNamespace>http://xmlns.example.com/1564745786465</pd:targetNamespace>
     <pd:activity name="Query_SelectAllEmployees">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
@@ -125,8 +135,8 @@ FROM user, employee WHERE user.id=employee.user_id
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>590</pd:x>
-        <pd:y>75</pd:y>
+        <pd:x>586</pd:x>
+        <pd:y>70</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
