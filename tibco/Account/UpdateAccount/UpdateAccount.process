@@ -37,8 +37,8 @@
     <pd:activity name="Query_AccountById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>259</pd:x>
-        <pd:y>76</pd:y>
+        <pd:x>262</pd:x>
+        <pd:y>69</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -124,10 +124,10 @@ WHERE id=?</statement>
         </pd:inputBindings>
     </pd:activity>
     <pd:group name="Group">
-        <pd:type>com.tibco.pe.core.CriticalSectionGroup</pd:type>
+        <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
         <pd:x>188</pd:x>
-        <pd:y>166</pd:y>
+        <pd:y>165</pd:y>
         <pd:width>386</pd:width>
         <pd:height>140</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
@@ -135,9 +135,10 @@ WHERE id=?</statement>
         <pd:groupVariables/>
         <pd:joinToggle>inherit</pd:joinToggle>
         <config>
-            <pd:groupType>criticalSection</pd:groupType>
+            <pd:groupType>transactionGroup</pd:groupType>
             <pd:serializable>false</pd:serializable>
-            <pd:scope>single</pd:scope>
+            <pd:transactionType>JDBCTransaction</pd:transactionType>
+            <pd:includeCheckpoint>false</pd:includeCheckpoint>
         </config>
         <pd:inputBindings/>
         <pd:expanded>true</pd:expanded>
@@ -165,7 +166,7 @@ WHERE id=?</statement>
         <pd:activity name="Update_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>262</pd:x>
+            <pd:x>264</pd:x>
             <pd:y>232</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -173,16 +174,12 @@ WHERE id=?</statement>
                 <emptyStrAsNil>false</emptyStrAsNil>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
                 <statement>UPDATE  account 
-SET status=(?), employee_id=(?)
+SET status=(?)
 WHERE id=?</statement>
                 <Prepared_Param_DataType>
                     <parameter>
                         <parameterName>status</parameterName>
                         <dataType>VARCHAR</dataType>
-                    </parameter>
-                    <parameter>
-                        <parameterName>employee_id</parameterName>
-                        <dataType>INTEGER</dataType>
                     </parameter>
                     <parameter>
                         <parameterName>id</parameterName>
@@ -202,16 +199,6 @@ WHERE id=?</statement>
                             </xsl:otherwise>
                         </xsl:choose>
                     </status>
-                    <employee_id>
-                        <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@employee_id)">
-                                <xsl:value-of select="$Start/pfx:UpdateAccountInput/input/ns:inputAccount/@employee_id"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </employee_id>
                     <id>
                         <xsl:choose>
                             <xsl:when test="exists($Start/pfx:UpdateAccountInput/input/ns:inputAccount/@id)">
@@ -229,7 +216,7 @@ WHERE id=?</statement>
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
             <pd:x>473</pd:x>
-            <pd:y>230</pd:y>
+            <pd:y>229</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>

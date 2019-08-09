@@ -10,6 +10,10 @@
 			<xs:sequence>
 				<xs:element ref="inputTransaction" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="outputTransaction" minOccurs="0"/>
+				<xs:element ref="DepositTransaction" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="WithdrawTransaction" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="PaymentTransaction" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="TransferTransaction" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -28,6 +32,31 @@
 	<xs:element name="outputTransaction">
 		<xs:complexType>
 			<xs:attribute name="message" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositTransaction">
+		<xs:complexType>
+			<xs:attribute name="depositer_name" type="xs:string"/>
+			<xs:attribute name="depositer_cc_number" type="xs:string"/>
+			<xs:attribute name="employee_id" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="WithdrawTransaction">
+		<xs:complexType>
+			<xs:attribute name="employee_id" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PaymentTransaction">
+		<xs:complexType>
+			<xs:attribute name="entity" type="xs:string"/>
+			<xs:attribute name="reference" type="xs:string"/>
+			<xs:attribute name="employee_id" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransferTransaction">
+		<xs:complexType>
+			<xs:attribute name="destination_iban" type="xs:string"/>
+			<xs:attribute name="employee_id" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
