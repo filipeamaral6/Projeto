@@ -9,7 +9,7 @@
         <connectionType>JDBC</connectionType>
         <UseSharedJndiConfig>false</UseSharedJndiConfig>
         <location>%%Globals/JDBC_Connections/Url%%</location>
-        <user>root</user>
-        <password>#!0ZCc+dTmOb0flIoD8PrJEBb78eqUwCx2Sip6u5V0v+w=</password>
+        <user>%%Globals/JDBC_Connections/username%%</user>
+        <password>%%Globals/JDBC_Connections/password%%</password>
     </config>
 </BWSharedResource>

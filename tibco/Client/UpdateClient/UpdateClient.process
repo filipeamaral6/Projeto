@@ -4,8 +4,8 @@
     <pd:name>Client/UpdateClient/UpdateClient.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:UpdateClientInput"/>
-    <pd:startX>39</pd:startX>
-    <pd:startY>877</pd:startY>
+    <pd:startX>38</pd:startX>
+    <pd:startY>878</pd:startY>
     <pd:returnBindings>
         <pfx:UpdateClientOutput>
             <input>
@@ -19,8 +19,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:UpdateClientOutput"/>
-    <pd:endX>926</pd:endX>
-    <pd:endY>539</pd:endY>
+    <pd:endX>821</pd:endX>
+    <pd:endY>395</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -85,8 +85,8 @@
     <pd:activity name="Query_ClientById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>212</pd:x>
-        <pd:y>743</pd:y>
+        <pd:x>214</pd:x>
+        <pd:y>747</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -150,10 +150,6 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>notification</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -189,8 +185,8 @@
     <pd:activity name="Query_ClientCc_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>216</pd:x>
-        <pd:y>414</pd:y>
+        <pd:x>214</pd:x>
+        <pd:y>417</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -254,10 +250,6 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>notification</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -293,8 +285,8 @@
     <pd:activity name="QueryEmailEXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>213</pd:x>
-        <pd:y>631</pd:y>
+        <pd:x>224</pd:x>
+        <pd:y>647</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -330,6 +322,10 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
@@ -350,7 +346,7 @@
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>220</pd:x>
-        <pd:y>531</pd:y>
+        <pd:y>540</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -386,6 +382,10 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
@@ -405,7 +405,7 @@
     <pd:activity name="Username_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>519</pd:x>
+        <pd:x>518</pd:x>
         <pd:y>531</pd:y>
         <config>
             <variableName>message</variableName>
@@ -421,8 +421,8 @@
     <pd:activity name="Query_Nif_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>230</pd:x>
-        <pd:y>287</pd:y>
+        <pd:x>236</pd:x>
+        <pd:y>293</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -486,10 +486,6 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>notification</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -541,8 +537,8 @@
     <pd:activity name="Query_UserById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>214</pd:x>
-        <pd:y>879</pd:y>
+        <pd:x>217</pd:x>
+        <pd:y>881</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -575,6 +571,10 @@
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>role</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
@@ -660,8 +660,8 @@
         <pd:activity name="Update_Client">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>640</pd:x>
-            <pd:y>140</pd:y>
+            <pd:x>644</pd:x>
+            <pd:y>137</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -893,8 +893,8 @@ WHERE user_id=?</statement>
         <pd:activity name="Update_User">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>522</pd:x>
-            <pd:y>140</pd:y>
+            <pd:x>524</pd:x>
+            <pd:y>145</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -902,7 +902,7 @@ WHERE user_id=?</statement>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
                 <statement>UPDATE user 
 SET username=(?), password=(?), email=(?), role=(?), status=(?)
-WHERE id=?</statement>
+WHERE id=(?)</statement>
                 <Prepared_Param_DataType>
                     <parameter>
                         <parameterName>username</parameterName>
@@ -921,12 +921,12 @@ WHERE id=?</statement>
                         <dataType>VARCHAR</dataType>
                     </parameter>
                     <parameter>
-                        <parameterName>id</parameterName>
-                        <dataType>INTEGER</dataType>
-                    </parameter>
-                    <parameter>
                         <parameterName>status</parameterName>
                         <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>id</parameterName>
+                        <dataType>INTEGER</dataType>
                     </parameter>
                 </Prepared_Param_DataType>
             </config>
@@ -972,16 +972,6 @@ WHERE id=?</statement>
                             </xsl:otherwise>
                         </xsl:choose>
                     </role>
-                    <id>
-                        <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id)">
-                                <xsl:value-of select="$Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </id>
                     <status>
                         <xsl:choose>
                             <xsl:when test="exists($Start/pfx:UpdateClientInput/input/ns:inputClient/@status)">
@@ -992,10 +982,47 @@ WHERE id=?</statement>
                             </xsl:otherwise>
                         </xsl:choose>
                     </status>
+                    <id>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id)">
+                                <xsl:value-of select="$Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </id>
                 </jdbcUpdateActivityInput>
             </pd:inputBindings>
         </pd:activity>
     </pd:group>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>1063</pd:x>
+        <pd:y>396</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>946</pd:x>
+        <pd:y>403</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
         <pd:to>Query_UserById</pd:to>
@@ -1083,7 +1110,7 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id = $Query_Nif_EXISTS/resultSet/Record/user_id) or not(exists($Query_Nif_EXISTS/resultSet/Record))</pd:xpath>
+        <pd:xpath>not(exists($Query_Nif_EXISTS/resultSet/Record)) or ($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id = $Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id)</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Group</pd:from>
@@ -1114,7 +1141,7 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id = $Query_Username_EXISTS/resultSet/Record/id) or not(exists($Query_Username_EXISTS/resultSet/Record))</pd:xpath>
+        <pd:xpath>not(exists($Query_Username_EXISTS/resultSet/Record)) or ($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id = $Query_Username_EXISTS/resultSet/Record/id)</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Query_ClientCc_EXISTS</pd:from>
@@ -1130,7 +1157,7 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id = $Query_ClientCc_EXISTS/resultSet/Record/user_id) or not(exists($Query_ClientCc_EXISTS/resultSet/Record))</pd:xpath>
+        <pd:xpath>not(exists($Query_ClientCc_EXISTS/resultSet/Record)) or ($Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id = $Query_ClientCc_EXISTS/resultSet/Record/user_id)</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Query_Nif_EXISTS</pd:from>
@@ -1147,5 +1174,19 @@ WHERE id=?</statement>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>$Start/pfx:UpdateClientInput/input/ns:inputClient/@user_id !=$QueryEmailEXISTS/resultSet/Record/id</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>ERROR</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ERROR</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
     </pd:transition>
 </pd:ProcessDefinition>
