@@ -1,10 +1,7 @@
 import { User } from 'app/shared/model/user.model';
 
-export class CurrentUser {
+export class Employee extends User {
 
-  id: number;
-  userName: string;
-  token: string;
-  role: string;
+  fullName: string;
 
 }
