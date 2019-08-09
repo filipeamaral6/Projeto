@@ -19,8 +19,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private appComponent: AppComponent,
-    private authenticationService: AuthenticationService,
-    ) {}
+    private authenticationService: AuthenticationService
+    ) {
+      this.currentUser = authenticationService.currentUserValue;
+    }
 
   accounts: any[];
 
@@ -116,13 +118,5 @@ export class DashboardComponent implements OnInit {
     return '#000000'.replace(/0/g, function () { return (~~(Math.random() * 16)).toString(16); });
   }
 
-  isLoggedIn() {
 
-    if (!localStorage.getItem('currentUser')) {
-      return false;
-    }
-    this.currentUser = this.authenticationService.currentUserValue;
-    return true;
-
-  }
 }

@@ -9,21 +9,19 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
-import { LoginComponent } from './pages/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './home/login/login.component';
+import { HomeComponent } from './home/home.component';
 import { LoadingSpinnerComponent } from './utils/loading-spinner/loading-spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Globals } from './shared/Globals';
-import { CurrentUser } from './models/CurrentUser';
-import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 
 
 @NgModule({
   declarations: [
-    DashboardComponent,
+    AdminLayoutComponent,
     AppComponent,
     LoginComponent,
     HomeComponent,
@@ -46,7 +44,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
   providers: [
-
     Globals
   ],
 

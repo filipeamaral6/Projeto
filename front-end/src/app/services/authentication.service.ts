@@ -18,21 +18,22 @@ const httpOptions = {
 
 export class AuthenticationService {
 
+  currentUser: CurrentUser;
+  userLocalStorage: string;
+
   public get currentUserValue(): CurrentUser {
     return this.currentUser;
   }
 
-  currentUser: CurrentUser;
-  userLocalStorage: string;
-
   API = this.globals.API;
 
-  constructor(private http: HttpClient, private globals: Globals) {
-    this.persistUser();
+  constructor(
+    private http: HttpClient,
+    private globals: Globals) {
+      this.persistUser();
   }
 
   login(username, password) {
-
 
     return this.http.post<any>(this.API + '/login', { username, password }, httpOptions)
       .pipe(map(response => {

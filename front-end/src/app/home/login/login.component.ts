@@ -4,13 +4,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'app/services/authentication.service';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { AccessService } from 'app/services/access.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   isLoading = false;
@@ -19,13 +20,13 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   currentUser: User;
   loginForm: FormGroup;
-  dashboardComponent: DashboardComponent;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private accessService: AccessService
 //    private alertService: AlertService,
 
   ) {
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
      });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = '/dashboard';
   }
 
   // convenience getter for easy access to form fields
@@ -67,8 +68,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.dashboardComponent.isLoggedIn();
-          this.router.navigate([this.returnUrl]);
+            this.router.navigate([this.returnUrl]);
         },
 
         error => {
