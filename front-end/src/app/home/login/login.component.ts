@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 //    private alertService: AlertService,
 
   ) {
-    if(this.authenticationService.currentUserValue ) {
+    if ( this.accessService.isLoggedIn ) {
       this.router.navigate(['/']);
     }
   }

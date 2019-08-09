@@ -5,6 +5,7 @@ import { UserComponent } from '../../pages/user/user.component';
 import { MovementsComponent } from 'app/pages/movements/movements.component';
 import { PaymentsComponent } from 'app/pages/payments/payments.component';
 import { TransferComponent } from 'app/pages/transfer/transfer.component';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },

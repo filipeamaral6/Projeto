@@ -3,8 +3,10 @@ import Chart from 'chart.js';
 import { Account } from 'app/shared/model/account.model';
 import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
 import { AppComponent } from 'app/app.component';
-import { CurrentUser } from 'app/models/CurrentUser';
 import { AuthenticationService } from 'app/services/authentication.service';
+import { AccessService } from 'app/services/access.service';
+import { Router } from '@angular/router';
+import { CurrentUser } from 'app/shared/models/CurrentUser';
 
 
 @Component({
@@ -19,10 +21,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private appComponent: AppComponent,
-    private authenticationService: AuthenticationService
-    ) {
-      this.currentUser = authenticationService.currentUserValue;
-    }
+    ) {}
 
   accounts: any[];
 

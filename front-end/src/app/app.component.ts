@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from './shared/model/user.model';
-import { CurrentUser } from './models/CurrentUser';
+import { CurrentUser } from './shared/models/CurrentUser';
 
 @Component({
   selector: 'app-root',

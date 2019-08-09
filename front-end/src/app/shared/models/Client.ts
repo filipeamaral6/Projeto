@@ -1,9 +1,10 @@
-import { User } from 'app/shared/model/user.model';
+import { User } from './User';
 
 export class Client extends User {
 
     fullName: string;
     nif: number;
+    clientCC: number;
     birthDate: Date;
     phoneNumber?: number;
     mobileNumber?: number;
@@ -14,7 +15,7 @@ export class Client extends User {
     nationality: string;
     status: string;
     notification: string;
+    transactionPassword?: string;
     createdAt?: string;
-    clientCC: number;
 
 }

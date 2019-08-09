@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { CurrentUser } from '../models/CurrentUser';
+import { CurrentUser } from '../shared/models/CurrentUser';
 import { map } from 'rxjs/operators';
 import { Globals } from '../shared/Globals';
 

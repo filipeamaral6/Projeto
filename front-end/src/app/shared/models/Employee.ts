@@ -1,4 +1,4 @@
-import { User } from 'app/shared/model/user.model';
+import { User } from './User';
 
 export class Employee extends User {
 
