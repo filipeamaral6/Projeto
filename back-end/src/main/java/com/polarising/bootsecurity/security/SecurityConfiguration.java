@@ -26,7 +26,6 @@ import com.polarising.bootsecurity.jwt.JwtAuthorizationFilter;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private UserPrincipalDetailsService userPrincipalDetailsService;
-
 	
 	// SO IMPORTANT YOU DONT EVEN KNOW
 	@Bean
@@ -62,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 			.antMatchers("/login").permitAll()
-			.antMatchers("/clients/**").hasAnyRole("EMPLOYEE", "ADMIN")
+			.antMatchers("/clients/**").permitAll()
 			.antMatchers("/employees/**").permitAll()
 			.antMatchers("/users-testing").permitAll();
 

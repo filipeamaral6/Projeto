@@ -3,12 +3,17 @@ package com.polarising.bootsecurity.security;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.polarising.bootsecurity.exceptions.ApiError;
+import com.polarising.bootsecurity.exceptions.CustomExceptionHandler;
 import com.polarising.bootsecurity.exceptions.CustomExceptionMessage;
 import com.polarising.bootsecurity.model.User;
 import com.polarising.bootsecurity.soap.user.example.xmlns._1565108737830.UserService;
@@ -60,8 +65,8 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 
 		} catch (CustomExceptionMessage e) {
 			throw new CustomExceptionMessage(e.getLocalizedMessage());
-		} catch (Exception e) {
-			throw new CustomExceptionMessage("Invalid username/password combination");
+		} catch (BadCredentialsException e) {
+			throw new CustomExceptionMessage(e.getLocalizedMessage());
 		}
 	}
 }

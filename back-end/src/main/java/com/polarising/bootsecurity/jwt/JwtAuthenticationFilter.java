@@ -42,6 +42,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
+    	// SO IMPORTANT YOU DONT EVEN KNOW
     	if (request.getHeader(ORIGIN) != null) {
             String origin = request.getHeader(ORIGIN);
             response.addHeader("Access-Control-Allow-Origin", origin);
