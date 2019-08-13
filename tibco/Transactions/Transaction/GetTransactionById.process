@@ -100,7 +100,7 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetTransactionByIdOuput"/>
-    <pd:endX>784</pd:endX>
+    <pd:endX>783</pd:endX>
     <pd:endY>272</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
@@ -135,7 +135,7 @@
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>197</pd:x>
-        <pd:y>35</pd:y>
+        <pd:y>36</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -280,7 +280,7 @@ WHERE transaction_id=?</statement>
     <pd:activity name="GetDepositTransaction">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>897</pd:x>
+        <pd:x>898</pd:x>
         <pd:y>78</pd:y>
         <config>
             <timeout>10</timeout>
@@ -446,8 +446,8 @@ WHERE transaction_id=?</statement>
     <pd:activity name="Map Data">
         <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
         <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
-        <pd:x>330</pd:x>
-        <pd:y>100</pd:y>
+        <pd:x>312</pd:x>
+        <pd:y>98</pd:y>
         <config>
             <element>
                 <xsd:element name="root">

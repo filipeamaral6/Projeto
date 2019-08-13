@@ -1,54 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670098615" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670098615" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <wsdl:import namespace="http://xmlns.example.com/1564670098615" location="/Account/WSDL.wsdl"/>
-    <pd:name>Account/GetAccount/GetAccountClients.process</pd:name>
+    <pd:name>Account/GetAccount/GetClientAccounts.process</pd:name>
     <pd:startName>Start</pd:startName>
-    <pd:startType wsMsgRef="pfx:GetAccountClientsInput"/>
-    <pd:startX>94</pd:startX>
-    <pd:startY>75</pd:startY>
+    <pd:startType wsMsgRef="pfx:GetClientAccountsInput"/>
+    <pd:startX>119</pd:startX>
+    <pd:startY>109</pd:startY>
     <pd:returnBindings>
-        <pfx:GetAccountClientsOuput>
+        <pfx:GetClientAccountsOutput>
             <output>
                 <ns2:root>
-                    <xsl:for-each select="$GetAccountClients/resultSet/Record">
-                        <ns2:inputUsers>
+                    <xsl:for-each select="$GetClientAccounts/resultSet/Record">
+                        <ns2:inputAccount>
                             <xsl:attribute name="id">
                                 <xsl:value-of select="id"/>
                             </xsl:attribute>
-                            <xsl:attribute name="username">
-                                <xsl:value-of select="username"/>
+                            <xsl:if test="@xsi:type">
+                                <xsl:attribute name="type">
+                                    <xsl:value-of select="@xsi:type"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:attribute name="iban">
+                                <xsl:value-of select="iban"/>
                             </xsl:attribute>
-                            <xsl:attribute name="password">
-                                <xsl:value-of select="password"/>
+                            <xsl:attribute name="account_number">
+                                <xsl:value-of select="account_number"/>
                             </xsl:attribute>
-                            <xsl:attribute name="email">
-                                <xsl:value-of select="email"/>
+                            <xsl:attribute name="balance">
+                                <xsl:value-of select="balance"/>
                             </xsl:attribute>
-                            <xsl:attribute name="role">
-                                <xsl:value-of select="role"/>
+                            <xsl:attribute name="interest">
+                                <xsl:value-of select="interest"/>
                             </xsl:attribute>
                             <xsl:attribute name="status">
                                 <xsl:value-of select="status"/>
                             </xsl:attribute>
-                        </ns2:inputUsers>
+                            <xsl:attribute name="created_at">
+                                <xsl:value-of select="created_at"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="user_id">
+                                <xsl:value-of select="user_id"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="employee_id">
+                                <xsl:value-of select="employee_id"/>
+                            </xsl:attribute>
+                        </ns2:inputAccount>
                     </xsl:for-each>
                     <xsl:choose>
-                        <xsl:when test="exists($_error_GetAccountClients/ActivityErrors) or not(exists($GetAccountClients/resultSet/Record))">
-                            <ns2:outputUsers>
+                        <xsl:when test="not(exists($GetClientAccounts/resultSet/Record)) or exists($_error_GetClientAccounts/ActivityErrors)">
+                            <ns2:outputAccount>
                                 <xsl:attribute name="message">
                                     <xsl:value-of select="$message/root/message"/>
                                 </xsl:attribute>
-                            </ns2:outputUsers>
+                            </ns2:outputAccount>
                         </xsl:when>
                     </xsl:choose>
                 </ns2:root>
             </output>
-        </pfx:GetAccountClientsOuput>
+        </pfx:GetClientAccountsOutput>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
-    <pd:endType wsMsgRef="pfx:GetAccountClientsOuput"/>
-    <pd:endX>490</pd:endX>
-    <pd:endY>77</pd:endY>
+    <pd:endType wsMsgRef="pfx:GetClientAccountsOutput"/>
+    <pd:endX>534</pd:endX>
+    <pd:endY>105</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -61,12 +75,12 @@
             </xsd:element>
         </message>
     </pd:processVariables>
-    <pd:targetNamespace>http://xmlns.example.com/1565368808345</pd:targetNamespace>
+    <pd:targetNamespace>http://xmlns.example.com/1565692255067</pd:targetNamespace>
     <pd:activity name="Catch">
         <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
         <pd:resourceType>ae.activities.catch</pd:resourceType>
-        <pd:x>822</pd:x>
-        <pd:y>76</pd:y>
+        <pd:x>850</pd:x>
+        <pd:y>106</pd:y>
         <pd:handler>true</pd:handler>
         <config>
             <catchAll>true</catchAll>
@@ -76,34 +90,34 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>666</pd:x>
-        <pd:y>77</pd:y>
+        <pd:x>692</pd:x>
+        <pd:y>109</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Ocorreu um erro! Por favor, tente mais tarde!&quot;"/>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="GetAccountClients">
+    <pd:activity name="GetClientAccounts">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>269</pd:x>
-        <pd:y>75</pd:y>
+        <pd:x>283</pd:x>
+        <pd:y>108</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT user.id,  user.email, user.password,  user.username, user.role, user.status, account_client.account_id, client.full_name, client.client_cc FROM user, account_client, client WHERE user.id=account_client.user_id AND user.id=client.user_id AND account_id=?</statement>
+            <statement>SELECT account.*,  account_client.account_id, account_client.user_id  FROM account, account_client  WHERE account.id=account_client.account_id  AND user_id=?</statement>
             <Prepared_Param_DataType>
                 <parameter>
-                    <parameterName>account_id</parameterName>
+                    <parameterName>id</parameterName>
                     <dataType>INTEGER</dataType>
                 </parameter>
             </Prepared_Param_DataType>
@@ -113,85 +127,78 @@
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>email</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaColumns>type</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>password</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaColumns>iban</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>username</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaColumns>account_number</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>role</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaColumns>balance</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>8</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DOUBLE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>interest</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>8</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DOUBLE</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>created_at</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>account_id</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>full_name</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>client_cc</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaColumns>user_id</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
-                <account_id>
+                <id>
                     <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:GetAccountClientsInput/input/ns:getById/@id)">
-                            <xsl:value-of select="$Start/pfx:GetAccountClientsInput/input/ns:getById/@id"/>
+                        <xsl:when test="exists($Start/pfx:GetClientAccountsInput/input/ns:getById/@id)">
+                            <xsl:value-of select="$Start/pfx:GetClientAccountsInput/input/ns:getById/@id"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
-                </account_id>
+                </id>
             </jdbcQueryActivityInput>
         </pd:inputBindings>
     </pd:activity>
     <pd:activity name="NOT_FOUND">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>377</pd:x>
-        <pd:y>191</pd:y>
+        <pd:x>405</pd:x>
+        <pd:y>212</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Nenhum resultado encontrado!&quot;"/>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Nenhum resultado encontrado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
     </pd:activity>
-    <pd:transition>
-        <pd:from>Start</pd:from>
-        <pd:to>GetAccountClients</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>GetAccountClients</pd:from>
-        <pd:to>NOT_FOUND</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($GetAccountClients/resultSet/Record))</pd:xpath>
-    </pd:transition>
     <pd:transition>
         <pd:from>Catch</pd:from>
         <pd:to>ERROR</pd:to>
@@ -207,12 +214,19 @@
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>GetAccountClients</pd:from>
-        <pd:to>End</pd:to>
+        <pd:from>Start</pd:from>
+        <pd:to>GetClientAccounts</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetClientAccounts</pd:from>
+        <pd:to>NOT_FOUND</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($GetAccountClients/resultSet/Record)</pd:xpath>
+        <pd:xpath>not(exists($GetClientAccounts/resultSet/Record))</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>NOT_FOUND</pd:from>
@@ -220,5 +234,13 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetClientAccounts</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($GetClientAccounts/resultSet/Record)</pd:xpath>
     </pd:transition>
 </pd:ProcessDefinition>

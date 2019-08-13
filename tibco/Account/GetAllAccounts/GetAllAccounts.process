@@ -109,7 +109,7 @@
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT account.*, account_client.user_id FROM account, account_client WHERE account.id=account_client.account_id
+            <statement>SELECT account.*, account_client.user_id FROM account, account_client WHERE account.id=account_client.account_id 
 </statement>
             <oraObjects/>
             <oraTables/>
