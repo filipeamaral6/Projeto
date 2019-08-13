@@ -19,7 +19,7 @@ export const AppRoutes: Routes = [
   // },
 
   {
-    path: 'dashboard',
+    path: '',
     component: AdminLayoutComponent, canActivate: [AuthGuard],
     children: [
         {
