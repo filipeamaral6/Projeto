@@ -30,6 +30,7 @@ import { AccountService } from './services/transport/account.service';
     LoginComponent,
     HomeComponent,
     LoadingSpinnerComponent
+
   ],
   imports: [
     BrowserAnimationsModule,

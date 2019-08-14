@@ -12,6 +12,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MovementsComponent } from 'app/pages/movements/movements.component';
 import { PaymentsComponent } from 'app/pages/payments/payments.component';
 import { TransferComponent } from 'app/pages/transfer/transfer.component';
+import { ClientDetailComponent } from 'app/pages/user/client/client-detail/client-detail.component';
+import { EditClientComponent } from 'app/pages/user/client/edit-client/edit-client.component';
+
 
 @NgModule({
   imports: [
@@ -25,7 +28,9 @@ import { TransferComponent } from 'app/pages/transfer/transfer.component';
     UserComponent,
     MovementsComponent,
     PaymentsComponent,
-    TransferComponent
+    TransferComponent,
+    ClientDetailComponent,
+    EditClientComponent
   ]
 })
 

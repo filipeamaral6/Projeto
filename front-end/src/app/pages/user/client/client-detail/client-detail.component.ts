@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'app/shared/models/Client';
 import { AdminLayoutComponent } from 'app/layouts/admin-layout/admin-layout.component';
+import { Client } from 'app/shared/models/Client';
 
 @Component({
   // tslint:disable-next-line: component-selector
-  selector: 'user-cmp',
-  moduleId: module.id,
-  templateUrl: 'user.component.html'
+  selector: 'client-detail-cmp',
+  templateUrl: './client-detail.component.html',
+  styleUrls: ['./client-detail.component.css']
 })
-
-export class UserComponent implements OnInit {
-
-  isEditing = false;
+export class ClientDetailComponent implements OnInit {
 
   client: Client;
 
+  teste = 'ertyghjklkcmnjv hjhfbvjhbd';
+  
   constructor(
     private adminLayout: AdminLayoutComponent) {
     }
@@ -22,16 +21,6 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.adminLayout.refreshData();
     this.client = this.adminLayout.getClient;
-  }
-
-  editMode() {
-    this.isEditing = true;
-    console.log(this.isEditing);
-  }
-
-  exitEditMode() {
-    this.isEditing = false;
-    console.log(this.isEditing);
   }
 
 }

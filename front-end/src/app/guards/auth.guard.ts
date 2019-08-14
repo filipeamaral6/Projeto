@@ -1,4 +1,3 @@
-   
 
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -24,4 +23,14 @@ export class AuthGuard implements CanActivate {
     this.router.navigate(['/home'], { queryParams: { returnUrl: state.url } });
     return false;
   }
+
+  isEmployee(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser.role === 'ADMIN' || currentUser.role === 'Employee') {
+      return true;
+    }
+    this.router.navigate(['/home'], { queryParams: { returnUrl: state.url } });
+    return false;
+  }
+
 }
