@@ -15,7 +15,7 @@ import { LoadingSpinnerComponent } from './utils/loading-spinner/loading-spinner
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Globals } from './shared/Globals';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AccessService } from './services/access.service';
 import { ClientService } from './services/transport/client.service';
@@ -25,7 +25,7 @@ import { AccountService } from './services/transport/account.service';
 
 @NgModule({
   declarations: [
-    AdminLayoutComponent,
+    WorkerLayoutComponent,
     AppComponent,
     LoginComponent,
     HomeComponent,

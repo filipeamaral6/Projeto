@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AdminLayoutRoutes } from './admin-layout.routing';
+import { WorkerLayoutRoutes } from './worker-layout.routing';
 
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { UserComponent } from '../../pages/user/user.component';
@@ -19,7 +19,7 @@ import { EditClientComponent } from 'app/pages/user/client/edit-client/edit-clie
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
+    RouterModule.forChild(WorkerLayoutRoutes),
     FormsModule,
     NgbModule
   ],
@@ -34,4 +34,4 @@ import { EditClientComponent } from 'app/pages/user/client/edit-client/edit-clie
   ]
 })
 
-export class AdminLayoutModule { }
+export class WorkerLayoutModule { }

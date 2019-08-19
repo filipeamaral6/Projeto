@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
      });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = '/application';
+    this.returnUrl = '/';
   }
 
   // convenience getter for easy access to form fields

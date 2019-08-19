@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'app/shared/models/Client';
-import { AdminLayoutComponent } from 'app/layouts/admin-layout/admin-layout.component';
+import { WorkerLayoutComponent } from 'app/layouts/worker-layout/worker-layout.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -13,10 +13,10 @@ export class PaymentsComponent implements OnInit {
   client: Client;
 
   constructor(
-    private adminLayout: AdminLayoutComponent
+    private workerLayout: WorkerLayoutComponent
   ) {
-    this.adminLayout.refreshData();
-    this.client = this.adminLayout.getClient;
+    this.workerLayout.refreshData();
+    this.client = this.workerLayout.getClient;
   }
 
 

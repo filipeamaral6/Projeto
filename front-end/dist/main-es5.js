@@ -11,9 +11,9 @@ module.exports = "<router-outlet></router-outlet>\n"
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/layouts/admin-layout/admin-layout.component.html":
+/***/ "./node_modules/raw-loader/index.js!./src/app/layouts/worker-layout/worker-layout.component.html":
 /*!********************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/layouts/admin-layout/admin-layout.component.html ***!
+  !*** ./node_modules/raw-loader!./src/app/layouts/worker-layout/worker-layout.component.html ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -63,9 +63,9 @@ module.exports = "<div class=\"sidebar-wrapper\">\n  <div class=\"logo\">\n    <
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./layouts/admin-layout/admin-layout.module": [
-		"./src/app/layouts/admin-layout/admin-layout.module.ts",
-		"layouts-admin-layout-admin-layout-module"
+	"./layouts/worker-layout/worker-layout.module": [
+		"./src/app/layouts/worker-layout/worker-layout.module.ts",
+		"layouts-worker-layout-worker-layout-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_navbar_navbar_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/navbar/navbar.module */ "./src/app/shared/navbar/navbar.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.routing */ "./src/app/app.routing.ts");
-/* harmony import */ var _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/admin-layout/admin-layout.component */ "./src/app/layouts/admin-layout/admin-layout.component.ts");
+/* harmony import */ var _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/worker-layout/worker-layout.component */ "./src/app/layouts/worker-layout/worker-layout.component.ts");
 
 
 
@@ -171,7 +171,7 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
-                _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_10__["AdminLayoutComponent"]
+                _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_10__["WorkerLayoutComponent"]
             ],
             imports: [
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
@@ -204,7 +204,7 @@ var AppModule = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutes", function() { return AppRoutes; });
-/* harmony import */ var _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/admin-layout/admin-layout.component */ "./src/app/layouts/admin-layout/admin-layout.component.ts");
+/* harmony import */ var _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/worker-layout/worker-layout.component */ "./src/app/layouts/worker-layout/worker-layout.component.ts");
 
 var AppRoutes = [
     {
@@ -213,11 +213,11 @@ var AppRoutes = [
         pathMatch: 'full',
     }, {
         path: '',
-        component: _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__["AdminLayoutComponent"],
+        component: _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__["WorkerLayoutComponent"],
         children: [
             {
                 path: '',
-                loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+                loadChildren: './layouts/worker-layout/worker-layout.module#WorkerLayoutModule'
             }
         ]
     },
@@ -230,9 +230,9 @@ var AppRoutes = [
 
 /***/ }),
 
-/***/ "./src/app/layouts/admin-layout/admin-layout.component.scss":
+/***/ "./src/app/layouts/worker-layout/worker-layout.component.scss":
 /*!******************************************************************!*\
-  !*** ./src/app/layouts/admin-layout/admin-layout.component.scss ***!
+  !*** ./src/app/layouts/worker-layout/worker-layout.component.scss ***!
   \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -241,32 +241,32 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ }),
 
-/***/ "./src/app/layouts/admin-layout/admin-layout.component.ts":
+/***/ "./src/app/layouts/worker-layout/worker-layout.component.ts":
 /*!****************************************************************!*\
-  !*** ./src/app/layouts/admin-layout/admin-layout.component.ts ***!
+  !*** ./src/app/layouts/worker-layout/worker-layout.component.ts ***!
   \****************************************************************/
-/*! exports provided: AdminLayoutComponent */
+/*! exports provided: WorkerLayoutComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminLayoutComponent", function() { return AdminLayoutComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WorkerLayoutComponent", function() { return WorkerLayoutComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 
 
-var AdminLayoutComponent = /** @class */ (function () {
-    function AdminLayoutComponent() {
+var WorkerLayoutComponent = /** @class */ (function () {
+    function WorkerLayoutComponent() {
     }
-    AdminLayoutComponent.prototype.ngOnInit = function () { };
-    AdminLayoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    WorkerLayoutComponent.prototype.ngOnInit = function () { };
+    WorkerLayoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-admin-layout',
-            template: __webpack_require__(/*! raw-loader!./admin-layout.component.html */ "./node_modules/raw-loader/index.js!./src/app/layouts/admin-layout/admin-layout.component.html"),
-            styles: [__webpack_require__(/*! ./admin-layout.component.scss */ "./src/app/layouts/admin-layout/admin-layout.component.scss")]
+            selector: 'app-worker-layout',
+            template: __webpack_require__(/*! raw-loader!./worker-layout.component.html */ "./node_modules/raw-loader/index.js!./src/app/layouts/worker-layout/worker-layout.component.html"),
+            styles: [__webpack_require__(/*! ./worker-layout.component.scss */ "./src/app/layouts/worker-layout/worker-layout.component.scss")]
         })
-    ], AdminLayoutComponent);
-    return AdminLayoutComponent;
+    ], WorkerLayoutComponent);
+    return WorkerLayoutComponent;
 }());
 
 

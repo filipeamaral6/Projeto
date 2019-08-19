@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminLayoutComponent } from 'app/layouts/admin-layout/admin-layout.component';
+import { WorkerLayoutComponent } from 'app/layouts/worker-layout/worker-layout.component';
 import { Client } from 'app/shared/models/Client';
 
 @Component({
@@ -15,12 +15,12 @@ export class ClientDetailComponent implements OnInit {
   teste = 'ertyghjklkcmnjv hjhfbvjhbd';
   
   constructor(
-    private adminLayout: AdminLayoutComponent) {
+    private workerLayout: WorkerLayoutComponent) {
     }
 
   ngOnInit() {
-    this.adminLayout.refreshData();
-    this.client = this.adminLayout.getClient;
+    this.workerLayout.refreshData();
+    this.client = this.workerLayout.getClient;
   }
 
 }

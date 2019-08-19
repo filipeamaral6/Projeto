@@ -9,7 +9,7 @@ import { CurrentUser } from 'app/shared/models/CurrentUser';
 import { Client } from 'app/shared/models/Client';
 import { ClientService } from 'app/services/transport/client.service';
 import { first } from 'rxjs/operators';
-import { AdminLayoutComponent } from 'app/layouts/admin-layout/admin-layout.component';
+import { WorkerLayoutComponent } from 'app/layouts/worker-layout/worker-layout.component';
 
 
 @Component({
@@ -23,9 +23,9 @@ export class DashboardComponent implements OnInit {
   private accounts: Account[];
 
   constructor(
-    private adminLayout: AdminLayoutComponent,
+    private workerLayout: WorkerLayoutComponent,
     ) {
-      this.adminLayout.refreshData();
+      this.workerLayout.refreshData();
     }
 
   // public canvas: any;
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
   // public chartHours;
 
   ngOnInit() {
-    this.accounts = this.adminLayout.getAccounts;
+    this.accounts = this.workerLayout.getAccounts;
     console.log(this.accounts)
     // this.loadAccountsChart();
   }

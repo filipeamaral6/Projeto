@@ -9,12 +9,12 @@ import { AccountService } from 'app/services/transport/account.service';
 
 
 @Component({
-  selector: 'app-admin-layout',
-  templateUrl: './admin-layout.component.html',
-  styleUrls: ['./admin-layout.component.scss']
+  selector: 'app-worker-layout',
+  templateUrl: './worker-layout.component.html',
+  styleUrls: ['./worker-layout.scss']
 })
 
-export class AdminLayoutComponent implements OnInit {
+export class WorkerLayoutComponent implements OnInit {
   private currentUser: CurrentUser;
   private client: Client;
   private accounts: Account[];
