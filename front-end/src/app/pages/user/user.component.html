@@ -6,17 +6,14 @@
         <button type="button" (click)="editMode()" class="btn btn-primary" style="height:40px;width:200px">Editar Utilizador</button>
       </div>
       <div class="col-md-4" *ngIf="isEditing">
-        <button type="button" (click)="exitEditMode()"class="btn btn-primary" style="height:40px;width:200px">Sair do Modo Edição</button>
+        <button type="button" (click)="exitEditMode()"class="btn btn-danger" style="height:40px;width:200px">Sair do Modo Edição</button>
       </div>
       <div class="col-md-4" *ngIf="!isEditing">
         <button type="button" class="btn btn-primary" style="height:40px;width:200px">Alterar Password</button>
         </div>
     </div>
-    <div *ngIf="!isEditing" class="row" style="margin-top: 20px">
-      <client-detail-cmp></client-detail-cmp>
-    </div>
-    <div *ngIf="isEditing" class="row" style="margin-top: 20px">
-      <edit-client-cmp></edit-client-cmp>
+    <div class="row" style="margin-top: 20px">
+      <app-client-details [editMode]="isEditing"></app-client-details>
     </div>
   </div>
   

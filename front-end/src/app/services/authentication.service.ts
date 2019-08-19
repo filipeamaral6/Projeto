@@ -63,4 +63,43 @@ export class AuthenticationService {
     this.userLocalStorage = localStorage.getItem('currentUser');
     this.currentUser = JSON.parse(this.userLocalStorage);
   }
+
+  isLoggedIn() {
+
+    if (!localStorage.getItem('currentUser')) {
+      return false;
+    }
+    this.currentUser = this.currentUserValue;
+    return true;
+
+  }
+
+  currentUserIsClient() {
+    if (this.currentUser.role === 'CLIENT') {
+      return true;
+    }
+    return false;
+  }
+
+  currentUserIsEmplyee() {
+    if (this.currentUser.role === 'ADMIN' || this.currentUser.role === 'OPERATOR') {
+      return true;
+    }
+    return false;
+  }
+
+  currentUserIsAdminMaster() {
+    if (this.currentUser.role === 'ADMIN') {
+      return true;
+    }
+    return false;
+  }
+
+  currentUserIsAdmin() {
+    if (this.currentUser.role === 'OPERATOR') {
+      return true;
+    }
+    return false;
+  }
+
 }

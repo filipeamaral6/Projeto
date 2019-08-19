@@ -15,7 +15,6 @@ import { AccountService } from 'app/services/transport/account.service';
 })
 
 export class AdminLayoutComponent implements OnInit {
-  private currentUser: CurrentUser;
   private client: Client;
   private accounts: Account[];
 
@@ -31,35 +30,38 @@ export class AdminLayoutComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private clientService: ClientService,
     private accountService: AccountService
-    ) {
-      this.currentUser = this.authenticationService.currentUser;
-    }
+    ) {}
   ngOnInit() {
     this.getClientInfo();
     // this.getClientAccounts();
    }
 
-   private getClientInfo() {
-
-    this.clientService.getById(this.currentUser.id).pipe(first()).subscribe( client => {
+  private getClientInfo() {
+    /*
+     *  Receber o ID do cliente pelo url!!
+     *
+     *
+     */
+      this.clientService.getById(this.authenticationService.currentUser.id).pipe(first()).subscribe( client => {
       this.client = client[0];
       console.log(this.client);
-    });
-    }
+  });
+  }
 
-    // private getClientAccounts() {
-    //   this.accountService.getById(this.currentUser.id).pipe(first()).subscribe( accounts => {
-    //     this.accounts = accounts;
-    //   })
-    // }
+  // private getClientAccounts() {
+  //  this.accountService.getById(this.currentUser.id).pipe(first()).subscribe( accounts => {
+  //    this.accounts = accounts;
+  //  })
+  // }
 
     // private getClientMovements() {
 
     // }
 
-    public refreshData() {
-      this.getClientInfo();
-      // this.getClientAccounts();
-      // this.getClientMovements();
-    }
+  public refreshData() {
+    this.getClientInfo();
+    // this.getClientAccounts();
+    // this.getClientMovements();
+  }
+
 }

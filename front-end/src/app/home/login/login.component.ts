@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'app/services/authentication.service';
-import { AccessService } from 'app/services/access.service';
 
 @Component({
   selector: 'app-login',
@@ -26,11 +25,10 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private accessService: AccessService
 //    private alertService: AlertService,
 
   ) {
-    if ( this.accessService.isLoggedIn ) {
+    if ( this.authenticationService.isLoggedIn ) {
       this.router.navigate(['/']);
     }
   }

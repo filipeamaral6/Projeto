@@ -17,9 +17,9 @@ import { Globals } from './shared/Globals';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthenticationService } from './services/authentication.service';
-import { AccessService } from './services/access.service';
 import { ClientService } from './services/transport/client.service';
 import { AccountService } from './services/transport/account.service';
+
 
 
 
@@ -51,7 +51,6 @@ import { AccountService } from './services/transport/account.service';
   providers: [
     Globals,
     AuthenticationService,
-    AccessService,
     ClientService,
     AccountService
   ],
