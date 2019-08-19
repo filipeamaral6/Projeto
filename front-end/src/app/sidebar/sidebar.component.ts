@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 
 export interface RouteInfo {
@@ -8,13 +8,7 @@ export interface RouteInfo {
   class: string;
 }
 
-export const ROUTES: RouteInfo[] = [
-  { path: '/dashboard', title: 'Página Inicial', icon: 'nc-bank', class: '' },
-  { path: '/user', title: 'Perfil', icon: 'nc-single-02', class: '' },
-  { path: '/movements', title: 'Movimentos', icon: 'nc-single-copy-04', class: '' },
-  { path: '/transfer', title: 'Transferências', icon: 'nc-credit-card', class: '' },
-  { path: '/payments', title: 'Pagamentos', icon: 'nc-cart-simple', class: '' }
-];
+export let ROUTES: RouteInfo[] = [];
 
 @Component({
   moduleId: module.id,
@@ -24,8 +18,17 @@ export const ROUTES: RouteInfo[] = [
 })
 
 export class SidebarComponent implements OnInit {
-  public menuItems: any[];
+  @Input() menuItems: any[];
   ngOnInit() {
+    // this.menuItems = [
+    //   { path: '/dashboard', title: 'Página Inicial', icon: 'nc-bank', class: '' },
+    //   { path: '/user', title: 'Perfil', icon: 'nc-single-02', class: '' },
+    //   { path: '/movements', title: 'Movimentos', icon: 'nc-single-copy-04', class: '' },
+    //   { path: '/transfer', title: 'Transferências', icon: 'nc-credit-card', class: '' },
+    //   { path: '/payments', title: 'Pagamentos', icon: 'nc-cart-simple', class: '' }
+    // ];
+    ROUTES = this.menuItems;
+
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
 }

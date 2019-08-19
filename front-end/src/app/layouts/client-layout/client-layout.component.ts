@@ -53,9 +53,9 @@ export class ClientLayoutComponent implements OnInit {
     //   })
     // }
 
-    // private getClientMovements() {
+    private getClientMovements() {
 
-    // }
+    }
 
     public refreshData() {
       this.getClientInfo();

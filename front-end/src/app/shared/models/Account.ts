@@ -10,5 +10,5 @@ export class Account {
   status: string;
   createdAt?: Date;
   employeeId: number;
-
+  color?: string;
 }

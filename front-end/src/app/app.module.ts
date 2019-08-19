@@ -20,17 +20,18 @@ import { AuthenticationService } from './services/authentication.service';
 import { AccessService } from './services/access.service';
 import { ClientService } from './services/transport/client.service';
 import { AccountService } from './services/transport/account.service';
+import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.component';
 
 
 
 @NgModule({
   declarations: [
+    WorkerLayoutComponent,
     ClientLayoutComponent,
     AppComponent,
     LoginComponent,
     HomeComponent,
     LoadingSpinnerComponent
-
   ],
   imports: [
     BrowserAnimationsModule,

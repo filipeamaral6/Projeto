@@ -3,6 +3,7 @@ import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.c
 import { Client } from 'app/shared/models/Client';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'edit-client-cmp',
   templateUrl: './edit-client.component.html',
   styleUrls: ['./edit-client.component.css']

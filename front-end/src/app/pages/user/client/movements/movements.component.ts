@@ -24,7 +24,8 @@ export class MovementsComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.accounts = this.appComponent.user.accounts;
+    // this.accounts = this.appComponent.user.accounts;
+    this.accounts = [];
   }
 
   onSelectAccount(index: number) {

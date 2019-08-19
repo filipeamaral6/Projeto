@@ -13,6 +13,7 @@ import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.c
 
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'dashboard-cmp',
   moduleId: module.id,
   templateUrl: 'dashboard.component.html'
@@ -20,7 +21,7 @@ import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.c
 
 export class DashboardComponent implements OnInit {
 
-  private accounts: Account[];
+  accounts: Account[];
 
   constructor(
     private clientLayout: ClientLayoutComponent,
@@ -35,7 +36,7 @@ export class DashboardComponent implements OnInit {
   // public chartHours;
 
   ngOnInit() {
-    this.accounts = this.clientLayout.getAccounts;
+    this.accounts = [];
     console.log(this.accounts)
     // this.loadAccountsChart();
   }
