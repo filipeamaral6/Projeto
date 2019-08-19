@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd4" xmlns:tns="http://xmlns.example.com/1564670098615" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" targetNamespace="http://xmlns.example.com/1564670098615">
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" location="../Schemas/GetById.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" location="../Schemas/GetByIban.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd4" location="../Schemas/Account.xsd"/>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns6="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" xmlns:ns5="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd4" xmlns:tns="http://xmlns.example.com/1564670098615" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" targetNamespace="http://xmlns.example.com/1564670098615">
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" location="../Schemas/GetByIban.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" location="../Schemas/Account.xsd"/>
     <message name="CreateAccountInput">
-        <part name="input" element="ns:inputAccount"/>
+        <part name="input" element="ns4:inputAccount"/>
     </message>
     <message name="CreateAccountOutput">
-        <part name="output" element="ns:outputAccount"/>
+        <part name="output" element="ns4:outputAccount"/>
     </message>
     <message name="GetAccountByIdInput">
-        <part name="input" element="ns2:getById"/>
+        <part name="input" element="ns5:getById"/>
     </message>
     <message name="GetAccountByIdOutput">
-        <part name="output" element="ns:inputAccount"/>
+        <part name="output" element="ns4:root"/>
     </message>
     <message name="GetAllAccountsInput"/>
     <message name="GetAllAccountsOutput">
-        <part name="output" element="ns:inputAccount"/>
+        <part name="output" element="ns4:root"/>
     </message>
     <message name="UpdateAccountInput">
-        <part name="input" element="ns:inputAccount"/>
+        <part name="input" element="ns4:inputAccount"/>
     </message>
     <message name="UpdateAccountOutput">
-        <part name="output" element="ns:outputAccount"/>
+        <part name="output" element="ns4:outputAccount"/>
     </message>
     <message name="GetAccountByIbanInput">
-        <part name="input" element="ns3:getByIban"/>
+        <part name="input" element="ns6:getByIban"/>
     </message>
     <message name="GetAccountByIbanOutput">
-        <part name="output" element="ns:inputAccount"/>
+        <part name="output" element="ns4:root"/>
     </message>
     <portType name="PortType_CreateAccount">
         <operation name="Operation">

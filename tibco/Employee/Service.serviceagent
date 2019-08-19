@@ -9,7 +9,7 @@
             <row isDefault="true" groupName="Default"/>
         </groups>
         <name>Service</name>
-        <serviceChange>Tue Aug 06 11:47:58 BST 2019</serviceChange>
+        <serviceChange>Thu Aug 08 15:44:50 BST 2019</serviceChange>
         <resourceType>service.definition</resourceType>
         <interfaceImpl>
             <tab>
@@ -159,7 +159,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="Operation" opImpl="/Employee/UpdateAccount/UpdateEmployee.process"/>
+                                    <row opName="Operation" opImpl="/Employee/UpdateEmployee/UpdateEmployee.process"/>
                                 </operations>
                             </config>
                         </tab>

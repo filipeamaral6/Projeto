@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670902359" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <wsdl:import namespace="http://xmlns.example.com/1564670902359" location="/Employee/WSDL.wsdl"/>
-    <pd:name>Employee/UpdateAccount/UpdateEmployee.process</pd:name>
+    <pd:name>Employee/UpdateEmployee/UpdateEmployee.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:UpdateEmployeeInput"/>
     <pd:startX>48</pd:startX>
@@ -19,8 +19,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:UpdateEmployeeOuput"/>
-    <pd:endX>966</pd:endX>
-    <pd:endY>427</pd:endY>
+    <pd:endX>808</pd:endX>
+    <pd:endY>387</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -84,7 +84,7 @@
         <pd:activity name="Update_Employee">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>620</pd:x>
+            <pd:x>621</pd:x>
             <pd:y>111</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -149,14 +149,14 @@ WHERE user_id=?</statement>
         <pd:activity name="Update_User">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>500</pd:x>
-            <pd:y>112</pd:y>
+            <pd:x>499</pd:x>
+            <pd:y>115</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
                 <emptyStrAsNil>false</emptyStrAsNil>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-                <statement>UPDATE user SET username=(?), password=(?), email=(?), role=(?)
+                <statement>UPDATE user SET username=(?), password=(?), email=(?), role=(?), status=(?)
 WHERE id=?</statement>
                 <Prepared_Param_DataType>
                     <parameter>
@@ -173,6 +173,10 @@ WHERE id=?</statement>
                     </parameter>
                     <parameter>
                         <parameterName>role</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>status</parameterName>
                         <dataType>VARCHAR</dataType>
                     </parameter>
                     <parameter>
@@ -223,10 +227,20 @@ WHERE id=?</statement>
                             </xsl:otherwise>
                         </xsl:choose>
                     </role>
+                    <status>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@status)">
+                                <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@status"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </status>
                     <id>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@id)">
-                                <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@id"/>
+                            <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id)">
+                                <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -248,7 +262,7 @@ WHERE id=?</statement>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O email que introduziu já foi registado!&quot;"/>
+                    <xsl:value-of select="&quot;O email que introduziu já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -272,8 +286,8 @@ WHERE id=?</statement>
     <pd:activity name="Query_Email_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>299</pd:x>
-        <pd:y>201</pd:y>
+        <pd:x>301</pd:x>
+        <pd:y>198</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -309,13 +323,17 @@ WHERE id=?</statement>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
                 <email>
                     <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:UpdateClientInput/input/ns:inputClient/@email)">
-                            <xsl:value-of select="$Start/pfx:UpdateClientInput/input/ns:inputClient/@email"/>
+                        <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@email)">
+                            <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@email"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -329,7 +347,7 @@ WHERE id=?</statement>
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>277</pd:x>
-        <pd:y>629</pd:y>
+        <pd:y>632</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -376,7 +394,7 @@ WHERE id=?</statement>
     <pd:activity name="Query_UserById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>279</pd:x>
+        <pd:x>281</pd:x>
         <pd:y>492</pd:y>
         <config>
             <timeout>10</timeout>
@@ -413,6 +431,10 @@ WHERE id=?</statement>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
@@ -429,11 +451,11 @@ WHERE id=?</statement>
             </jdbcQueryActivityInput>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="Query_Username_EXISTS-1">
+    <pd:activity name="Query_Username_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>277</pd:x>
-        <pd:y>350</pd:y>
+        <pd:y>348</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -469,13 +491,17 @@ WHERE id=?</statement>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
                 <username>
                     <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:UpdateClientInput/input/ns:inputClient/@username)">
-                            <xsl:value-of select="$Start/pfx:UpdateClientInput/input/ns:inputClient/@username"/>
+                        <xsl:when test="exists($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@username)">
+                            <xsl:value-of select="$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@username"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -517,6 +543,33 @@ WHERE id=?</statement>
             </root>
         </pd:inputBindings>
     </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>1051</pd:x>
+        <pd:y>394</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>934</pd:x>
+        <pd:y>391</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
         <pd:to>Query_EmployeeById</pd:to>
@@ -541,19 +594,19 @@ WHERE id=?</statement>
     </pd:transition>
     <pd:transition>
         <pd:from>Query_UserById</pd:from>
-        <pd:to>Query_Username_EXISTS-1</pd:to>
+        <pd:to>Query_Username_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>exists($Query_UserById/resultSet/Record)</pd:xpath>
     </pd:transition>
     <pd:transition>
-        <pd:from>Query_Username_EXISTS-1</pd:from>
+        <pd:from>Query_Username_EXISTS</pd:from>
         <pd:to>Username_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_Username_EXISTS-1/resultSet/Record)</pd:xpath>
+        <pd:xpath>$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id !=$Query_Username_EXISTS/resultSet/Record/id</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Username_EXISTS</pd:from>
@@ -586,12 +639,12 @@ WHERE id=?</statement>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>Query_Username_EXISTS-1</pd:from>
+        <pd:from>Query_Username_EXISTS</pd:from>
         <pd:to>Query_Email_EXISTS</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_Username_EXISTS-1/resultSet/Record))</pd:xpath>
+        <pd:xpath>($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id = $Query_Username_EXISTS/resultSet/Record/id) or not(exists($Query_Username_EXISTS/resultSet/Record))</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Query_Email_EXISTS</pd:from>
@@ -599,7 +652,7 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_Email_EXISTS/resultSet/Record)</pd:xpath>
+        <pd:xpath>$Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id !=$Query_Email_EXISTS/resultSet/Record/id</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Email_EXISTS</pd:from>
@@ -614,10 +667,24 @@ WHERE id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_Email_EXISTS/resultSet/Record))</pd:xpath>
+        <pd:xpath>($Start/pfx:UpdateEmployeeInput/input/ns:InputEmployee/@user_id = $Query_Email_EXISTS/resultSet/Record/id) or not(exists($Query_Email_EXISTS/resultSet/Record))</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Group</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>ERROR</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ERROR</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

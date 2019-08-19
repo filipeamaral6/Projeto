@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd3" xmlns:tns="http://xmlns.example.com/1564670902359" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:ns3="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd" targetNamespace="http://xmlns.example.com/1564670902359">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns5="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd3" xmlns:tns="http://xmlns.example.com/1564670902359" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:ns3="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd" targetNamespace="http://xmlns.example.com/1564670902359">
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd" location="../Schemas/Employee.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" location="../Schemas/User.xsd"/>
     <message name="CreateEmployeeInput">
         <part name="input" element="ns3:InputEmployee"/>
     </message>

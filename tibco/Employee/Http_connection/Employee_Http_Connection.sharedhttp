@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns0:httpSharedResource xmlns:ns0="www.tibco.com/shared/HTTPConnection">
     <config>
-        <Host>localhost</Host>
+        <Host>%%Globals/Host%%</Host>
         <serverType>HttpComponent</serverType>
-        <Port>8083</Port>
+        <Port>%%Globals/HTTP_Connections/Client/Client_Port%%</Port>
         <HttpConnectionProperties>
             <row>
                 <PropertyName>uriEncoding</PropertyName>
