@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["layouts-worker-layout-worker-layout-module"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["layouts-client-layout-client-layout-module"],{
 
 /***/ "./node_modules/chart.js/dist/Chart.js":
 /*!*********************************************!*\
@@ -32383,22 +32383,22 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./src/app/layouts/worker-layout/worker-layout.module.ts":
+/***/ "./src/app/layouts/client-layout/client-layout.module.ts":
 /*!*************************************************************!*\
-  !*** ./src/app/layouts/worker-layout/worker-layout.module.ts ***!
+  !*** ./src/app/layouts/client-layout/client-layout.module.ts ***!
   \*************************************************************/
-/*! exports provided: WorkerLayoutModule */
+/*! exports provided: ClientLayoutModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WorkerLayoutModule", function() { return WorkerLayoutModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientLayoutModule", function() { return ClientLayoutModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _admin_layout_routing__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./worker-layout.routing */ "./src/app/layouts/worker-layout/worker-layout.routing.ts");
+/* harmony import */ var _admin_layout_routing__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./client-layout.routing */ "./src/app/layouts/client-layout/client-layout.routing.ts");
 /* harmony import */ var _pages_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../pages/dashboard/dashboard.component */ "./src/app/pages/dashboard/dashboard.component.ts");
 /* harmony import */ var _pages_user_user_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../pages/user/user.component */ "./src/app/pages/user/user.component.ts");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
@@ -32417,13 +32417,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let WorkerLayoutModule = class WorkerLayoutModule {
+let ClientLayoutModule = class ClientLayoutModule {
 };
-WorkerLayoutModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+ClientLayoutModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(_admin_layout_routing__WEBPACK_IMPORTED_MODULE_5__["WorkerLayoutRoutes"]),
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(_admin_layout_routing__WEBPACK_IMPORTED_MODULE_5__["ClientLayoutRoutes"]),
             _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_8__["NgbModule"]
         ],
@@ -32435,22 +32435,22 @@ WorkerLayoutModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             app_pages_transfer_transfer_component__WEBPACK_IMPORTED_MODULE_11__["TransferComponent"]
         ]
     })
-], WorkerLayoutModule);
+], ClientLayoutModule);
 
 
 
 /***/ }),
 
-/***/ "./src/app/layouts/worker-layout/worker-layout.routing.ts":
+/***/ "./src/app/layouts/client-layout/client-layout.routing.ts":
 /*!**************************************************************!*\
-  !*** ./src/app/layouts/worker-layout/worker-layout.routing.ts ***!
+  !*** ./src/app/layouts/client-layout/client-layout.routing.ts ***!
   \**************************************************************/
-/*! exports provided: WorkerLayoutRoutes */
+/*! exports provided: ClientLayoutRoutes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WorkerLayoutRoutes", function() { return WorkerLayoutRoutes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientLayoutRoutes", function() { return ClientLayoutRoutes; });
 /* harmony import */ var _pages_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../pages/dashboard/dashboard.component */ "./src/app/pages/dashboard/dashboard.component.ts");
 /* harmony import */ var _pages_user_user_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../pages/user/user.component */ "./src/app/pages/user/user.component.ts");
 /* harmony import */ var app_pages_movements_movements_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/pages/movements/movements.component */ "./src/app/pages/movements/movements.component.ts");
@@ -32461,7 +32461,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const WorkerLayoutRoutes = [
+const ClientLayoutRoutes = [
     { path: 'dashboard', component: _pages_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_0__["DashboardComponent"] },
     { path: 'user', component: _pages_user_user_component__WEBPACK_IMPORTED_MODULE_1__["UserComponent"] },
     { path: 'movements', component: app_pages_movements_movements_component__WEBPACK_IMPORTED_MODULE_2__["MovementsComponent"] },
@@ -32734,4 +32734,4 @@ UserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /***/ })
 
 }]);
-//# sourceMappingURL=layouts-worker-layout-worker-layout-module-es2015.js.map
+//# sourceMappingURL=layouts-client-layout-client-layout-module-es2015.js.map

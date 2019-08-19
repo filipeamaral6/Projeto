@@ -11,9 +11,9 @@ module.exports = "<router-outlet></router-outlet>\n"
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/layouts/worker-layout/worker-layout.component.html":
+/***/ "./node_modules/raw-loader/index.js!./src/app/layouts/client-layout/client-layout.component.html":
 /*!********************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/layouts/worker-layout/worker-layout.component.html ***!
+  !*** ./node_modules/raw-loader!./src/app/layouts/client-layout/client-layout.component.html ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -63,9 +63,9 @@ module.exports = "<div class=\"sidebar-wrapper\">\n  <div class=\"logo\">\n    <
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./layouts/worker-layout/worker-layout.module": [
-		"./src/app/layouts/worker-layout/worker-layout.module.ts",
-		"layouts-worker-layout-worker-layout-module"
+	"./layouts/client-layout/client-layout.module": [
+		"./src/app/layouts/client-layout/client-layout.module.ts",
+		"layouts-client-layout-client-layout-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_navbar_navbar_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/navbar/navbar.module */ "./src/app/shared/navbar/navbar.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_routing__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.routing */ "./src/app/app.routing.ts");
-/* harmony import */ var _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/worker-layout/worker-layout.component */ "./src/app/layouts/worker-layout/worker-layout.component.ts");
+/* harmony import */ var _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/client-layout/client-layout.component */ "./src/app/layouts/client-layout/client-layout.component.ts");
 
 
 
@@ -171,7 +171,7 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
-                _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_10__["WorkerLayoutComponent"]
+                _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_10__["ClientLayoutComponent"]
             ],
             imports: [
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
@@ -204,7 +204,7 @@ var AppModule = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutes", function() { return AppRoutes; });
-/* harmony import */ var _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/worker-layout/worker-layout.component */ "./src/app/layouts/worker-layout/worker-layout.component.ts");
+/* harmony import */ var _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/client-layout/client-layout.component */ "./src/app/layouts/client-layout/client-layout.component.ts");
 
 var AppRoutes = [
     {
@@ -213,11 +213,11 @@ var AppRoutes = [
         pathMatch: 'full',
     }, {
         path: '',
-        component: _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__["WorkerLayoutComponent"],
+        component: _layouts_admin_layout_admin_layout_component__WEBPACK_IMPORTED_MODULE_0__["ClientLayoutComponent"],
         children: [
             {
                 path: '',
-                loadChildren: './layouts/worker-layout/worker-layout.module#WorkerLayoutModule'
+                loadChildren: './layouts/client-layout/client-layout.module#ClientLayoutModule'
             }
         ]
     },
@@ -230,9 +230,9 @@ var AppRoutes = [
 
 /***/ }),
 
-/***/ "./src/app/layouts/worker-layout/worker-layout.component.scss":
+/***/ "./src/app/layouts/client-layout/client-layout.component.scss":
 /*!******************************************************************!*\
-  !*** ./src/app/layouts/worker-layout/worker-layout.component.scss ***!
+  !*** ./src/app/layouts/client-layout/client-layout.component.scss ***!
   \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -241,32 +241,32 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ }),
 
-/***/ "./src/app/layouts/worker-layout/worker-layout.component.ts":
+/***/ "./src/app/layouts/client-layout/client-layout.component.ts":
 /*!****************************************************************!*\
-  !*** ./src/app/layouts/worker-layout/worker-layout.component.ts ***!
+  !*** ./src/app/layouts/client-layout/client-layout.component.ts ***!
   \****************************************************************/
-/*! exports provided: WorkerLayoutComponent */
+/*! exports provided: ClientLayoutComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WorkerLayoutComponent", function() { return WorkerLayoutComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientLayoutComponent", function() { return ClientLayoutComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 
 
-var WorkerLayoutComponent = /** @class */ (function () {
-    function WorkerLayoutComponent() {
+var ClientLayoutComponent = /** @class */ (function () {
+    function ClientLayoutComponent() {
     }
-    WorkerLayoutComponent.prototype.ngOnInit = function () { };
-    WorkerLayoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    ClientLayoutComponent.prototype.ngOnInit = function () { };
+    ClientLayoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-worker-layout',
-            template: __webpack_require__(/*! raw-loader!./worker-layout.component.html */ "./node_modules/raw-loader/index.js!./src/app/layouts/worker-layout/worker-layout.component.html"),
-            styles: [__webpack_require__(/*! ./worker-layout.component.scss */ "./src/app/layouts/worker-layout/worker-layout.component.scss")]
+            selector: 'app-client-layout',
+            template: __webpack_require__(/*! raw-loader!./client-layout.component.html */ "./node_modules/raw-loader/index.js!./src/app/layouts/client-layout/client-layout.component.html"),
+            styles: [__webpack_require__(/*! ./client-layout.component.scss */ "./src/app/layouts/client-layout/client-layout.component.scss")]
         })
-    ], WorkerLayoutComponent);
-    return WorkerLayoutComponent;
+    ], ClientLayoutComponent);
+    return ClientLayoutComponent;
 }());
 
 

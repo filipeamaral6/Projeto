@@ -7,7 +7,7 @@ import { PaymentsComponent } from 'app/pages/payments/payments.component';
 import { TransferComponent } from 'app/pages/transfer/transfer.component';
 import { AuthGuard } from 'app/guards/auth.guard';
 
-export const WorkerLayoutRoutes: Routes = [
+export const ClientLayoutRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'user', component: UserComponent },
   { path: 'movements', component: MovementsComponent },

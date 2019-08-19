@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'app/app.component';
 import { Router, Route } from '@angular/router';
-import { WorkerLayoutComponent } from 'app/layouts/worker-layout/worker-layout.component';
+import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -18,9 +18,9 @@ export class MovementsComponent implements OnInit {
   constructor(
     private appComponent: AppComponent,
     private router: Router,
-    private workerLayout: WorkerLayoutComponent
+    private clientLayout: ClientLayoutComponent
     ) {
-      this.workerLayout.refreshData();
+      this.clientLayout.refreshData();
     }
 
   ngOnInit() {

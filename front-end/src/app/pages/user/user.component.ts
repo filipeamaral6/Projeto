@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'app/shared/models/Client';
-import { WorkerLayoutComponent } from 'app/layouts/worker-layout/worker-layout.component';
+import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -16,12 +16,12 @@ export class UserComponent implements OnInit {
   client: Client;
 
   constructor(
-    private workerLayout: WorkerLayoutComponent) {
+    private clientLayout: ClientLayoutComponent) {
     }
 
   ngOnInit() {
-    this.workerLayout.refreshData();
-    this.client = this.workerLayout.getClient;
+    this.clientLayout.refreshData();
+    this.client = this.clientLayout.getClient;
   }
 
   editMode() {
