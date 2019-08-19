@@ -3,7 +3,6 @@ import Chart from 'chart.js';
 import { Account } from 'app/shared/models/Account';
 import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
 import { AuthenticationService } from 'app/services/authentication.service';
-import { AccessService } from 'app/services/access.service';
 import { Router } from '@angular/router';
 import { CurrentUser } from 'app/shared/models/CurrentUser';
 import { Client } from 'app/shared/models/Client';

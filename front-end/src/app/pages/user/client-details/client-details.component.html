@@ -10,14 +10,14 @@
                             <div class="col-md-3">
                                 <div class="form-group" >
                                     <label for="userId">Número de Cliente</label>
-                                    <input readonly type="text" class="form-control" value="{{client.userId}}">
+                                    <input [ngStyle]="fieldStyle('id')" disabled type="text" class="form-control" value="{{client.userId}}">
                                 </div>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input *ngIf="!editMode" readOnly type="text" class="form-control" value="{{teste}}">
-                                    <input *ngIf="editMode" type="text" class="form-control" value="{{teste}}">
+                                    <input *ngIf="!editMode" [ngStyle]="fieldStyle('email')" disabled type="text" class="form-control" value="{{teste}}">
+                                    <input *ngIf="editMode" [ngStyle]="fieldStyle('email')" type="text" class="form-control" value="{{teste}}">
                                 </div>
                             </div>
                         </div>
@@ -25,21 +25,14 @@
                             <div class="col-md-6">
                                 <div class="form-group" >
                                     <label for="username">Username</label>
-                                    <input *ngIf="!editMode || ( editMode && ( isOperator || isClient))" readOnly type="text" class="form-control" value="{{client.username}}">
-                                    <input *ngIf="editMode && isAdmin" type="text" class="form-control" value="{{client.username}}">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group" >
-                                    <label for="role">Permissão</label>
-                                    <input *ngIf="!editMode || ( editMode && ( isOperator || isClient))" readOnly type="text" class="form-control" value="{{client.role}}">
-                                    <input *ngIf="editMode && isAdmin" type="text" class="form-control" value="{{client.role}}">
+                                    <input *ngIf="!editMode || (editMode && isClient)" [ngStyle]="fieldStyle('username')" readonly type="text" class="form-control" value="{{client.username}}">
+                                    <input *ngIf="editMode && ( isOperator || isAdmin )" [ngStyle]="fieldStyle('username')" type="text" class="form-control" value="{{client.username}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group" >
                                     <label for="createdAt">Data de Inscrição</label>
-                                    <input readonly type="text" class="form-control" value="{{client.createdAt}}">
+                                    <input [ngStyle]="fieldStyle('createdAt')" readonly type="text" class="form-control" value="{{client.createdAt}}" >
                                 </div>
                             </div>
                         </div>
@@ -55,8 +48,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="fullName">Nome Completo</label>
-                                    <input *ngIf="!editMode" readonly type="text" class="form-control" value="{{client.fullName}}">
-                                    <input *ngIf="editMode && (isAdmin || isOperator)" type="text" class="form-control" value="{{client.fullName}}">
+                                    <input *ngIf="editMode || ( editMode && isClient )" readonly type="text" class="form-control" value="{{client.fullName}}">
+                                    <input *ngIf="editMode && (isAdmin || isOperator)" [ngStyle]="fieldStyle('fullName')" type="text" class="form-control" value="{{client.fullName}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -69,7 +62,7 @@
                             <div class="col-md-3">
                                 <div class="form-group" >
                                     <label for="nationality">Nacionalidade</label>
-                                    <input *ngIf="!editMode" readonly type="text" class="form-control" value="{{client.nationality}}">
+                                    <input *ngIf="!editMode || ( editMode && isClient )" readonly type="text" class="form-control" value="{{client.nationality}}">
                                     <input *ngIf="editMode && (isAdmin || isOperator)" type="text" class="form-control" value="{{client.nationality}}">
                                 </div>
                             </div> 
@@ -92,7 +85,7 @@
                             <div class="col-md-3">
                                 <div class="form-group" >
                                     <label for="phoneNumber">Telefone</label>
-                                    <input *ngIf="!editMode || ( editMode && isClient )" readonly type="text" class="form-control" value="{{client.phoneNumber}}">
+                                    <input *ngIf="!editMode" readonly type="text" class="form-control" value="{{client.phoneNumber}}">
                                     <input *ngIf="editMode" type="text" class="form-control" value="{{client.phoneNumber}}">
                                 </div>
                             </div>
@@ -116,15 +109,15 @@
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label for="address">Morada</label>
-                                    <input *ngIf="!editMode" readonly type="text" class="form-control" value="{{client.address}}">
-                                    <input *ngIf="editMode" type="text" class="form-control" value="{{client.address}}">
+                                    <input *ngIf="!editMode || ( editMode && isClient )" readonly type="text" class="form-control" value="{{client.address}}">
+                                    <input *ngIf="editMode && (isAdmin || isOperator)" type="text" class="form-control" value="{{client.address}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="zipCode">Código Postal</label>
-                                    <input *ngIf="!editMode" readonly type="text" class="form-control" value="{{client.zipCode}}">
-                                    <input *ngIf="editMode" type="text" class="form-control" value="{{client.zipCode}}">
+                                    <input *ngIf="!editMode || ( editMode && isClient )" readonly type="text" class="form-control" value="{{client.zipCode}}">
+                                    <input *ngIf="editMode && (isAdmin || isOperator)" type="text" class="form-control" value="{{client.zipCode}}">
                                 </div>
                             </div>
                         </div>
@@ -132,15 +125,15 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="county">Localidade</label>
-                                    <input *ngIf="!editMode" readonly type="text" class="form-control" value="{{client.county}}">
-                                    <input *ngIf="editMode" type="text" class="form-control" value="{{client.county}}">
+                                    <input *ngIf="!editMode || ( editMode && isClient )" readonly type="text" class="form-control" value="{{client.county}}">
+                                    <input *ngIf="editMode && (isAdmin || isOperator)" type="text" class="form-control" value="{{client.county}}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="country">País</label>
-                                    <input *ngIf="!editMode" readonly type="text" class="form-control" value="{{client.country}}">
-                                    <input *ngIf="editMode" type="text" class="form-control" value="{{client.country}}">
+                                    <input *ngIf="!editMode || ( editMode && isClient )" readonly type="text" class="form-control" value="{{client.country}}">
+                                    <input *ngIf="editMode && (isAdmin || isOperator)" type="text" class="form-control" value="{{client.country}}">
                                 </div>
                             </div>
                         </div>

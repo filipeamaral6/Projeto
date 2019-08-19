@@ -4,6 +4,7 @@ import { Client } from 'app/shared/models/Client';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'app/services/authentication.service';
 
+
 @Component({
   selector: 'app-client-details',
   templateUrl: './client-details.component.html',
@@ -13,11 +14,13 @@ export class ClientDetailsComponent implements OnInit {
 
   @Input() editMode: boolean;
 
-  teste = 'drstgahdcnjdnjksdbchjsbc'
+  private permitedFields: string[];
 
-  isAdmin = false;
   isClient = false;
   isOperator = false;
+  isAdmin = false;
+
+  teste = '123teste'
 
   initClient: Client;
   client: Client;
@@ -28,9 +31,20 @@ export class ClientDetailsComponent implements OnInit {
     private adminLayout: AdminLayoutComponent,
     private formBuilder: FormBuilder
     ) {
-      this.isClient = this.authenticationService.currentUserIsClient();
-      this.isAdmin = this.authenticationService.currentUserIsAdminMaster();
-      this.isOperator = this.authenticationService.currentUserIsAdmin();
+      switch (authenticationService.currentUser.role) {
+        case 'CLIENT':
+          this.isClient = true;
+          this.permitedFields = ['email', 'phoneNumber', 'mobileNumber'];
+          break;
+        case 'OPERATOR':
+          this.isOperator = true;
+          this.permitedFields = ['email', 'phoneNumber', 'mobileNumber', 'notification'];
+          break;
+        case 'ADMIN':
+          this.isAdmin = true;
+          this.permitedFields = ['email', 'phoneNumber', 'mobileNumber', 'notification'];
+          break;
+      }
     }
 
   ngOnInit() {
@@ -87,5 +101,35 @@ export class ClientDetailsComponent implements OnInit {
     console.log('Submited')
   }
 
+  fieldStyle(field: string) {
+    console.log(field);
+    let styles = {
+      'background-color': 'white'
+    }
+    if ( !this.editMode ) {
+      return styles;
+    }
+    if ( this.editMode ) {
+      styles = {
+        'background-color': 'rgb(248, 248, 248)'
+      }
+      switch (this.authenticationService.currentUser.role) {
+        case 'CLIENT':
+          this.permitedFields.forEach(clientField => {
+            if ( clientField === field) {
+              styles = {
+                'background-color': 'white'
+              }
+              return styles;
+            }
+          });
+          break;
+        case 'OPERATOR':
+        case 'ADMIN':
+        default:
+          break;
+      }
+    }
+  }
 
 }

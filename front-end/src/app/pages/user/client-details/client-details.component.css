@@ -46,7 +46,9 @@
 	margin-top: 2px;
 	margin-left: 10px;
 }
-
-input[type="text"].form-control {
+.form-control {
 	background-color: white;
 }
+
+
+
