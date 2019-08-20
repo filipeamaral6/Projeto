@@ -16,11 +16,15 @@ import { Globals } from './shared/Globals';
 import { HttpClientModule } from '@angular/common/http';
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 import { AuthenticationService } from './services/authentication.service';
+import { AccessService } from './services/access.service';
 import { ClientService } from './services/transport/client.service';
 import { AccountService } from './services/transport/account.service';
 import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.component';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
-
+import { AccountListComponent } from './shared/account-list/account-list.component';
+import { ClientProfileComponent } from './pages/user/client/client-profile/client-profile.component';
+import { ClientDetailComponent } from './pages/user/client/client-profile/client-detail/client-detail.component';
+import { EditClientComponent } from './pages/user/client/client-profile/edit-client/edit-client.component';
 
 
 
@@ -31,7 +35,8 @@ import { SidebarModule } from './shared/sidebar/sidebar.module';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AccountListComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -52,6 +57,7 @@ import { SidebarModule } from './shared/sidebar/sidebar.module';
   providers: [
     Globals,
     AuthenticationService,
+    AccessService,
     ClientService,
     AccountService
   ],

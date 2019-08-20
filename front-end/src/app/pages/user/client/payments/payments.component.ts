@@ -19,9 +19,12 @@ export class PaymentsComponent implements OnInit {
     this.client = this.clientLayout.getClient;
   }
 
-
-
   ngOnInit() {
     console.log(this.client);
   }
+
+  selectAccount(accountId: number) {
+    console.log('payments' + accountId);
+  }
+
 }

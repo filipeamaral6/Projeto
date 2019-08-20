@@ -1,6 +1,6 @@
 /* Switch 1 Specific Style Start */
 
-.switch_1{
+input[type="checkbox"].switch_1{
 	font-size: 15px;
 	-webkit-appearance: none;
 	   -moz-appearance: none;
@@ -16,11 +16,11 @@
 	transition: all .2s ease-in-out;
   }
   
-.switch_1:checked{
+  input[type="checkbox"].switch_1:checked{
 	background: #0ebeff;
   }
   
-.switch_1:after{
+  input[type="checkbox"].switch_1:after{
 	position: absolute;
 	content: "";
 	width: 1.5em;
@@ -36,7 +36,7 @@
 	transition: all .2s ease-in-out;
   }
   
-.switch_1:checked:after{
+  input[type="checkbox"].switch_1:checked:after{
 	left: calc(100% - 1.5em);
   }
 	
@@ -46,9 +46,3 @@
 	margin-top: 2px;
 	margin-left: 10px;
 }
-.form-control {
-	background-color: white;
-}
-
-
-

@@ -12,8 +12,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MovementsComponent } from 'app/pages/user/client/movements/movements.component';
 import { PaymentsComponent } from 'app/pages/user/client/payments/payments.component';
 import { TransferComponent } from 'app/pages/user/client/transfer/transfer.component';
-import { ClientDetailComponent } from 'app/pages/user/client/client-detail/client-detail.component';
-import { EditClientComponent } from 'app/pages/user/client/edit-client/edit-client.component';
+import { ClientDetailComponent } from 'app/pages/user/client/client-profile/client-detail/client-detail.component';
+import { EditClientComponent } from 'app/pages/user/client/client-profile/edit-client/edit-client.component';
+import { ClientProfileComponent } from 'app/pages/user/client/client-profile/client-profile.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { EditClientComponent } from 'app/pages/user/client/edit-client/edit-clie
     MovementsComponent,
     PaymentsComponent,
     TransferComponent,
+    ClientProfileComponent,
     ClientDetailComponent,
     EditClientComponent
   ]

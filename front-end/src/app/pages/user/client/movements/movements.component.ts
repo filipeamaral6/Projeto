@@ -32,4 +32,9 @@ export class MovementsComponent implements OnInit {
     this.selectedAccount = this.accounts.slice(index, index + 1);
     console.log(this.selectedAccount);
   }
+
+  selectAccount(accountId: number) {
+    console.log('movements' + accountId);
+  }
+
 }

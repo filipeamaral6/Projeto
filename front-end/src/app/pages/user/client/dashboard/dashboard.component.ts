@@ -125,7 +125,9 @@ export class DashboardComponent implements OnInit {
     return '#000000'.replace(/0/g, function () { return (~~(Math.random() * 16)).toString(16); });
   }
 
-
+  selectAccount(accountId: number) {
+    console.log('dashboard' + accountId);
+  }
 
 
 }

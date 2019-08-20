@@ -11,4 +11,9 @@ export class TransferComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  selectAccount(accountId: number) {
+    console.log('transfer' + accountId);
+  }
+
 }
