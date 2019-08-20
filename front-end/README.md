@@ -88,13 +88,13 @@ paper-dashboard-angular
 │   │   ├── app.module.ts
 │   │   ├── app.routing.ts
 │   │   ├── layouts
-│   │   │   └── admin-layout
-│   │   │       ├── admin-layout.component.html
-│   │   │       ├── admin-layout.component.scss
-│   │   │       ├── admin-layout.component.spec.ts
-│   │   │       ├── admin-layout.component.ts
-│   │   │       ├── admin-layout.module.ts
-│   │   │       └── admin-layout.routing.ts
+│   │   │   └── client-layout
+│   │   │       ├── client-layout.component.html
+│   │   │       ├── client-layout.component.scss
+│   │   │       ├── client-layout.component.spec.ts
+│   │   │       ├── client-layout.component.ts
+│   │   │       ├── client-layout.module.ts
+│   │   │       └── client-layout.routing.ts
 │   │   ├── pages
 │   │   │   ├── dashboard
 │   │   │   │   ├── dashboard.component.html

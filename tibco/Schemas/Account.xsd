@@ -9,12 +9,13 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="inputAccount" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="outputAccount" minOccurs="0"/>
+				<xs:element ref="outputAccount" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="inputAccount">
 		<xs:complexType>
+			<xs:attribute name="id" type="xs:string"/>
 			<xs:attribute name="type" type="xs:string"/>
 			<xs:attribute name="iban" type="xs:string"/>
 			<xs:attribute name="account_number" type="xs:string"/>
@@ -22,6 +23,7 @@
 			<xs:attribute name="interest" type="xs:string"/>
 			<xs:attribute name="status" type="xs:string"/>
 			<xs:attribute name="created_at" type="xs:string"/>
+			<xs:attribute name="user_id" type="xs:string"/>
 			<xs:attribute name="employee_id" type="xs:string"/>
 		</xs:complexType>
 	</xs:element>

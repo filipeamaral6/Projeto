@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'app/shared/models/Client';
-import { AdminLayoutComponent } from 'app/layouts/admin-layout/admin-layout.component';
+import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -16,12 +16,12 @@ export class UserComponent implements OnInit {
   client: Client;
 
   constructor(
-    private adminLayout: AdminLayoutComponent) {
+    private clientLayout: ClientLayoutComponent) {
     }
 
   ngOnInit() {
-    this.adminLayout.refreshData();
-    this.client = this.adminLayout.getClient;
+    this.clientLayout.refreshData();
+    this.client = this.clientLayout.getClient;
   }
 
   editMode() {

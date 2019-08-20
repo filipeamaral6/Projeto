@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 import { Component } from '@angular/core';
-import { HomeComponent} from './home/home.component'
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { HomeComponent } from './home/home.component'
+import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 import { AuthGuard } from './guards/auth.guard';
+import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.component';
 
 
 export const AppRoutes: Routes = [
@@ -19,16 +20,19 @@ export const AppRoutes: Routes = [
   // },
 
   {
-    path: '',
-    component: AdminLayoutComponent, canActivate: [AuthGuard],
-    children: [
-        {
-      path: '',
-      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-  }]},
+    path: 'client',
+    component: ClientLayoutComponent, canActivate: [AuthGuard],
+    loadChildren: () => import('./layouts/client-layout/client-layout.module').then(mod => mod.ClientLayoutModule)
+  },
 
   {
-   path: '**',
-   redirectTo: 'home'
+    path: 'worker',
+    component: WorkerLayoutComponent, canActivate: [AuthGuard],
+    loadChildren: () => import('./layouts/worker-layout/worker-layout.module').then(mod => mod.WorkerLayoutModule)
+  },
+
+  {
+    path: '**',
+    redirectTo: 'home'
   }
 ]

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'app/shared/model/user.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'app/services/authentication.service';
+import { AccessService } from 'app/services/access.service';
+import { User } from 'app/shared/models/User';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,6 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   submitted = false;
   isTakingAWhile = false;
-  returnUrl: string;
   currentUser: User;
   loginForm: FormGroup;
 
@@ -25,23 +25,21 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-//    private alertService: AlertService,
+    private accessService: AccessService
+    //    private alertService: AlertService,
 
   ) {
-    if ( this.authenticationService.isLoggedIn ) {
+    if (this.accessService.isLoggedIn) {
       this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
 
-     this.loginForm = this.formBuilder.group({
-       username: ['', Validators.required],
-       password: ['', Validators.required]
-     });
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = '/application';
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
   // convenience getter for easy access to form fields
@@ -52,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     // reset alerts on submit
-//    this.alertService.clear();
+    //    this.alertService.clear();
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
@@ -66,15 +64,21 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-            this.router.navigate([this.returnUrl]);
+          const role = data.role;
+
+          if (role === 'CLIENT') {
+            this.router.navigate(['/client']);
+          } else {
+            this.router.navigate(['/worker']);
+          }
         },
 
         error => {
-//          this.alertService.error(error.message);
+          //          this.alertService.error(error.message);
           this.isLoading = false;
           this.isTakingAWhile = false;
         });
-   }
+  }
 
 
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670902359" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd">
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1564670902359" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Employee.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <wsdl:import namespace="http://xmlns.example.com/1564670902359" location="/Employee/WSDL.wsdl"/>
     <pd:name>Employee/GetAllEmployees/GetAllEmployees.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetAllEmployeesInput"/>
     <pd:startX>153</pd:startX>
-    <pd:startY>67</pd:startY>
+    <pd:startY>68</pd:startY>
     <pd:returnBindings>
         <pfx:GetAllEmployeesOutput>
             <output>
@@ -33,6 +33,9 @@
                             <xsl:attribute name="role">
                                 <xsl:value-of select="role"/>
                             </xsl:attribute>
+                            <xsl:attribute name="status">
+                                <xsl:value-of select="status"/>
+                            </xsl:attribute>
                         </ns:InputEmployee>
                     </xsl:for-each>
                     <xsl:choose>
@@ -50,23 +53,33 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllEmployeesOutput"/>
-    <pd:endX>462</pd:endX>
-    <pd:endY>72</pd:endY>
+    <pd:endX>455</pd:endX>
+    <pd:endY>71</pd:endY>
     <pd:errorSchemas/>
-    <pd:processVariables/>
+    <pd:processVariables>
+        <message>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </message>
+    </pd:processVariables>
     <pd:targetNamespace>http://xmlns.example.com/1564745786465</pd:targetNamespace>
     <pd:activity name="Query_SelectAllEmployees">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>306</pd:x>
-        <pd:y>68</pd:y>
+        <pd:x>307</pd:x>
+        <pd:y>69</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT user.id, user.email, user.password, user.username, user.role, employee.full_name, employee.user_id 
+            <statement>SELECT user.id, user.email, user.password, user.username, user.role, user.status, employee.full_name, employee.user_id 
 FROM user, employee WHERE user.id=employee.user_id
 </statement>
             <oraObjects/>
@@ -91,6 +104,10 @@ FROM user, employee WHERE user.id=employee.user_id
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>full_name</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -104,6 +121,33 @@ FROM user, employee WHERE user.id=employee.user_id
             <jdbcQueryActivityInput/>
         </pd:inputBindings>
     </pd:activity>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>740</pd:x>
+        <pd:y>73</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="ERROR">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>586</pd:x>
+        <pd:y>70</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
         <pd:to>Query_SelectAllEmployees</pd:to>
@@ -113,6 +157,20 @@ FROM user, employee WHERE user.id=employee.user_id
     </pd:transition>
     <pd:transition>
         <pd:from>Query_SelectAllEmployees</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>ERROR</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ERROR</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
