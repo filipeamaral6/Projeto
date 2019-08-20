@@ -1,6 +1,7 @@
 
 package com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction;
 
+import javax.validation.constraints.NotBlank;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -31,11 +32,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 @XmlRootElement(name = "DepositTransaction")
 public class DepositTransaction {
-
+	
+	@NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "depositer_cc_number")
     protected String depositerCcNumber;
+	@NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "depositer_name")
     protected String depositerName;
+	@NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "employee_id")
     protected String employeeId;
 

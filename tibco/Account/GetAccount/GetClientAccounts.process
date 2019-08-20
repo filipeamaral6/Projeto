@@ -62,7 +62,7 @@
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetClientAccountsOutput"/>
     <pd:endX>534</pd:endX>
-    <pd:endY>105</pd:endY>
+    <pd:endY>106</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -106,8 +106,8 @@
     <pd:activity name="GetClientAccounts">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>283</pd:x>
-        <pd:y>108</pd:y>
+        <pd:x>282</pd:x>
+        <pd:y>109</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

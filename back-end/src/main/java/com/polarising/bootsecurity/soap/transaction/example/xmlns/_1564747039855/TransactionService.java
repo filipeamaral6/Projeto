@@ -16,7 +16,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "Service", targetNamespace = "http://xmlns.example.com/1564747039855", wsdlLocation = "http://localhost:8074/bankrising/ws/transaction.wsdl")
+@WebServiceClient(name = "Service", targetNamespace = "http://xmlns.example.com/1564747039855", wsdlLocation = "http://localhost:8083/bankrising/ws/transaction.wsdl")
 public class TransactionService
     extends javax.xml.ws.Service
 {

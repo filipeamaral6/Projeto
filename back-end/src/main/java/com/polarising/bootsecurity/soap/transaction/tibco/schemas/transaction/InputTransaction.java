@@ -1,6 +1,11 @@
 
 package com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction;
 
+import java.util.Date;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -30,15 +35,38 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/complexType>
  * </pre>
  * 
- * 
+	@NotBlank(message="Campo obrigatório")
+	@Email(message="Formato inválido")
+    @XmlAttribute(name = "email")
+    protected String email;
+    @XmlAttribute(name = "full_name")
+    protected String fullName;
+    @XmlAttribute(name = "id")
+    protected String id;
+    @NotBlank(message="Campo obrigatório")
+    @XmlAttribute(name = "password")
+    protected String password;
+    @NotBlank(message="Campo obrigatório")
+    @XmlAttribute(name = "role")
+    protected String role;
+    @XmlAttribute(name = "status")
+    protected String status;
+    @XmlAttribute(name = "user_id")
+    protected String userId;
+    @NotBlank(message="Campo obrigatório")
+    @XmlAttribute(name = "username")
+    protected String username;
+
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "inputTransaction")
 public class InputTransaction {
 
+	@NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "account_iban")
     protected String accountIban;
+	@NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "account_id")
     protected String accountId;
     @XmlAttribute(name = "created_at")
@@ -47,10 +75,13 @@ public class InputTransaction {
     protected String description;
     @XmlAttribute(name = "id")
     protected String id;
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "type")
     protected String type;
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "user_id")
     protected String userId;
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "value")
     protected String value;
 

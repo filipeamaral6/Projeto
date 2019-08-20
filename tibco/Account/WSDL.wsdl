@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns6="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" xmlns:ns5="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:ns8="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" xmlns:ns7="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd4" xmlns:tns="http://xmlns.example.com/1564670098615" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Schema.xsd2" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" xmlns:ns3="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd2" targetNamespace="http://xmlns.example.com/1564670098615">
     <import namespace="http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd" location="../Schemas/GetByIban.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" location="../Schemas/Client.xsd"/>
     <import namespace="http://www.tibco.com/schemas/tibco/Schemas/Schema.xsd" location="../Schemas/User.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" location="../Schemas/Account.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" location="../Schemas/Client.xsd"/>
     <message name="CreateAccountInput">
         <part name="input" element="ns4:inputAccount"/>
     </message>
@@ -34,7 +34,7 @@
         <part name="output" element="ns4:root"/>
     </message>
     <message name="GetAccountClientsOuput">
-        <part name="output" element="ns8:root"/>
+        <part name="output" element="ns7:root"/>
     </message>
     <message name="GetAccountClientsInput">
         <part name="input" element="ns5:getById"/>
