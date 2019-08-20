@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 
 import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
+import { NavbarModule } from './shared/navbar/navbar.module';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
@@ -31,16 +31,15 @@ import { SidebarModule } from './shared/sidebar/sidebar.module';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    LoadingSpinnerComponent
-  ],
+    LoadingSpinnerComponent],
   imports: [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes,
-    {
-      useHash: true
-    }),
+      {
+        useHash: true
+      }),
     SidebarModule,
     NavbarModule,
     ToastrModule.forRoot(),
