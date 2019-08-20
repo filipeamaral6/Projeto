@@ -1,21 +1,26 @@
 import { User } from './User';
 
-export class Client extends User {
+export class Client {
 
-    fullName: string;
-    nif: number;
-    clientCC: number;
-    birthDate: Date;
-    phoneNumber?: number;
-    mobileNumber?: number;
-    address: string;
-    zipCode: string;
-    county: string;
-    country: string;
-    nationality: string;
-    status: string;
-    notification: string;
-    transactionPassword?: string;
+    address?: string;
+    birthDate?: string;
+    clientCc?: string;
+    country?: string;
+    county?: string;
     createdAt?: string;
-
+    email?: string;
+    fullName?: string;
+    id?: number;
+    loginPassword?: string;
+    mobileNumber?: string;
+    nationality?: string;
+    nif?: string;
+    notification?: boolean;
+    phoneNumber?: string;
+    role?: string;
+    status?: string;
+    transactionPassword?: string;
+    userId?: number;
+    username?: string;
+    zipCode?: string;
 }
