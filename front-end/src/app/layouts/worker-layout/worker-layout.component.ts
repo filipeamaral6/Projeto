@@ -3,7 +3,7 @@ import { CurrentUser } from 'app/shared/models/CurrentUser';
 import { Account } from 'app/shared/models/Account';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { AccountService } from 'app/services/transport/account.service';
-import { RouteInfo } from 'app/sidebar/sidebar.component';
+import { RouteInfo } from 'app/shared/sidebar/sidebar.component';
 
 const ROUTES = [
   { path: 'users', title: 'Utilizadores', icon: 'nc-single-02', class: '' },

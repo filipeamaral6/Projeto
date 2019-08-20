@@ -22,11 +22,7 @@ export const AppRoutes: Routes = [
   {
     path: 'client',
     component: ClientLayoutComponent, canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'client',
-        loadChildren: './layouts/client-layout/client-layout.module#ClientLayoutModule'
-      }]
+    loadChildren: () => import('./layouts/client-layout/client-layout.module').then(mod => mod.ClientLayoutModule)
   },
 
   {

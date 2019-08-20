@@ -21,6 +21,12 @@ import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.c
 
 export class DashboardComponent implements OnInit {
 
+  public canvas: any;
+  public ctx;
+  public chartColor;
+  public chartEmail;
+  public chartHours;
+
   accounts: Account[];
 
   constructor(
@@ -29,98 +35,95 @@ export class DashboardComponent implements OnInit {
       this.clientLayout.refreshData();
     }
 
-  // public canvas: any;
-  // public ctx;
-  // public chartColor;
-  // public chartEmail;
-  // public chartHours;
+
 
   ngOnInit() {
     this.accounts = [];
     console.log(this.accounts)
-    // this.loadAccountsChart();
+    this.loadAccountsChart();
   }
 
-  // private loadAccountsChart() {
-  //   let speedCanvas = document.getElementById("speedChart");
+  private loadAccountsChart() {
+    const speedCanvas = document.getElementById('speedChart');
 
-  //   let accountsData = [];
+    const accountsData = [];
 
-    // for (let account of this.accounts) {
-    //   let balanceData: number[] = [];
-    //   for (let movementBalance of account.movementBalances) {
-    //     balanceData.push(movementBalance);
-    //   }
+    for (const account of this.accounts) {
+      const balanceData: number[] = [];
+      for (const movementBalance of account.movementBalances) {
+        balanceData.push(movementBalance);
+      }
 
-    //   let color: string = this.getRandomColor();
+      const color: string = this.getRandomColor();
 
-    //   let data = {
-    //     data: balanceData,
-    //     fill: false,
-    //     borderColor: color,
-    //     backgroundColor: 'transparent',
-    //     pointBorderColor: color,
-    //     pointRadius: 4,
-    //     pointHoverRadius: 4,
-    //     pointBorderWidth: 8,
-    //   }
-    //   accountsData.push(data);
-    // }
+      const data = {
+        data: balanceData,
+        fill: false,
+        borderColor: color,
+        backgroundColor: 'transparent',
+        pointBorderColor: color,
+        pointRadius: 4,
+        pointHoverRadius: 4,
+        pointBorderWidth: 8,
+      }
+      accountsData.push(data);
+    }
 
-  //   const labels = [];
-  //   const daysInMonth = this.getDaysInCurrentMonth();
+    const labels = [];
+    const daysInMonth = this.getDaysInCurrentMonth();
 
-  //   for (let i = 1; i <= daysInMonth; i++) {
-  //     labels.push(i);
-  //   }
+    for (let i = 1; i <= daysInMonth; i++) {
+      labels.push(i);
+    }
 
-  //   let speedData = {
-  //     labels: labels,
-  //     datasets: accountsData,
-  //   };
+    const speedData = {
+      labels: labels,
+      datasets: accountsData,
+    };
 
-  //   let chartOptions = {
-  //     legend: {
-  //       display: false,
-  //       position: 'top'
-  //     },
-  //   };
+    const chartOptions = {
+      legend: {
+        display: false,
+        position: 'top'
+      },
+    };
 
-  //   let lineChart = new Chart(speedCanvas, {
-  //     type: 'line',
-  //     hover: false,
-  //     data: speedData,
-  //     options: chartOptions
-  //   });
-  // }
+    const lineChart = new Chart(speedCanvas, {
+      type: 'line',
+      hover: false,
+      data: speedData,
+      options: chartOptions
+    });
+  }
 
-  // private isLeapYear(year) {
-  //   return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
-  // }
+  private isLeapYear(year) {
+    return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
+  }
 
-  // private getDaysInCurrentMonth() {
-  //   const date = new Date();
+  private getDaysInCurrentMonth() {
+    const date = new Date();
 
-  //   switch (date.getMonth() + 1) {
-  //     case 2:
-  //       if (this.isLeapYear(new Date().getFullYear())) {
-  //         return 29;
-  //       } else {
-  //         return 28;
-  //       }
-  //     case 4:
-  //     case 6:
-  //     case 9:
-  //     case 11:
-  //       return 30;
-  //     default:
-  //       return 31;
-  //   }
-  // }
+    switch (date.getMonth() + 1) {
+      case 2:
+        if (this.isLeapYear(new Date().getFullYear())) {
+          return 29;
+        } else {
+          return 28;
+        }
+      case 4:
+      case 6:
+      case 9:
+      case 11:
+        return 30;
+      default:
+        return 31;
+    }
+  }
 
-  // private getRandomColor() {
-  //   return '#000000'.replace(/0/g, function () { return (~~(Math.random() * 16)).toString(16); });
-  // }
+  private getRandomColor() {
+    // tslint:disable-next-line: no-bitwise
+    return '#000000'.replace(/0/g, function () { return (~~(Math.random() * 16)).toString(16); });
+  }
 
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 export interface RouteInfo {
@@ -19,6 +20,9 @@ export let ROUTES: RouteInfo[] = [];
 
 export class SidebarComponent implements OnInit {
   @Input() menuItems: any[];
+
+  constructor(private router: Router) {}
+
   ngOnInit() {
     // this.menuItems = [
     //   { path: '/dashboard', title: 'Página Inicial', icon: 'nc-bank', class: '' },
@@ -30,5 +34,10 @@ export class SidebarComponent implements OnInit {
     ROUTES = this.menuItems;
 
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+  }
+
+  onLogout() {
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['']);
   }
 }

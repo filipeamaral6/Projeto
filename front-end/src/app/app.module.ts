@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 
-import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
 import { AppComponent } from './app.component';
@@ -21,6 +20,7 @@ import { AccessService } from './services/access.service';
 import { ClientService } from './services/transport/client.service';
 import { AccountService } from './services/transport/account.service';
 import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.component';
+import { SidebarModule } from './shared/sidebar/sidebar.module';
 
 
 
