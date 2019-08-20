@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <tr>
+                  <th>
+                    Nome
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Morada
+                  </th>
+                  <th class="text-right">
+                    Estado
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let client of clients; let i = index" (click)="getClientDetails(client.id)" [class.active]="i == selectedRow">
+                  <td>
+                    {{ client.fullName }}
+                  </td>
+                  <td>
+                    {{ client.email }}
+                  </td>
+                  <td>
+                    {{ client.address }}
+                  </td>
+                  <td class="text-right">
+                    {{ client.status }}
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+        <hr>
+        <div>
+          <span>
+            <a class="btn btn-primary">Adicionar Cliente</a>
+          </span>
+        </div>
+    </div>
+  </div>

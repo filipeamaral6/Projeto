@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { WorkerLayoutRoutes } from './worker-layout.routing';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UsersComponent } from 'app/pages/user/worker/users/users.component';
+import { ClientsComponent } from 'app/pages/user/worker/clients/clients.component';
 import { DepositComponent } from 'app/pages/user/worker/deposit/deposit.component';
 import { PaymentsComponent } from 'app/pages/user/worker/payments/payments.component';
 import { TransferComponent } from 'app/pages/user/worker/transfer/transfer.component';
@@ -21,7 +21,7 @@ import { TransferComponent } from 'app/pages/user/worker/transfer/transfer.compo
     NgbModule
   ],
   declarations: [
-    UsersComponent,
+    ClientsComponent,
     DepositComponent,
     PaymentsComponent,
     TransferComponent
