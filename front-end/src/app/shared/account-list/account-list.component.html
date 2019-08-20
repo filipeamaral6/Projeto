@@ -1,7 +1,6 @@
-<div class="row col-md-12">
-    <div class="col-md-4" *ngFor="let account of accountList">
-        <button id="account" type="button btn-primary" (click)="sendSelectedAccount(account.id)">
-            <div class="card card-stats col-md-12" style="margin-bottom: 0">
+<div class="row col-md-12" style="background-color: #F4F3EF">
+    <div class="col-md-3" *ngFor="let account of accountList">
+        <button [ngStyle]="selectedStyle(account.id)" id="account" class="card card-stats col-md-12" type="button btn-primary" (click)="sendSelectedAccount(account.id)" style="background-color: #E1F5FE">
                 <div class="card-header">
                     <h4>Conta {{account.type}}</h4>
                     <h6 class="card-title">Nº de Conta: {{account.accountNumber}}</h6>
@@ -17,21 +16,37 @@
                     </div>
                 </div>
             </div>
-        </div>
         </button>
     </div>
 </div>
-<div class="row col-md-12">
-    <div class="col-md-3">
-
-    </div>
-    <div class="col-md-3">
-
-    </div>
-    <div class="col-md-3">
-
-    </div>
-    <div class="col-md-3">
-
+<div class="row col-md-12" *ngIf="(selectedAccount !== null) && accountInfoPopUp ">
+    <div class="card card-accout-info col-md-12">
+        <div class="card-header">
+            <h5 class="card-title">Informações de Conta</h5>
+        </div>
+        <div class="card-body col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="type">Tipo de Conta</label>
+                    <p type="text" class="form-control">{{selectedAccount.type}}</p>
+                </div>
+                <div class="col-md-2">
+                    <label for="iban">IBAN</label>
+                    <p type="text" class="form-control">{{selectedAccount.iban}}</p>
+                </div>
+                <div class="col-md-2">
+                    <label for="accountNumber">Número de Conta</label>
+                    <p type="text" class="form-control">{{selectedAccount.accountNumber}}</p>
+                </div>
+                <div class="col-md-2">
+                    <label for="cretedAt">Data de Abertura</label>
+                    <p type="text" class="form-control">{{selectedAccount.createdAt}}</p>
+                </div>
+                <div class="col-md-2">
+                    <label for="interest">Juros Anuais</label>
+                    <p type="text" class="form-control">{{selectedAccount.interest}} %</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

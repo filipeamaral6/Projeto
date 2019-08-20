@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Account } from 'app/shared/models/Account';
 import { DashboardComponent } from 'app/pages/user/client/dashboard/dashboard.component';
 import { MovementsComponent } from 'app/pages/user/client/movements/movements.component';
-import { PaymentsComponent } from 'app/pages/user/client/payments/payments.component';
-import { TransferComponent } from 'app/pages/user/client/transfer/transfer.component';
-import { Account } from 'app/shared/models/Account';
+
 
 @Component({
   selector: 'app-account-list',
@@ -12,77 +11,41 @@ import { Account } from 'app/shared/models/Account';
 })
 export class AccountListComponent implements OnInit {
 
-  // @Input() accountList: Account[];
-  // @Input() callingPageName: string;
+  accountInfoPopUp = false;
 
-  private selectedAccount: Account;
+  @Input() private component: any;
+
   accountList: Account[];
-  account1: Account;
-  account2: Account;
-  account3: Account;
+  selectedAccount: Account = null;
 
-  constructor(
-    // private dashboardComponent: DashboardComponent,
-    // private movementsComponent: MovementsComponent,
-    // private paymentsComponent: PaymentsComponent,
-    // private transferComponent: TransferComponent,
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.account1 = {
-      id: 1,
-      type: 'Ordem',
-      iban: 'PT500001000000001',
-      accountNumber: 1000000001,
-      balance: 500,
-      interest: 0.001,
-      status: 'ACTIVE',
-      createdAt: new Date(),
-      employeeId: 123456789,
-    },
-    this.account2 = {
-      id: 2,
-      type: 'Ordem',
-      iban: 'PT500001000000002',
-      accountNumber: 1000000002,
-      balance: 500,
-      interest: 0.001,
-      status: 'ACTIVE',
-      createdAt: new Date(),
-      employeeId: 123456789,
-    },
-    this.account3 = {
-      id: 3,
-      type: 'Poupança',
-      iban: 'PT500001000000003',
-      accountNumber: 1000000003,
-      balance: 500,
-      interest: 0.001,
-      status: 'ACTIVE',
-      createdAt: new Date(),
-      employeeId: 123456789,
+    this.accountList = this.component.getAccountList();
+    if ( (this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent) ) {
+      this.accountInfoPopUp = true;
     }
-    this.accountList = [ this.account1, this.account2, this.account3 ];
+  }
+
+  selectedStyle(accountId: number) {
+    let style = {
+      'background-color': 'white'
+    }
+    if ( this.selectedAccount === null ) {
+      return style;
+    } else {
+      if ( accountId === this.selectedAccount.id ) {
+        style = {
+          'background-color': '#E1F5FE'
+        }
+      }
+      return style;
+    }
   }
 
   sendSelectedAccount(index: number) {
 
-    this.selectedAccount = this.accountList[index];
-    console.log(index);
-
-
-    // if ( this.callingPageName === 'DASHBOARD' ) {
-    //   this.dashboardComponent.selectAccount(this.selectedAccount.accountNumber);
-    // }
-    // if ( this.callingPageName === 'MOVEMENTS' ) {
-    //   this.movementsComponent.selectAccount(this.selectedAccount.accountNumber);
-    // }
-    // if ( this.callingPageName === 'PAYMENTS' ) {
-    //   this.paymentsComponent.selectAccount(this.selectedAccount.accountNumber);
-    // }
-    // if ( this.callingPageName === 'TRANSFER' ) {
-    //   this.transferComponent.selectAccount(this.selectedAccount.accountNumber);
-    // }
+    this.selectedAccount = this.accountList[index - 1];
+    this.component.selectAccount(this.selectedAccount.id);
   }
-
 }

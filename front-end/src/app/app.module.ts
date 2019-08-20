@@ -21,10 +21,7 @@ import { ClientService } from './services/transport/client.service';
 import { AccountService } from './services/transport/account.service';
 import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.component';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
-import { AccountListComponent } from './shared/account-list/account-list.component';
-import { ClientProfileComponent } from './pages/user/client/client-profile/client-profile.component';
-import { ClientDetailComponent } from './pages/user/client/client-profile/client-detail/client-detail.component';
-import { EditClientComponent } from './pages/user/client/client-profile/edit-client/edit-client.component';
+
 
 
 
@@ -35,8 +32,7 @@ import { EditClientComponent } from './pages/user/client/client-profile/edit-cli
     AppComponent,
     LoginComponent,
     HomeComponent,
-    LoadingSpinnerComponent,
-    AccountListComponent
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserAnimationsModule,

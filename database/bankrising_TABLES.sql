@@ -1,6 +1,6 @@
 DROP TABLE IF exists withdraw;
 DROP TABLE IF exists account_client;
-DROP TABLE IF EXISTS user;
+
 DROP TABLE IF exists deposit;
 DROP TABLE IF exists transfer;
 DROP TABLE IF exists payment;
@@ -8,6 +8,7 @@ DROP TABLE IF exists `transaction`;
 DROP TABLE IF exists account;
 DROP TABLE IF EXISTS employee;
 DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS user;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

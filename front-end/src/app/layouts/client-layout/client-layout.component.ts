@@ -25,11 +25,28 @@ const ROUTES = [
 export class ClientLayoutComponent implements OnInit {
   private currentUser: CurrentUser;
   private client: Client;
-  private accounts: Account[];
+
+
+
   routes: RouteInfo[];
+
+  accountList: Account[];
+  account1: Account;
+  account2: Account;
+  account3: Account;
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    private clientService: ClientService,
+    private accountService: AccountService
+  ) {
+    this.currentUser = this.authenticationService.currentUser;
+  }
+
 
   ngOnInit() {
     this.routes = ROUTES;
+    this.initAccounts();
     // this.getClientInfo();
     // this.getClientAccounts();
   }
@@ -39,16 +56,14 @@ export class ClientLayoutComponent implements OnInit {
   }
 
   public get getAccounts() {
-    return this.accounts;
+    return this.accountList;
   }
 
-  constructor(
-    private authenticationService: AuthenticationService,
-    private clientService: ClientService,
-    private accountService: AccountService
-  ) {
-    this.currentUser = this.authenticationService.currentUser;
+  public getAccountById(accountId: number) {
+    return this.accountService.getById(accountId).pipe(first());
   }
+
+
 
   // private getClientInfo() {
 
@@ -73,4 +88,42 @@ export class ClientLayoutComponent implements OnInit {
     // this.getClientAccounts();
     // this.getClientMovements();
   }
+
+  initAccounts() {
+    this.account1 = {
+      id: 1,
+      type: 'Ordem',
+      iban: 'PT500001000000001',
+      accountNumber: 1000000001,
+      balance: 500,
+      interest: 0.001,
+      status: 'ACTIVE',
+      createdAt: new Date(),
+      employeeId: 123456789,
+    },
+    this.account2 = {
+      id: 2,
+      type: 'Ordem',
+      iban: 'PT500001000000002',
+      accountNumber: 1000000002,
+      balance: 500,
+      interest: 0.001,
+      status: 'ACTIVE',
+      createdAt: new Date(),
+      employeeId: 123456789,
+    },
+    this.account3 = {
+      id: 3,
+      type: 'Poupança',
+      iban: 'PT500001000000003',
+      accountNumber: 1000000003,
+      balance: 500,
+      interest: 0.001,
+      status: 'ACTIVE',
+      createdAt: new Date(),
+      employeeId: 123456789,
+    }
+    this.accountList = [ this.account1, this.account2, this.account3 ];
+  }
+
 }

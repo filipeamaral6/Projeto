@@ -20,6 +20,7 @@ export class ClientsComponent implements OnInit {
 
   fetchClients() {
     this.clientService.getAll().pipe(first()).subscribe(clients => {
+      console.log(clients);
       this.clients = clients;
     });
   }

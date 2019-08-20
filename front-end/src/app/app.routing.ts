@@ -4,7 +4,6 @@ import { HomeComponent } from './home/home.component'
 import { ClientLayoutComponent } from './layouts/client-layout/client-layout.component';
 import { AuthGuard } from './guards/auth.guard';
 import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.component';
-import { AccountListComponent } from './shared/account-list/account-list.component';
 
 
 export const AppRoutes: Routes = [
@@ -12,11 +11,6 @@ export const AppRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent
-  },
-
-  {
-    path: 'test',
-    component: AccountListComponent
   },
 
   // {

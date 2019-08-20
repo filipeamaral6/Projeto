@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'app/app.component';
 import { Router, Route } from '@angular/router';
 import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.component';
+import { Account } from 'app/shared/models/Account';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -12,8 +13,8 @@ import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.c
 })
 
 export class MovementsComponent implements OnInit {
-  accounts: any[];
-  selectedAccount;
+  // accounts: Account[];
+  selectedAccount: Account;
 
   constructor(
     private appComponent: AppComponent,
@@ -24,17 +25,15 @@ export class MovementsComponent implements OnInit {
     }
 
   ngOnInit() {
-    // this.accounts = this.appComponent.user.accounts;
-    this.accounts = [];
-  }
-
-  onSelectAccount(index: number) {
-    this.selectedAccount = this.accounts.slice(index, index + 1);
-    console.log(this.selectedAccount);
+    // this.accounts = this.getAccountList();
   }
 
   selectAccount(accountId: number) {
     console.log('movements' + accountId);
+  }
+
+  getAccountList() {
+    return this.clientLayout.getAccounts;
   }
 
 }
