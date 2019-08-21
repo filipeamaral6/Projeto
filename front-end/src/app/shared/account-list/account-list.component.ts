@@ -30,24 +30,7 @@ export class AccountListComponent implements OnInit {
     this.selectedAccount = null;
     this.accountInfoPopUp = false;
 
-    if ( this.authenticationService.currentUser.role === 'CLIENT' ) {
-      if ( (this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent) ) {
-        this.accountInfoPopUp = true;
-        this.accountList = this.component.getAccountList();
-      }
-      if ( ((this.component instanceof PaymentsComponent) || (this.component instanceof TransferComponent)) ) {
-        this.component.getAccountList().forEach(account => {
-          if ( account.type.toLowerCase() !== 'poupança') {
-            console.log(account.id);
-            this.accountList.push(account);
-            console.log(this.accountList);
-          }
-        });
-      }
-    }
-    if ( (this.authenticationService.currentUser.role === 'OPERATOR') || (this.authenticationService.currentUser.role === 'ADMIN') ) {
-  
-    }
+    this.initAccountList();
   }
   selectedStyle(accountId: number) {
     let style = {
@@ -70,4 +53,38 @@ export class AccountListComponent implements OnInit {
     this.selectedAccount = this.accountList[index - 1];
     this.component.selectAccount(this.selectedAccount.id);
   }
+
+  private initAccountList() {
+    if ( this.authenticationService.currentUser.role === 'CLIENT' ) {
+      if ( (this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent) ) {
+        this.accountInfoPopUp = true;
+        this.accountList = this.component.getAccountList();
+      }
+      if ( ((this.component instanceof PaymentsComponent) || (this.component instanceof TransferComponent)) ) {
+        this.component.getAccountList().forEach(account => {
+          if ( account.type.toLowerCase() !== 'poupança') {
+            console.log(account.id);
+            this.accountList.push(account);
+            console.log(this.accountList);
+          }
+        });
+      }
+    }
+    if ( (this.authenticationService.currentUser.role === 'OPERATOR') || (this.authenticationService.currentUser.role === 'ADMIN') ) {
+      if ( (this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent) ) {
+        this.accountInfoPopUp = true;
+        this.accountList = this.component.getAccountList();
+      }
+      if ( this.component instanceof PaymentsComponent ) {
+        this.component.getAccountList().forEach(account => {
+          if ( account.type.toLowerCase() !== 'poupança') {
+            console.log(account.id);
+            this.accountList.push(account);
+            console.log(this.accountList);
+          }
+        });
+      }
+    }
+  }
+
 }

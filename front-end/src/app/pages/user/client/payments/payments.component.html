@@ -9,69 +9,104 @@
     <div class="card-body col-md-12">
         <div class="row col-md-12">
             <div class="col-md-6">
-                <div class="row col-md-12" style="padding-left: 0">
-                    <div class="col-md-6">
+                <div class="row col-md-12">
+                    <div class="col-md-2" style="padding-right: 0; padding-left: 0">
                         <div class="form-group">
                             <label for="entity">Entidate</label>
-                            <input type="text" class="form-control">
+                            <input (keypress)="digitOnly($event)" type="text"  class="form-control">
                         </div>
                     </div>
-                
-                    <div class="col-md-6">
+                    <div class="col-md-1" style="padding-right: 0; padding-left: 0"></div>
+                    <div class="col-md-3" style="padding-right: 0; padding-left: 0">
                         <div class="form-group">
                             <label for="reference">Referência</label>
-                            <input type="text" class="form-control">
+                            <input (keypress)="digitOnly($event)" type="text" class="form-control">
                         </div>
                     </div>
-                </div>
-                <div class="row col-md-12" style="padding-left: 0">
-                    <div class="col-md-6">
-                        <div class="form-group" >
-                            <label for="value">Valor do Pagamento</label>
-                            <div class="row">
-                                <div class="col-md-6" style="padding-right: 0">
-                                    <input type="text" class="form-control"> 
-                                </div>
-                                <div class="col-md-1">
-                                    <h5 class="payment-value">,</h5>
-                                </div>
-                                <div class="col-md-3"style="padding-right: 0; padding-left: 0">
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-md-1">
-                                    <h5 class="payment-value">€</h5>
-                                </div>
+                    <div class="col-md-1" style="padding-right: 0; padding-left: 0"></div>
+                <div class="col-md-5">
+                    <div class="form-group" >
+                        <label for="value">Valor do Pagamento</label>
+                        <div class="row col-md-12" style="padding-right: 0; padding-left: 0">
+                            <div class="col-md-7" style="padding-right: 0; padding-left: 0" >
+                                <input (keypress)="digitOnly($event)" type="text" class="form-control"> 
+                            </div>
+                            <div class="col-md-1" style="padding-right: 0; padding-left: 5px">
+                                <h5 class="payment-value">,</h5>
+                            </div>
+                            <div class="col-md-2" style="padding-right: 0; padding-left: 0">
+                                <input (keypress)="digitOnly($event)" type="text" class="form-control">
+                            </div>
+                            <div class="col-md-1" style="padding-right: 0; padding-left: 5px">
+                                <h5 class="payment-value">€</h5>
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    <div class="col-md-6">
+                </div>  
+                <div class="row col-md-12" style="padding-right: 0">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label for="transactionCode">Codigo de Segurança</label>
-                            <input type="text" class="form-control">
+                            <div class="row">
+                                <label for="transactionCode" style="padding-right: 0">Codigo de Segurança</label>
+                            </div>
+                            <div class="row" *ngIf="!isEyeOpen">
+                                <input type="password" class="form-control col-md-10" style="padding-right: 0">
+                                <button class="fa fa-eye form-control col-md-1" aria-hidden="true" id="eyeClose" (click)="showPass()"></button>
+                            </div>
+                            <div class="row" *ngIf="isEyeOpen">
+                                <input type="text" class="form-control col-md-9" style="padding-right: 0">
+                                <button class="fa fa-eye form-control col-md-1" aria-hidden="true" id="eyeOpen" (click)="showPass()"></button>
+                            </div>
                         </div>
                     </div>
+
+                           
+                            
+                                
+                           
+                 
+                        <!-- <div class="col-xs-1" style="padding-top: 30px; padding-left: 0">
+                            <button class="fa fa-eye-slash form-control" style="padding-right: 0"></button>
+                        </div> -->
+                    </div>
                 </div>
+
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="description">Descrição do Pagamento</label>
-                    <textarea type="text" class="form-control" style="min-height: 115px">
-                    </textarea>
+                    <textarea type="text" class="form-control" style="min-height: 115px"></textarea>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="col-md-12" *ngIf="selectedAccount !== null">
-    <div class="row">
+<div class="row col-md-12">
+    <div class="row" style="float: left; ">
         <div class="update mr-auto ml-auto">
-            <button type="submit" class="btn btn-success btn-round">Efetuar Pagamento</button>
-            <button type="button" class="btn btn-secundary btn-round" style="margin-left: 15px">Descartar</button>
-            <button type="button" class="btn btn-danger btn-round" style="margin-left: 15px">Cancelar</button>
+            <button type="submit" class="btn btn-success" (click)="onSubmit()">Efetuar Pagamento</button>
+            <button type="button" class="btn btn-secundary" (click)="resetForm()">Descartar</button>
+            <button type="button" class="btn btn-danger" (click)="cancelFunction()">Cancelar</button>
         </div>
     </div>
 </div>
+
+<div class="container">
+        <div class="row justify-content-center">
+          <div class="col-6">
+            <form>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="input-group" id="show_hide_password">
+            <input class="form-control" type="password">
+            <div class="input-group-addon">
+              <a href=""><i class="fa fa-eye-open" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </form>
+          </div>
+        </div>
+      </div>

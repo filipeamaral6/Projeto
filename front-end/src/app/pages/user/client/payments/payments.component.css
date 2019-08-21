@@ -5,3 +5,29 @@
 .card-title {
     padding-left: 15px;
 }
+
+button {
+    margin-left: 15px;
+}
+#eyeOpen {
+    text-align: center; 
+    border-width: 0; 
+    font-size: 200%; 
+    padding: 0;
+    color: lightskyblue;
+}
+
+#eyeClose {
+    text-align: center; 
+    border-width: 0; 
+    font-size: 200%; 
+    padding: 0;
+}
+
+#eyeClose:hover {
+    color: lightskyblue;
+}
+
+
+
+
