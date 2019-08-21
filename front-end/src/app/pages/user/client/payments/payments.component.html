@@ -1,0 +1,77 @@
+<div>
+    <app-account-list [component]="this" ></app-account-list>
+</div>
+
+<div class="card card-user-login col-md-12">
+    <div class="card-header">
+        <h5 class="card-title">Pagamento de Serviços</h5>
+    </div>
+    <div class="card-body col-md-12">
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <div class="row col-md-12" style="padding-left: 0">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="entity">Entidate</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="reference">Referência</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12" style="padding-left: 0">
+                    <div class="col-md-6">
+                        <div class="form-group" >
+                            <label for="value">Valor do Pagamento</label>
+                            <div class="row">
+                                <div class="col-md-6" style="padding-right: 0">
+                                    <input type="text" class="form-control"> 
+                                </div>
+                                <div class="col-md-1">
+                                    <h5 class="payment-value">,</h5>
+                                </div>
+                                <div class="col-md-3"style="padding-right: 0; padding-left: 0">
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <h5 class="payment-value">€</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="transactionCode">Codigo de Segurança</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="description">Descrição do Pagamento</label>
+                    <textarea type="text" class="form-control" style="min-height: 115px">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12" *ngIf="selectedAccount !== null">
+    <div class="row">
+        <div class="update mr-auto ml-auto">
+            <button type="submit" class="btn btn-success btn-round">Efetuar Pagamento</button>
+            <button type="button" class="btn btn-secundary btn-round" style="margin-left: 15px">Descartar</button>
+            <button type="button" class="btn btn-danger btn-round" style="margin-left: 15px">Cancelar</button>
+        </div>
+    </div>
+</div>
