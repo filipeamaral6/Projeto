@@ -7,6 +7,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,7 +39,7 @@ public class ClientController {
 	
 	// Add Client
 	@PostMapping("clients/add")
-	public Object AddClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
+	public ResponseEntity<Object> AddClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
@@ -47,7 +49,7 @@ public class ClientController {
 			ClientService clientService = new ClientService();
 
 			OutputClient message = clientService.getPortTypeCreateClientEndpoint1().operation(inputClient);
-			return message;
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
 
@@ -55,7 +57,7 @@ public class ClientController {
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 	}
 
 	// Get Clients
@@ -113,7 +115,7 @@ public class ClientController {
 
 	// Update Client
 	@PutMapping("clients/update")
-	public Object updateClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
+	public ResponseEntity<Object> updateClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
@@ -121,7 +123,7 @@ public class ClientController {
 
 			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
 
-			return message;
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
 
@@ -129,7 +131,7 @@ public class ClientController {
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 	}
 }

@@ -4,8 +4,8 @@ import { ClientService } from 'app/services/transport/client.service';
 import { first } from 'rxjs/operators';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
-
-//adicionar a data correta ao modal
+import { AuthenticationService } from 'app/services/authentication.service';
+import { AlertService } from 'app/shared/alerts';
 
 @Component({
   selector: 'app-clients',
@@ -15,14 +15,53 @@ import { NgForm } from '@angular/forms';
 export class ClientsComponent implements OnInit {
   clients: Client[];
   selectedClient: Client;
-  clientToEdit: Client;
+  newClient: Client;
+  verifyPassword: string;
   editMode = false;
+  role: string;
   editButtonLabel = 'Editar Dados';
+  nationalities: string[] = [
+    'Albanesa',
+    'Alemã',
+    'Austríaca',
+    'Belga',
+    'Búlgara',
+    'Croata',
+    'Cipriota',
+    'Dinamarquesa',
+    'Eslovaca',
+    'Eslovena',
+    'Espanhola',
+    'Francesa',
+    'Finlandesa',
+    'Grega',
+    'Húngara',
+    'Islandesa',
+    'Irlandesa',
+    'Italiana',
+    'Kosovar',
+    'Lituana',
+    'Luxemburguesa',
+    'Montenegrina',
+    'Holandesa',
+    'Norueguesa',
+    'Polaca',
+    'Portuguesa',
+    'Inglesa',
+    'Romena',
+    'Russa',
+    'Suecas',
+    'Suíça',
+    'Turca',
+    'Ucraniana'
+  ];
 
-  constructor(private clientService: ClientService, config: NgbModalConfig, private modalService: NgbModal) { }
+  constructor(private authenticationService: AuthenticationService, private clientService: ClientService,
+    config: NgbModalConfig, private modalService: NgbModal, private alertService: AlertService) { }
 
   ngOnInit() {
     this.fetchClients();
+    this.role = this.authenticationService.currentUser.role;
   }
 
   fetchClients() {
@@ -31,7 +70,42 @@ export class ClientsComponent implements OnInit {
     });
   }
 
+  addClient(form: NgForm) {
+    // const newClient: Client = {
+    //   address: form.value.address,
+    //   birthDate: form.value.birthDate,
+    //   clientCc: form.value.clientCc,
+    //   country: form.value.country,
+    //   county: form.value.county,
+    //   email: form.value.email,
+    //   fullName: form.value.fullName,
+    //   loginPassword: form.value.loginPassword,
+    //   mobileNumber: form.value.mobileNumber,
+    //   nationality: form.value.nationality,
+    //   nif: form.value.nif,
+    //   notification: true, // string or boolean in backend?
+    //   phoneNumber: form.value.phoneNumber,
+    //   role: 'CLIENT',
+    //   status: 'ACTIVE',
+    //   transactionPassword: form.value.transactionPassword,
+    //   username: form.value.username,
+    //   zipCode: form.value.zipCode
+    // }
+
+    console.log(form);
+
+    const newClientString = JSON.stringify(this.newClient);
+
+    this.clientService.addClient(newClientString).pipe(first()).subscribe(response => {
+      console.log(response);
+      this.alertService.success('Cliente adicionado com sucesso!');
+    }, error => {
+      this.alertService.error(JSON.stringify(error));
+    });
+  }
+
   updateClient(form: NgForm) {
+    console.log(form);
     this.selectedClient.fullName = form.value.fullName;
     this.selectedClient.birthDate = form.value.birthDate;
     this.selectedClient.nationality = form.value.nationality;
@@ -45,20 +119,50 @@ export class ClientsComponent implements OnInit {
     this.selectedClient.county = form.value.county;
     this.selectedClient.country = form.value.country;
 
-    let updatedClient = JSON.stringify(this.selectedClient);
-    console.log(updatedClient);
+    const updatedClient = JSON.stringify(this.selectedClient);
 
     this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
       console.log(response);
       this.fetchClients();
       this.modalService.dismissAll();
+      this.alertService.success('Cliente editado com sucesso!');
+    }, error => {
+      this.alertService.error(error.error.message);
     });
   }
 
-  details(content, client) {
-    this.selectedClient = client;
-    this.clientToEdit = client;
-    this.clientToEdit.birthDate = this.clientToEdit.birthDate.split('T')[0];
+  deactivateClient(id: number) {
+    this.selectedClient.status = 'INACTIVE';
+
+    const updatedClient = JSON.stringify(this.selectedClient);
+
+    this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
+      console.log(response);
+      this.modalService.dismissAll();
+    });
+  }
+
+  activateClient(id: number) {
+    this.selectedClient.status = 'ACTIVE';
+
+    const updatedClient = JSON.stringify(this.selectedClient);
+
+    this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
+      console.log(response);
+      this.modalService.dismissAll();
+    });
+  }
+
+  openModal(content, client) {
+    if (client !== null) {
+      this.selectedClient = client;
+      const formattedDate: string[] = this.selectedClient.birthDate.split('T');
+      if (formattedDate.length > 0) {
+        this.selectedClient.birthDate = formattedDate[0];
+      }
+    } else {
+      this.newClient = new Client();
+    }
     this.modalService.open(content, { size: 'lg' });
   }
 
@@ -71,6 +175,21 @@ export class ClientsComponent implements OnInit {
       this.editButtonLabel = 'Editar Dados';
       this.modalService.dismissAll();
       this.fetchClients();
+    }
+  }
+
+  generatePassword(controlName: string) {
+    let result = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for (let i = 0; i < 15; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    if (controlName === 'password') {
+      this.newClient.loginPassword = result;
+    } else {
+      this.newClient.transactionPassword = result;
     }
   }
 

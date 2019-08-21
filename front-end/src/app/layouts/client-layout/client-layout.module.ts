@@ -14,6 +14,8 @@ import { PaymentsComponent } from 'app/pages/user/client/payments/payments.compo
 import { TransferComponent } from 'app/pages/user/client/transfer/transfer.component';
 import { ClientDetailComponent } from 'app/pages/user/client/client-detail/client-detail.component';
 import { EditClientComponent } from 'app/pages/user/client/edit-client/edit-client.component';
+import { AlertComponent } from 'app/shared/alerts/alert.component';
+import { AlertModule } from 'app/shared/alerts';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { EditClientComponent } from 'app/pages/user/client/edit-client/edit-clie
     CommonModule,
     RouterModule.forChild(ClientLayoutRoutes),
     FormsModule,
-    NgbModule
+    NgbModule,
+    AlertModule
   ],
   declarations: [
     DashboardComponent,

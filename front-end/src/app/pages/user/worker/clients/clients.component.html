@@ -1,3 +1,4 @@
+<alert></alert>
 <div class="card">
   <div class="card-body">
     <div class="table-responsive">
@@ -19,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let client of clients" (click)="details(clientDetails, client)">
+          <tr *ngFor="let client of clients" (click)="openModal(clientDetailsModal, client)">
             <td>
               {{ client.fullName }}
             </td>
@@ -39,13 +40,13 @@
     <hr>
     <div>
       <span>
-        <a class="btn btn-primary">Adicionar Cliente</a>
+        <a class="btn btn-primary" (click)="openModal(addClientModal, null)">Adicionar Cliente</a>
       </span>
     </div>
   </div>
 </div>
 
-<ng-template #clientDetails let-modal>
+<ng-template #clientDetailsModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Detalhes</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -53,79 +54,87 @@
     </button>
   </div>
   <div class="modal-body">
-    <form #form="ngForm" (ngSubmit)="updateClient(form)">
+    <alert></alert>
+    <form #editClientForm="ngForm" (ngSubmit)="updateClient(editClientForm)">
       <button type="button" class="btn btn-secondary" (click)="toggleEditMode()">{{ editButtonLabel }}</button>
+      <button *ngIf="selectedClient.status === 'ACTIVE'" type="button" class="btn btn-danger"
+        (click)="deactivateClient(selectedClient.id)">Desativar Cliente</button>
+      <button *ngIf="selectedClient.status === 'INACTIVE'" type="button" class="btn btn-success"
+        (click)="activateClient(selectedClient.id)">Ativar Cliente</button>
       <span *ngIf="editMode">
         | <button type="submit" class="btn btn-info">Guardar</button>
       </span>
       <div class="form-group">
         <label for="fullName">Nome Completo</label>
-        <input type="text" class="form-control col-md-10" value="{{clientToEdit.fullName}}" [disabled]="!editMode"
+        <input type="text" class="form-control col-md-10" value="{{selectedClient.fullName}}" [disabled]="!editMode"
           [(ngModel)]="selectedClient.fullName" name="fullName">
       </div>
       <hr>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="birthDate">Data de Nascimento</label>
-          <input type="date" class="form-control" value="{{clientToEdit.birthDate}}" [disabled]="!editMode"
+          <input type="date" class="form-control" value="{{selectedClient.birthDate}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.birthDate" name="birthDate">
         </div>
         <div class="form-group">
           <label for="nationality">Nacionalidade</label>
-          <input type="text" class="form-control" value="{{clientToEdit.nationality}}" [disabled]="!editMode"
+          <select class="form-control" value="{{selectedClient.nationality}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.nationality" name="nationality">
+            <option *ngFor="let nationality of nationalities" [value]="nationality"
+              [selected]="selectedClient.nationality === nationality">{{ nationality }}</option>
+          </select>
         </div>
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="clientCC">Número de C.C.</label>
-          <input type="text" class="form-control" value="{{clientToEdit.clientCc}}" [disabled]="!editMode"
+          <input type="text" class="form-control" value="{{selectedClient.clientCc}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.clientCc" name="clientCc">
         </div>
         <div class="form-group">
           <label for="nif">NIF</label>
-          <input type="text" class="form-control" value="{{clientToEdit.nif}}" [disabled]="!editMode"
+          <input type="text" class="form-control" value="{{selectedClient.nif}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.nif" name="nif">
         </div>
       </div>
       <hr>
       <div class="form-group" style="padding-right: 4.9%">
         <label for="email">Email</label>
-        <input type="email" class="form-control col-md-6" value="{{clientToEdit.email}}" [disabled]="!editMode"
+        <input type="email" class="form-control col-md-6" value="{{selectedClient.email}}" [disabled]="!editMode"
           [(ngModel)]="selectedClient.email" name="email">
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="phoneNumber">Telefone</label>
-          <input type="text" class="form-control" value="{{clientToEdit.phoneNumber}}" [disabled]="!editMode"
+          <input type="text" class="form-control" value="{{selectedClient.phoneNumber}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.phoneNumber" name="phoneNumber">
         </div>
         <div class="form-group">
           <label for="mobileNumber">Telemóvel</label>
-          <input type="text" class="form-control" value="{{clientToEdit.mobileNumber}}" [disabled]="!editMode"
+          <input type="text" class="form-control" value="{{selectedClient.mobileNumber}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.mobileNumber" name="mobileNumber">
         </div>
       </div>
       <hr>
       <div class="form-group">
         <label for="address">Morada</label>
-        <input type="text" class="form-control col-md-10" value="{{clientToEdit.address}}" [disabled]="!editMode"
+        <input type="text" class="form-control col-md-10" value="{{selectedClient.address}}" [disabled]="!editMode"
           [(ngModel)]="selectedClient.address" name="address">
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="zipCode">Código Postal</label>
-          <input type="text" class="form-control" value="{{clientToEdit.zipCode}}" [disabled]="!editMode"
+          <input type="text" class="form-control" value="{{selectedClient.zipCode}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.zipCode" name="zipCode">
         </div>
         <div class="form-group" style="padding-right: 4.9%">
           <label for="county">Localidade</label>
-          <input type="text" class="form-control" value="{{clientToEdit.county}}" [disabled]="!editMode"
+          <input type="text" class="form-control" value="{{selectedClient.county}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.county" name="county">
         </div>
         <div class="form-group">
           <label for="country">País</label>
-          <input type="text" class="form-control" value="{{clientToEdit.country}}" [disabled]="!editMode"
+          <input type="text" class="form-control" value="{{selectedClient.country}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.country" name="country">
         </div>
       </div>
@@ -133,7 +142,7 @@
   </div>
 </ng-template>
 
-<ng-template #addClient let-modal>
+<ng-template #addClientModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Adicionar Cliente</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -141,78 +150,121 @@
     </button>
   </div>
   <div class="modal-body">
-    <form #form="ngForm" (ngSubmit)="updateClient(form)">
+    <form #addClientForm="ngForm" (ngSubmit)="addClient(addClientForm)">
       <div class="form-group">
-        <label for="fullName">Nome Completo</label>
-        <input type="text" class="form-control col-md-10" value="{{clientToEdit.fullName}}" [disabled]="!editMode"
-          [(ngModel)]="selectedClient.fullName" name="fullName">
+        <label for="fullName">Nome Completo*</label>
+        <input type="text" class="form-control col-md-10" name="fullName" [(ngModel)]="newClient.fullName"
+          [ngClass]="{ 'is-invalid': fullName.touched && fullName.errors }" #fullName="ngModel" required>
+        <div *ngIf="fullName.touched && fullName.hasError('required')" class="invalid-feedback">Nome inválido</div>
       </div>
       <hr>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
-          <label for="birthDate">Data de Nascimento</label>
-          <input type="date" class="form-control" value="{{clientToEdit.birthDate}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.birthDate" name="birthDate">
+          <label for="birthDate">Data de Nascimento*</label>
+          <input type="date" class="form-control" name="birthDate" [(ngModel)]="newClient.birthDate"
+            [ngClass]="{ 'is-invalid': birthDate.touched && birthDate.errors }" #birthDate="ngModel" required>
+          <div *ngIf="birthDate.touched && birthDate.hasError('required')" class="invalid-feedback">Data inválida</div>
         </div>
         <div class="form-group">
-          <label for="nationality">Nacionalidade</label>
-          <input type="text" class="form-control" value="{{clientToEdit.nationality}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.nationality" name="nationality">
+          <label for="nationality">Nacionalidade*</label>
+          <select class="form-control" value="Selecionar" name="nationality" [(ngModel)]="newClient.nationality"
+            [ngClass]="{ 'is-invalid': nationality.touched && nationality.errors }" #nationality="ngModel" required>
+            <option *ngFor="let nationality of nationalities" [value]="nationality">{{ nationality }}</option>
+          </select>
+          <div *ngIf="nationality.touched && nationality.hasError('required')" class="invalid-feedback">Nacionalidade
+            inválida</div>
         </div>
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
-          <label for="clientCC">Número de C.C.</label>
-          <input type="text" class="form-control" value="{{clientToEdit.clientCc}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.clientCc" name="clientCc">
+          <label for="clientCC">Número de C.C.*</label>
+          <input type="text" class="form-control" name="clientCc" [(ngModel)]="newClient.clientCc"
+            [ngClass]="{ 'is-invalid': clientCc.touched && clientCc.errors }" #clientCc="ngModel" required>
+          <div *ngIf="clientCc.touched && clientCc.hasError('required')" class="invalid-feedback">Número de C.C.
+            inválido</div>
         </div>
         <div class="form-group">
-          <label for="nif">NIF</label>
-          <input type="text" class="form-control" value="{{clientToEdit.nif}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.nif" name="nif">
+          <label for="nif">NIF*</label>
+          <input type="text" class="form-control" name="nif" [(ngModel)]="newClient.nif"
+            [ngClass]="{ 'is-invalid': nif.touched && nif.errors }" #nif="ngModel" required>
+          <div *ngIf="nif.touched && nif.hasError('required')" class="invalid-feedback">NIF inválido</div>
         </div>
       </div>
       <hr>
       <div class="form-group" style="padding-right: 4.9%">
-        <label for="email">Email</label>
-        <input type="email" class="form-control col-md-6" value="{{clientToEdit.email}}" [disabled]="!editMode"
-          [(ngModel)]="selectedClient.email" name="email">
+        <label for="email">Email*</label>
+        <input type="email" class="form-control col-md-6" name="email" [(ngModel)]="newClient.email"
+          [ngClass]="{ 'is-invalid': email.touched && email.errors }" #email="ngModel" required>
+        <div *ngIf="email.touched && email.hasError('required')" class="invalid-feedback">Email inválido</div>
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="phoneNumber">Telefone</label>
-          <input type="text" class="form-control" value="{{clientToEdit.phoneNumber}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.phoneNumber" name="phoneNumber">
+          <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="newClient.phoneNumber">
         </div>
         <div class="form-group">
           <label for="mobileNumber">Telemóvel</label>
-          <input type="text" class="form-control" value="{{clientToEdit.mobileNumber}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.mobileNumber" name="mobileNumber">
+          <input type="text" class="form-control" name="mobileNumber" [(ngModel)]="newClient.mobileNumber">
         </div>
       </div>
       <hr>
       <div class="form-group">
-        <label for="address">Morada</label>
-        <input type="text" class="form-control col-md-10" value="{{clientToEdit.address}}" [disabled]="!editMode"
-          [(ngModel)]="selectedClient.address" name="address">
+        <label for="address">Morada*</label>
+        <input type="text" class="form-control col-md-10" name="address" [(ngModel)]="newClient.address"
+          [ngClass]="{ 'is-invalid': address.touched && address.errors }" #address="ngModel" required>
+        <div *ngIf="address.touched && address.hasError('required')" class="invalid-feedback">Morada inválida</div>
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
-          <label for="zipCode">Código Postal</label>
-          <input type="text" class="form-control" value="{{clientToEdit.zipCode}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.zipCode" name="zipCode">
+          <label for="zipCode">Código Postal*</label>
+          <input type="text" class="form-control" name="zipCode" [(ngModel)]="newClient.zipCode"
+            [ngClass]="{ 'is-invalid': zipCode.touched && zipCode.errors }" #zipCode="ngModel" required>
+          <div *ngIf="zipCode.touched && zipCode.hasError('required')" class="invalid-feedback">Código postal inválido
+          </div>
         </div>
         <div class="form-group" style="padding-right: 4.9%">
-          <label for="county">Localidade</label>
-          <input type="text" class="form-control" value="{{clientToEdit.county}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.county" name="county">
+          <label for="county">Localidade*</label>
+          <input type="text" class="form-control" name="county" [(ngModel)]="newClient.county"
+            [ngClass]="{ 'is-invalid': county.touched && county.errors }" #county="ngModel" required>
+          <div *ngIf="county.touched && county.hasError('required')" class="invalid-feedback">Localidade inválida</div>
         </div>
         <div class="form-group">
-          <label for="country">País</label>
-          <input type="text" class="form-control" value="{{clientToEdit.country}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.country" name="country">
+          <label for="country">País*</label>
+          <input type="text" class="form-control" name="country" [(ngModel)]="newClient.country"
+            [ngClass]="{ 'is-invalid': country.touched && country.errors }" #country="ngModel" required>
+          <div *ngIf="country.touched && country.hasError('required')" class="invalid-feedback">País inválido</div>
         </div>
       </div>
+      <hr>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="username">Username*</label>
+          <input type="text" class="form-control" name="username" [(ngModel)]="newClient.username"
+            [ngClass]="{ 'is-invalid': username.touched && username.errors }" #username="ngModel" required>
+          <div *ngIf="username.touched && username.hasError('required')" class="invalid-feedback">Username inválido
+          </div>
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="password">Password*</label>
+          <input type="password" class="form-control" name="password" [(ngModel)]="newClient.loginPassword" [ngClass]="{ 'is-invalid': loginPassword.touched && loginPassword.errors }" #loginPassword="ngModel" required>
+          <div *ngIf="loginPassword.touched && loginPassword.hasError('required')" class="invalid-feedback">Password inválida</div>
+          <button type="button" class="btn btn-secondary" (click)="generatePassword('password')">Gerar</button> |
+          <button type="button" class="btn btn-success">Imprimir</button>
+        </div>
+        <div class="form-group">
+          <label for="transactionPassword">Password para transações</label>
+          <input type="password" class="form-control" name="transactionPassword" [(ngModel)]="newClient.transactionPassword" [ngClass]="{ 'is-invalid': transactionPassword.touched && transactionPassword.errors }" #transactionPassword="ngModel" required>
+          <div *ngIf="transactionPassword.touched && transactionPassword.hasError('required')" class="invalid-feedback">Password para transações inválida
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="generatePassword('transactionPassword')">Gerar</button> |
+          <button type="button" class="btn btn-success">Imprimir</button>
+        </div>
+      </div>
+      <div>* Campo Obrigatório</div>
+      <hr>
+      <button type="submit" class="btn btn-primary">Adicionar</button>
     </form>
   </div>
 </ng-template>

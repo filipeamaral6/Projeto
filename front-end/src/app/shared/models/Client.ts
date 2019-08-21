@@ -15,10 +15,10 @@ export class Client {
     mobileNumber?: string;
     nationality?: string;
     nif?: string;
-    notification?: boolean;
+    notification = true;
     phoneNumber?: string;
-    role?: string;
-    status?: string;
+    role = 'CLIENT';
+    status = 'ACTIVE';
     transactionPassword?: string;
     userId?: number;
     username?: string;

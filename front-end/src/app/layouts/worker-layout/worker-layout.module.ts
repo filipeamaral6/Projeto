@@ -10,6 +10,7 @@ import { ClientsComponent } from 'app/pages/user/worker/clients/clients.componen
 import { DepositComponent } from 'app/pages/user/worker/deposit/deposit.component';
 import { PaymentsComponent } from 'app/pages/user/worker/payments/payments.component';
 import { TransferComponent } from 'app/pages/user/worker/transfer/transfer.component';
+import { AlertModule } from 'app/shared/alerts';
 
 
 
@@ -18,7 +19,8 @@ import { TransferComponent } from 'app/pages/user/worker/transfer/transfer.compo
     CommonModule,
     RouterModule.forChild(WorkerLayoutRoutes),
     FormsModule,
-    NgbModule
+    NgbModule,
+    AlertModule
   ],
   declarations: [
     ClientsComponent,
