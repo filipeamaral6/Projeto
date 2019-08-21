@@ -16,7 +16,8 @@ import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.c
   // tslint:disable-next-line: component-selector
   selector: 'dashboard-cmp',
   moduleId: module.id,
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.component.css']
 })
 
 export class DashboardComponent implements OnInit {

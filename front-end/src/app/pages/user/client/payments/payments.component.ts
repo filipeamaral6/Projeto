@@ -7,11 +7,12 @@ import { Account } from 'app/shared/models/Account';
   // tslint:disable-next-line: component-selector
   selector: 'payments-cmp',
   moduleId: module.id,
-  templateUrl: 'payments.component.html'
+  templateUrl: 'payments.component.html',
+  styleUrls: ['payments.component.css']
 })
 
 export class PaymentsComponent implements OnInit {
- 
+
   client: Client;
   selectedAccount: Account = null;
 

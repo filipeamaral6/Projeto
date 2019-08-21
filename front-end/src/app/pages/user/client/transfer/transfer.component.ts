@@ -6,7 +6,8 @@ import { Account } from 'app/shared/models/Account';
   // tslint:disable-next-line: component-selector
   selector: 'transfer-cmp',
   moduleId: module.id,
-  templateUrl: 'transfer.component.html'
+  templateUrl: 'transfer.component.html',
+  styleUrls: ['transfer.component.css']
 })
 
 export class TransferComponent implements OnInit {

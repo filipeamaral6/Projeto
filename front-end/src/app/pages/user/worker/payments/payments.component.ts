@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payments.component.scss']
 })
 export class PaymentsComponent implements OnInit {
+  [x: string]: any;
 
   constructor() { }
 

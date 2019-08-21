@@ -1,5 +1,5 @@
 <div class="row col-md-12" style="background-color: #F4F3EF">
-    <div class="col-md-3" *ngFor="let account of accountList">
+    <div class="col-md-3" *ngFor="let account of accountList" style="padding-left: 0; padding-right: 2%">
         <button [ngStyle]="selectedStyle(account.id)" id="account" class="card card-stats col-md-12" type="button btn-primary" (click)="sendSelectedAccount(account.id)" style="background-color: #E1F5FE">
                 <div class="card-header">
                     <h4>Conta {{account.type}}</h4>
@@ -19,8 +19,8 @@
         </button>
     </div>
 </div>
-<div class="row col-md-12" *ngIf="(selectedAccount !== null) && accountInfoPopUp ">
-    <div class="card card-accout-info col-md-12">
+<div class="row col-md-12" *ngIf="(selectedAccount !== null) && accountInfoPopUp">
+    <div class="card card-account-info col-md-12" style="padding-left: 30px">
         <div class="card-header">
             <h5 class="card-title">Informações de Conta</h5>
         </div>
