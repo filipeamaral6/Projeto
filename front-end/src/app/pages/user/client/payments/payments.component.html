@@ -27,15 +27,20 @@
                 <div class="col-md-5">
                     <div class="form-group" >
                         <label for="value">Valor do Pagamento</label>
+                        <div class="row">
+                            <input (keypress)="digitOnly($event)" type="text" class="form-control" style="text-align: right">
+                        </div>
+
+
                         <div class="row col-md-12" style="padding-right: 0; padding-left: 0">
-                            <div class="col-md-7" style="padding-right: 0; padding-left: 0" >
-                                <input (keypress)="digitOnly($event)" type="text" class="form-control"> 
+                            <div class="col-md-7" style="padding-right: 5px; padding-left: 0" >
+                                <input (keypress)="digitOnly($event)" type="text" class="form-control" style="text-align: right"> 
                             </div>
                             <div class="col-md-1" style="padding-right: 0; padding-left: 5px">
                                 <h5 class="payment-value">,</h5>
                             </div>
                             <div class="col-md-2" style="padding-right: 0; padding-left: 0">
-                                <input (keypress)="digitOnly($event)" type="text" class="form-control">
+                                <input (keypress)="digitOnly($event)" type="text" class="form-control" length="2">
                             </div>
                             <div class="col-md-1" style="padding-right: 0; padding-left: 5px">
                                 <h5 class="payment-value">€</h5>
@@ -46,16 +51,16 @@
                 <div class="row col-md-12" style="padding-right: 0">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <div class="row">
-                                <label for="transactionCode" style="padding-right: 0">Codigo de Segurança</label>
+                            <div class="row col-md-12">
+                                <label for="transactionCode">Codigo de Segurança</label>
                             </div>
-                            <div class="row" *ngIf="!isEyeOpen">
-                                <input type="password" class="form-control col-md-10" style="padding-right: 0">
-                                <button class="fa fa-eye form-control col-md-1" aria-hidden="true" id="eyeClose" (click)="showPass()"></button>
+                            <div class="row col-md-12 form-inline security-code" *ngIf="!isEyeOpen">
+                                <input type="password" class="form-control pass-control" style="padding-right: 0">
+                                <i class="button fa fa-eye-slash eye-icon form-control" id="eyeClose" (click)="showPass()"></i>     
                             </div>
-                            <div class="row" *ngIf="isEyeOpen">
-                                <input type="text" class="form-control col-md-9" style="padding-right: 0">
-                                <button class="fa fa-eye form-control col-md-1" aria-hidden="true" id="eyeOpen" (click)="showPass()"></button>
+                            <div class="row form-inline security-code" *ngIf="isEyeOpen">
+                                <input type="text" class="form-control pass-control" style="padding-right: 0">
+                                <i class="button fa fa-eye eye-icon form-control" id="eyeClose" (click)="showPass()"></i> 
                             </div>
                         </div>
                     </div>
@@ -92,21 +97,3 @@
         </div>
     </div>
 </div>
-
-<div class="container">
-        <div class="row justify-content-center">
-          <div class="col-6">
-            <form>
-        <div class="form-group">
-          <label>Password</label>
-          <div class="input-group" id="show_hide_password">
-            <input class="form-control" type="password">
-            <div class="input-group-addon">
-              <a href=""><i class="fa fa-eye-open" aria-hidden="true"></i></a>
-            </div>
-          </div>
-        </div>
-      </form>
-          </div>
-        </div>
-      </div>
