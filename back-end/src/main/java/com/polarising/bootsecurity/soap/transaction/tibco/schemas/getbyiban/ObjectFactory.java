@@ -38,11 +38,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetByIban }
+     * Create an instance of {@link GetByIbanTransaction }
      * 
      */
-    public GetByIban createGetByIban() {
-        return new GetByIban();
+    public GetByIbanTransaction createGetByIban() {
+        return new GetByIbanTransaction();
     }
 
 }

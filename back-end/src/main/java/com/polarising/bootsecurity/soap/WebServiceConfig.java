@@ -64,7 +64,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	public Wsdl11Definition transactionWsdl11Definition() {
 		SimpleWsdl11Definition wsdl11Definition = new SimpleWsdl11Definition();
 
-		wsdl11Definition.setWsdl(new ClassPathResource("/wsdl/transaction.wsdl"));
+		wsdl11Definition.setWsdl(new ClassPathResource("/wsdl/transactions.wsdl"));
 
 		return wsdl11Definition;
 	}

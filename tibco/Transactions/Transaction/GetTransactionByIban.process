@@ -4,7 +4,7 @@
     <pd:name>Transactions/Transaction/GetTransactionByIban.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetTransactionsByIbanInput"/>
-    <pd:startX>155</pd:startX>
+    <pd:startX>156</pd:startX>
     <pd:startY>220</pd:startY>
     <pd:returnBindings>
         <pfx:GetTransactionsByIbanOutput>

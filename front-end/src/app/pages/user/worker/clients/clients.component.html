@@ -1,0 +1,218 @@
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class=" text-primary">
+          <tr>
+            <th>
+              Nome
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Morada
+            </th>
+            <th class="text-right">
+              Estado
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clients" (click)="details(clientDetails, client)">
+            <td>
+              {{ client.fullName }}
+            </td>
+            <td>
+              {{ client.email }}
+            </td>
+            <td>
+              {{ client.address }}
+            </td>
+            <td class="text-right">
+              {{ client.status }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <div>
+      <span>
+        <a class="btn btn-primary">Adicionar Cliente</a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<ng-template #clientDetails let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detalhes</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm" (ngSubmit)="updateClient(form)">
+      <button type="button" class="btn btn-secondary" (click)="toggleEditMode()">{{ editButtonLabel }}</button>
+      <span *ngIf="editMode">
+        | <button type="submit" class="btn btn-info">Guardar</button>
+      </span>
+      <div class="form-group">
+        <label for="fullName">Nome Completo</label>
+        <input type="text" class="form-control col-md-10" value="{{clientToEdit.fullName}}" [disabled]="!editMode"
+          [(ngModel)]="selectedClient.fullName" name="fullName">
+      </div>
+      <hr>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="birthDate">Data de Nascimento</label>
+          <input type="date" class="form-control" value="{{clientToEdit.birthDate}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.birthDate" name="birthDate">
+        </div>
+        <div class="form-group">
+          <label for="nationality">Nacionalidade</label>
+          <input type="text" class="form-control" value="{{clientToEdit.nationality}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.nationality" name="nationality">
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="clientCC">Número de C.C.</label>
+          <input type="text" class="form-control" value="{{clientToEdit.clientCc}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.clientCc" name="clientCc">
+        </div>
+        <div class="form-group">
+          <label for="nif">NIF</label>
+          <input type="text" class="form-control" value="{{clientToEdit.nif}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.nif" name="nif">
+        </div>
+      </div>
+      <hr>
+      <div class="form-group" style="padding-right: 4.9%">
+        <label for="email">Email</label>
+        <input type="email" class="form-control col-md-6" value="{{clientToEdit.email}}" [disabled]="!editMode"
+          [(ngModel)]="selectedClient.email" name="email">
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="phoneNumber">Telefone</label>
+          <input type="text" class="form-control" value="{{clientToEdit.phoneNumber}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.phoneNumber" name="phoneNumber">
+        </div>
+        <div class="form-group">
+          <label for="mobileNumber">Telemóvel</label>
+          <input type="text" class="form-control" value="{{clientToEdit.mobileNumber}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.mobileNumber" name="mobileNumber">
+        </div>
+      </div>
+      <hr>
+      <div class="form-group">
+        <label for="address">Morada</label>
+        <input type="text" class="form-control col-md-10" value="{{clientToEdit.address}}" [disabled]="!editMode"
+          [(ngModel)]="selectedClient.address" name="address">
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="zipCode">Código Postal</label>
+          <input type="text" class="form-control" value="{{clientToEdit.zipCode}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.zipCode" name="zipCode">
+        </div>
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="county">Localidade</label>
+          <input type="text" class="form-control" value="{{clientToEdit.county}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.county" name="county">
+        </div>
+        <div class="form-group">
+          <label for="country">País</label>
+          <input type="text" class="form-control" value="{{clientToEdit.country}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.country" name="country">
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #addClient let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Adicionar Cliente</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm" (ngSubmit)="updateClient(form)">
+      <div class="form-group">
+        <label for="fullName">Nome Completo</label>
+        <input type="text" class="form-control col-md-10" value="{{clientToEdit.fullName}}" [disabled]="!editMode"
+          [(ngModel)]="selectedClient.fullName" name="fullName">
+      </div>
+      <hr>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="birthDate">Data de Nascimento</label>
+          <input type="date" class="form-control" value="{{clientToEdit.birthDate}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.birthDate" name="birthDate">
+        </div>
+        <div class="form-group">
+          <label for="nationality">Nacionalidade</label>
+          <input type="text" class="form-control" value="{{clientToEdit.nationality}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.nationality" name="nationality">
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="clientCC">Número de C.C.</label>
+          <input type="text" class="form-control" value="{{clientToEdit.clientCc}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.clientCc" name="clientCc">
+        </div>
+        <div class="form-group">
+          <label for="nif">NIF</label>
+          <input type="text" class="form-control" value="{{clientToEdit.nif}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.nif" name="nif">
+        </div>
+      </div>
+      <hr>
+      <div class="form-group" style="padding-right: 4.9%">
+        <label for="email">Email</label>
+        <input type="email" class="form-control col-md-6" value="{{clientToEdit.email}}" [disabled]="!editMode"
+          [(ngModel)]="selectedClient.email" name="email">
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="phoneNumber">Telefone</label>
+          <input type="text" class="form-control" value="{{clientToEdit.phoneNumber}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.phoneNumber" name="phoneNumber">
+        </div>
+        <div class="form-group">
+          <label for="mobileNumber">Telemóvel</label>
+          <input type="text" class="form-control" value="{{clientToEdit.mobileNumber}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.mobileNumber" name="mobileNumber">
+        </div>
+      </div>
+      <hr>
+      <div class="form-group">
+        <label for="address">Morada</label>
+        <input type="text" class="form-control col-md-10" value="{{clientToEdit.address}}" [disabled]="!editMode"
+          [(ngModel)]="selectedClient.address" name="address">
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="zipCode">Código Postal</label>
+          <input type="text" class="form-control" value="{{clientToEdit.zipCode}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.zipCode" name="zipCode">
+        </div>
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="county">Localidade</label>
+          <input type="text" class="form-control" value="{{clientToEdit.county}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.county" name="county">
+        </div>
+        <div class="form-group">
+          <label for="country">País</label>
+          <input type="text" class="form-control" value="{{clientToEdit.country}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.country" name="country">
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

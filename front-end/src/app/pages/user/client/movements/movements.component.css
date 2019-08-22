@@ -1,0 +1,13 @@
+button#account:focus, button#account:hover {
+  border: #4A90E2;
+  background-color: #4A90E2;
+  outline: transparent;
+}
+
+
+button#account {
+  border: transparent;
+  border-radius: 10px;
+  padding: 3px;
+  background-color: transparent;
+}

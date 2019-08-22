@@ -5,7 +5,7 @@
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:WriteTransferInput"/>
     <pd:startX>99</pd:startX>
-    <pd:startY>429</pd:startY>
+    <pd:startY>430</pd:startY>
     <pd:returnBindings>
         <pfx:WriteTransferOutput>
             <output>
@@ -252,8 +252,8 @@
         <pd:activity name="LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>352</pd:x>
-            <pd:y>198</pd:y>
+            <pd:x>350</pd:x>
+            <pd:y>196</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -275,8 +275,8 @@
         <pd:activity name="WriteTransfer">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>457</pd:x>
-            <pd:y>198</pd:y>
+            <pd:x>465</pd:x>
+            <pd:y>194</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>

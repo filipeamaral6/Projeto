@@ -54,11 +54,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Root }
+     * Create an instance of {@link RootTransaction }
      * 
      */
-    public Root createRoot() {
-        return new Root();
+    public RootTransaction createRoot() {
+        return new RootTransaction();
     }
 
     /**

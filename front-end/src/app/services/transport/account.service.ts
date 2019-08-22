@@ -1,0 +1,41 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Globals } from 'app/shared/Globals';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class AccountService {
+
+  API = this.globals.API;
+  constructor(private http: HttpClient, private globals: Globals) { }
+
+  getAll() {
+    return this.http.get<Account[]>(this.API + '/accounts');
+  }
+
+  getById(id: number) {
+    return this.http.get<Account[]>(this.API + '/accounts/id/' + id);
+  }
+
+  getByIban(iban: string) {
+    return this.http.get<Account>(this.API + '/accounts/iban/' + iban);
+  }
+
+  addAccount(account: string) {
+    return this.http.post(this.API + '/accounts/add', account, httpOptions);
+  }
+
+  updateAccount(account: string) {
+    return this.http.put(this.API + '/accountss/update' + account, httpOptions);
+  }
+
+}

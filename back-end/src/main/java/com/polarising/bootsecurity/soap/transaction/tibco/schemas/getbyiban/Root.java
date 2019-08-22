@@ -35,17 +35,17 @@ import javax.xml.bind.annotation.XmlType;
 public class Root {
 
     @XmlElement(required = true)
-    protected GetByIban getByIban;
+    protected GetByIbanTransaction getByIban;
 
     /**
      * Gets the value of the getByIban property.
      * 
      * @return
      *     possible object is
-     *     {@link GetByIban }
+     *     {@link GetByIbanTransaction }
      *     
      */
-    public GetByIban getGetByIban() {
+    public GetByIbanTransaction getGetByIban() {
         return getByIban;
     }
 
@@ -54,10 +54,10 @@ public class Root {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetByIban }
+     *     {@link GetByIbanTransaction }
      *     
      */
-    public void setGetByIban(GetByIban value) {
+    public void setGetByIban(GetByIbanTransaction value) {
         this.getByIban = value;
     }
 
