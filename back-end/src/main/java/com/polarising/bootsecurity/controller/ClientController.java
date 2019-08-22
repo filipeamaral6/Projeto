@@ -7,6 +7,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.polarising.bootsecurity.soap.client.example.xmlns._1564670621329.ClientService;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
@@ -31,13 +32,12 @@ import com.polarising.bootsecurity.soap.client.tibco.schemas.getbyid.GetById;
 @CrossOrigin(origins = "*")
 public class ClientController {
 
-	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	// Add Client
 	@PostMapping("clients/add")
-	public Object AddClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
+	public ResponseEntity<Object> AddClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
@@ -47,7 +47,7 @@ public class ClientController {
 			ClientService clientService = new ClientService();
 
 			OutputClient message = clientService.getPortTypeCreateClientEndpoint1().operation(inputClient);
-			return message;
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
 
@@ -55,12 +55,12 @@ public class ClientController {
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 	}
 
 	// Get Clients
 	@GetMapping("clients")
-	public List<Object> getClients() {
+	public ResponseEntity<List<Object>> getClients() {
 
 		ClientService clientService = new ClientService();
 		Root getClients = clientService.getPortTypeGetAllClientsEndpoint1().operation();
@@ -75,12 +75,12 @@ public class ClientController {
 			message.add(getClients.getOutputClient());
 		}
 
-		return message;
+		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
 	}
 
 	// Get Client by Id
 	@GetMapping("clients/id/{id}")
-	public Object getClientById(@PathVariable String id) {
+	public ResponseEntity<Object> getClientById(@PathVariable String id) {
 
 		ClientService clientService = new ClientService();
 		GetById getById = new GetById();
@@ -88,16 +88,16 @@ public class ClientController {
 		Root getClientById = clientService.getPortTypeGetClientByIdEndpoint1().operation(getById);
 
 		if (getClientById.getInputClient().isEmpty()) {
-			return getClientById.getOutputClient();
+			return new ResponseEntity<Object>(getClientById.getOutputClient(), HttpStatus.OK);
 		} else {
-			return getClientById.getInputClient();
+			return new ResponseEntity<Object>(getClientById.getInputClient(), HttpStatus.OK);
 		}
 
 	}
 
 	// Get Client by CC
 	@GetMapping("clients/cc/{cc}")
-	public Object getClientByCC(@PathVariable String cc) {
+	public ResponseEntity<Object> getClientByCC(@PathVariable String cc) {
 
 		ClientService clientService = new ClientService();
 		GetByClientCC getByCC = new GetByClientCC();
@@ -105,15 +105,15 @@ public class ClientController {
 		Root getClientByCC = clientService.getPortTypeGetClientByCcEndpoint1().operation(getByCC);
 
 		if (getClientByCC.getInputClient().isEmpty()) {
-			return getClientByCC.getOutputClient();
+			return new ResponseEntity<Object>(getClientByCC.getOutputClient(), HttpStatus.OK);
 		} else {
-			return getClientByCC.getInputClient();
+			return new ResponseEntity<Object>(getClientByCC.getInputClient(), HttpStatus.OK);
 		}
 	}
 
 	// Update Client
 	@PutMapping("clients/update")
-	public Object updateClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
+	public ResponseEntity<Object> updateClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
@@ -121,7 +121,7 @@ public class ClientController {
 
 			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
 
-			return message;
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
 
@@ -129,7 +129,24 @@ public class ClientController {
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 	}
+	
+	// Get Client by Id
+		@GetMapping("clients/accountClients/{id}")
+		public ResponseEntity<Object> getAccountClientsById(@PathVariable String id) {
+
+			ClientService clientService = new ClientService();
+			GetById getById = new GetById();
+			getById.setId(id);
+			Root getClientById = clientService.getPortTypeGetClientByIdEndpoint1().operation(getById);
+
+			if (getClientById.getInputClient().isEmpty()) {
+				return new ResponseEntity<Object>(getClientById.getOutputClient(), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<Object>(getClientById.getInputClient(), HttpStatus.OK);
+			}
+
+		}
 }

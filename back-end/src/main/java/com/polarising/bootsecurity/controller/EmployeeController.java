@@ -7,6 +7,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.polarising.bootsecurity.soap.client.tibco.schemas.client.OutputClient;
 import com.polarising.bootsecurity.soap.employee.example.xmlns._1564670906833.EmployeeService;
 import com.polarising.bootsecurity.soap.employee.tibco.schemas.employee.InputEmployee;
 import com.polarising.bootsecurity.soap.employee.tibco.schemas.employee.OutputEmployee;
@@ -35,7 +37,7 @@ public class EmployeeController {
 
 	// Add Client
 	@PostMapping("employees/add")
-	public Object AddEmployee(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
+	public ResponseEntity<Object> AddEmployee(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
@@ -44,7 +46,7 @@ public class EmployeeController {
 			EmployeeService employeeService = new EmployeeService();
 
 			OutputEmployee message = employeeService.getPortTypeEmployeeEndpoint1().operation(inputEmployee);
-			return message;
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
 
@@ -52,12 +54,12 @@ public class EmployeeController {
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 	}
 
 	// Get Employees
 	@GetMapping("employees")
-	public List<Object> getEmployees() {
+	public ResponseEntity<List<Object>> getEmployees() {
 
 		EmployeeService employeeService = new EmployeeService();
 		Root getEmployees = employeeService.getPortTypeGetAllEmployeesEndpoint1().operation();
@@ -72,12 +74,12 @@ public class EmployeeController {
 			message.add(getEmployees.getOutputEmployee());
 		}
 
-		return message;
+		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
 	}
 
 	// Get Client by Id
 	@GetMapping("employees/id/{id}")
-	public Object getEmployeeById(@PathVariable String id) {
+	public ResponseEntity<Object> getEmployeeById(@PathVariable String id) {
 
 		EmployeeService employeeService = new EmployeeService();
 
@@ -87,15 +89,15 @@ public class EmployeeController {
 		Root getEmployeeById = employeeService.getPortTypeGetEmployeeEndpoint1().operation(getById);
 
 		if (getEmployeeById.getInputEmployee().isEmpty()) {
-			return getEmployeeById.getOutputEmployee();
+			return new ResponseEntity<Object>(getEmployeeById.getOutputEmployee(), HttpStatus.OK);
 		} else {
-			return getEmployeeById.getInputEmployee();
+			return new ResponseEntity<Object>(getEmployeeById.getInputEmployee(), HttpStatus.OK);
 		}
 	}
 
 	// Update Client
 	@PutMapping("employees/update")
-	public Object updateClient(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
+	public ResponseEntity<Object> updateClient(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
@@ -103,7 +105,7 @@ public class EmployeeController {
 
 			OutputEmployee message = employeeService.getPortTypeUpdateEmployeeEndpoint1().operation(inputEmployee);
 
-			return message;
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
 
@@ -111,7 +113,7 @@ public class EmployeeController {
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 	}
 }

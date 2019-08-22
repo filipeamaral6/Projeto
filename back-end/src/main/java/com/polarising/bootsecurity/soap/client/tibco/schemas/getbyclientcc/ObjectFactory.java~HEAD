@@ -1,5 +1,5 @@
 
-package com.polarising.bootsecurity.soap.account.tibco.schemas.getbyid;
+package com.polarising.bootsecurity.soap.client.tibco.schemas.getbyclientcc;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the com.tibco.schemas.bankrising.schemas.getbyid package. 
+ * generated in the com.tibco.schemas.tibco.schemas.getbyclientcc package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,26 +23,10 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.tibco.schemas.bankrising.schemas.getbyid
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.tibco.schemas.tibco.schemas.getbyclientcc
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link GetById }
-     * 
-     */
-    public GetById createGetById() {
-        return new GetById();
-    }
-
-    /**
-     * Create an instance of {@link UserId }
-     * 
-     */
-    public UserId createUserId() {
-        return new UserId();
     }
 
     /**
@@ -51,6 +35,14 @@ public class ObjectFactory {
      */
     public Root createRoot() {
         return new Root();
+    }
+
+    /**
+     * Create an instance of {@link GetByClientCC }
+     * 
+     */
+    public GetByClientCC createGetByClientCC() {
+        return new GetByClientCC();
     }
 
 }

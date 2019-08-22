@@ -52,16 +52,16 @@
     </wsdl:types>
     <wsdl:service name="Service">
         <wsdl:port name="PortType_EmployeeEndpoint1" binding="tns:PortType_EmployeeEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Employee/Service.serviceagent/PortType_EmployeeEndpoint1"/>
+            <soap:address location="http://localhost:8082/Employee/Service.serviceagent/PortType_EmployeeEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_GetAllEmployeesEndpoint1" binding="tns:PortType_GetAllEmployeesEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Employee/Service.serviceagent/PortType_GetAllEmployeesEndpoint1"/>
+            <soap:address location="http://localhost:8082/Employee/Service.serviceagent/PortType_GetAllEmployeesEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_GetEmployeeEndpoint1" binding="tns:PortType_GetEmployeeEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Employee/Service.serviceagent/PortType_GetEmployeeEndpoint1"/>
+            <soap:address location="http://localhost:8082/Employee/Service.serviceagent/PortType_GetEmployeeEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_UpdateEmployeeEndpoint1" binding="tns:PortType_UpdateEmployeeEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Employee/Service.serviceagent/PortType_UpdateEmployeeEndpoint1"/>
+            <soap:address location="http://localhost:8082/Employee/Service.serviceagent/PortType_UpdateEmployeeEndpoint1"/>
         </wsdl:port>
     </wsdl:service>
     <wsdl:portType name="PortType_Employee">

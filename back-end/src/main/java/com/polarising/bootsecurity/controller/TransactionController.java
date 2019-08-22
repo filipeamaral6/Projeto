@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +43,7 @@ public class TransactionController {
 	
 	// Add Transfer
 		@PostMapping("transfer/add")
-		public Object AddTransfer(@Valid @RequestBody InputTransfer inputTransfer, BindingResult result) {
+		public ResponseEntity<Object> AddTransfer(@Valid @RequestBody InputTransfer inputTransfer, BindingResult result) {
 			
 
 			HashMap<String, String> error = new HashMap<>();
@@ -67,7 +69,7 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputTransaction message = transactionService.getPortTypeTransferEndpoint1().writeTransfer(inputTransfer);
-				return message;
+				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
 			
@@ -78,15 +80,15 @@ public class TransactionController {
 			}
 			
 			if (getAccountByIban.getInputAccount().isEmpty()) {
-				return getAccountByIban.getOutputAccount();
+				return new ResponseEntity<Object> (getAccountByIban.getOutputAccount(), HttpStatus.BAD_REQUEST);
 			} 			
-			return error;
+			return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 		}
 		
 		// Add Withdraw
 		@PostMapping("withdraw/add")
-		public Object AddWithdraw(@Valid @RequestBody InputWithdraw inputWithdraw, BindingResult result) {
+		public ResponseEntity<Object> AddWithdraw(@Valid @RequestBody InputWithdraw inputWithdraw, BindingResult result) {
 			
 			HashMap<String, String> error = new HashMap<>();
 			boolean noMoneyError = false;
@@ -111,7 +113,7 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputWithdraw message = transactionService.getPortTypeWithdrawEndpoint1().writeWithdraw(inputWithdraw);
-				return message;
+				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
 			
@@ -120,13 +122,13 @@ public class TransactionController {
 				error.put("message", result.getFieldError().getDefaultMessage());
 	
 			}
-			return error;
+			return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 		}
 		
 		// Add Payment
 		@PostMapping("payment/add")
-		public Object AddPayment(@Valid @RequestBody InputPayment inputPayment, BindingResult result) {
+		public ResponseEntity<Object>  AddPayment(@Valid @RequestBody InputPayment inputPayment, BindingResult result) {
 			
 			HashMap<String, String> error = new HashMap<>();
 			boolean noMoneyError = false;
@@ -150,7 +152,7 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputPayment message = transactionService.getPortTypePaymentEndpoint1().writePayment(inputPayment);
-				return message;
+				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
 			
@@ -159,13 +161,13 @@ public class TransactionController {
 				error.put("message", result.getFieldError().getDefaultMessage());
 	
 			}
-			return error;
+			return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 		}
 		
 		// Add Deposit
 		@PostMapping("deposit/add")
-		public Object AddDeposit(@Valid @RequestBody InputDeposit inputDeposit, BindingResult result) {
+		public ResponseEntity<Object> AddDeposit(@Valid @RequestBody InputDeposit inputDeposit, BindingResult result) {
 			
 			HashMap<String, String> error = new HashMap<>();
 			
@@ -175,7 +177,7 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputDeposit message = transactionService.getPortTypeDepositEndpoint1().writeDeposit(inputDeposit);
-				return message;
+				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
 			
@@ -184,14 +186,14 @@ public class TransactionController {
 				error.put("message", result.getFieldError().getDefaultMessage());
 	
 			}
-			return error;
+			return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 		}
 
 		// Get Transaction by Id
 		@GetMapping("transaction/id/{id}")
-		public List<Object> getTransactionById(@PathVariable String id) {
-
+		public ResponseEntity<List<Object>> getTransactionById(@PathVariable String id) {
+			
 			TransactionService transactionService = new TransactionService();
 			GetById getById = new GetById();
 			getById.setId(id);
@@ -208,15 +210,15 @@ public class TransactionController {
 			objects.add(5, getTransactionById.getOutputTransaction());
 			
 			if (getTransactionById.getInputTransaction().isEmpty()) {
-				return objects;
+				return new ResponseEntity<List<Object>>(objects, HttpStatus.BAD_REQUEST);
 			} else {
-				return objects;
+				return new ResponseEntity<List<Object>>(objects, HttpStatus.OK);
 			}
 		}
 
 		// Get Transaction by IBAN
 		@GetMapping("transaction/accountIBAN/{accountIBAN}")
-		public Object getTransactionByIBAN(@PathVariable String accountIBAN) {
+		public ResponseEntity<Object> getTransactionByIBAN(@PathVariable String accountIBAN) {
 
 			TransactionService transactionService = new TransactionService();
 			GetByIbanTransaction getByIban = new GetByIbanTransaction();
@@ -225,15 +227,15 @@ public class TransactionController {
 			RootTransaction getTransactionsByIban = transactionService.getPortTypeGetTransactionsByIbanEndpoint1().operation(getByIban);
 
 			if (getTransactionsByIban.getInputTransaction().isEmpty()) {
-				return getTransactionsByIban.getOutputTransaction();
+				return new ResponseEntity<Object>(getTransactionsByIban.getOutputTransaction(), HttpStatus.BAD_REQUEST);
 			} else {
-				return getTransactionsByIban.getInputTransaction();
+				return new ResponseEntity<Object> (getTransactionsByIban.getInputTransaction(), HttpStatus.OK);
 			}
 		}
 		
 		// Get Transactions
 		@GetMapping("transactions")
-		public List<Object> getAccounts() {
+		public ResponseEntity<List<Object>> getAccounts() {
 
 			TransactionService transactionService = new TransactionService();
 			RootTransaction getTransactions = transactionService.getPortTypeGetAllTransactionsEndpoint1().operation();
@@ -246,9 +248,10 @@ public class TransactionController {
 				}
 			} else {
 				message.add(getTransactions.getOutputTransaction().get(0));
+				return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 			}
 
-			return message;
+			return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
 		}
 
 }

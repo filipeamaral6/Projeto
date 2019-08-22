@@ -1,4 +1,3 @@
-
 package com.polarising.bootsecurity.soap.transaction.tibco.schemas.getbyiban;
 
 import javax.xml.bind.annotation.XmlRegistry;
@@ -46,3 +45,4 @@ public class ObjectFactory {
     }
 
 }
+
