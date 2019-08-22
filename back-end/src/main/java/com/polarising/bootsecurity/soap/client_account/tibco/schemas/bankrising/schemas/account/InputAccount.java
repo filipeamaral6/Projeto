@@ -303,9 +303,5 @@ public class InputAccount {
     }
 
 
-	public MultiValueMap<String, String> getInputAccount() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

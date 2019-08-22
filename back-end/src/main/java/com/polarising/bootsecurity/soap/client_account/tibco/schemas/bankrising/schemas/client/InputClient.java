@@ -599,9 +599,4 @@ public class InputClient {
         this.zipCode = value;
     }
 
-	public MultiValueMap<String, String> getInputClient() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
