@@ -8,7 +8,7 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.getbyid.GetById;
-import com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.Root;
+import com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.RootTransaction;
 
 
 /**
@@ -39,7 +39,7 @@ public interface PortTypeTransactionById {
      */
     @WebMethod(operationName = "Operation", action = "/Transactions/Service.serviceagent/PortType_TransactionByIdEndpoint1/Operation")
     @WebResult(name = "root", targetNamespace = "http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd", partName = "output")
-    public Root operation(
+    public RootTransaction operation(
         @WebParam(name = "getById", targetNamespace = "http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd", partName = "input")
         GetById input);
 

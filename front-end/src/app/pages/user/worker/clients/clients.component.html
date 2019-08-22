@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 <alert></alert>
+=======
+>>>>>>> André
 <div class="card">
   <div class="card-body">
     <div class="table-responsive">
@@ -20,7 +23,11 @@
           </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
           <tr *ngFor="let client of clients" (click)="openModal(clientDetailsModal, client)">
+=======
+          <tr *ngFor="let client of clients" (click)="details(clientDetails, client)">
+>>>>>>> André
             <td>
               {{ client.fullName }}
             </td>
@@ -40,13 +47,21 @@
     <hr>
     <div>
       <span>
+<<<<<<< HEAD
         <a class="btn btn-primary" (click)="openModal(addClientModal, null)">Adicionar Cliente</a>
+=======
+        <a class="btn btn-primary">Adicionar Cliente</a>
+>>>>>>> André
       </span>
     </div>
   </div>
 </div>
 
+<<<<<<< HEAD
 <ng-template #clientDetailsModal let-modal>
+=======
+<ng-template #clientDetails let-modal>
+>>>>>>> André
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Detalhes</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -54,6 +69,7 @@
     </button>
   </div>
   <div class="modal-body">
+<<<<<<< HEAD
     <alert></alert>
     <form #editClientForm="ngForm" (ngSubmit)="updateClient(editClientForm)">
       <button type="button" class="btn btn-secondary" (click)="toggleEditMode()">{{ editButtonLabel }}</button>
@@ -61,80 +77,133 @@
         (click)="deactivateClient(selectedClient.id)">Desativar Cliente</button>
       <button *ngIf="selectedClient.status === 'INACTIVE'" type="button" class="btn btn-success"
         (click)="activateClient(selectedClient.id)">Ativar Cliente</button>
+=======
+    <form #form="ngForm" (ngSubmit)="updateClient(form)">
+      <button type="button" class="btn btn-secondary" (click)="toggleEditMode()">{{ editButtonLabel }}</button>
+>>>>>>> André
       <span *ngIf="editMode">
         | <button type="submit" class="btn btn-info">Guardar</button>
       </span>
       <div class="form-group">
         <label for="fullName">Nome Completo</label>
+<<<<<<< HEAD
         <input type="text" class="form-control col-md-10" value="{{selectedClient.fullName}}" [disabled]="!editMode"
+=======
+        <input type="text" class="form-control col-md-10" value="{{clientToEdit.fullName}}" [disabled]="!editMode"
+>>>>>>> André
           [(ngModel)]="selectedClient.fullName" name="fullName">
       </div>
       <hr>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="birthDate">Data de Nascimento</label>
+<<<<<<< HEAD
           <input type="date" class="form-control" value="{{selectedClient.birthDate}}" [disabled]="!editMode"
+=======
+          <input type="date" class="form-control" value="{{clientToEdit.birthDate}}" [disabled]="!editMode"
+>>>>>>> André
             [(ngModel)]="selectedClient.birthDate" name="birthDate">
         </div>
         <div class="form-group">
           <label for="nationality">Nacionalidade</label>
+<<<<<<< HEAD
           <select class="form-control" value="{{selectedClient.nationality}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.nationality" name="nationality">
             <option *ngFor="let nationality of nationalities" [value]="nationality"
               [selected]="selectedClient.nationality === nationality">{{ nationality }}</option>
           </select>
+=======
+          <input type="text" class="form-control" value="{{clientToEdit.nationality}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.nationality" name="nationality">
+>>>>>>> André
         </div>
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="clientCC">Número de C.C.</label>
+<<<<<<< HEAD
           <input type="text" class="form-control" value="{{selectedClient.clientCc}}" [disabled]="!editMode"
+=======
+          <input type="text" class="form-control" value="{{clientToEdit.clientCc}}" [disabled]="!editMode"
+>>>>>>> André
             [(ngModel)]="selectedClient.clientCc" name="clientCc">
         </div>
         <div class="form-group">
           <label for="nif">NIF</label>
+<<<<<<< HEAD
           <input type="text" class="form-control" value="{{selectedClient.nif}}" [disabled]="!editMode"
+=======
+          <input type="text" class="form-control" value="{{clientToEdit.nif}}" [disabled]="!editMode"
+>>>>>>> André
             [(ngModel)]="selectedClient.nif" name="nif">
         </div>
       </div>
       <hr>
       <div class="form-group" style="padding-right: 4.9%">
         <label for="email">Email</label>
+<<<<<<< HEAD
         <input type="email" class="form-control col-md-6" value="{{selectedClient.email}}" [disabled]="!editMode"
+=======
+        <input type="email" class="form-control col-md-6" value="{{clientToEdit.email}}" [disabled]="!editMode"
+>>>>>>> André
           [(ngModel)]="selectedClient.email" name="email">
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="phoneNumber">Telefone</label>
+<<<<<<< HEAD
           <input type="text" class="form-control" value="{{selectedClient.phoneNumber}}" [disabled]="!editMode"
+=======
+          <input type="text" class="form-control" value="{{clientToEdit.phoneNumber}}" [disabled]="!editMode"
+>>>>>>> André
             [(ngModel)]="selectedClient.phoneNumber" name="phoneNumber">
         </div>
         <div class="form-group">
           <label for="mobileNumber">Telemóvel</label>
+<<<<<<< HEAD
           <input type="text" class="form-control" value="{{selectedClient.mobileNumber}}" [disabled]="!editMode"
+=======
+          <input type="text" class="form-control" value="{{clientToEdit.mobileNumber}}" [disabled]="!editMode"
+>>>>>>> André
             [(ngModel)]="selectedClient.mobileNumber" name="mobileNumber">
         </div>
       </div>
       <hr>
       <div class="form-group">
         <label for="address">Morada</label>
+<<<<<<< HEAD
         <input type="text" class="form-control col-md-10" value="{{selectedClient.address}}" [disabled]="!editMode"
+=======
+        <input type="text" class="form-control col-md-10" value="{{clientToEdit.address}}" [disabled]="!editMode"
+>>>>>>> André
           [(ngModel)]="selectedClient.address" name="address">
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="zipCode">Código Postal</label>
+<<<<<<< HEAD
           <input type="text" class="form-control" value="{{selectedClient.zipCode}}" [disabled]="!editMode"
+=======
+          <input type="text" class="form-control" value="{{clientToEdit.zipCode}}" [disabled]="!editMode"
+>>>>>>> André
             [(ngModel)]="selectedClient.zipCode" name="zipCode">
         </div>
         <div class="form-group" style="padding-right: 4.9%">
           <label for="county">Localidade</label>
+<<<<<<< HEAD
           <input type="text" class="form-control" value="{{selectedClient.county}}" [disabled]="!editMode"
+=======
+          <input type="text" class="form-control" value="{{clientToEdit.county}}" [disabled]="!editMode"
+>>>>>>> André
             [(ngModel)]="selectedClient.county" name="county">
         </div>
         <div class="form-group">
           <label for="country">País</label>
+<<<<<<< HEAD
           <input type="text" class="form-control" value="{{selectedClient.country}}" [disabled]="!editMode"
+=======
+          <input type="text" class="form-control" value="{{clientToEdit.country}}" [disabled]="!editMode"
+>>>>>>> André
             [(ngModel)]="selectedClient.country" name="country">
         </div>
       </div>
@@ -142,7 +211,11 @@
   </div>
 </ng-template>
 
+<<<<<<< HEAD
 <ng-template #addClientModal let-modal>
+=======
+<ng-template #addClient let-modal>
+>>>>>>> André
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Adicionar Cliente</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -150,16 +223,25 @@
     </button>
   </div>
   <div class="modal-body">
+<<<<<<< HEAD
     <form #addClientForm="ngForm" (ngSubmit)="addClient(addClientForm)">
       <div class="form-group">
         <label for="fullName">Nome Completo*</label>
         <input type="text" class="form-control col-md-10" name="fullName" [(ngModel)]="newClient.fullName"
           [ngClass]="{ 'is-invalid': fullName.touched && fullName.errors }" #fullName="ngModel" required>
         <div *ngIf="fullName.touched && fullName.hasError('required')" class="invalid-feedback">Nome inválido</div>
+=======
+    <form #form="ngForm" (ngSubmit)="updateClient(form)">
+      <div class="form-group">
+        <label for="fullName">Nome Completo</label>
+        <input type="text" class="form-control col-md-10" value="{{clientToEdit.fullName}}" [disabled]="!editMode"
+          [(ngModel)]="selectedClient.fullName" name="fullName">
+>>>>>>> André
       </div>
       <hr>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
+<<<<<<< HEAD
           <label for="birthDate">Data de Nascimento*</label>
           <input type="date" class="form-control" name="birthDate" [(ngModel)]="newClient.birthDate"
             [ngClass]="{ 'is-invalid': birthDate.touched && birthDate.errors }" #birthDate="ngModel" required>
@@ -173,10 +255,21 @@
           </select>
           <div *ngIf="nationality.touched && nationality.hasError('required')" class="invalid-feedback">Nacionalidade
             inválida</div>
+=======
+          <label for="birthDate">Data de Nascimento</label>
+          <input type="date" class="form-control" value="{{clientToEdit.birthDate}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.birthDate" name="birthDate">
+        </div>
+        <div class="form-group">
+          <label for="nationality">Nacionalidade</label>
+          <input type="text" class="form-control" value="{{clientToEdit.nationality}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.nationality" name="nationality">
+>>>>>>> André
         </div>
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
+<<<<<<< HEAD
           <label for="clientCC">Número de C.C.*</label>
           <input type="text" class="form-control" name="clientCc" [(ngModel)]="newClient.clientCc"
             [ngClass]="{ 'is-invalid': clientCc.touched && clientCc.errors }" #clientCc="ngModel" required>
@@ -188,27 +281,54 @@
           <input type="text" class="form-control" name="nif" [(ngModel)]="newClient.nif"
             [ngClass]="{ 'is-invalid': nif.touched && nif.errors }" #nif="ngModel" required>
           <div *ngIf="nif.touched && nif.hasError('required')" class="invalid-feedback">NIF inválido</div>
+=======
+          <label for="clientCC">Número de C.C.</label>
+          <input type="text" class="form-control" value="{{clientToEdit.clientCc}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.clientCc" name="clientCc">
+        </div>
+        <div class="form-group">
+          <label for="nif">NIF</label>
+          <input type="text" class="form-control" value="{{clientToEdit.nif}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.nif" name="nif">
+>>>>>>> André
         </div>
       </div>
       <hr>
       <div class="form-group" style="padding-right: 4.9%">
+<<<<<<< HEAD
         <label for="email">Email*</label>
         <input type="email" class="form-control col-md-6" name="email" [(ngModel)]="newClient.email"
           [ngClass]="{ 'is-invalid': email.touched && email.errors }" #email="ngModel" required>
         <div *ngIf="email.touched && email.hasError('required')" class="invalid-feedback">Email inválido</div>
+=======
+        <label for="email">Email</label>
+        <input type="email" class="form-control col-md-6" value="{{clientToEdit.email}}" [disabled]="!editMode"
+          [(ngModel)]="selectedClient.email" name="email">
+>>>>>>> André
       </div>
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="phoneNumber">Telefone</label>
+<<<<<<< HEAD
           <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="newClient.phoneNumber">
         </div>
         <div class="form-group">
           <label for="mobileNumber">Telemóvel</label>
           <input type="text" class="form-control" name="mobileNumber" [(ngModel)]="newClient.mobileNumber">
+=======
+          <input type="text" class="form-control" value="{{clientToEdit.phoneNumber}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.phoneNumber" name="phoneNumber">
+        </div>
+        <div class="form-group">
+          <label for="mobileNumber">Telemóvel</label>
+          <input type="text" class="form-control" value="{{clientToEdit.mobileNumber}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.mobileNumber" name="mobileNumber">
+>>>>>>> André
         </div>
       </div>
       <hr>
       <div class="form-group">
+<<<<<<< HEAD
         <label for="address">Morada*</label>
         <input type="text" class="form-control col-md-10" name="address" [(ngModel)]="newClient.address"
           [ngClass]="{ 'is-invalid': address.touched && address.errors }" #address="ngModel" required>
@@ -265,6 +385,29 @@
       <div>* Campo Obrigatório</div>
       <hr>
       <button type="submit" class="btn btn-primary">Adicionar</button>
+=======
+        <label for="address">Morada</label>
+        <input type="text" class="form-control col-md-10" value="{{clientToEdit.address}}" [disabled]="!editMode"
+          [(ngModel)]="selectedClient.address" name="address">
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="zipCode">Código Postal</label>
+          <input type="text" class="form-control" value="{{clientToEdit.zipCode}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.zipCode" name="zipCode">
+        </div>
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="county">Localidade</label>
+          <input type="text" class="form-control" value="{{clientToEdit.county}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.county" name="county">
+        </div>
+        <div class="form-group">
+          <label for="country">País</label>
+          <input type="text" class="form-control" value="{{clientToEdit.country}}" [disabled]="!editMode"
+            [(ngModel)]="selectedClient.country" name="country">
+        </div>
+      </div>
+>>>>>>> André
     </form>
   </div>
 </ng-template>

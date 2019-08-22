@@ -3,7 +3,7 @@ package com.polarising.bootsecurity.soap.transaction.tibco.schemas.getbyiban;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -17,9 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd}getByIban"/>
- *       &lt;/sequence>
+ *       &lt;attribute name="iban" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -28,37 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "getByIban"
-})
-@XmlRootElement(name = "root")
-public class Root {
+@XmlType(name = "")
+@XmlRootElement(name = "getByIban")
+public class GetByIbanTransaction {
 
-    @XmlElement(required = true)
-    protected GetByIbanTransaction getByIban;
+    @XmlAttribute(name = "iban")
+    protected String iban;
 
     /**
-     * Gets the value of the getByIban property.
+     * Gets the value of the iban property.
      * 
      * @return
      *     possible object is
-     *     {@link GetByIbanTransaction }
+     *     {@link String }
      *     
      */
-    public GetByIbanTransaction getGetByIban() {
-        return getByIban;
+    public String getIban() {
+        return iban;
     }
 
     /**
-     * Sets the value of the getByIban property.
+     * Sets the value of the iban property.
      * 
      * @param value
      *     allowed object is
-     *     {@link GetByIbanTransaction }
+     *     {@link String }
      *     
      */
-    public void setGetByIban(GetByIbanTransaction value) {
-        this.getByIban = value;
+    public void setIban(String value) {
+        this.iban = value;
     }
 
 }

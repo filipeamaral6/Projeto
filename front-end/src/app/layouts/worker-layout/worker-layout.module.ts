@@ -10,7 +10,10 @@ import { ClientsComponent } from 'app/pages/user/worker/clients/clients.componen
 import { DepositComponent } from 'app/pages/user/worker/deposit/deposit.component';
 import { PaymentsComponent } from 'app/pages/user/worker/payments/payments.component';
 import { TransferComponent } from 'app/pages/user/worker/transfer/transfer.component';
+<<<<<<< HEAD
 import { AlertModule } from 'app/shared/alerts';
+=======
+>>>>>>> André
 
 
 
@@ -19,8 +22,12 @@ import { AlertModule } from 'app/shared/alerts';
     CommonModule,
     RouterModule.forChild(WorkerLayoutRoutes),
     FormsModule,
+<<<<<<< HEAD
     NgbModule,
     AlertModule
+=======
+    NgbModule
+>>>>>>> André
   ],
   declarations: [
     ClientsComponent,

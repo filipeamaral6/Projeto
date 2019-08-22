@@ -12,24 +12,24 @@ public class Transfer {
 
 	@NotBlank(message="${app.model.message.required}")
 	@Size(min = 25, max = 25, message = "${app.model.message.length} 25")
-	private String destinationIBAN;
+	private String destination_iban;
 
 	private Long employeeId;
 
 	// Add Transfer
-	public Transfer(Transaction transation, String destinationIBAN, Long employeeId) {
+	public Transfer(Transaction transation, String destination_iban, Long employeeId) {
 		super();
 		this.transation = transation;
-		this.destinationIBAN = destinationIBAN;
+		this.destination_iban = destination_iban;
 		this.employeeId = employeeId;
 	}
 
 	// Get Transfer
-	public Transfer(Long id, Transaction transation, String destinationIBAN, Long employeeId) {
+	public Transfer(Long id, Transaction transation, String destination_iban, Long employeeId) {
 		super();
 		this.id = id;
 		this.transation = transation;
-		this.destinationIBAN = destinationIBAN;
+		this.destination_iban = destination_iban;
 		this.employeeId = employeeId;
 	}
 
@@ -50,11 +50,11 @@ public class Transfer {
 	}
 
 	public String getDestinationIBAN() {
-		return destinationIBAN;
+		return destination_iban;
 	}
 
-	public void setDestinationIBAN(String destinationIBAN) {
-		this.destinationIBAN = destinationIBAN;
+	public void setDestinationIBAN(String destination_iban) {
+		this.destination_iban = destination_iban;
 	}
 
 	public Long getEmployeeId() {

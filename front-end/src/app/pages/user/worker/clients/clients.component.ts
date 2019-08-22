@@ -4,8 +4,13 @@ import { ClientService } from 'app/services/transport/client.service';
 import { first } from 'rxjs/operators';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
+<<<<<<< HEAD
 import { AuthenticationService } from 'app/services/authentication.service';
 import { AlertService } from 'app/shared/alerts';
+=======
+
+//adicionar a data correta ao modal
+>>>>>>> André
 
 @Component({
   selector: 'app-clients',
@@ -15,6 +20,7 @@ import { AlertService } from 'app/shared/alerts';
 export class ClientsComponent implements OnInit {
   clients: Client[];
   selectedClient: Client;
+<<<<<<< HEAD
   newClient: Client;
   verifyPassword: string;
   editMode = false;
@@ -62,6 +68,16 @@ export class ClientsComponent implements OnInit {
   ngOnInit() {
     this.fetchClients();
     this.role = this.authenticationService.currentUser.role;
+=======
+  clientToEdit: Client;
+  editMode = false;
+  editButtonLabel = 'Editar Dados';
+
+  constructor(private clientService: ClientService, config: NgbModalConfig, private modalService: NgbModal) { }
+
+  ngOnInit() {
+    this.fetchClients();
+>>>>>>> André
   }
 
   fetchClients() {
@@ -70,6 +86,7 @@ export class ClientsComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   addClient(form: NgForm) {
     // const newClient: Client = {
     //   address: form.value.address,
@@ -106,6 +123,9 @@ export class ClientsComponent implements OnInit {
 
   updateClient(form: NgForm) {
     console.log(form);
+=======
+  updateClient(form: NgForm) {
+>>>>>>> André
     this.selectedClient.fullName = form.value.fullName;
     this.selectedClient.birthDate = form.value.birthDate;
     this.selectedClient.nationality = form.value.nationality;
@@ -119,12 +139,18 @@ export class ClientsComponent implements OnInit {
     this.selectedClient.county = form.value.county;
     this.selectedClient.country = form.value.country;
 
+<<<<<<< HEAD
     const updatedClient = JSON.stringify(this.selectedClient);
+=======
+    let updatedClient = JSON.stringify(this.selectedClient);
+    console.log(updatedClient);
+>>>>>>> André
 
     this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
       console.log(response);
       this.fetchClients();
       this.modalService.dismissAll();
+<<<<<<< HEAD
       this.alertService.success('Cliente editado com sucesso!');
     }, error => {
       this.alertService.error(error.error.message);
@@ -163,6 +189,15 @@ export class ClientsComponent implements OnInit {
     } else {
       this.newClient = new Client();
     }
+=======
+    });
+  }
+
+  details(content, client) {
+    this.selectedClient = client;
+    this.clientToEdit = client;
+    this.clientToEdit.birthDate = this.clientToEdit.birthDate.split('T')[0];
+>>>>>>> André
     this.modalService.open(content, { size: 'lg' });
   }
 
@@ -178,6 +213,7 @@ export class ClientsComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   generatePassword(controlName: string) {
     let result = '';
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -193,4 +229,6 @@ export class ClientsComponent implements OnInit {
     }
   }
 
+=======
+>>>>>>> André
 }

@@ -7,8 +7,8 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.Root;
-import com.polarising.bootsecurity.soap.transaction.tibco.schemas.getbyiban.GetByIban;
+import com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.RootTransaction;
+import com.polarising.bootsecurity.soap.transaction.tibco.schemas.getbyiban.GetByIbanTransaction;
 
 
 /**
@@ -33,14 +33,14 @@ public interface PortTypeGetTransactionsByIban {
 
     /**
      * 
-     * @param input
+     * @param getByIban
      * @return
      *     returns com.tibco.schemas.bankrising.schemas.transaction.Root
      */
     @WebMethod(operationName = "Operation", action = "/Transactions/Service.serviceagent/PortType_GetTransactionsByIbanEndpoint1/Operation")
     @WebResult(name = "root", targetNamespace = "http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd", partName = "output")
-    public Root operation(
+    public RootTransaction operation(
         @WebParam(name = "getByIban", targetNamespace = "http://www.tibco.com/schemas/tibco/Schemas/getByIban.xsd", partName = "input")
-        GetByIban input);
+        GetByIbanTransaction getByIban);
 
 }

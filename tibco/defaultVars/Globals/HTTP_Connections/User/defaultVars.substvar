@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version = "1.0" encoding = "UTF-8"?>
 <repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
 	<globalVariables>
@@ -10,4 +11,18 @@
 			<modTime>1565277498560</modTime>
 		</globalVariable>
 	</globalVariables>
+=======
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>PortUser</name>
+			<value>8085</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1566394846535</modTime>
+		</globalVariable>
+	</globalVariables>
+>>>>>>> André
 </repository>

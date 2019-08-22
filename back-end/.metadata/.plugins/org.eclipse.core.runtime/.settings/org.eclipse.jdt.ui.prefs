@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> André
 content_assist_proposals_background=255,255,255
 content_assist_proposals_foreground=0,0,0
 eclipse.preferences.version=1
@@ -8,6 +11,7 @@ org.eclipse.jdt.ui.formatterprofiles.version=16
 spelling_locale_initialized=true
 useAnnotationsPrefPage=true
 useQuickDiffPrefPage=true
+<<<<<<< HEAD
 =======
 content_assist_proposals_background=255,255,255
 content_assist_proposals_foreground=0,0,0
@@ -18,4 +22,6 @@ org.eclipse.jdt.ui.formatterprofiles.version=16
 spelling_locale_initialized=true
 useAnnotationsPrefPage=true
 useQuickDiffPrefPage=true
+>>>>>>> André
+=======
 >>>>>>> André

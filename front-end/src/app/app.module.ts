@@ -21,8 +21,11 @@ import { ClientService } from './services/transport/client.service';
 import { AccountService } from './services/transport/account.service';
 import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.component';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
+<<<<<<< HEAD
 import { AlertComponent } from './shared/alerts/alert.component';
 import { AlertService, AlertModule } from './shared/alerts';
+=======
+>>>>>>> André
 
 
 
@@ -35,7 +38,10 @@ import { AlertService, AlertModule } from './shared/alerts';
     HomeComponent,
     LoadingSpinnerComponent],
   imports: [
+<<<<<<< HEAD
     AlertModule,
+=======
+>>>>>>> André
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,

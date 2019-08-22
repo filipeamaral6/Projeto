@@ -39,4 +39,8 @@ export class ClientService {
   updateClient(client: string) {
     return this.http.put(this.API + '/clients/update', client, httpOptions);
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> André
 }

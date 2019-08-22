@@ -6,8 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.polarising.bootsecurity.model.Account;
+import com.polarising.bootsecurity.soap.account.example.xmlns._1564670090695.AccountService;
+import com.polarising.bootsecurity.soap.account.tibco.schemas.account.InputAccount;
 import com.polarising.bootsecurity.soap.transaction.example.xmlns._1564747039855.TransactionService;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.deposit.InputDeposit;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.deposit.OutputDeposit;
-import com.polarising.bootsecurity.soap.transaction.tibco.schemas.getbyiban.GetByIban;
+import com.polarising.bootsecurity.soap.transaction.tibco.schemas.getbyiban.GetByIbanTransaction;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.getbyid.GetById;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.payment.InputPayment;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.payment.OutputPayment;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.InputTransaction;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.OutputTransaction;
-import com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.Root;
+import com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.RootTransaction;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.transfer.InputTransfer;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.withdraw.InputWithdraw;
 import com.polarising.bootsecurity.soap.transaction.tibco.schemas.withdraw.OutputWithdraw;
@@ -40,17 +41,46 @@ public class TransactionController {
 	// Add Transfer
 	@PostMapping("transfer/add")
 	public ResponseEntity<Object> AddTransfer(@Valid @RequestBody InputTransfer inputTransfer, BindingResult result) {
+			
+
+			HashMap<String, String> error = new HashMap<>();
+			boolean noMoneyError = false;
+			
+			AccountService accountService = new AccountService();
+			GetByIban getByIban = new GetByIban();
+			getByIban.setIban(inputTransfer.getAccountIban());
+
+			Root getAccountByIban = accountService.getPortTypeGetAccountByIbanEndpoint1().operation(getByIban);
+
+			InputAccount currentAccount = getAccountByIban.getInputAccount().get(0);
+			
+			
+			
+			if (Double.parseDouble(currentAccount.getBalance()) - Double.parseDouble(inputTransfer.getValue()) < 0) {
+				error.put("field", "balance");
+				error.put("message", "Não tem saldo suficiente para fazer executar esta operação!");
+				noMoneyError = true;
+			}
+			
+			if (!result.hasErrors() && !noMoneyError) {
 
 		AccountController accountController = new AccountController();
 		HashMap<String, String> error = new HashMap<>();
 		boolean noMoneyError = false;
 		Account currentAccount = (Account) accountController.getAccountByIban(inputTransfer.getAccountIban()).getBody();
 
-		if (currentAccount.getBalance() - Double.parseDouble(inputTransfer.getValue()) < 0) {
-			error.put("field", "balance");
-			error.put("message", "Não tem saldo suficiente para fazer executar esta operação");
-			noMoneyError = true;
-		}
+			}
+			
+			if (result.hasErrors()) {
+				error.put("field", result.getFieldError().getField());
+				error.put("message", result.getFieldError().getDefaultMessage());
+	
+			}
+			
+			if (getAccountByIban.getInputAccount().isEmpty()) {
+				return getAccountByIban.getOutputAccount();
+			} 			
+			return error;
 
 		if (!result.hasErrors() && !noMoneyError) {
 
@@ -59,6 +89,31 @@ public class TransactionController {
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
+		
+		// Add Withdraw
+		@PostMapping("withdraw/add")
+		public Object AddWithdraw(@Valid @RequestBody InputWithdraw inputWithdraw, BindingResult result) {
+			
+			HashMap<String, String> error = new HashMap<>();
+			boolean noMoneyError = false;
+			
+			AccountService accountService = new AccountService();
+			GetByIban getByIban = new GetByIban();
+			getByIban.setIban(inputWithdraw.getAccountIban());
+
+			Root getAccountByIban = accountService.getPortTypeGetAccountByIbanEndpoint1().operation(getByIban);
+
+			InputAccount currentAccount = getAccountByIban.getInputAccount().get(0);
+			
+			
+			
+			if (Double.parseDouble(currentAccount.getBalance()) - Double.parseDouble(inputWithdraw.getValue()) < 0) {
+				error.put("field", "balance");
+				error.put("message", "Não tem saldo suficiente para fazer executar esta operação");
+				noMoneyError = true;
+			}
+			
+			if (!result.hasErrors() && !noMoneyError) {
 
 		if (result.hasErrors()) {
 			error.put("field", result.getFieldError().getField());
@@ -83,6 +138,30 @@ public class TransactionController {
 			error.put("message", "Não tem saldo suficiente para fazer executar esta operação");
 			noMoneyError = true;
 		}
+		
+		// Add Payment
+		@PostMapping("payment/add")
+		public Object AddPayment(@Valid @RequestBody InputPayment inputPayment, BindingResult result) {
+			
+			HashMap<String, String> error = new HashMap<>();
+			boolean noMoneyError = false;
+			
+			AccountService accountService = new AccountService();
+			GetByIban getByIban = new GetByIban();
+			getByIban.setIban(inputPayment.getAccountIban());
+
+			Root getAccountByIban = accountService.getPortTypeGetAccountByIbanEndpoint1().operation(getByIban);
+
+			InputAccount currentAccount = getAccountByIban.getInputAccount().get(0);
+			
+			
+			
+			if (Double.parseDouble(currentAccount.getBalance()) - Double.parseDouble(inputPayment.getValue()) < 0) {
+				error.put("field", "balance");
+				error.put("message", "Não tem saldo suficiente para fazer executar esta operação");
+				noMoneyError = true;
+			}
+			if (!result.hasErrors() && !noMoneyError) {
 
 		if (!result.hasErrors() && !noMoneyError) {
 
@@ -91,6 +170,16 @@ public class TransactionController {
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
+		
+		// Add Deposit
+		@PostMapping("deposit/add")
+		public Object AddDeposit(@Valid @RequestBody InputDeposit inputDeposit, BindingResult result) {
+			
+			HashMap<String, String> error = new HashMap<>();
+			
+		
+			
+			if (!result.hasErrors()) {
 
 		if (result.hasErrors()) {
 			error.put("field", result.getFieldError().getField());
@@ -122,7 +211,7 @@ public class TransactionController {
 			OutputPayment message = transactionService.getPortTypePaymentEndpoint1().writePayment(inputPayment);
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
-		}
+			com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.RootTransaction getTransactionById = transactionService.getPortTypeTransactionByIdEndpoint1().operation(getById);
 
 		if (result.hasErrors()) {
 			error.put("field", result.getFieldError().getField());
@@ -131,7 +220,9 @@ public class TransactionController {
 		}
 		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
-	}
+		// Get Transaction by IBAN
+		@GetMapping("transaction/accountIBAN/{accountIBAN}")
+		public Object getTransactionByIBAN(@PathVariable String accountIBAN) {
 
 	// Add Deposit
 	@PostMapping("transfer/add")
@@ -142,10 +233,10 @@ public class TransactionController {
 		if (!result.hasErrors()) {
 
 			TransactionService transactionService = new TransactionService();
-			OutputDeposit message = transactionService.getPortTypeDepositEndpoint1().writeDeposit(inputDeposit);
-			return new ResponseEntity<Object>(message, HttpStatus.OK);
+			GetByIbanTransaction getByIban = new GetByIbanTransaction();
+			getByIban.setIban(accountIBAN);
 
-		}
+			RootTransaction getTransactionsByIban = transactionService.getPortTypeGetTransactionsByIbanEndpoint1().operation(getByIban);
 
 		if (result.hasErrors()) {
 			error.put("field", result.getFieldError().getField());
@@ -154,7 +245,8 @@ public class TransactionController {
 		}
 		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
-	}
+			TransactionService transactionService = new TransactionService();
+			RootTransaction getTransactions = transactionService.getPortTypeGetAllTransactionsEndpoint1().operation();
 
 	// Get Transaction by Id
 	@GetMapping("transaction/id/{id}")
