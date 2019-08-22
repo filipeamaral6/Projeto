@@ -37,7 +37,7 @@ export class ClientService {
   }
 
   updateUser(client: string) {
-    return this.http.put(this.API + '/clients/update' + client, httpOptions);
+    return this.http.put(this.API + '/clients/update', client, httpOptions);
   }
 
 }

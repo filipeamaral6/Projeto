@@ -14,13 +14,13 @@ const ROUTES = [
   { path: 'movements', title: 'Movimentos', icon: 'nc-single-copy-04', class: '' },
   { path: 'transfer', title: 'Transferências', icon: 'nc-credit-card', class: '' },
   { path: 'payments', title: 'Pagamentos', icon: 'nc-cart-simple', class: '' }
- ];
+];
 
 @Component({
-    selector: 'app-client-layout',
-    templateUrl: './client-layout.component.html',
-    styleUrls: ['./client-layout.scss']
-  })
+  selector: 'app-client-layout',
+  templateUrl: './client-layout.component.html',
+  styleUrls: ['./client-layout.scss']
+})
 
 export class ClientLayoutComponent implements OnInit {
   private currentUser: CurrentUser;
@@ -47,7 +47,7 @@ export class ClientLayoutComponent implements OnInit {
   ngOnInit() {
     this.routes = ROUTES;
     this.initAccounts();
-    // this.getClientInfo();
+    this.getClientInfo();
     // this.getClientAccounts();
   }
 
@@ -63,15 +63,12 @@ export class ClientLayoutComponent implements OnInit {
     return this.accountService.getById(accountId).pipe(first());
   }
 
+  private getClientInfo() {
 
-
-  // private getClientInfo() {
-
-  //   this.clientService.getById(this.currentUser.id).pipe(first()).subscribe(client => {
-  //     this.client = client[0];
-  //     console.log(this.client);
-  //   });
-  // }
+    this.clientService.getById(this.currentUser.id).pipe(first()).subscribe(client => {
+      this.client = client[0];
+    });
+  }
 
   // private getClientAccounts() {
   //   this.accountService.getById(this.currentUser.id).pipe(first()).subscribe( accounts => {
@@ -84,7 +81,7 @@ export class ClientLayoutComponent implements OnInit {
   }
 
   public refreshData() {
-    // this.getClientInfo();
+    this.getClientInfo();
     // this.getClientAccounts();
     // this.getClientMovements();
   }
@@ -101,29 +98,29 @@ export class ClientLayoutComponent implements OnInit {
       createdAt: new Date(),
       employeeId: 123456789,
     },
-    this.account2 = {
-      id: 2,
-      type: 'Ordem',
-      iban: 'PT500001000000002',
-      accountNumber: 1000000002,
-      balance: 500,
-      interest: 0.001,
-      status: 'ACTIVE',
-      createdAt: new Date(),
-      employeeId: 123456789,
-    },
-    this.account3 = {
-      id: 3,
-      type: 'Poupança',
-      iban: 'PT500001000000003',
-      accountNumber: 1000000003,
-      balance: 500,
-      interest: 0.001,
-      status: 'ACTIVE',
-      createdAt: new Date(),
-      employeeId: 123456789,
-    }
-    this.accountList = [ this.account1, this.account2, this.account3 ];
+      this.account2 = {
+        id: 2,
+        type: 'Ordem',
+        iban: 'PT500001000000002',
+        accountNumber: 1000000002,
+        balance: 500,
+        interest: 0.001,
+        status: 'ACTIVE',
+        createdAt: new Date(),
+        employeeId: 123456789,
+      },
+      this.account3 = {
+        id: 3,
+        type: 'Poupança',
+        iban: 'PT500001000000003',
+        accountNumber: 1000000003,
+        balance: 500,
+        interest: 0.001,
+        status: 'ACTIVE',
+        createdAt: new Date(),
+        employeeId: 123456789,
+      }
+    this.accountList = [this.account1, this.account2, this.account3];
   }
 
 }

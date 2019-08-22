@@ -1,0 +1,45 @@
+div.card-body.col-md-12 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+div.row.col-md-12 {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin: 0px;
+}
+
+#transferCol {
+  padding-left: 0px;
+}
+
+.payment-value {
+  padding-top: 6px;
+}
+
+.eye-icon {
+  font-size: 18px;
+  border-left-width: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.pass-control {
+  flex: 1;
+  border-right-width: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.security-code {
+  display: flex;
+  flex-direction: row;
+}
+
+#eyeOpen {
+  color: lightskyblue;
+}
+
+#eyeClose:hover {
+  color: lightskyblue;
+}

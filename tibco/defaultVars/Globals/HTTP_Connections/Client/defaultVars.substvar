@@ -3,11 +3,15 @@
 	<globalVariables>
 		<globalVariable>
 			<name>Client_Port</name>
-			<value>8099</value>
+			<value>8098</value>
 			<deploymentSettable>true</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
+<<<<<<< HEAD
 			<modTime>1566309407365</modTime>
+=======
+			<modTime>1565610080264</modTime>
+>>>>>>> Filipe
 		</globalVariable>
 		<globalVariable>
 			<name>Client_Url</name>
