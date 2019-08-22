@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.component';
 import { Client } from 'app/shared/models/Client';
 import { ClientService } from 'app/services/transport/client.service';
-import { User } from 'app/shared/models/User';
 import { CurrentUser } from 'app/shared/models/CurrentUser';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'app/services/authentication.service';
@@ -22,13 +21,14 @@ export class ClientDetailComponent implements OnInit {
   teste = 'ertyghjklkcmnjv hjhfbvjhbd';
 
   constructor(
-    private clientLayout: ClientLayoutComponent, private clientService: ClientService, private authenticationService: AuthenticationService) {
+    private clientLayout: ClientLayoutComponent,
+    private clientService: ClientService,
+    private authenticationService: AuthenticationService) {
     this.currentUser = authenticationService.currentUserValue;
   }
 
   ngOnInit() {
     this.getClientInfo();
-
   }
 
   private getClientInfo() {
@@ -56,14 +56,13 @@ export class ClientDetailComponent implements OnInit {
       this.client.notification = 'TRUE';
     }
 
-    console.log(this.client.notification);
-    let clientToJSON = JSON.stringify(this.client);
+    const clientToJSON = JSON.stringify(this.client);
 
     this.clientService.updateUser(clientToJSON)
       .pipe(first())
       .subscribe(
         data => {
-          alert('Notificação por Email atualizada com sucesso!');
+          alert('Notificação por email atualizada com sucesso!');
         },
         error => {
         });

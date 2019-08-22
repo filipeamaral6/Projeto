@@ -12,11 +12,13 @@ import { Account } from 'app/shared/models/Account';
 
 export class TransferComponent implements OnInit {
 
+  selectedAccount: Account = null;
+  isEyeOpen = false;
   // accounts: Account[];
 
   constructor(
     private clientLayout: ClientLayoutComponent,
-  ) {}
+  ) { }
 
   ngOnInit() {
     // this.accounts = this.getAccountList();
@@ -28,6 +30,15 @@ export class TransferComponent implements OnInit {
 
   getAccountList() {
     return this.clientLayout.getAccounts;
+  }
+
+  showPass() {
+    if (!this.isEyeOpen) {
+      this.isEyeOpen = true;
+    } else {
+      this.isEyeOpen = false;
+    }
+
   }
 
 }
