@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.polarising.bootsecurity.soap.client.example.xmlns._1564670621329.ClientService;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.OutputClient;
@@ -33,10 +32,9 @@ import com.polarising.bootsecurity.soap.client.tibco.schemas.getbyid.GetById;
 @CrossOrigin(origins = "*")
 public class ClientController {
 
-	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	// Add Client
 	@PostMapping("clients/add")
 	public ResponseEntity<Object> AddClient(@Valid @RequestBody InputClient inputClient, BindingResult result) {
@@ -62,7 +60,7 @@ public class ClientController {
 
 	// Get Clients
 	@GetMapping("clients")
-	public List<Object> getClients() {
+	public ResponseEntity<List<Object>> getClients() {
 
 		ClientService clientService = new ClientService();
 		Root getClients = clientService.getPortTypeGetAllClientsEndpoint1().operation();
@@ -77,12 +75,12 @@ public class ClientController {
 			message.add(getClients.getOutputClient());
 		}
 
-		return message;
+		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
 	}
 
 	// Get Client by Id
 	@GetMapping("clients/id/{id}")
-	public Object getClientById(@PathVariable String id) {
+	public ResponseEntity<Object> getClientById(@PathVariable String id) {
 
 		ClientService clientService = new ClientService();
 		GetById getById = new GetById();
@@ -90,16 +88,16 @@ public class ClientController {
 		Root getClientById = clientService.getPortTypeGetClientByIdEndpoint1().operation(getById);
 
 		if (getClientById.getInputClient().isEmpty()) {
-			return getClientById.getOutputClient();
+			return new ResponseEntity<Object>(getClientById.getOutputClient(), HttpStatus.OK);
 		} else {
-			return getClientById.getInputClient();
+			return new ResponseEntity<Object>(getClientById.getInputClient(), HttpStatus.OK);
 		}
 
 	}
 
 	// Get Client by CC
 	@GetMapping("clients/cc/{cc}")
-	public Object getClientByCC(@PathVariable String cc) {
+	public ResponseEntity<Object> getClientByCC(@PathVariable String cc) {
 
 		ClientService clientService = new ClientService();
 		GetByClientCC getByCC = new GetByClientCC();
@@ -107,9 +105,9 @@ public class ClientController {
 		Root getClientByCC = clientService.getPortTypeGetClientByCcEndpoint1().operation(getByCC);
 
 		if (getClientByCC.getInputClient().isEmpty()) {
-			return getClientByCC.getOutputClient();
+			return new ResponseEntity<Object>(getClientByCC.getOutputClient(), HttpStatus.OK);
 		} else {
-			return getClientByCC.getInputClient();
+			return new ResponseEntity<Object>(getClientByCC.getInputClient(), HttpStatus.OK);
 		}
 	}
 
