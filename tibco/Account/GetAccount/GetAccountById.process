@@ -10,7 +10,7 @@
         <pfx:GetAccountByIdOutput>
             <output>
                 <ns2:root>
-                    <xsl:for-each select="$Query_GetAccountById/resultSet/Record">
+                    <xsl:for-each select="$Query_GetAccountById/resultSet/Record[1]">
                         <ns2:inputAccount>
                             <xsl:attribute name="id">
                                 <xsl:value-of select="id"/>
@@ -61,7 +61,7 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAccountByIdOutput"/>
-    <pd:endX>469</pd:endX>
+    <pd:endX>468</pd:endX>
     <pd:endY>156</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
@@ -106,15 +106,15 @@
     <pd:activity name="Query_GetAccountById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>269</pd:x>
-        <pd:y>156</pd:y>
+        <pd:x>267</pd:x>
+        <pd:y>152</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT account.*, account_client.user_id  FROM account, account_client  WHERE account.id=account_client.account_id AND id=?</statement>
+            <statement>SELECT account.*, account_client.account_id, account_client.user_id FROM account,  account_client  WHERE account.id=account_client.account_id  AND account.id=(?)</statement>
             <Prepared_Param_DataType>
                 <parameter>
                     <parameterName>id</parameterName>
@@ -156,6 +156,10 @@
             <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>account_id</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>

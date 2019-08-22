@@ -4,13 +4,13 @@
     <pd:name>Transactions/Transaction/GetTransactionById.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetTransactionByIdInput"/>
-    <pd:startX>180</pd:startX>
-    <pd:startY>221</pd:startY>
+    <pd:startX>47</pd:startX>
+    <pd:startY>35</pd:startY>
     <pd:returnBindings>
         <pfx:GetTransactionByIdOuput>
             <output>
                 <ns2:root>
-                    <xsl:for-each select="$Query_GetTransactionByAccountIban/resultSet/Record">
+                    <xsl:for-each select="$Query_GetTransactionById/resultSet/Record">
                         <ns2:inputTransaction>
                             <xsl:attribute name="id">
                                 <xsl:value-of select="id"/>
@@ -45,7 +45,7 @@
                         </ns2:inputTransaction>
                     </xsl:for-each>
                     <xsl:choose>
-                        <xsl:when test="not(exists($Query_GetTransactionByAccountIban/resultSet/Record))">
+                        <xsl:when test="not(exists($Query_GetTransactionById/resultSet/Record))&#xA;or $_error_Query_GetTransactionById/ActivityErrors&#xA;or $_error_GetDepositTransaction/ActivityErrors&#xA;or $_error_GetPaymentTransaction/ActivityErrors&#xA;or $_error_GetTransferTransaction/ActivityErrors&#xA;or $_error_GetWithdrawTransaction/ActivityErrors">
                             <ns2:outputTransaction>
                                 <xsl:attribute name="message">
                                     <xsl:value-of select="$message/root/message"/>
@@ -53,14 +53,55 @@
                             </ns2:outputTransaction>
                         </xsl:when>
                     </xsl:choose>
+                    <xsl:for-each select="$GetDepositTransaction/resultSet/Record">
+                        <ns2:DepositTransaction>
+                            <xsl:attribute name="employee_id">
+                                <xsl:value-of select="employee_id"/>
+                            </xsl:attribute>
+                        </ns2:DepositTransaction>
+                    </xsl:for-each>
+                    <xsl:for-each select="$GetWithdrawTransaction/resultSet/Record">
+                        <ns2:WithdrawTransaction>
+                            <xsl:attribute name="employee_id">
+                                <xsl:value-of select="employee_id"/>
+                            </xsl:attribute>
+                        </ns2:WithdrawTransaction>
+                    </xsl:for-each>
+                    <xsl:for-each select="$GetPaymentTransaction/resultSet/Record">
+                        <ns2:PaymentTransaction>
+                            <xsl:attribute name="entity">
+                                <xsl:value-of select="entity"/>
+                            </xsl:attribute>
+                            <xsl:attribute name="reference">
+                                <xsl:value-of select="reference"/>
+                            </xsl:attribute>
+                            <xsl:if test="employee_id">
+                                <xsl:attribute name="employee_id">
+                                    <xsl:value-of select="employee_id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </ns2:PaymentTransaction>
+                    </xsl:for-each>
+                    <xsl:for-each select="$GetTransferTransaction/resultSet/Record">
+                        <ns2:TransferTransaction>
+                            <xsl:attribute name="destination_iban">
+                                <xsl:value-of select="destination_iban"/>
+                            </xsl:attribute>
+                            <xsl:if test="employee_id">
+                                <xsl:attribute name="employee_id">
+                                    <xsl:value-of select="employee_id"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                        </ns2:TransferTransaction>
+                    </xsl:for-each>
                 </ns2:root>
             </output>
         </pfx:GetTransactionByIdOuput>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetTransactionByIdOuput"/>
-    <pd:endX>700</pd:endX>
-    <pd:endY>222</pd:endY>
+    <pd:endX>783</pd:endX>
+    <pd:endY>272</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -74,27 +115,11 @@
         </message>
     </pd:processVariables>
     <pd:targetNamespace>http://xmlns.example.com/1564743247316</pd:targetNamespace>
-    <pd:activity name="Account_IBAN_NOTEXISTS">
-        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
-        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>519</pd:x>
-        <pd:y>223</pd:y>
-        <config>
-            <variableName>message</variableName>
-        </config>
-        <pd:inputBindings>
-            <root>
-                <message>
-                    <xsl:value-of select="&quot;Conta não encontrada!&quot;"/>
-                </message>
-            </root>
-        </pd:inputBindings>
-    </pd:activity>
     <pd:activity name="NOT_FOUND">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>698</pd:x>
-        <pd:y>62</pd:y>
+        <pd:x>1086</pd:x>
+        <pd:y>50</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -106,93 +131,23 @@
             </root>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="Query_GetAccountByIban">
+    <pd:activity name="Query_GetTransactionById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>340</pd:x>
-        <pd:y>225</pd:y>
+        <pd:x>197</pd:x>
+        <pd:y>36</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT * FROM account WHERE id=?</statement>
+            <statement>SELECT * FROM transaction WHERE id=?
+</statement>
+            <wizardData/>
             <Prepared_Param_DataType>
                 <parameter>
                     <parameterName>id</parameterName>
-                    <dataType>INTEGER</dataType>
-                </parameter>
-            </Prepared_Param_DataType>
-            <oraObjects/>
-            <oraTables/>
-            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>type</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>iban</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>account_number</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>balance</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>8</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>DOUBLE</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>interest</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>8</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>DOUBLE</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>created_at</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>93</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-        </config>
-        <pd:inputBindings>
-            <jdbcQueryActivityInput>
-                <id>
-                    <xsl:choose>
-                        <xsl:when test="exists($Start/pfx:GetTransactionByIdInput/input/ns:getById/@id)">
-                            <xsl:value-of select="$Start/pfx:GetTransactionByIdInput/input/ns:getById/@id"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </id>
-            </jdbcQueryActivityInput>
-        </pd:inputBindings>
-    </pd:activity>
-    <pd:activity name="Query_GetTransactionByAccountIban">
-        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
-        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>342</pd:x>
-        <pd:y>61</pd:y>
-        <config>
-            <timeout>10</timeout>
-            <commit>false</commit>
-            <maxRows>100</maxRows>
-            <emptyStrAsNil>false</emptyStrAsNil>
-            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT * FROM transaction WHERE account_id=?</statement>
-            <Prepared_Param_DataType>
-                <parameter>
-                    <parameterName>account_id</parameterName>
                     <dataType>INTEGER</dataType>
                 </parameter>
             </Prepared_Param_DataType>
@@ -233,7 +188,7 @@
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
-                <account_id>
+                <id>
                     <xsl:choose>
                         <xsl:when test="exists($Start/pfx:GetTransactionByIdInput/input/ns:getById/@id)">
                             <xsl:value-of select="$Start/pfx:GetTransactionByIdInput/input/ns:getById/@id"/>
@@ -242,15 +197,15 @@
                             <xsl:attribute name="xsi:nil">true</xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
-                </account_id>
+                </id>
             </jdbcQueryActivityInput>
         </pd:inputBindings>
     </pd:activity>
     <pd:activity name="Catch">
         <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
         <pd:resourceType>ae.activities.catch</pd:resourceType>
-        <pd:x>938</pd:x>
-        <pd:y>219</pd:y>
+        <pd:x>1121</pd:x>
+        <pd:y>260</pd:y>
         <pd:handler>true</pd:handler>
         <config>
             <catchAll>true</catchAll>
@@ -260,8 +215,8 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>830</pd:x>
-        <pd:y>221</pd:y>
+        <pd:x>991</pd:x>
+        <pd:y>263</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -273,28 +228,254 @@
             </root>
         </pd:inputBindings>
     </pd:activity>
+    <pd:activity name="GetWithdrawTransaction">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>83</pd:x>
+        <pd:y>255</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM  withdraw 
+WHERE transaction_id=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>transaction_id</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>transaction_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <transaction_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:GetTransactionByIdInput/input/ns:getById/@id)">
+                            <xsl:value-of select="$Start/pfx:GetTransactionByIdInput/input/ns:getById/@id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </transaction_id>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="GetDepositTransaction">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>898</pd:x>
+        <pd:y>78</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <statement>SELECT * FROM deposit WHERE transaction_id=?</statement>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>transaction_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>depositer_name</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>depositer_cc_number</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>transaction_id</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <transaction_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:GetTransactionByIdInput/input/ns:getById/@id)">
+                            <xsl:value-of select="$Start/pfx:GetTransactionByIdInput/input/ns:getById/@id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </transaction_id>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="GetTransferTransaction">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>677</pd:x>
+        <pd:y>135</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM transfer
+ WHERE transaction_id=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>transaction_id</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>destination_iban</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>transaction_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <transaction_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:GetTransactionByIdInput/input/ns:getById/@id)">
+                            <xsl:value-of select="$Start/pfx:GetTransactionByIdInput/input/ns:getById/@id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </transaction_id>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="GetPaymentTransaction">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>417</pd:x>
+        <pd:y>195</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM payment 
+WHERE transaction_id=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>transaction_id</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>entity</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>reference</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>transaction_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <transaction_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:GetTransactionByIdInput/input/ns:getById/@id)">
+                            <xsl:value-of select="$Start/pfx:GetTransactionByIdInput/input/ns:getById/@id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </transaction_id>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Map Data">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>312</pd:x>
+        <pd:y>98</pd:y>
+        <config>
+            <element>
+                <xsd:element name="root">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="param" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </element>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <xsl:for-each select="$Query_GetTransactionById/resultSet/Record/type">
+                    <param>
+                        <xsl:value-of select="lower-case(current())"/>
+                    </param>
+                </xsl:for-each>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
-        <pd:from>Start</pd:from>
-        <pd:to>Query_GetAccountByIban</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_GetAccountByIban</pd:from>
-        <pd:to>Query_GetTransactionByAccountIban</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_GetAccountByIban/resultSet/Record)</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_GetTransactionByAccountIban</pd:from>
+        <pd:from>Query_GetTransactionById</pd:from>
         <pd:to>NOT_FOUND</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_GetTransactionByAccountIban/resultSet/Record))</pd:xpath>
+        <pd:xpath>not(exists($Query_GetTransactionById/resultSet/Record))</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>NOT_FOUND</pd:from>
@@ -302,29 +483,6 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_GetAccountByIban</pd:from>
-        <pd:to>Account_IBAN_NOTEXISTS</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_GetAccountByIban/resultSet/Record))</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Account_IBAN_NOTEXISTS</pd:from>
-        <pd:to>End</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_GetTransactionByAccountIban</pd:from>
-        <pd:to>End</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_GetTransactionByAccountIban/resultSet/Record)</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Catch</pd:from>
@@ -339,5 +497,79 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Query_GetTransactionById</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetWithdrawTransaction</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetPaymentTransaction</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetTransferTransaction</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetDepositTransaction</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_GetTransactionById</pd:from>
+        <pd:to>Map Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Map Data</pd:from>
+        <pd:to>GetTransferTransaction</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Map-Data/root/param = "transfer"</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Map Data</pd:from>
+        <pd:to>GetWithdrawTransaction</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Map-Data/root/param = "withdraw"</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Map Data</pd:from>
+        <pd:to>GetPaymentTransaction</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Map-Data/root/param = "payment"</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Map Data</pd:from>
+        <pd:to>GetDepositTransaction</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Map-Data/root/param = "deposit"</pd:xpath>
     </pd:transition>
 </pd:ProcessDefinition>

@@ -20,3 +20,4 @@ CREATE TABLE `client` (
   KEY `client_user_fk` (`user_id`),
   CONSTRAINT `client_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+

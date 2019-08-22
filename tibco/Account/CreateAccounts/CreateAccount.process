@@ -76,13 +76,13 @@
         </pd:transition>
         <pd:transition>
             <pd:from>GET_LAST_INSERT_ID</pd:from>
-            <pd:to>Update_Account_Client</pd:to>
+            <pd:to>CreateAccount_Client</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
         </pd:transition>
         <pd:transition>
-            <pd:from>Update_Account_Client</pd:from>
+            <pd:from>CreateAccount_Client</pd:from>
             <pd:to>SUCCESS</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
@@ -91,8 +91,8 @@
         <pd:activity name="CreateAccount">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>229</pd:x>
-            <pd:y>301</pd:y>
+            <pd:x>228</pd:x>
+            <pd:y>306</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -205,11 +205,11 @@
                 </jdbcUpdateActivityInput>
             </pd:inputBindings>
         </pd:activity>
-        <pd:activity name="Update_Account_Client">
+        <pd:activity name="CreateAccount_Client">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>532</pd:x>
-            <pd:y>305</pd:y>
+            <pd:x>534</pd:x>
+            <pd:y>306</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>

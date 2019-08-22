@@ -5,8 +5,8 @@
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Deposit.xsd" location="../Schemas/Deposit.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Payment.xsd" location="../Schemas/Payment.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transfer.xsd" location="../Schemas/Transfer.xsd"/>
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd" location="../Schemas/Transaction.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Withdraw.xsd" location="../Schemas/Withdraw.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Transaction.xsd" location="../Schemas/Transaction.xsd"/>
     <message name="WriteDepositInput">
         <part name="input" element="ns9:inputDeposit"/>
     </message>
@@ -49,6 +49,9 @@
     </message>
     <message name="WriteTransactionOutpu">
         <part name="output" element="ns8:root"/>
+    </message>
+    <message name="GetDetailTransaction">
+        <part name="output" element="ns8:detailTransaction"/>
     </message>
     <portType name="PortType_Deposit">
         <operation name="WriteDeposit">
