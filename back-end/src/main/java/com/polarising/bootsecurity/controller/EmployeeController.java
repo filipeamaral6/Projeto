@@ -72,6 +72,7 @@ public class EmployeeController {
 			}
 		} else {
 			message.add(getEmployees.getOutputEmployee());
+			return new ResponseEntity<List<Object>>(message, HttpStatus.BAD_REQUEST);
 		}
 
 		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
@@ -89,7 +90,7 @@ public class EmployeeController {
 		Root getEmployeeById = employeeService.getPortTypeGetEmployeeEndpoint1().operation(getById);
 
 		if (getEmployeeById.getInputEmployee().isEmpty()) {
-			return new ResponseEntity<Object>(getEmployeeById.getOutputEmployee(), HttpStatus.OK);
+			return new ResponseEntity<Object>(getEmployeeById.getOutputEmployee(), HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<Object>(getEmployeeById.getInputEmployee(), HttpStatus.OK);
 		}

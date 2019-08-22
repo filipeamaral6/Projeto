@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.polarising.bootsecurity.soap.account.example.xmlns._1564670090695.AccountService;
+
 import com.polarising.bootsecurity.soap.client.example.xmlns._1564670621329.ClientService;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.OutputClient;
@@ -52,13 +52,14 @@ public class ClientController {
 
 		}
 		
-		if (result.hasErrors()) {
+		
 		HashMap<String, String> error = new HashMap<>();
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
-
+		
 		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
-	}
+	
+		
 }
 	// Get Clients
 	@GetMapping("clients")

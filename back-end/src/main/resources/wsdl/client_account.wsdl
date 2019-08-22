@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1566480228153" xmlns:ns0="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:ns1="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" name="Untitled" targetNamespace="http://xmlns.example.com/1566480228153">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="getById">
+                <xs:complexType>
+                    <xs:attribute name="id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:getById"/>
+                        <xs:element ref="ns0:user_id"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="user_id">
+                <xs:complexType>
+                    <xs:attribute name="user_id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="inputAccount">
+                <xs:complexType>
+                    <xs:attribute name="account_number" type="xs:string"/>
+                    <xs:attribute name="balance" type="xs:string"/>
+                    <xs:attribute name="created_at" type="xs:string"/>
+                    <xs:attribute name="employee_id" type="xs:string"/>
+                    <xs:attribute name="iban" type="xs:string"/>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="interest" type="xs:string"/>
+                    <xs:attribute name="status" type="xs:string"/>
+                    <xs:attribute name="type" type="xs:string"/>
+                    <xs:attribute name="user_id" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="outputAccount">
+                <xs:complexType>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:inputAccount" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="ns1:outputAccount" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="inputClient">
+                <xs:complexType>
+                    <xs:attribute name="address" type="xs:string"/>
+                    <xs:attribute name="birthDate" type="xs:string"/>
+                    <xs:attribute name="client_cc" type="xs:string"/>
+                    <xs:attribute name="country" type="xs:string"/>
+                    <xs:attribute name="county" type="xs:string"/>
+                    <xs:attribute name="created_at" type="xs:string"/>
+                    <xs:attribute name="email" type="xs:string"/>
+                    <xs:attribute name="full_name" type="xs:string"/>
+                    <xs:attribute name="id" type="xs:string"/>
+                    <xs:attribute name="login_password" type="xs:string"/>
+                    <xs:attribute name="mobile_number" type="xs:string"/>
+                    <xs:attribute name="nationality" type="xs:string"/>
+                    <xs:attribute name="nif" type="xs:string"/>
+                    <xs:attribute name="notification" type="xs:string"/>
+                    <xs:attribute name="phone_number" type="xs:string"/>
+                    <xs:attribute name="role" type="xs:string"/>
+                    <xs:attribute name="status" type="xs:string"/>
+                    <xs:attribute name="transaction_password" type="xs:string"/>
+                    <xs:attribute name="user_id" type="xs:string"/>
+                    <xs:attribute name="username" type="xs:string"/>
+                    <xs:attribute name="zip_code" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="outputClient">
+                <xs:complexType>
+                    <xs:attribute name="message" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="root">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns2:inputClient" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="ns2:outputClient" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="Service">
+        <wsdl:port name="PortType_GetClientAccountsEndpoint1" binding="tns:PortType_GetClientAccountsEndpoint1Binding">
+            <soap:address location="http://localhost:8086/Client_Account/Service.serviceagent/PortType_GetClientAccountsEndpoint1"/>
+        </wsdl:port>
+        <wsdl:port name="PortType_GetAccountClientsEndpoint1" binding="tns:PortType_GetAccountClientsEndpoint1Binding">
+            <soap:address location="http://localhost:8086/Client_Account/Service.serviceagent/PortType_GetAccountClientsEndpoint1"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="PortType_GetClientAccounts">
+        <wsdl:operation name="Operation">
+            <wsdl:input message="tns:GetClientAccountsInput"/>
+            <wsdl:output message="tns:GetClientAccountsOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="PortType_GetAccountClients">
+        <wsdl:operation name="Operation">
+            <wsdl:input message="tns:GetAccountClientsInput"/>
+            <wsdl:output message="tns:GetAccountClientsOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PortType_GetClientAccountsEndpoint1Binding" type="tns:PortType_GetClientAccounts">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Operation">
+            <soap:operation style="document" soapAction="/Client_Account/Service.serviceagent/PortType_GetClientAccountsEndpoint1/Operation"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="PortType_GetAccountClientsEndpoint1Binding" type="tns:PortType_GetAccountClients">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Operation">
+            <soap:operation style="document" soapAction="/Client_Account/Service.serviceagent/PortType_GetAccountClientsEndpoint1/Operation"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="input"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="output"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="GetClientAccountsInput">
+        <wsdl:part name="input" element="ns0:getById"/>
+    </wsdl:message>
+    <wsdl:message name="GetClientAccountsOutput">
+        <wsdl:part name="output" element="ns1:inputAccount"/>
+    </wsdl:message>
+    <wsdl:message name="GetAccountClientsInput">
+        <wsdl:part name="input" element="ns0:getById"/>
+    </wsdl:message>
+    <wsdl:message name="GetAccountClientsOutput">
+        <wsdl:part name="output" element="ns2:inputClient"/>
+    </wsdl:message>
+</wsdl:definitions>
