@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Globals } from 'app/shared/Globals';
+import { Account } from 'app/shared/models/Account';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -35,7 +36,7 @@ export class AccountService {
   }
 
   updateAccount(account: string) {
-    return this.http.put(this.API + '/accountss/update' + account, httpOptions);
+    return this.http.put(this.API + '/accounts/update', account, httpOptions);
   }
 
 }

@@ -1,11 +1,11 @@
 <div class="wrapper">
-    <alert></alert>
     <div class="sidebar" data-color="white" data-active-color="danger">
         <sidebar-cmp [menuItems]="routes"></sidebar-cmp>
     </div>
     <div class="main-panel">
         <navbar-cmp [listTitles]="routes" [subPath]="'client'"></navbar-cmp>
         <div class="content">
+            
             <router-outlet></router-outlet>
         </div>
         <footer-cmp></footer-cmp>

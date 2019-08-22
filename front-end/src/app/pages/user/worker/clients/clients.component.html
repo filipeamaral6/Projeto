@@ -1,4 +1,3 @@
-<alert></alert>
 <div class="card">
   <div class="card-body">
     <div class="table-responsive">
@@ -49,7 +48,7 @@
 <ng-template #clientDetailsModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Detalhes</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click'); activeModal = false;">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -145,7 +144,7 @@
 <ng-template #addClientModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Adicionar Cliente</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click'); activeModal = false;">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -248,21 +247,55 @@
       <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="password">Password*</label>
-          <input type="password" class="form-control" name="password" [(ngModel)]="newClient.loginPassword" [ngClass]="{ 'is-invalid': loginPassword.touched && loginPassword.errors }" #loginPassword="ngModel" required>
-          <div *ngIf="loginPassword.touched && loginPassword.hasError('required')" class="invalid-feedback">Password inválida</div>
+          <input type="password" class="form-control" name="password" [(ngModel)]="newClient.loginPassword"
+            [ngClass]="{ 'is-invalid': loginPassword.touched && loginPassword.errors }" #loginPassword="ngModel"
+            required>
+          <div *ngIf="loginPassword.touched && loginPassword.hasError('required')" class="invalid-feedback">Password
+            inválida</div>
           <button type="button" class="btn btn-secondary" (click)="generatePassword('password')">Gerar</button> |
           <button type="button" class="btn btn-success">Imprimir</button>
         </div>
         <div class="form-group">
           <label for="transactionPassword">Password para transações</label>
-          <input type="password" class="form-control" name="transactionPassword" [(ngModel)]="newClient.transactionPassword" [ngClass]="{ 'is-invalid': transactionPassword.touched && transactionPassword.errors }" #transactionPassword="ngModel" required>
-          <div *ngIf="transactionPassword.touched && transactionPassword.hasError('required')" class="invalid-feedback">Password para transações inválida
+          <input type="password" class="form-control" name="transactionPassword"
+            [(ngModel)]="newClient.transactionPassword"
+            [ngClass]="{ 'is-invalid': transactionPassword.touched && transactionPassword.errors }"
+            #transactionPassword="ngModel" required>
+          <div *ngIf="transactionPassword.touched && transactionPassword.hasError('required')" class="invalid-feedback">
+            Password para transações inválida
           </div>
-          <button type="button" class="btn btn-secondary" (click)="generatePassword('transactionPassword')">Gerar</button> |
+          <button type="button" class="btn btn-secondary"
+            (click)="generatePassword('transactionPassword')">Gerar</button> |
           <button type="button" class="btn btn-success">Imprimir</button>
         </div>
       </div>
+      <hr>
+      <div class="form-group">
+        <label for="accountType">Tipo de conta*</label>
+        <div class="row col-md-12">
+          <div class="custom-control custom-radio" style="padding-right: 4.9%">
+            <input type="radio" class="custom-control-input" id="currentAccount" name="accountType" value="CURRENT"
+              [(ngModel)]="newAccount.type">
+            <label class="custom-control-label" for="currentAccount">Conta à ordem</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="savingsAccount" name="accountType" value="SAVINGS"
+              [(ngModel)]="newAccount.type">
+            <label class="custom-control-label" for="savingsAccount">Conta poupança</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="iban">Saldo inicial(€)*</label>
+        <input type="number" class="form-control" name="balance" [(ngModel)]="newAccount.balance"
+          [ngClass]="{ 'is-invalid': balance.touched && balance.errors }" #balance="ngModel" required [min]=500>
+        <div *ngIf="balance.touched && balance.hasError('required')" class="invalid-feedback">O saldo tem de ser maior
+          ou igual que 500€</div>
+      </div>
+
+      <button type="button" class="btn btn-success">Imprimir dados de conta</button>
       <div>* Campo Obrigatório</div>
+      <alert></alert>
       <hr>
       <button type="submit" class="btn btn-primary">Adicionar</button>
     </form>

@@ -2,14 +2,15 @@
 export class Account {
 
   id?: number
-  type: string;
-  iban?: string;
-  accountNumber?: number;
-  balance: number;
-  interest: number;
-  status: string;
+  type = 'CURRENT';
+  iban = '';
+  accountNumber = '';
+  balance?: number;
+  interest = 2.5;
+  status = 'ACTIVE';
   createdAt?: Date;
-  employeeId: number;
+  userId?: number;
+  employeeId?: number;
   color?: string;
   movementBalances?: any[];
 }

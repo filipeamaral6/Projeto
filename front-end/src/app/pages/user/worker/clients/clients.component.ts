@@ -6,6 +6,8 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { AlertService } from 'app/shared/alerts';
+import { Account } from 'app/shared/models/Account';
+import { AccountService } from 'app/services/transport/account.service';
 
 @Component({
   selector: 'app-clients',
@@ -16,6 +18,7 @@ export class ClientsComponent implements OnInit {
   clients: Client[];
   selectedClient: Client;
   newClient: Client;
+  newAccount: Account;
   verifyPassword: string;
   editMode = false;
   role: string;
@@ -57,7 +60,8 @@ export class ClientsComponent implements OnInit {
   ];
 
   constructor(private authenticationService: AuthenticationService, private clientService: ClientService,
-    config: NgbModalConfig, private modalService: NgbModal, private alertService: AlertService) { }
+    private accountService: AccountService, config: NgbModalConfig, private modalService: NgbModal,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.fetchClients();
@@ -71,53 +75,32 @@ export class ClientsComponent implements OnInit {
   }
 
   addClient(form: NgForm) {
-    // const newClient: Client = {
-    //   address: form.value.address,
-    //   birthDate: form.value.birthDate,
-    //   clientCc: form.value.clientCc,
-    //   country: form.value.country,
-    //   county: form.value.county,
-    //   email: form.value.email,
-    //   fullName: form.value.fullName,
-    //   loginPassword: form.value.loginPassword,
-    //   mobileNumber: form.value.mobileNumber,
-    //   nationality: form.value.nationality,
-    //   nif: form.value.nif,
-    //   notification: true, // string or boolean in backend?
-    //   phoneNumber: form.value.phoneNumber,
-    //   role: 'CLIENT',
-    //   status: 'ACTIVE',
-    //   transactionPassword: form.value.transactionPassword,
-    //   username: form.value.username,
-    //   zipCode: form.value.zipCode
-    // }
-
-    console.log(form);
 
     const newClientString = JSON.stringify(this.newClient);
 
     this.clientService.addClient(newClientString).pipe(first()).subscribe(response => {
       console.log(response);
-      this.alertService.success('Cliente adicionado com sucesso!');
+
+      this.clientService.getByClientCC(this.newClient.clientCc).pipe(first()).subscribe(client => {
+        this.newAccount.userId = client[0].userId;
+        this.newAccount.employeeId = this.authenticationService.currentUser.id;
+
+        this.accountService.addAccount(JSON.stringify(this.newAccount)).pipe(first()).subscribe(responseAccount => {
+          console.log(responseAccount);
+          this.modalService.dismissAll();
+          const message = JSON.parse(JSON.stringify(response)).message;
+          this.alertService.success(JSON.stringify(message));
+        }, error => {
+          this.showErrorAlert(error);
+        }
+        );
+      });
     }, error => {
-      this.alertService.error(JSON.stringify(error));
+      this.showErrorAlert(error);
     });
   }
 
   updateClient(form: NgForm) {
-    console.log(form);
-    this.selectedClient.fullName = form.value.fullName;
-    this.selectedClient.birthDate = form.value.birthDate;
-    this.selectedClient.nationality = form.value.nationality;
-    this.selectedClient.clientCc = form.value.clientCc;
-    this.selectedClient.nif = form.value.nif;
-    this.selectedClient.email = form.value.email;
-    this.selectedClient.phoneNumber = form.value.phoneNumber;
-    this.selectedClient.mobileNumber = form.value.mobileNumber;
-    this.selectedClient.address = form.value.address;
-    this.selectedClient.zipCode = form.value.zipCode;
-    this.selectedClient.county = form.value.county;
-    this.selectedClient.country = form.value.country;
 
     const updatedClient = JSON.stringify(this.selectedClient);
 
@@ -125,9 +108,11 @@ export class ClientsComponent implements OnInit {
       console.log(response);
       this.fetchClients();
       this.modalService.dismissAll();
-      this.alertService.success('Cliente editado com sucesso!');
+
+      const message = JSON.parse(JSON.stringify(response)).message;
+      this.alertService.success(message);
     }, error => {
-      this.alertService.error(error.error.message);
+      this.showErrorAlert(error);
     });
   }
 
@@ -162,6 +147,7 @@ export class ClientsComponent implements OnInit {
       }
     } else {
       this.newClient = new Client();
+      this.newAccount = new Account();
     }
     this.modalService.open(content, { size: 'lg' });
   }
@@ -173,24 +159,87 @@ export class ClientsComponent implements OnInit {
       this.editButtonLabel = 'Cancelar Edição';
     } else {
       this.editButtonLabel = 'Editar Dados';
+
       this.modalService.dismissAll();
+
       this.fetchClients();
     }
   }
 
   generatePassword(controlName: string) {
-    let result = '';
-    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let charactersLength = characters.length;
-    for (let i = 0; i < 15; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
     if (controlName === 'password') {
-      this.newClient.loginPassword = result;
+      this.newClient.loginPassword = this.randomString('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', 15);
     } else {
-      this.newClient.transactionPassword = result;
+      this.newClient.transactionPassword = this.randomString('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', 15);
     }
   }
 
+  generateIban() {
+    let iban = 'PT50';
+    iban += this.randomString('0123456789', 21);
+
+    this.newAccount.iban = iban;
+  }
+
+  generateAccountNumber() {
+    let accountNumber = this.randomString('0123456789', 11);
+
+    this.newAccount.accountNumber = accountNumber;
+  }
+
+  private randomString(characters: string, length: number) {
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+  }
+
+  private showErrorAlert(error: ErrorEvent) {
+    let message: string;
+    console.log(error);
+    if (error.error.field) {
+      message = 'Campo "' + this.translateField(error.error.field) + '" por preencher!';
+    } else {
+      message = error.error.message;
+    }
+    this.alertService.error(message);
+  }
+
+  private translateField(field: string) {
+    switch (field) {
+      case 'fullName':
+        return 'Nome Completo';
+      case 'birthDate':
+        return 'Data de Nascimento';
+      case 'nationality':
+        return 'Nacionalidade';
+      case 'clientCc':
+        return 'Número de C.C.';
+      case 'nif':
+        return 'NIF';
+      case 'email':
+        return 'Email';
+      case 'phoneNumber':
+        return 'Telefone';
+      case 'mobileNumber':
+        return 'Telemóvel';
+      case 'address':
+        return 'Morada';
+      case 'zipCode':
+        return 'Código Postal';
+      case 'county':
+        return 'Localidade';
+      case 'country':
+        return 'País';
+      case 'username':
+        return 'Username';
+      case 'loginPassword':
+        return 'Password';
+      case 'transactionPassword':
+        return 'Password para transações'
+    }
+  }
 }

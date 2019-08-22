@@ -24,6 +24,8 @@ export class AlertComponent implements OnInit, OnDestroy {
 
                 // add alert to array
                 this.alerts.push(alert);
+
+                setTimeout(() => {this.alerts = []}, 3000);
             });
     }
 
