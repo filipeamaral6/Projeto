@@ -190,18 +190,27 @@ public class TransactionController {
 
 		// Get Transaction by Id
 		@GetMapping("transaction/id/{id}")
-		public Object getTransactionById(@PathVariable String id) {
+		public List<Object> getTransactionById(@PathVariable String id) {
 
 			TransactionService transactionService = new TransactionService();
 			GetById getById = new GetById();
 			getById.setId(id);
+			
+			List<Object> objects = new ArrayList<Object>();
 
 			com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.RootTransaction getTransactionById = transactionService.getPortTypeTransactionByIdEndpoint1().operation(getById);
 
+			objects.add(0, getTransactionById.getInputTransaction());
+			objects.add(1, getTransactionById.getPaymentTransaction());
+			objects.add(2, getTransactionById.getDepositTransaction());
+			objects.add(3, getTransactionById.getTransferTransaction());
+			objects.add(4, getTransactionById.getWithdrawTransaction());
+			objects.add(5, getTransactionById.getOutputTransaction());
+			
 			if (getTransactionById.getInputTransaction().isEmpty()) {
-				return getTransactionById.getOutputTransaction();
+				return objects;
 			} else {
-				return getTransactionById.getInputTransaction();
+				return objects;
 			}
 		}
 
