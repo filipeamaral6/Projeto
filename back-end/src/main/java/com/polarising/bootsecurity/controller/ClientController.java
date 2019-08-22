@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.polarising.bootsecurity.soap.account.example.xmlns._1564670090695.AccountService;
 import com.polarising.bootsecurity.soap.client.example.xmlns._1564670621329.ClientService;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
 import com.polarising.bootsecurity.soap.client.tibco.schemas.client.OutputClient;
@@ -50,14 +51,15 @@ public class ClientController {
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
-
+		
+		if (result.hasErrors()) {
 		HashMap<String, String> error = new HashMap<>();
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
 		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 	}
-
+}
 	// Get Clients
 	@GetMapping("clients")
 	public ResponseEntity<List<Object>> getClients() {
@@ -73,6 +75,7 @@ public class ClientController {
 			}
 		} else {
 			message.add(getClients.getOutputClient());
+			return new ResponseEntity<List<Object>>(message, HttpStatus.BAD_REQUEST);
 		}
 
 		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
@@ -88,7 +91,7 @@ public class ClientController {
 		Root getClientById = clientService.getPortTypeGetClientByIdEndpoint1().operation(getById);
 
 		if (getClientById.getInputClient().isEmpty()) {
-			return new ResponseEntity<Object>(getClientById.getOutputClient(), HttpStatus.OK);
+			return new ResponseEntity<Object>(getClientById.getOutputClient(), HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<Object>(getClientById.getInputClient(), HttpStatus.OK);
 		}
@@ -105,7 +108,7 @@ public class ClientController {
 		Root getClientByCC = clientService.getPortTypeGetClientByCcEndpoint1().operation(getByCC);
 
 		if (getClientByCC.getInputClient().isEmpty()) {
-			return new ResponseEntity<Object>(getClientByCC.getOutputClient(), HttpStatus.OK);
+			return new ResponseEntity<Object>(getClientByCC.getOutputClient(), HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<Object>(getClientByCC.getInputClient(), HttpStatus.OK);
 		}
@@ -134,19 +137,19 @@ public class ClientController {
 	}
 	
 	// Get Client by Id
-		@GetMapping("clients/accountClients/{id}")
-		public ResponseEntity<Object> getAccountClientsById(@PathVariable String id) {
-
-			ClientService clientService = new ClientService();
-			GetById getById = new GetById();
-			getById.setId(id);
-			Root getClientById = clientService.getPortTypeGetClientByIdEndpoint1().operation(getById);
-
-			if (getClientById.getInputClient().isEmpty()) {
-				return new ResponseEntity<Object>(getClientById.getOutputClient(), HttpStatus.OK);
-			} else {
-				return new ResponseEntity<Object>(getClientById.getInputClient(), HttpStatus.OK);
-			}
-
-		}
+//		@GetMapping("clients/accountClients/{id}")
+//		public ResponseEntity<Object> getAccountClientsById(@PathVariable String id) {
+//
+//			AccountService accountService = new AccountService();
+//			GetById getById = new GetById();
+//			getById.setId(id);
+//			Root getClientById = accountService.getPortTypeGetAccountClientsEndpoint1().operation(getById);
+//
+//			if (getClientById.getInputClient().isEmpty()) {
+//				return new ResponseEntity<Object>(getClientById.getOutputClient(), HttpStatus.BAD_REQUEST);
+//			} else {
+//				return new ResponseEntity<Object>(getClientById.getInputClient(), HttpStatus.OK);
+//			}
+//
+//		}
 }
