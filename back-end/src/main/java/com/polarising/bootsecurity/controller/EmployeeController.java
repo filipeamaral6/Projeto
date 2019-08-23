@@ -45,6 +45,10 @@ public class EmployeeController {
 			EmployeeService employeeService = new EmployeeService();
 			OutputEmployee message = employeeService.getPortTypeEmployeeEndpoint1().operation(inputEmployee);
 			
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
@@ -104,7 +108,10 @@ public class EmployeeController {
 			EmployeeService employeeService = new EmployeeService();
 
 			OutputEmployee message = employeeService.getPortTypeUpdateEmployeeEndpoint1().operation(inputEmployee);
-
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}

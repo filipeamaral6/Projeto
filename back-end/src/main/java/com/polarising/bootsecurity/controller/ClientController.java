@@ -48,6 +48,10 @@ public class ClientController {
 			ClientService clientService = new ClientService();
 
 			OutputClient message = clientService.getPortTypeCreateClientEndpoint1().operation(inputClient);
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
@@ -123,6 +127,10 @@ public class ClientController {
 
 			ClientService clientService = new ClientService();
 			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}

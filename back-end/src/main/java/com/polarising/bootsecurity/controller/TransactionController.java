@@ -69,6 +69,10 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputTransaction message = transactionService.getPortTypeTransferEndpoint1().writeTransfer(inputTransfer);
+				
+				if(message.getMessage().startsWith("Erro")) {
+					return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+				}
 				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
@@ -113,6 +117,10 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputWithdraw message = transactionService.getPortTypeWithdrawEndpoint1().writeWithdraw(inputWithdraw);
+				
+				if(message.getMessage().startsWith("Erro")) {
+					return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+				}
 				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
@@ -152,6 +160,10 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputPayment message = transactionService.getPortTypePaymentEndpoint1().writePayment(inputPayment);
+				
+				if(message.getMessage().startsWith("Erro")) {
+					return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+				}
 				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
@@ -177,6 +189,10 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputDeposit message = transactionService.getPortTypeDepositEndpoint1().writeDeposit(inputDeposit);
+				
+				if(message.getMessage().startsWith("Erro")) {
+					return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+				}
 				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
