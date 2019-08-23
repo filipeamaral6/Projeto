@@ -2,11 +2,11 @@
 export class Transaction {
 
   id?: number;
-  type: string;
-  value: number;
-  accountIban: string;
-  clientId?: number;
+  value?: number;
+  accountIban?: string;
   createdAt?: Date;
+  userId?: number;
+  type?: string;
   description?: string;
-
+  accountId?: number;
 }

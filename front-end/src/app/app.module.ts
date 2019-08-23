@@ -23,6 +23,8 @@ import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.com
 import { SidebarModule } from './shared/sidebar/sidebar.module';
 import { AlertComponent } from './shared/alerts/alert.component';
 import { AlertService, AlertModule } from './shared/alerts';
+import { TransactionService } from './services/transport/transaction.service';
+import { EmployeeService } from './services/transport/employee.service';
 
 
 
@@ -57,7 +59,9 @@ import { AlertService, AlertModule } from './shared/alerts';
     AuthenticationService,
     AccessService,
     ClientService,
-    AccountService
+    AccountService,
+    TransactionService,
+    EmployeeService
   ],
 
   bootstrap: [AppComponent]

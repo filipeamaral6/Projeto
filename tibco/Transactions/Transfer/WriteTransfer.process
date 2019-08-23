@@ -367,7 +367,7 @@
                     </parameter>
                     <parameter>
                         <parameterName>iban</parameterName>
-                        <dataType>INTEGER</dataType>
+                        <dataType>VARCHAR</dataType>
                     </parameter>
                 </Prepared_Param_DataType>
             </config>

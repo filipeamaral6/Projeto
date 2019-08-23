@@ -35,7 +35,7 @@ export class AccountService {
     return this.http.post(this.API + '/accounts/add', account, httpOptions);
   }
 
-  updateAccount(account: string) {
+  updateAccount(account: Account) {
     return this.http.put(this.API + '/accounts/update', account, httpOptions);
   }
 

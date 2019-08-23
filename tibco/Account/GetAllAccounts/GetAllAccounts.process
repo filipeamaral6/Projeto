@@ -39,6 +39,9 @@
                             <xsl:attribute name="employee_id">
                                 <xsl:value-of select="employee_id"/>
                             </xsl:attribute>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="id"/>
+                            </xsl:attribute>
                         </ns:inputAccount>
                     </xsl:for-each>
                     <xsl:choose>

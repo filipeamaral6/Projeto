@@ -1,5 +1,9 @@
 import { Transaction } from './Transaction';
 
 export class Deposit extends Transaction {
-    amount: number;
+    id?: number;
+    employeeId?: number;
+    transactionId?: number;
+    depositerName?: string;
+    depositerCcNumber?: number;
 }

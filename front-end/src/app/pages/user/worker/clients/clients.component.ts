@@ -86,10 +86,10 @@ export class ClientsComponent implements OnInit {
         this.newAccount.employeeId = this.authenticationService.currentUser.id;
 
         this.accountService.addAccount(JSON.stringify(this.newAccount)).pipe(first()).subscribe(responseAccount => {
-          console.log(responseAccount);
           this.modalService.dismissAll();
           const message = JSON.parse(JSON.stringify(response)).message;
           this.alertService.success(JSON.stringify(message));
+          this.fetchClients();
         }, error => {
           this.showErrorAlert(error);
         }
@@ -199,7 +199,6 @@ export class ClientsComponent implements OnInit {
 
   private showErrorAlert(error: ErrorEvent) {
     let message: string;
-    console.log(error);
     if (error.error.field) {
       message = 'Campo "' + this.translateField(error.error.field) + '" por preencher!';
     } else {

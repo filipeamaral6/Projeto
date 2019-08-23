@@ -79,7 +79,7 @@
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT user.id, user.email, user.password, user.username, user.role, user.status, employee.full_name, employee.user_id 
+            <statement>SELECT employee.id, user.email, user.password, user.username, user.role, user.status, employee.full_name, employee.user_id 
 FROM user, employee WHERE user.id=employee.user_id
 </statement>
             <oraObjects/>
