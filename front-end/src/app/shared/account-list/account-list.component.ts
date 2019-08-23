@@ -5,6 +5,8 @@ import { MovementsComponent } from 'app/pages/user/client/movements/movements.co
 import { PaymentsComponent } from 'app/pages/user/client/payments/payments.component';
 import { TransferComponent } from 'app/pages/user/client/transfer/transfer.component';
 import { AuthenticationService } from 'app/services/authentication.service';
+import { first } from 'rxjs/operators';
+import { AccountService } from 'app/services/transport/account.service';
 
 
 @Component({
@@ -19,9 +21,11 @@ export class AccountListComponent implements OnInit {
   accountInfoPopUp: boolean;
   accountList: Account[];
   selectedAccount: Account;
+  createdAt: string;
 
   constructor(
     private authenticationService: AuthenticationService,
+    private accountService: AccountService,
   ) { }
 
   ngOnInit() {
@@ -29,9 +33,10 @@ export class AccountListComponent implements OnInit {
     this.accountList  = [];
     this.selectedAccount = null;
     this.accountInfoPopUp = false;
-
+    this.getClientAccounts();
     this.initAccountList();
   }
+
   selectedStyle(accountId: number) {
     let style = {
       'background-color': 'white'
@@ -48,10 +53,17 @@ export class AccountListComponent implements OnInit {
     }
   }
 
-  sendSelectedAccount(index: number) {
+  getSelectedAccount() {
+    return this.selectedAccount;
+  }
 
-    this.selectedAccount = this.accountList[index - 1];
-    this.component.selectAccount(this.selectedAccount.id);
+  sendSelectedAccount(account: Account) {
+    this.selectedAccount = account;
+    this.createdAt = this.selectedAccount.createdAt.toString().substring(0, 10);
+    
+    console.log(this.selectedAccount.type);
+    
+    this.component.selectedAccount = account;
   }
 
   private initAccountList() {
@@ -61,11 +73,9 @@ export class AccountListComponent implements OnInit {
         this.accountList = this.component.getAccountList();
       }
       if ( ((this.component instanceof PaymentsComponent) || (this.component instanceof TransferComponent)) ) {
-        this.component.getAccountList().forEach(account => {
+        this.accountList.forEach(account => {
           if ( account.type.toLowerCase() !== 'poupança') {
-            console.log(account.id);
             this.accountList.push(account);
-            console.log(this.accountList);
           }
         });
       }
@@ -76,15 +86,21 @@ export class AccountListComponent implements OnInit {
         this.accountList = this.component.getAccountList();
       }
       if ( this.component instanceof PaymentsComponent ) {
-        this.component.getAccountList().forEach(account => {
+        this.accountList.forEach(account => {
           if ( account.type.toLowerCase() !== 'poupança') {
-            console.log(account.id);
             this.accountList.push(account);
-            console.log(this.accountList);
           }
         });
       }
     }
+  }
+
+  private getClientAccounts() {
+    this.accountList = [];
+
+    this.accountService.getByClientId(this.authenticationService.currentUser.id).pipe(first()).subscribe( accounts => {
+      this.accountList = accounts;
+    });
   }
 
 }

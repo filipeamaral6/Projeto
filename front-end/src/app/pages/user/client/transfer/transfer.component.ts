@@ -31,9 +31,30 @@ export class TransferComponent implements OnInit {
   getAccountList() {
     return this.clientLayout.getAccounts;
   }
+  resetForm() {
+    console.log('Reset');
+  }
+
+  cancelFunction() {
+    this.selectAccount = null;
+    console.log('Cancel');
+  }
+
+  onSubmit() {
+    console.log('Submit');
+  }
+
+  digitOnly(event: { which: any; keyCode: any; }): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
+  }
 
   showPass() {
-    if (!this.isEyeOpen) {
+    if ( !this.isEyeOpen ) {
       this.isEyeOpen = true;
     } else {
       this.isEyeOpen = false;

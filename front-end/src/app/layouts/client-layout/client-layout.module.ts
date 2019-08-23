@@ -13,7 +13,6 @@ import { MovementsComponent } from 'app/pages/user/client/movements/movements.co
 import { PaymentsComponent } from 'app/pages/user/client/payments/payments.component';
 import { TransferComponent } from 'app/pages/user/client/transfer/transfer.component';
 import { ClientDetailComponent } from 'app/pages/user/client/client-detail/client-detail.component';
-import { ClientProfileComponent } from 'app/pages/user/client/client-profile/client-profile.component';
 import { AccountListComponent } from 'app/shared/account-list/account-list.component';
 
 
@@ -30,7 +29,6 @@ import { AccountListComponent } from 'app/shared/account-list/account-list.compo
     MovementsComponent,
     PaymentsComponent,
     TransferComponent,
-    ClientProfileComponent,
     ClientDetailComponent,
     AccountListComponent,
   ]

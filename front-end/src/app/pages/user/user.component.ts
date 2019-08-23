@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.clientLayout.refreshData();
-    this.client = this.clientLayout.getClient;
+
   }
 
   editMode() {

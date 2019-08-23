@@ -18,6 +18,8 @@ div.row.col-md-12 {
 }
 
 .eye-icon {
+  text-align: right;
+  width: 30px;
   font-size: 18px;
   border-left-width: 0;
   border-top-left-radius: 0;
@@ -26,7 +28,7 @@ div.row.col-md-12 {
 
 .pass-control {
   flex: 1;
-  border-right-width: 1;
+  border-right-width: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -36,10 +38,28 @@ div.row.col-md-12 {
   flex-direction: row;
 }
 
-#eyeOpen {
-  color: lightskyblue;
+#eyeClose {
+  text-align: right; 
+  padding-left: 0; 
+  padding-top: 8.2px;
+  padding-bottom: 8.1px;
+
 }
 
 #eyeClose:hover {
   color: lightskyblue;
+}
+
+#comma-sign {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#euro-sign {
+  padding-left: 10px;
+  padding-right: 0px;
+}
+
+button {
+  margin-right: 10px;
 }

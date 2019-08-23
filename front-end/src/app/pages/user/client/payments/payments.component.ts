@@ -25,7 +25,7 @@ export class PaymentsComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
     this.clientLayout.refreshData();
-    this.client = this.clientLayout.getClient;
+
   }
 
   ngOnInit() {
@@ -47,13 +47,9 @@ export class PaymentsComponent implements OnInit {
     return this.paymentForm.controls;
   }
 
-  selectAccount(accountId: number) {
-    console.log('payments' + accountId);
-    // this.selectedAccount = this.clientLayout.getAccountById( accountId )[0];
-  }
-
-  getAccountList() {
-    return this.clientLayout.getAccounts;
+  selectAccount(account: Account) {
+    console.log('payments' + account.id);
+    this.selectedAccount = account;
   }
 
   resetForm() {

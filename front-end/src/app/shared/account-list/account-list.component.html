@@ -1,36 +1,39 @@
 <div class="row col-md-12" style="background-color: #F4F3EF">
-    <div class="col-md-3" *ngFor="let account of accountList" style="padding-left: 0; padding-right: 2%">
-        <button [ngStyle]="selectedStyle(account.id)" id="account" class="card card-stats col-md-12" type="button btn-primary" (click)="sendSelectedAccount(account.id)" style="background-color: #E1F5FE">
-                <div class="card-header">
-                    <h4>Conta {{account.type}}</h4>
-                    <h6 class="card-title">Nº de Conta: {{account.accountNumber}}</h6>
+    <div class="col-md-3" *ngFor="let account of accountList">
+        <button [ngStyle]="selectedStyle(account.id)" id="account" class="card card-stats col-md-12" type="button btn-primary" (click)="sendSelectedAccount(account)" style="background-color: #E1F5FE; padding-left: 0; padding-right: 0">
+                <div class="card-header col-md-12">
+                    <h4 id="account-type">Conta {{account.type}}</h4>
+                    <h6 class="card-title" id="account-number">Nº de Conta: {{account.accountNumber}}</h6>
                 </div>
-                <div class="card-body ">
-                    <div class="row">
-                    <div class="icon-big text-center icon-warning col-md-2">
+                <div class="card-body col-md-12" id="account-button">
+                   <div class="row col-md-12 balance-info"> 
+                        
                         <i class="nc-icon nc-money-coins text-success"></i>
-                    </div>
-                    <div class="numbers col-md-10">
-                        <p class="card-category">Saldo</p>
-                        <p>{{account.balance}} €
+                    
+                        <span>
+                            <div class="numbers">
+                                <p class="card-category">Saldo</p>
+                                <p class="balance">{{account.balance}} €</p>
+                        </div>
+                        </span>
+
                     </div>
                 </div>
-            </div>
         </button>
     </div>
 </div>
 <div class="row col-md-12" *ngIf="(selectedAccount !== null) && accountInfoPopUp">
-    <div class="card card-account-info col-md-12" style="padding-left: 30px">
+    <div class="card card-account-info col-md-12">
         <div class="card-header">
             <h5 class="card-title">Informações de Conta</h5>
         </div>
-        <div class="card-body col-md-12">
+        <div class="card-body col-md-12" id="account-info">
             <div class="row">
                 <div class="col-md-2">
                     <label for="type">Tipo de Conta</label>
                     <p type="text" class="form-control">{{selectedAccount.type}}</p>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label for="iban">IBAN</label>
                     <p type="text" class="form-control">{{selectedAccount.iban}}</p>
                 </div>
@@ -40,7 +43,7 @@
                 </div>
                 <div class="col-md-2">
                     <label for="cretedAt">Data de Abertura</label>
-                    <p type="text" class="form-control">{{selectedAccount.createdAt}}</p>
+                    <p type="text" class="form-control">{{createdAt}}</p>
                 </div>
                 <div class="col-md-2">
                     <label for="interest">Juros Anuais</label>
