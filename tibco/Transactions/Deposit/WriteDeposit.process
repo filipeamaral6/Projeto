@@ -181,15 +181,15 @@
     <pd:activity name="IBAN_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>524</pd:x>
-        <pd:y>350</pd:y>
+        <pd:x>487</pd:x>
+        <pd:y>353</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Conta não encontrada!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Conta não encontrada!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -197,7 +197,7 @@
     <pd:activity name="ID_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>612</pd:x>
+        <pd:x>611</pd:x>
         <pd:y>227</pd:y>
         <config>
             <variableName>message</variableName>
@@ -205,7 +205,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Conta não encontrada!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Conta não encontrada!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -213,8 +213,8 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>280</pd:x>
-        <pd:y>11</pd:y>
+        <pd:x>281</pd:x>
+        <pd:y>1</pd:y>
         <pd:width>820</pd:width>
         <pd:height>154</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
@@ -281,8 +281,8 @@
         <pd:activity name="WriteTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>373</pd:x>
-            <pd:y>85</pd:y>
+            <pd:x>374</pd:x>
+            <pd:y>75</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -384,8 +384,8 @@
         <pd:activity name="LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>507</pd:x>
-            <pd:y>81</pd:y>
+            <pd:x>508</pd:x>
+            <pd:y>71</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -407,8 +407,8 @@
         <pd:activity name="WriteDeposit">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>618</pd:x>
-            <pd:y>82</pd:y>
+            <pd:x>619</pd:x>
+            <pd:y>72</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -482,8 +482,8 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1015</pd:x>
-            <pd:y>87</pd:y>
+            <pd:x>1016</pd:x>
+            <pd:y>77</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -498,8 +498,8 @@
         <pd:activity name="UPDATE_ACCOUNT">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>873</pd:x>
-            <pd:y>84</pd:y>
+            <pd:x>874</pd:x>
+            <pd:y>74</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -545,8 +545,8 @@
         <pd:activity name="GetAccountBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>734</pd:x>
-            <pd:y>82</pd:y>
+            <pd:x>735</pd:x>
+            <pd:y>72</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -597,15 +597,15 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>928</pd:x>
-        <pd:y>278</pd:y>
+        <pd:x>929</pd:x>
+        <pd:y>279</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

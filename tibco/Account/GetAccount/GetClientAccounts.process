@@ -90,15 +90,15 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>692</pd:x>
-        <pd:y>109</pd:y>
+        <pd:x>689</pd:x>
+        <pd:y>110</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -186,7 +186,7 @@
     <pd:activity name="NOT_FOUND">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>405</pd:x>
+        <pd:x>403</pd:x>
         <pd:y>212</pd:y>
         <config>
             <variableName>message</variableName>
@@ -194,7 +194,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Nenhum resultado encontrado!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Nenhum resultado encontrado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

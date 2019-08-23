@@ -140,12 +140,12 @@
         <wsdl:part name="input" element="ns0:getById"/>
     </wsdl:message>
     <wsdl:message name="GetClientAccountsOutput">
-        <wsdl:part name="output" element="ns1:inputAccount"/>
+        <wsdl:part name="output" element="ns1:root"/>
     </wsdl:message>
     <wsdl:message name="GetAccountClientsInput">
         <wsdl:part name="input" element="ns0:getById"/>
     </wsdl:message>
     <wsdl:message name="GetAccountClientsOutput">
-        <wsdl:part name="output" element="ns2:inputClient"/>
+        <wsdl:part name="output" element="ns2:root"/>
     </wsdl:message>
 </wsdl:definitions>

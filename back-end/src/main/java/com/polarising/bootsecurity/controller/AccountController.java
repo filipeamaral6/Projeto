@@ -84,6 +84,7 @@ public class AccountController {
 			}
 		} else {
 			message.add(getAccounts.getOutputAccount().get(0));
+			return new ResponseEntity<List<Object>>(message, HttpStatus.BAD_REQUEST);
 		}
 
 		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
@@ -100,7 +101,7 @@ public class AccountController {
 		Root getAccountById = accountService.getPortTypeGetAccountByIdEndpoint1().operationGetAccountById(getById);
 
 		if (getAccountById.getInputAccount().isEmpty()) {
-			return new ResponseEntity<Object>(getAccountById.getOutputAccount(), HttpStatus.OK);
+			return new ResponseEntity<Object>(getAccountById.getOutputAccount(), HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<Object>(getAccountById.getInputAccount(), HttpStatus.OK);
 		}
@@ -116,7 +117,7 @@ public class AccountController {
 		Root getAccountByIban = accountService.getPortTypeGetAccountByIbanEndpoint1().operation(getByIban);
 
 		if (getAccountByIban.getInputAccount().isEmpty()) {
-			return new ResponseEntity<Object>(getAccountByIban.getOutputAccount(), HttpStatus.OK);
+			return new ResponseEntity<Object>(getAccountByIban.getOutputAccount(), HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<Object>(getAccountByIban.getInputAccount(), HttpStatus.OK);
 		}

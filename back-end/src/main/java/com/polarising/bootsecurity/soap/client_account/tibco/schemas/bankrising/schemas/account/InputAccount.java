@@ -7,8 +7,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import org.springframework.util.MultiValueMap;
-
 
 /**
  * <p>Java class for anonymous complex type.
@@ -301,7 +299,5 @@ public class InputAccount {
     public void setUserId(String value) {
         this.userId = value;
     }
-
-
 
 }

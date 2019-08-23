@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.polarising.bootsecurity.soap.client_account.example.xmlns._1566480228153.ClientAccountService;
-import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.account.InputAccount;
-import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.account.Root;
-import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.client.InputClient;
+import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.account.RootClientAccount;
+import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.client.RootAccountClient;
 import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid.GetById;
+
+
+
 
 @RestController
 @RequestMapping("/")
@@ -27,22 +28,31 @@ public class ClientAccountController {
 		ClientAccountService clientAccountService = new ClientAccountService();
 		GetById getById = new GetById();
 		getById.setId(id);
-		InputClient inputClient = clientAccountService.getPortTypeGetAccountClientsEndpoint1().operation(getById);
+		RootAccountClient getClientsByAccountId = clientAccountService.getPortTypeGetAccountClientsEndpoint1().operation(getById);
+		
 
-		return new ResponseEntity<Object>(inputClient.getInputClient(), HttpStatus.OK);
+		if (getClientsByAccountId.getInputClient().isEmpty()) {
+			return new ResponseEntity<Object>(getClientsByAccountId.getOutputClient(), HttpStatus.BAD_REQUEST);
+		} else {
+			return new ResponseEntity<Object>(getClientsByAccountId.getInputClient(), HttpStatus.OK);
+		}
+		
 	
 	}
 	
 	// Get Accounts by user_id
-	@GetMapping("clients/clientAccounts/{id}")
+	@GetMapping("accounts/clientAccounts/{id}")
 	public ResponseEntity<Object> getAccountClients(@PathVariable String id) {
 
 		ClientAccountService clientAccountService = new ClientAccountService();
 		GetById getById = new GetById();
 		getById.setId(id);
-		InputAccount inputAccount = clientAccountService.getPortTypeGetClientAccountsEndpoint1().operation(getById);
-
-		return new ResponseEntity<Object>(inputAccount.getInputAccount(), HttpStatus.OK);
-	
+		RootClientAccount getAccountsByClientId = clientAccountService.getPortTypeGetClientAccountsEndpoint1().operation(getById);
+		
+		if (getAccountsByClientId.getInputAccount().isEmpty()) {
+			return new ResponseEntity<Object>(getAccountsByClientId.getOutputAccount(), HttpStatus.BAD_REQUEST);
+		} else {
+			return new ResponseEntity<Object>(getAccountsByClientId.getInputAccount(), HttpStatus.OK);
+		}
 	}
 }

@@ -35,17 +35,16 @@ public class EmployeeController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
-	// Add Client
+	// Add Employee
 	@PostMapping("employees/add")
 	public ResponseEntity<Object> AddEmployee(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
 			inputEmployee.setPassword(passwordEncoder.encode(inputEmployee.getPassword()));
-
 			EmployeeService employeeService = new EmployeeService();
-
 			OutputEmployee message = employeeService.getPortTypeEmployeeEndpoint1().operation(inputEmployee);
+			
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
@@ -67,8 +66,8 @@ public class EmployeeController {
 		List<Object> message = new ArrayList<Object>();
 
 		if (!getEmployees.getInputEmployee().isEmpty()) {
-			for (InputEmployee client : getEmployees.getInputEmployee()) {
-				message.add(client);
+			for (InputEmployee employee : getEmployees.getInputEmployee()) {
+				message.add(employee);
 			}
 		} else {
 			message.add(getEmployees.getOutputEmployee());
@@ -78,7 +77,7 @@ public class EmployeeController {
 		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
 	}
 
-	// Get Client by Id
+	// Get Employee by Id
 	@GetMapping("employees/id/{id}")
 	public ResponseEntity<Object> getEmployeeById(@PathVariable String id) {
 
@@ -96,7 +95,7 @@ public class EmployeeController {
 		}
 	}
 
-	// Update Client
+	// Update Employee
 	@PutMapping("employees/update")
 	public ResponseEntity<Object> updateClient(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
 

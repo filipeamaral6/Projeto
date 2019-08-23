@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
     "outputAccount"
 })
 @XmlRootElement(name = "root")
-public class Root {
+public class RootClientAccount {
 
     protected List<InputAccount> inputAccount;
     protected List<OutputAccount> outputAccount;

@@ -122,9 +122,7 @@ public class ClientController {
 		if (!result.hasErrors()) {
 
 			ClientService clientService = new ClientService();
-
 			OutputClient message = clientService.getPortTypeUpdateClientEndpoint1().operation(inputClient);
-
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
@@ -136,21 +134,4 @@ public class ClientController {
 		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 	}
-	
-	// Get Client by Id
-//		@GetMapping("clients/accountClients/{id}")
-//		public ResponseEntity<Object> getAccountClientsById(@PathVariable String id) {
-//
-//			AccountService accountService = new AccountService();
-//			GetById getById = new GetById();
-//			getById.setId(id);
-//			Root getClientById = accountService.getPortTypeGetAccountClientsEndpoint1().operation(getById);
-//
-//			if (getClientById.getInputClient().isEmpty()) {
-//				return new ResponseEntity<Object>(getClientById.getOutputClient(), HttpStatus.BAD_REQUEST);
-//			} else {
-//				return new ResponseEntity<Object>(getClientById.getInputClient(), HttpStatus.OK);
-//			}
-//
-//		}
 }

@@ -8,9 +8,8 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.client.InputClient;
+import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.client.RootAccountClient;
 import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid.GetById;
-
 
 
 /**
@@ -22,8 +21,8 @@ import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.
 @WebService(name = "PortType_GetAccountClients", targetNamespace = "http://xmlns.example.com/1566480228153")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 @XmlSeeAlso({
-	com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.client.ObjectFactory.class,
 	com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.account.ObjectFactory.class,
+	com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.client.ObjectFactory.class,
 	com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid.ObjectFactory.class
 })
 public interface PortTypeGetAccountClients {
@@ -37,7 +36,7 @@ public interface PortTypeGetAccountClients {
      */
     @WebMethod(operationName = "Operation", action = "/Client_Account/Service.serviceagent/PortType_GetAccountClientsEndpoint1/Operation")
     @WebResult(name = "inputClient", targetNamespace = "http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd", partName = "output")
-    public InputClient operation(
+    public RootAccountClient operation(
         @WebParam(name = "getById", targetNamespace = "http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd", partName = "input")
         GetById input);
 
