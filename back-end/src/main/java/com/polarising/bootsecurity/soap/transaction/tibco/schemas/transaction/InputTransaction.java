@@ -35,28 +35,6 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;/complexType>
  * </pre>
  * 
-	@NotBlank(message="Campo obrigatório")
-	@Email(message="Formato inválido")
-    @XmlAttribute(name = "email")
-    protected String email;
-    @XmlAttribute(name = "full_name")
-    protected String fullName;
-    @XmlAttribute(name = "id")
-    protected String id;
-    @NotBlank(message="Campo obrigatório")
-    @XmlAttribute(name = "password")
-    protected String password;
-    @NotBlank(message="Campo obrigatório")
-    @XmlAttribute(name = "role")
-    protected String role;
-    @XmlAttribute(name = "status")
-    protected String status;
-    @XmlAttribute(name = "user_id")
-    protected String userId;
-    @NotBlank(message="Campo obrigatório")
-    @XmlAttribute(name = "username")
-    protected String username;
-
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
