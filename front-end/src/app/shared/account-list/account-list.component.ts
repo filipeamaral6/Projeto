@@ -98,7 +98,7 @@ export class AccountListComponent implements OnInit {
   private getClientAccounts() {
     this.accountList = [];
 
-    this.accountService.getByClientId(this.authenticationService.currentUser.id).pipe(first()).subscribe( accounts => {
+    this.accountService.getAccountByClientId(this.authenticationService.currentUser.id).pipe(first()).subscribe( accounts => {
       this.accountList = accounts;
     });
   }

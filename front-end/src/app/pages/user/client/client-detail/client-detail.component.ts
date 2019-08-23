@@ -52,7 +52,7 @@ export class ClientDetailComponent implements OnInit {
 
     const clientToJSON = JSON.stringify(this.client);
 
-    this.clientService.updateUser(clientToJSON)
+    this.clientService.updateClient(clientToJSON)
       .pipe(first())
       .subscribe(
         data => {
