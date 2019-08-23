@@ -64,7 +64,7 @@ export class TransferComponent implements OnInit {
 
   openModal(content, client) {
     this.selectedClient = client;
-    this.accountService.getAll().pipe(first()).subscribe(accounts => {
+    this.accountService.getAccountByClientId(client.id).pipe(first()).subscribe(accounts => {
       this.accounts = accounts;
       console.log(this.accounts);
       this.modalService.open(content, { size: 'lg' });

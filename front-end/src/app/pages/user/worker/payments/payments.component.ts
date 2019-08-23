@@ -50,20 +50,21 @@ export class PaymentsComponent implements OnInit {
         }
       }
 
+      console.log(this.payment);
       this.transactionService.addPayment(this.payment).pipe(first()).subscribe(response => {
         const message = JSON.parse(JSON.stringify(response)).message;
 
         this.modalService.dismissAll();
         this.alertService.success(message);
       }, error => {
-        this.alertService.error(error.message);
+        this.alertService.error(error.error.message);
       });
     });
   }
 
   openModal(content, client) {
     this.selectedClient = client;
-    this.accountService.getAll().pipe(first()).subscribe(accounts => {
+    this.accountService.getAccountByClientId(client.id).pipe(first()).subscribe(accounts => {
       this.accounts = accounts;
       console.log(this.accounts);
       this.modalService.open(content, { size: 'lg' });

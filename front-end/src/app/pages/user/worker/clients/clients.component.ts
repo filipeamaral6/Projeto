@@ -8,6 +8,7 @@ import { AuthenticationService } from 'app/services/authentication.service';
 import { AlertService } from 'app/shared/alerts';
 import { Account } from 'app/shared/models/Account';
 import { AccountService } from 'app/services/transport/account.service';
+import { EmployeeService } from 'app/services/transport/employee.service';
 
 @Component({
   selector: 'app-clients',
@@ -61,7 +62,7 @@ export class ClientsComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private clientService: ClientService,
     private accountService: AccountService, config: NgbModalConfig, private modalService: NgbModal,
-    private alertService: AlertService) { }
+    private alertService: AlertService, private employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.fetchClients();
@@ -81,19 +82,30 @@ export class ClientsComponent implements OnInit {
     this.clientService.addClient(newClientString).pipe(first()).subscribe(response => {
       console.log(response);
 
-      this.clientService.getByClientCC(this.newClient.clientCc).pipe(first()).subscribe(client => {
-        this.newAccount.userId = client[0].userId;
-        this.newAccount.employeeId = this.authenticationService.currentUser.id;
-
-        this.accountService.addAccount(JSON.stringify(this.newAccount)).pipe(first()).subscribe(responseAccount => {
-          this.modalService.dismissAll();
-          const message = JSON.parse(JSON.stringify(response)).message;
-          this.alertService.success(JSON.stringify(message));
-          this.fetchClients();
-        }, error => {
-          this.showErrorAlert(error);
+      this.employeeService.getAll().pipe(first()).subscribe(employees => {
+        for (let employee of employees) {
+          // tslint:disable-next-line: triple-equals
+          if (employee.userId == this.authenticationService.currentUser.id) {
+            this.newAccount.employeeId = employee.id;
+            break;
+          }
         }
-        );
+
+        this.clientService.getByClientCC(this.newClient.clientCc).pipe(first()).subscribe(client => {
+          this.newAccount.userId = client[0].userId;
+
+          this.accountService.addAccount(JSON.stringify(this.newAccount)).pipe(first()).subscribe(responseAccount => {
+            this.modalService.dismissAll();
+            const message = JSON.parse(JSON.stringify(response)).message;
+            this.alertService.success(JSON.stringify(message));
+            this.fetchClients();
+          }, error => {
+            this.showErrorAlert(error);
+          }
+          );
+        });
+      }, error => {
+        this.showErrorAlert(error);
       });
     }, error => {
       this.showErrorAlert(error);

@@ -27,6 +27,9 @@ import com.polarising.bootsecurity.soap.account.tibco.schemas.account.OutputAcco
 import com.polarising.bootsecurity.soap.account.tibco.schemas.account.Root;
 import com.polarising.bootsecurity.soap.account.tibco.schemas.getbyiban.GetByIban;
 import com.polarising.bootsecurity.soap.account.tibco.schemas.getbyid.GetById;
+import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
+import com.polarising.bootsecurity.soap.client_account.example.xmlns._1566480228153.ClientAccountService;
+import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.account.RootClientAccount;
 
 @RestController
 @RequestMapping("/")
@@ -124,6 +127,23 @@ public class AccountController {
 			return new ResponseEntity<Object>(getAccountByIban.getOutputAccount(), HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<Object>(getAccountByIban.getInputAccount(), HttpStatus.OK);
+		}
+
+	}
+	
+	// Get Client's Account's
+	@GetMapping("client/accounts/{clientId}")
+	public ResponseEntity<Object> getClientsAccounts(@PathVariable String clientId) {
+		ClientAccountService clientAccountService = new ClientAccountService();
+		com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid.GetById getById = new com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid.GetById();
+		getById.setId(clientId);
+
+		RootClientAccount getClientAccounts = clientAccountService.getPortTypeGetClientAccountsEndpoint1().operation(getById);
+
+		if (getClientAccounts.getInputAccount().isEmpty()) {
+			return new ResponseEntity<Object>(getClientAccounts.getOutputAccount(), HttpStatus.BAD_REQUEST);
+		} else {
+			return new ResponseEntity<Object>(getClientAccounts.getInputAccount(), HttpStatus.OK);
 		}
 
 	}

@@ -132,8 +132,6 @@ public class ClientController {
 			}
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
-			return message;
-
 		}
 
 		HashMap<String, String> error = new HashMap<>();

@@ -34,6 +34,6 @@ export class TransactionService {
     }
 
     addPayment(payment: Payment) {
-        return this.http.post(this.API + '/transfer/add', payment);
+        return this.http.post(this.API + '/payment/add', payment);
     }
 }

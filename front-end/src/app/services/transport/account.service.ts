@@ -31,6 +31,10 @@ export class AccountService {
     return this.http.get<Account>(this.API + '/accounts/iban/' + iban);
   }
 
+  getAccountByClientId(clientId: number) {
+    return this.http.get<Account[]>(this.API + '/client/accounts/' + clientId);
+  }
+
   addAccount(account: string) {
     return this.http.post(this.API + '/accounts/add', account, httpOptions);
   }

@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let client of clients" (click)="openModal(transferModal, client)">
+                        <tr *ngFor="let client of clients" (click)="openModal(paymentsModal, client)">
                             <td>
                                 {{ client.fullName }}
                             </td>
@@ -40,9 +40,9 @@
         </div>
     </div>
     
-    <ng-template #transferModal let-modal>
+    <ng-template #paymentsModal let-modal>
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Selecionar conta e valor do depósito</h4>
+            <h4 class="modal-title" id="modal-basic-title">Selecionar conta e introduzir dados do pagamento</h4>
             <button type="button" class="close" aria-label="Close"
                 (click)="modal.dismiss('Cross click'); activeModal = false;">
                 <span aria-hidden="true">&times;</span>
