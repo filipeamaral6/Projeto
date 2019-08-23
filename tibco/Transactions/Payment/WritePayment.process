@@ -181,7 +181,7 @@
     <pd:activity name="IBAN_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>411</pd:x>
+        <pd:x>410</pd:x>
         <pd:y>459</pd:y>
         <config>
             <variableName>message</variableName>
@@ -189,7 +189,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Conta não encontrada!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Conta não encontrada!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -197,15 +197,15 @@
     <pd:activity name="ID_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>423</pd:x>
-        <pd:y>345</pd:y>
+        <pd:x>422</pd:x>
+        <pd:y>346</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Conta não encontrada!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Conta não encontrada!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -594,7 +594,7 @@
         <pd:activity name="NO_MONEY">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1074</pd:x>
+            <pd:x>1075</pd:x>
             <pd:y>60</pd:y>
             <config>
                 <variableName>message</variableName>
@@ -602,7 +602,7 @@
             <pd:inputBindings>
                 <root>
                     <message>
-                        <xsl:value-of select="&quot;Não tem saldo suficiente para fazer esta operação!&quot;"/>
+                        <xsl:value-of select="&quot;Erro: Não tem saldo suficiente para executar esta operação!&quot;"/>
                     </message>
                 </root>
             </pd:inputBindings>
@@ -622,7 +622,7 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>965</pd:x>
+        <pd:x>967</pd:x>
         <pd:y>365</pd:y>
         <config>
             <variableName>message</variableName>
@@ -630,7 +630,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -697,14 +697,14 @@
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
         <pd:x>433</pd:x>
-        <pd:y>251</pd:y>
+        <pd:y>252</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Não tem acesso a esta conta!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Não tem acesso a esta conta!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

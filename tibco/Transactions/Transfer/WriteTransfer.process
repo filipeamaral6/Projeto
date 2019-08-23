@@ -149,7 +149,7 @@
         <pd:activity name="WriteTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>231</pd:x>
+            <pd:x>232</pd:x>
             <pd:y>200</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -352,7 +352,7 @@
         <pd:activity name="UPDATE_Origin_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>100</pd:x>
+            <pd:x>99</pd:x>
             <pd:y>201</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -526,8 +526,8 @@
         <pd:activity name="DestinationTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>695</pd:x>
-            <pd:y>200</pd:y>
+            <pd:x>697</pd:x>
+            <pd:y>198</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -629,7 +629,7 @@
         <pd:activity name="GetDestinationAccountId">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>582</pd:x>
+            <pd:x>581</pd:x>
             <pd:y>196</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -677,7 +677,7 @@
             <pd:inputBindings>
                 <root>
                     <message>
-                        <xsl:value-of select="&quot;O seu saldo não lhe permite fazer esta operação!&quot;"/>
+                        <xsl:value-of select="&quot;Erro: O seu saldo não lhe permite executar esta operação!&quot;"/>
                     </message>
                 </root>
             </pd:inputBindings>
@@ -694,7 +694,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Conta não encontrada!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Conta não encontrada!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -702,15 +702,15 @@
     <pd:activity name="ID_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>661</pd:x>
-        <pd:y>317</pd:y>
+        <pd:x>660</pd:x>
+        <pd:y>318</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Conta não encontrada!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Conta não encontrada!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -873,15 +873,15 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>943</pd:x>
-        <pd:y>405</pd:y>
+        <pd:x>942</pd:x>
+        <pd:y>406</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

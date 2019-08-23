@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "PaymentTransaction")
 public class PaymentTransaction {
 	
+	@NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "employee_id")
     protected String employeeId;
     @NotBlank(message="Campo obrigatório")

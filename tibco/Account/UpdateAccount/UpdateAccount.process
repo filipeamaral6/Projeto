@@ -118,7 +118,7 @@ WHERE id=?</statement>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Ocorreu um erro! Não foi encontrada nenhuma conta. &quot;"/>
+                    <xsl:value-of select="&quot;Erro: Nenhuma conta encontrada. &quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -243,7 +243,7 @@ WHERE id=?</statement>
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>779</pd:x>
+        <pd:x>777</pd:x>
         <pd:y>125</pd:y>
         <config>
             <variableName>message</variableName>
@@ -251,7 +251,7 @@ WHERE id=?</statement>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

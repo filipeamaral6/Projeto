@@ -1,6 +1,8 @@
 
 package com.polarising.bootsecurity.soap.transaction.tibco.schemas.deposit;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -40,29 +42,42 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 @XmlRootElement(name = "inputDeposit")
 public class InputDeposit {
-
+	
+	@NotBlank(message="Campo obrigatório")
+	@Size(max = 25, message="Número de caracteres máximo (25)")
     @XmlAttribute(name = "account_iban")
     protected String accountIban;
+	@NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "account_id")
     protected String accountId;
     @XmlAttribute(name = "created_at")
     protected String createdAt;
+    @NotBlank(message="Campo obrigatório")
+    @Size(max = 8, message="Número de caracteres máximo (8)")
     @XmlAttribute(name = "depositer_cc_number")
     protected String depositerCcNumber;
+    @NotBlank(message="Campo obrigatório")
+    @Size(max = 255, message="Número de caracteres máximo (255)")
     @XmlAttribute(name = "depositer_name")
     protected String depositerName;
+    @Size(max = 255, message="Número de caracteres máximo (255)")
     @XmlAttribute(name = "description")
     protected String description;
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "employee_id")
     protected String employeeId;
     @XmlAttribute(name = "id")
     protected String id;
     @XmlAttribute(name = "transaction_id")
     protected String transactionId;
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "type")
     protected String type;
+    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "user_id")
     protected String userId;
+    @NotBlank(message="Campo obrigatório")
+    @Size(max = 255, message="Número de caracteres máximo (255)")
     @XmlAttribute(name = "value")
     protected String value;
 

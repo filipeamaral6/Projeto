@@ -328,15 +328,15 @@
     <pd:activity name="Username_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>545</pd:x>
-        <pd:y>403</pd:y>
+        <pd:x>542</pd:x>
+        <pd:y>406</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;O username que introduziu já existe!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O username que introduziu já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -405,14 +405,14 @@
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
         <pd:x>550</pd:x>
-        <pd:y>277</pd:y>
+        <pd:y>278</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;O email que introduziu já existe!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O email que introduziu já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -431,15 +431,15 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>945</pd:x>
-        <pd:y>388</pd:y>
+        <pd:x>941</pd:x>
+        <pd:y>389</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

@@ -45,7 +45,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O número de indentificação civil já existe!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O número de indentificação civil já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -54,14 +54,14 @@
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
         <pd:x>504</pd:x>
-        <pd:y>628</pd:y>
+        <pd:y>629</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O email que introduziu já foi registado!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O email que introduziu já foi registado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -69,7 +69,7 @@
     <pd:activity name="Id_NOTEXIST">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>510</pd:x>
+        <pd:x>514</pd:x>
         <pd:y>735</pd:y>
         <config>
             <variableName>message</variableName>
@@ -77,7 +77,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Não foi encontrado nenhum utilizador!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Não foi encontrado nenhum utilizador!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -413,15 +413,15 @@
     <pd:activity name="Username_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>518</pd:x>
-        <pd:y>531</pd:y>
+        <pd:x>511</pd:x>
+        <pd:y>524</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O username que introduziu já foi registado!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O username que introduziu já foi registado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -541,7 +541,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O NIF que introduziu já existe!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O NIF que introduziu já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -617,7 +617,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Não foram encontrados resultados!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Não foram encontrados resultados!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -1030,7 +1030,7 @@ WHERE id=(?)</statement>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

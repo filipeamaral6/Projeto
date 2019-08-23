@@ -69,6 +69,10 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputTransaction message = transactionService.getPortTypeTransferEndpoint1().writeTransfer(inputTransfer);
+				
+				if(message.getMessage().startsWith("Erro")) {
+					return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+				}
 				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
@@ -80,7 +84,7 @@ public class TransactionController {
 			}
 			
 			if (getAccountByIban.getInputAccount().isEmpty()) {
-				return new ResponseEntity<Object> (getAccountByIban.getOutputAccount(), HttpStatus.OK);
+				return new ResponseEntity<Object> (getAccountByIban.getOutputAccount(), HttpStatus.BAD_REQUEST);
 			} 			
 			return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
@@ -113,6 +117,10 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputWithdraw message = transactionService.getPortTypeWithdrawEndpoint1().writeWithdraw(inputWithdraw);
+				
+				if(message.getMessage().startsWith("Erro")) {
+					return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+				}
 				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
@@ -152,6 +160,10 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputPayment message = transactionService.getPortTypePaymentEndpoint1().writePayment(inputPayment);
+				
+				if(message.getMessage().startsWith("Erro")) {
+					return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+				}
 				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
@@ -177,6 +189,10 @@ public class TransactionController {
 
 				TransactionService transactionService = new TransactionService();
 				OutputDeposit message = transactionService.getPortTypeDepositEndpoint1().writeDeposit(inputDeposit);
+				
+				if(message.getMessage().startsWith("Erro")) {
+					return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+				}
 				return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 			}
@@ -192,18 +208,27 @@ public class TransactionController {
 
 		// Get Transaction by Id
 		@GetMapping("transaction/id/{id}")
-		public ResponseEntity<Object>  getTransactionById(@PathVariable String id) {
-
+		public ResponseEntity<List<Object>> getTransactionById(@PathVariable String id) {
+			
 			TransactionService transactionService = new TransactionService();
 			GetById getById = new GetById();
 			getById.setId(id);
+			
+			List<Object> objects = new ArrayList<Object>();
 
 			com.polarising.bootsecurity.soap.transaction.tibco.schemas.transaction.RootTransaction getTransactionById = transactionService.getPortTypeTransactionByIdEndpoint1().operation(getById);
 
+			objects.add(0, getTransactionById.getInputTransaction());
+			objects.add(1, getTransactionById.getPaymentTransaction());
+			objects.add(2, getTransactionById.getDepositTransaction());
+			objects.add(3, getTransactionById.getTransferTransaction());
+			objects.add(4, getTransactionById.getWithdrawTransaction());
+			objects.add(5, getTransactionById.getOutputTransaction());
+			
 			if (getTransactionById.getInputTransaction().isEmpty()) {
-				return new ResponseEntity<Object>(getTransactionById.getOutputTransaction(), HttpStatus.OK);
+				return new ResponseEntity<List<Object>>(objects, HttpStatus.BAD_REQUEST);
 			} else {
-				return new ResponseEntity<Object>(getTransactionById.getInputTransaction(), HttpStatus.OK);
+				return new ResponseEntity<List<Object>>(objects, HttpStatus.OK);
 			}
 		}
 
@@ -218,7 +243,7 @@ public class TransactionController {
 			RootTransaction getTransactionsByIban = transactionService.getPortTypeGetTransactionsByIbanEndpoint1().operation(getByIban);
 
 			if (getTransactionsByIban.getInputTransaction().isEmpty()) {
-				return new ResponseEntity<Object>(getTransactionsByIban.getOutputTransaction(), HttpStatus.OK);
+				return new ResponseEntity<Object>(getTransactionsByIban.getOutputTransaction(), HttpStatus.BAD_REQUEST);
 			} else {
 				return new ResponseEntity<Object> (getTransactionsByIban.getInputTransaction(), HttpStatus.OK);
 			}
@@ -239,6 +264,7 @@ public class TransactionController {
 				}
 			} else {
 				message.add(getTransactions.getOutputTransaction().get(0));
+				return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 			}
 
 			return new ResponseEntity<List<Object>>(message, HttpStatus.OK);

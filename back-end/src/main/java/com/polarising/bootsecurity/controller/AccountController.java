@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +46,7 @@ public class AccountController {
 
 		if (Double.parseDouble(inputAccount.getBalance()) < 500) {
 			error.put("field", "balance");
-			error.put("message", "Valor mínimo de depósitio de abertura de conta inválido (500€)");
+			error.put("message", "Valor para abertura de conta inválido! (mínimo: 500€)");
 			minBalanceError = true;
 		}
 
@@ -54,10 +55,13 @@ public class AccountController {
 			inputAccount.setAccountNumber(accountNumber.toString());
 			inputAccount.setIban(utils.generateIban("PT50", 4000, accountNumber));
 			AccountService accountService = new AccountService();
-
 			OutputAccount message = accountService.getPortTypeCreateAccountEndpoint1().operation(inputAccount);
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
-
+			
 		}
 
 		if (result.hasErrors()) {
@@ -84,6 +88,7 @@ public class AccountController {
 			}
 		} else {
 			message.add(getAccounts.getOutputAccount().get(0));
+			return new ResponseEntity<List<Object>>(message, HttpStatus.BAD_REQUEST);
 		}
 
 		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
@@ -100,7 +105,7 @@ public class AccountController {
 		Root getAccountById = accountService.getPortTypeGetAccountByIdEndpoint1().operationGetAccountById(getById);
 
 		if (getAccountById.getInputAccount().isEmpty()) {
-			return new ResponseEntity<Object>(getAccountById.getOutputAccount(), HttpStatus.OK);
+			return new ResponseEntity<Object>(getAccountById.getOutputAccount(), HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<Object>(getAccountById.getInputAccount(), HttpStatus.OK);
 		}
@@ -116,7 +121,7 @@ public class AccountController {
 		Root getAccountByIban = accountService.getPortTypeGetAccountByIbanEndpoint1().operation(getByIban);
 
 		if (getAccountByIban.getInputAccount().isEmpty()) {
-			return new ResponseEntity<Object>(getAccountByIban.getOutputAccount(), HttpStatus.OK);
+			return new ResponseEntity<Object>(getAccountByIban.getOutputAccount(), HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<Object>(getAccountByIban.getInputAccount(), HttpStatus.OK);
 		}
@@ -132,7 +137,10 @@ public class AccountController {
 			AccountService accountService = new AccountService();
 
 			OutputAccount message = accountService.getPortTypeUpdateAccountEndpoint1().operation(inputAccount);
-
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
 			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}

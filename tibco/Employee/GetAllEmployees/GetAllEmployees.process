@@ -12,9 +12,6 @@
                 <ns:root>
                     <xsl:for-each select="$Query_SelectAllEmployees/resultSet/Record">
                         <ns:InputEmployee>
-                            <xsl:attribute name="id">
-                                <xsl:value-of select="id"/>
-                            </xsl:attribute>
                             <xsl:attribute name="full_name">
                                 <xsl:value-of select="full_name"/>
                             </xsl:attribute>
@@ -36,6 +33,9 @@
                             <xsl:attribute name="status">
                                 <xsl:value-of select="status"/>
                             </xsl:attribute>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="id"/>
+                            </xsl:attribute>
                         </ns:InputEmployee>
                     </xsl:for-each>
                     <xsl:choose>
@@ -53,8 +53,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllEmployeesOutput"/>
-    <pd:endX>455</pd:endX>
-    <pd:endY>71</pd:endY>
+    <pd:endX>452</pd:endX>
+    <pd:endY>74</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -71,23 +71,19 @@
     <pd:activity name="Query_SelectAllEmployees">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>307</pd:x>
-        <pd:y>69</pd:y>
+        <pd:x>306</pd:x>
+        <pd:y>73</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT employee.id, user.email, user.password, user.username, user.role, user.status, employee.full_name, employee.user_id 
+            <statement>SELECT user.email, user.password, user.username, user.role, user.status, employee.id, employee.full_name, employee.user_id 
 FROM user, employee WHERE user.id=employee.user_id
 </statement>
             <oraObjects/>
             <oraTables/>
-            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>email</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -107,6 +103,10 @@ FROM user, employee WHERE user.id=employee.user_id
             <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>full_name</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
@@ -136,14 +136,14 @@ FROM user, employee WHERE user.id=employee.user_id
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
         <pd:x>586</pd:x>
-        <pd:y>70</pd:y>
+        <pd:y>71</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro:  Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
