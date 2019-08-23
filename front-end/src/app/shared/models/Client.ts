@@ -15,7 +15,7 @@ export class Client {
     mobileNumber?: string;
     nationality?: string;
     nif?: string;
-    notification = true;
+    notification?: string;
     phoneNumber?: string;
     role = 'CLIENT';
     status = 'ACTIVE';

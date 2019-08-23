@@ -11,3 +11,7 @@ button#account {
   padding: 3px;
   background-color: transparent;
 }
+
+.card-title {
+  padding-left: 15px;
+}

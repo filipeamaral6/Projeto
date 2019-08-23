@@ -16,7 +16,8 @@ import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.c
   // tslint:disable-next-line: component-selector
   selector: 'dashboard-cmp',
   moduleId: module.id,
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.component.css']
 })
 
 export class DashboardComponent implements OnInit {
@@ -27,7 +28,9 @@ export class DashboardComponent implements OnInit {
   public chartEmail;
   public chartHours;
 
-  accounts: Account[];
+  pageName = 'DASHBOARD';
+
+  // accounts: Account[];
 
   constructor(
     private clientLayout: ClientLayoutComponent,
@@ -38,94 +41,99 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
-    this.accounts = [];
-    console.log(this.accounts)
-    this.loadAccountsChart();
+    // this.accounts = this.getAccountList();
+    // this.loadAccountsChart();
   }
 
-  private loadAccountsChart() {
-    const speedCanvas = document.getElementById('speedChart');
+  // private loadAccountsChart() {
+  //   const speedCanvas = document.getElementById('speedChart');
 
-    const accountsData = [];
+  //   const accountsData = [];
 
-    for (const account of this.accounts) {
-      const balanceData: number[] = [];
-      for (const movementBalance of account.movementBalances) {
-        balanceData.push(movementBalance);
-      }
+  //   for (const account of this.accounts) {
+  //     const balanceData: number[] = [];
+  //     for (const movementBalance of account.movementBalances) {
+  //       balanceData.push(movementBalance);
+  //     }
 
-      const color: string = this.getRandomColor();
+  //     const color: string = this.getRandomColor();
 
-      const data = {
-        data: balanceData,
-        fill: false,
-        borderColor: color,
-        backgroundColor: 'transparent',
-        pointBorderColor: color,
-        pointRadius: 4,
-        pointHoverRadius: 4,
-        pointBorderWidth: 8,
-      }
-      accountsData.push(data);
-    }
+  //     const data = {
+  //       data: balanceData,
+  //       fill: false,
+  //       borderColor: color,
+  //       backgroundColor: 'transparent',
+  //       pointBorderColor: color,
+  //       pointRadius: 4,
+  //       pointHoverRadius: 4,
+  //       pointBorderWidth: 8,
+  //     }
+  //     accountsData.push(data);
+  //   }
 
-    const labels = [];
-    const daysInMonth = this.getDaysInCurrentMonth();
+  //   const labels = [];
+  //   const daysInMonth = this.getDaysInCurrentMonth();
 
-    for (let i = 1; i <= daysInMonth; i++) {
-      labels.push(i);
-    }
+  //   for (let i = 1; i <= daysInMonth; i++) {
+  //     labels.push(i);
+  //   }
 
-    const speedData = {
-      labels: labels,
-      datasets: accountsData,
-    };
+  //   const speedData = {
+  //     labels: labels,
+  //     datasets: accountsData,
+  //   };
 
-    const chartOptions = {
-      legend: {
-        display: false,
-        position: 'top'
-      },
-    };
+  //   const chartOptions = {
+  //     legend: {
+  //       display: false,
+  //       position: 'top'
+  //     },
+  //   };
 
-    const lineChart = new Chart(speedCanvas, {
-      type: 'line',
-      hover: false,
-      data: speedData,
-      options: chartOptions
-    });
+  //   const lineChart = new Chart(speedCanvas, {
+  //     type: 'line',
+  //     hover: false,
+  //     data: speedData,
+  //     options: chartOptions
+  //   });
+  // }
+
+  // private isLeapYear(year) {
+  //   return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
+  // }
+
+  // private getDaysInCurrentMonth() {
+  //   const date = new Date();
+
+  //   switch (date.getMonth() + 1) {
+  //     case 2:
+  //       if (this.isLeapYear(new Date().getFullYear())) {
+  //         return 29;
+  //       } else {
+  //         return 28;
+  //       }
+  //     case 4:
+  //     case 6:
+  //     case 9:
+  //     case 11:
+  //       return 30;
+  //     default:
+  //       return 31;
+  //   }
+  // }
+
+  // private getRandomColor() {
+  //   // tslint:disable-next-line: no-bitwise
+  //   return '#000000'.replace(/0/g, function () { return (~~(Math.random() * 16)).toString(16); });
+  // }
+
+  selectAccount(accountId: number) {
+    console.log('dashboard' + accountId);
   }
 
-  private isLeapYear(year) {
-    return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
+  getAccountList() {
+    return this.clientLayout.getAccounts;
   }
-
-  private getDaysInCurrentMonth() {
-    const date = new Date();
-
-    switch (date.getMonth() + 1) {
-      case 2:
-        if (this.isLeapYear(new Date().getFullYear())) {
-          return 29;
-        } else {
-          return 28;
-        }
-      case 4:
-      case 6:
-      case 9:
-      case 11:
-        return 30;
-      default:
-        return 31;
-    }
-  }
-
-  private getRandomColor() {
-    // tslint:disable-next-line: no-bitwise
-    return '#000000'.replace(/0/g, function () { return (~~(Math.random() * 16)).toString(16); });
-  }
-
-
 
 
 }
