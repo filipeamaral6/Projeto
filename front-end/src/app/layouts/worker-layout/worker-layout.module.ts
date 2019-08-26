@@ -13,6 +13,8 @@ import { TransferComponent } from 'app/pages/user/worker/transfer/transfer.compo
 import { AlertModule } from 'app/shared/alerts';
 import { AccountsComponent } from 'app/pages/user/worker/accounts/accounts.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
+import { EmployeesComponent } from 'app/pages/user/worker/employees/employees.component';
+import { FilterPipe } from 'app/shared/filter.pipe';
 
 
 
@@ -29,8 +31,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
     ClientsComponent,
     DepositComponent,
     PaymentsComponent,
-    TransferComponent,
-    AccountsComponent
+    TransferComponent
   ]
 })
 

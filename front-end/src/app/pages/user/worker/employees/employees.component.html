@@ -1,0 +1,336 @@
+<div class="row col-md-8" style="padding-left: 15px;">
+  <div class="card col-md-4" style="margin-right: 15px;">
+    <input
+      type="text"
+      class="form-control"
+      name="searchString"
+      placeholder="Type to search by name..."
+      [(ngModel)]="searchString"
+      style="border-width: 0; padding: 15px;"
+    />
+  </div>
+  <div class="card col-md-2">
+    <select
+      class="form-control"
+      value="ALL"
+      name="status"
+      #f
+      (change)="fetchEmployees(f.value)"
+      style="border-width: 0px; margin: auto;"
+    >
+      <ng-container *ngFor="let status of statusArray">
+        <option [value]="status">{{ status }}</option>
+      </ng-container>
+    </select>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class=" text-primary">
+          <tr>
+            <th>
+              Nome
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Função
+            </th>
+            <th class="text-right">
+              Estado
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let employee of employees | filter: 'fullName':searchString"
+            (click)="openModal(employeeDetailsModal, employee)"
+          >
+            <td>
+              {{ employee.fullName }}
+            </td>
+            <td>
+              {{ employee.email }}
+            </td>
+
+            <td *ngIf="employee.role === 'ADMIN'">
+              Administrador
+            </td>
+            <td *ngIf="employee.role === 'EMPLOYEE'">
+              Colaborador
+            </td>
+            <td class="text-right">
+              {{ employee.status }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <div>
+      <span>
+        <a class="btn btn-primary" (click)="openModal(addEmployeeModal, null)"
+          >Adicionar Colaborador</a
+        >
+      </span>
+    </div>
+  </div>
+</div>
+
+<ng-template #employeeDetailsModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detalhes</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click'); activeModal = false; closeModal()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <alert></alert>
+    <form
+      #editEmployeeForm="ngForm"
+      (ngSubmit)="updateEmployee(editEmployeeForm)"
+    >
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="toggleEditMode()"
+      >
+        {{ editButtonLabel }}
+      </button>
+      <button
+        *ngIf="selectedEmployee.status === 'ACTIVE'"
+        type="button"
+        class="btn btn-danger"
+        (click)="deactivateEmployee(selectedEmployee.id)"
+      >
+        Desativar Colaborador
+      </button>
+      <button
+        *ngIf="selectedEmployee.status === 'INACTIVE'"
+        type="button"
+        class="btn btn-success"
+        (click)="activateEmployee(selectedEmployee.id)"
+      >
+        Ativar Colaborador
+      </button>
+      <span *ngIf="editMode">
+        | <button type="submit" class="btn btn-info">Guardar</button>
+      </span>
+      <div class="form-group">
+        <label for="fullName">Nome Completo</label>
+        <input
+          type="text"
+          class="form-control col-md-10"
+          value="{{ selectedEmployee.fullName }}"
+          [disabled]="!editMode"
+          [(ngModel)]="selectedEmployee.fullName"
+          name="fullName"
+        />
+      </div>
+      <div class="row col-md-12">
+        <div
+          class="form-group col-md-6"
+          style="padding-right: 4.9%; padding-left: 0;"
+        >
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control "
+            value="{{ selectedEmployee.email }}"
+            [disabled]="!editMode"
+            [(ngModel)]="selectedEmployee.email"
+            name="email"
+          />
+        </div>
+        <div class="form-group col-md-4" style="padding-right: 4.9%">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control "
+            value="{{ selectedEmployee.username }}"
+            [disabled]="!editMode"
+            [(ngModel)]="selectedEmployee.username"
+            name="username"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="role">Função</label>
+        <select
+          class="form-control col-md-4"
+          value="{{ selectedEmployee.role }}"
+          [disabled]="!editMode"
+          [(ngModel)]="selectedEmployee.role"
+          name="role"
+        >
+          <ng-container *ngFor="let role of roles">
+            <option
+              *ngIf="role === 'ADMIN'"
+              [value]="role"
+              [selected]="selectedEmployee.role === role"
+              >Administrator</option
+            >
+            <option
+              *ngIf="role === 'EMPLOYEE'"
+              [value]="role"
+              [selected]="selectedEmployee.role === role"
+              >Colaborador</option
+            >
+          </ng-container>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="editMode">
+        <button type="button" class="btn btn-primary">
+          Reset Password
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #addEmployeeModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Adicionar Colaborador</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click'); activeModal = false"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #addEmployeeForm="ngForm" (ngSubmit)="addEmployee(addEmployeeForm)">
+      <div class="form-group">
+        <label for="fullName">Nome Completo*</label>
+        <input
+          type="text"
+          class="form-control col-md-10"
+          name="fullName"
+          [(ngModel)]="newEmployee.fullName"
+          [ngClass]="{ 'is-invalid': fullName.touched && fullName.errors }"
+          #fullName="ngModel"
+          required
+        />
+        <div
+          *ngIf="fullName.touched && fullName.hasError('required')"
+          class="invalid-feedback"
+        >
+          Nome inválido
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div
+          class="form-group col-md-6"
+          style="padding-right: 4.9%; padding-left: 0;"
+        >
+          <label for="email">Email*</label>
+          <input
+            type="email"
+            class="form-control "
+            name="email"
+            [(ngModel)]="newEmployee.email"
+            [ngClass]="{ 'is-invalid': email.touched && email.errors }"
+            #email="ngModel"
+            required
+          />
+          <div
+            *ngIf="email.touched && email.hasError('required')"
+            class="invalid-feedback"
+          >
+            Email inválido
+          </div>
+        </div>
+        <div class="form-group col-md-4" style="padding-right: 4.9%">
+          <label for="username">Username*</label>
+          <input
+            type="text"
+            class="form-control "
+            name="username"
+            [(ngModel)]="newEmployee.username"
+            [ngClass]="{ 'is-invalid': username.touched && username.errors }"
+            #username="ngModel"
+            required
+          />
+          <div
+            *ngIf="username.touched && username.hasError('required')"
+            class="invalid-feedback"
+          >
+            Username inválido
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="role">Função*</label>
+        <select
+          class="form-control col-md-4"
+          value="Selecionar"
+          name="role"
+          [(ngModel)]="newEmployee.role"
+          [ngClass]="{ 'is-invalid': role.touched && role.errors }"
+          #role="ngModel"
+          required
+        >
+          <ng-container *ngFor="let role of roles">
+            <option [value]="role" *ngIf="role === 'ADMIN'"
+              >Administrador</option
+            >
+            <option [value]="role" *ngIf="role === 'EMPLOYEE'"
+              >Colaborador</option
+            >
+          </ng-container>
+        </select>
+        <div
+          *ngIf="role.touched && role.hasError('required')"
+          class="invalid-feedback"
+        >
+          Função inválida
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="password">Password*</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="newEmployee.password"
+            [ngClass]="{
+              'is-invalid': password.touched && password.errors
+            }"
+            #password="ngModel"
+            required
+          />
+          <div
+            *ngIf="password.touched && password.hasError('required')"
+            class="invalid-feedback"
+          >
+            Password inválida
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="generatePassword('password')"
+          >
+            Gerar
+          </button>
+        </div>
+      </div>
+      <hr />
+      <div>* Campo Obrigatório</div>
+      <alert></alert>
+      <hr />
+      <button type="submit" class="btn btn-primary">Adicionar</button>
+    </form>
+  </div>
+</ng-template>
