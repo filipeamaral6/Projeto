@@ -94,10 +94,10 @@
     </wsdl:types>
     <wsdl:service name="Service">
         <wsdl:port name="PortType_GetClientAccountsEndpoint1" binding="tns:PortType_GetClientAccountsEndpoint1Binding">
-            <soap:address location="http://localhost:8086/Client_Account/Service.serviceagent/PortType_GetClientAccountsEndpoint1"/>
+            <soap:address location="http://localhost:8092/Client_Account/Service.serviceagent/PortType_GetClientAccountsEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_GetAccountClientsEndpoint1" binding="tns:PortType_GetAccountClientsEndpoint1Binding">
-            <soap:address location="http://localhost:8086/Client_Account/Service.serviceagent/PortType_GetAccountClientsEndpoint1"/>
+            <soap:address location="http://localhost:8092/Client_Account/Service.serviceagent/PortType_GetAccountClientsEndpoint1"/>
         </wsdl:port>
     </wsdl:service>
     <wsdl:portType name="PortType_GetClientAccounts">

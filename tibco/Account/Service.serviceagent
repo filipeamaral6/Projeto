@@ -363,7 +363,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="GetAccountClients_Operation" opImpl="/Account/GetAccount/GetAccountClients.process"/>
+                                    <row opName="GetAccountClients_Operation" opImpl=""/>
                                 </operations>
                             </config>
                         </tab>
@@ -431,7 +431,7 @@
                             <tabType>impl</tabType>
                             <config>
                                 <operations>
-                                    <row opName="Operation" opImpl="/Account/GetAccount/GetClientAccounts.process"/>
+                                    <row opName="Operation" opImpl=""/>
                                 </operations>
                             </config>
                         </tab>
