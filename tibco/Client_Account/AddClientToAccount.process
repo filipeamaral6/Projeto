@@ -4,8 +4,8 @@
     <pd:name>Client_Account/AddClientToAccount.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:AddClientToAccountInput"/>
-    <pd:startX>60</pd:startX>
-    <pd:startY>261</pd:startY>
+    <pd:startX>29</pd:startX>
+    <pd:startY>361</pd:startY>
     <pd:returnBindings>
         <pfx:AddClientToAccountOutput>
             <output>
@@ -37,8 +37,8 @@
     <pd:activity name="GetAccount">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>254</pd:x>
-        <pd:y>263</pd:y>
+        <pd:x>177</pd:x>
+        <pd:y>366</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -109,14 +109,14 @@
     <pd:activity name="JDBC Update">
         <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-        <pd:x>251</pd:x>
+        <pd:x>314</pd:x>
         <pd:y>35</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>INSERT (account_id, user_id) INTO account_client VALUES (?,?) </statement>
+            <statement>INSERT INTO account_client (account_id, user_id)  VALUES (?,?) </statement>
             <Prepared_Param_DataType>
                 <parameter>
                     <parameterName>account_id</parameterName>
@@ -156,8 +156,8 @@
     <pd:activity name="NOT_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>521</pd:x>
-        <pd:y>278</pd:y>
+        <pd:x>668</pd:x>
+        <pd:y>367</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -199,8 +199,8 @@
     <pd:activity name="GetClient">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>251</pd:x>
-        <pd:y>147</pd:y>
+        <pd:x>175</pd:x>
+        <pd:y>258</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -299,8 +299,8 @@
     <pd:activity name="Client_NOT_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>518</pd:x>
-        <pd:y>155</pd:y>
+        <pd:x>598</pd:x>
+        <pd:y>262</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -315,8 +315,8 @@
     <pd:activity name="SUCCESS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>513</pd:x>
-        <pd:y>37</pd:y>
+        <pd:x>612</pd:x>
+        <pd:y>44</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -324,6 +324,80 @@
             <root>
                 <message>
                     <xsl:value-of select="&quot;Foi adicionado com sucesso!&quot;"/>
+                </message>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="AlreadyInAccount">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>182</pd:x>
+        <pd:y>140</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT * FROM account_client WHERE account_id=? AND user_id=? </statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>account_id</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>user_id</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>account_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>user_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <account_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:AddClientToAccountInput/input/ns:inputAccountClient/@account_id)">
+                            <xsl:value-of select="$Start/pfx:AddClientToAccountInput/input/ns:inputAccountClient/@account_id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </account_id>
+                <user_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:AddClientToAccountInput/input/ns:inputAccountClient/@client_id)">
+                            <xsl:value-of select="$Start/pfx:AddClientToAccountInput/input/ns:inputAccountClient/@client_id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </user_id>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="ClientAlreadyInAccount">
+        <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
+        <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
+        <pd:x>466</pd:x>
+        <pd:y>143</pd:y>
+        <config>
+            <variableName>message</variableName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <message>
+                    <xsl:value-of select="&quot;Erro: Este cliente já é titular desta conta!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -403,10 +477,33 @@
     </pd:transition>
     <pd:transition>
         <pd:from>GetClient</pd:from>
-        <pd:to>JDBC Update</pd:to>
+        <pd:to>AlreadyInAccount</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>exists($GetClient/resultSet/Record)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>AlreadyInAccount</pd:from>
+        <pd:to>JDBC Update</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>not(exists($AlreadyInAccount/resultSet/Record))</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>AlreadyInAccount</pd:from>
+        <pd:to>ClientAlreadyInAccount</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($AlreadyInAccount/resultSet/Record)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>ClientAlreadyInAccount</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
     </pd:transition>
 </pd:ProcessDefinition>

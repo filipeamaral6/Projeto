@@ -3,11 +3,11 @@
 	<globalVariables>
 		<globalVariable>
 			<name>Transaction_Port</name>
-			<value>8095</value>
+			<value>8085</value>
 			<deploymentSettable>true</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
-			<modTime>1566815489044</modTime>
+			<modTime>1566836369200</modTime>
 		</globalVariable>
 		<globalVariable>
 			<name>Transaction_Url</name>

@@ -68,19 +68,19 @@
     </wsdl:types>
     <wsdl:service name="Service">
         <wsdl:port name="PortType_GetAccountByIdEndpoint1" binding="tns:PortType_GetAccountByIdEndpoint1Binding">
-            <soap:address location="http://localhost:8091/Account/Service.serviceagent/PortType_GetAccountByIdEndpoint1"/>
+            <soap:address location="http://localhost:8081/Account/Service.serviceagent/PortType_GetAccountByIdEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_UpdateAccountEndpoint1" binding="tns:PortType_UpdateAccountEndpoint1Binding">
-            <soap:address location="http://localhost:8091/Account/Service.serviceagent/PortType_UpdateAccountEndpoint1"/>
+            <soap:address location="http://localhost:8081/Account/Service.serviceagent/PortType_UpdateAccountEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_GetAccountByIbanEndpoint1" binding="tns:PortType_GetAccountByIbanEndpoint1Binding">
-            <soap:address location="http://localhost:8091/Account/Service.serviceagent/PortType_GetAccountByIbanEndpoint1"/>
+            <soap:address location="http://localhost:8081/Account/Service.serviceagent/PortType_GetAccountByIbanEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_GetAllAccountsEndpoint1" binding="tns:PortType_GetAllAccountsEndpoint1Binding">
-            <soap:address location="http://localhost:8091/Account/Service.serviceagent/PortType_GetAllAccountsEndpoint1"/>
+            <soap:address location="http://localhost:8081/Account/Service.serviceagent/PortType_GetAllAccountsEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_CreateAccountEndpoint1" binding="tns:PortType_CreateAccountEndpoint1Binding">
-            <soap:address location="http://localhost:8091/Account/Service.serviceagent/PortType_CreateAccountEndpoint1"/>
+            <soap:address location="http://localhost:8081/Account/Service.serviceagent/PortType_CreateAccountEndpoint1"/>
 
         </wsdl:port>
     </wsdl:service>

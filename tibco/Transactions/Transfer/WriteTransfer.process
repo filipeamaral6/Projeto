@@ -150,7 +150,7 @@
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
             <pd:x>232</pd:x>
-            <pd:y>200</pd:y>
+            <pd:y>201</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -352,8 +352,8 @@
         <pd:activity name="UPDATE_Origin_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>99</pd:x>
-            <pd:y>201</pd:y>
+            <pd:x>98</pd:x>
+            <pd:y>200</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>

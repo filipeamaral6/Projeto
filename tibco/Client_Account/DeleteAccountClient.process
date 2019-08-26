@@ -102,7 +102,7 @@
             <commit>false</commit>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>DELETE * FROM account_client WHERE user_id=? AND account_id=?</statement>
+            <statement>DELETE FROM account_client WHERE user_id=? AND account_id=?</statement>
             <Prepared_Param_DataType>
                 <parameter>
                     <parameterName>user_id</parameterName>
@@ -115,7 +115,28 @@
             </Prepared_Param_DataType>
         </config>
         <pd:inputBindings>
-            <jdbcUpdateActivityInput/>
+            <jdbcUpdateActivityInput>
+                <user_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:DeleteAccountClientInput/input/ns:inputAccountClient/@client_id)">
+                            <xsl:value-of select="$Start/pfx:DeleteAccountClientInput/input/ns:inputAccountClient/@client_id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </user_id>
+                <account_id>
+                    <xsl:choose>
+                        <xsl:when test="exists($Start/pfx:DeleteAccountClientInput/input/ns:inputAccountClient/@account_id)">
+                            <xsl:value-of select="$Start/pfx:DeleteAccountClientInput/input/ns:inputAccountClient/@account_id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </account_id>
+            </jdbcUpdateActivityInput>
         </pd:inputBindings>
     </pd:activity>
     <pd:activity name="NOT_EXISTS">
