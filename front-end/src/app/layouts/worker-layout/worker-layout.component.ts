@@ -6,10 +6,11 @@ import { AccountService } from 'app/services/transport/account.service';
 import { RouteInfo } from 'app/shared/sidebar/sidebar.component';
 
 const ROUTES = [
+  { path: 'employees', title: 'Colaboradores', icon: 'nc-badge', class: '' },
   { path: 'clients', title: 'Clientes', icon: 'nc-single-02', class: '' },
   { path: 'deposit', title: 'Depositar', icon: 'nc-box', class: '' },
-  { path: 'transfer', title: 'Transferir', icon: 'nc-money-coins', class: ''},
-  { path: 'payments', title: 'Pagamentos', icon: 'nc-cart-simple', class: ''}
+  { path: 'transfer', title: 'Transferir', icon: 'nc-money-coins', class: '' },
+  { path: 'payments', title: 'Pagamentos', icon: 'nc-cart-simple', class: '' },
 ];
 
 @Component({
@@ -39,7 +40,7 @@ export class WorkerLayoutComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private accountService: AccountService
-    ) {
-      this.currentUser = this.authenticationService.currentUser;
-    }
+  ) {
+    this.currentUser = this.authenticationService.currentUser;
+  }
 }

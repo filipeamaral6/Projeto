@@ -26,10 +26,6 @@ import { AlertService, AlertModule } from './shared/alerts';
 import { TransactionService } from './services/transport/transaction.service';
 import { EmployeeService } from './services/transport/employee.service';
 
-
-
-
-
 @NgModule({
   declarations: [
     WorkerLayoutComponent,

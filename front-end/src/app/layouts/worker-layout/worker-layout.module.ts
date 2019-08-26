@@ -11,6 +11,8 @@ import { DepositComponent } from 'app/pages/user/worker/deposit/deposit.componen
 import { PaymentsComponent } from 'app/pages/user/worker/payments/payments.component';
 import { TransferComponent } from 'app/pages/user/worker/transfer/transfer.component';
 import { AlertModule } from 'app/shared/alerts';
+import { EmployeesComponent } from 'app/pages/user/worker/employees/employees.component';
+import { FilterPipe } from 'app/shared/filter.pipe';
 
 
 
@@ -26,7 +28,9 @@ import { AlertModule } from 'app/shared/alerts';
     ClientsComponent,
     DepositComponent,
     PaymentsComponent,
-    TransferComponent
+    TransferComponent,
+    EmployeesComponent,
+    FilterPipe
   ]
 })
 
