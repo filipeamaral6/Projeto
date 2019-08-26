@@ -1,6 +1,6 @@
 CREATE TABLE `transfer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `destination_iban` int(11) NOT NULL,
+  `destination_iban` varchar(255) NOT NULL,
   `transaction_id` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),

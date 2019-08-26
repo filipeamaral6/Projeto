@@ -6,7 +6,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +27,9 @@ import com.polarising.bootsecurity.soap.account.tibco.schemas.account.OutputAcco
 import com.polarising.bootsecurity.soap.account.tibco.schemas.account.Root;
 import com.polarising.bootsecurity.soap.account.tibco.schemas.getbyiban.GetByIban;
 import com.polarising.bootsecurity.soap.account.tibco.schemas.getbyid.GetById;
+import com.polarising.bootsecurity.soap.client.tibco.schemas.client.InputClient;
+import com.polarising.bootsecurity.soap.client_account.example.xmlns._1566480228153.ClientAccountService;
+import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.account.RootClientAccount;
 
 @RestController
 @RequestMapping("/")
@@ -35,7 +41,7 @@ public class AccountController {
 
 	// Add Account
 	@PostMapping("accounts/add")
-	public Object AddAccount(@Valid @RequestBody InputAccount inputAccount, BindingResult result) {
+	public ResponseEntity<Object> AddAccount(@Valid @RequestBody InputAccount inputAccount, BindingResult result) {
 
 		Long accountNumber = (System.currentTimeMillis() / 100);
 		HashMap<String, String> error = new HashMap<>();
@@ -43,7 +49,7 @@ public class AccountController {
 
 		if (Double.parseDouble(inputAccount.getBalance()) < 500) {
 			error.put("field", "balance");
-			error.put("message", "Valor mínimo de depósitio de abertura de conta inválido (500€)");
+			error.put("message", "Valor para abertura de conta inválido! (mínimo: 500€)");
 			minBalanceError = true;
 		}
 
@@ -52,10 +58,13 @@ public class AccountController {
 			inputAccount.setAccountNumber(accountNumber.toString());
 			inputAccount.setIban(utils.generateIban("PT50", 4000, accountNumber));
 			AccountService accountService = new AccountService();
-
 			OutputAccount message = accountService.getPortTypeCreateAccountEndpoint1().operation(inputAccount);
-			return message;
-
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
+			
 		}
 
 		if (result.hasErrors()) {
@@ -63,13 +72,13 @@ public class AccountController {
 			error.put("message", result.getFieldError().getDefaultMessage());
 
 		}
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 	}
 
 	// Get Accounts
 	@GetMapping("accounts")
-	public List<Object> getAccounts() {
+	public ResponseEntity<List<Object>> getAccounts() {
 
 		AccountService accountService = new AccountService();
 		Root getAccounts = accountService.getPortTypeGetAllAccountsEndpoint1().operation();
@@ -82,14 +91,15 @@ public class AccountController {
 			}
 		} else {
 			message.add(getAccounts.getOutputAccount().get(0));
+			return new ResponseEntity<List<Object>>(message, HttpStatus.BAD_REQUEST);
 		}
 
-		return message;
+		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
 	}
 
 	// Get Account by Id
 	@GetMapping("accounts/id/{id}")
-	public Object getAccountById(@PathVariable String id) {
+	public ResponseEntity<Object> getAccountById(@PathVariable String id) {
 
 		AccountService accountService = new AccountService();
 		GetById getById = new GetById();
@@ -98,15 +108,15 @@ public class AccountController {
 		Root getAccountById = accountService.getPortTypeGetAccountByIdEndpoint1().operationGetAccountById(getById);
 
 		if (getAccountById.getInputAccount().isEmpty()) {
-			return getAccountById.getOutputAccount();
+			return new ResponseEntity<Object>(getAccountById.getOutputAccount(), HttpStatus.BAD_REQUEST);
 		} else {
-			return getAccountById.getInputAccount();
+			return new ResponseEntity<Object>(getAccountById.getInputAccount(), HttpStatus.OK);
 		}
 	}
 
 	// Get Account By IBAN
 	@GetMapping("accounts/iban/{iban}")
-	public Object getAccountByIban(@PathVariable String iban) {
+	public ResponseEntity<Object> getAccountByIban(@PathVariable String iban) {
 		AccountService accountService = new AccountService();
 		GetByIban getByIban = new GetByIban();
 		getByIban.setIban(iban);
@@ -114,24 +124,44 @@ public class AccountController {
 		Root getAccountByIban = accountService.getPortTypeGetAccountByIbanEndpoint1().operation(getByIban);
 
 		if (getAccountByIban.getInputAccount().isEmpty()) {
-			return getAccountByIban.getOutputAccount();
+			return new ResponseEntity<Object>(getAccountByIban.getOutputAccount(), HttpStatus.BAD_REQUEST);
 		} else {
-			return getAccountByIban.getInputAccount();
+			return new ResponseEntity<Object>(getAccountByIban.getInputAccount(), HttpStatus.OK);
+		}
+
+	}
+	
+	// Get Client's Account's
+	@GetMapping("client/accounts/{clientId}")
+	public ResponseEntity<Object> getClientsAccounts(@PathVariable String clientId) {
+		ClientAccountService clientAccountService = new ClientAccountService();
+		com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid.GetById getById = new com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid.GetById();
+		getById.setId(clientId);
+
+		RootClientAccount getClientAccounts = clientAccountService.getPortTypeGetClientAccountsEndpoint1().operation(getById);
+
+		if (getClientAccounts.getInputAccount().isEmpty()) {
+			return new ResponseEntity<Object>(getClientAccounts.getOutputAccount(), HttpStatus.BAD_REQUEST);
+		} else {
+			return new ResponseEntity<Object>(getClientAccounts.getInputAccount(), HttpStatus.OK);
 		}
 
 	}
 
 	// Update Account
 	@PutMapping("accounts/update")
-	public Object updateAccounts(@Valid @RequestBody InputAccount inputAccount, BindingResult result) {
+	public ResponseEntity<Object> updateAccounts(@Valid @RequestBody InputAccount inputAccount, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
 			AccountService accountService = new AccountService();
 
 			OutputAccount message = accountService.getPortTypeUpdateAccountEndpoint1().operation(inputAccount);
-
-			return message;
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
 
@@ -139,7 +169,7 @@ public class AccountController {
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 	}
 }

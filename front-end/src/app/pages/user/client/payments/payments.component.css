@@ -1,7 +1,69 @@
-.payment-value {
-    padding-top: 5px;
+div.card-body.col-md-12 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+  div.row.col-md-12 {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin: 0px;
+  }
+  
+  #transferCol {
+    padding-left: 0px;
+  }
+  
+  .payment-value {
+    padding-top: 6px;
+  }
+  
+  .eye-icon {
+    text-align: right;
+    width: 30px;
+    font-size: 18px;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .pass-control {
+    flex: 1;
+    border-right-width: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  
+  .security-code {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  #eyeClose {
+    text-align: right; 
+    padding-left: 0; 
+    padding-top: 8.2px;
+    padding-bottom: 8.1px;
+
+  }
+  
+  #eyeClose:hover {
+    color: lightskyblue;
+  }
+  
+button {
+    margin-right: 10px;
 }
 
-.card-title {
-    padding-left: 15px;
-}
+#comma-sign {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  #euro-sign {
+    padding-left: 10px;
+    padding-right: 0px;
+  }
+
+
+

@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 
 import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
+import { NavbarModule } from './shared/navbar/navbar.module';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
@@ -21,6 +21,11 @@ import { ClientService } from './services/transport/client.service';
 import { AccountService } from './services/transport/account.service';
 import { WorkerLayoutComponent } from './layouts/worker-layout/worker-layout.component';
 import { SidebarModule } from './shared/sidebar/sidebar.module';
+import { AlertComponent } from './shared/alerts/alert.component';
+import { AlertService, AlertModule } from './shared/alerts';
+import { TransactionService } from './services/transport/transaction.service';
+import { EmployeeService } from './services/transport/employee.service';
+
 
 
 
@@ -32,16 +37,16 @@ import { SidebarModule } from './shared/sidebar/sidebar.module';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    LoadingSpinnerComponent
-  ],
+    LoadingSpinnerComponent],
   imports: [
+    AlertModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes,
-    {
-      useHash: true
-    }),
+      {
+        useHash: true
+      }),
     SidebarModule,
     NavbarModule,
     ToastrModule.forRoot(),
@@ -55,7 +60,9 @@ import { SidebarModule } from './shared/sidebar/sidebar.module';
     AuthenticationService,
     AccessService,
     ClientService,
-    AccountService
+    AccountService,
+    TransactionService,
+    EmployeeService
   ],
 
   bootstrap: [AppComponent]

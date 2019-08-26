@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:tns="http://xmlns.example.com/1566479847232" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:ns3="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" targetNamespace="http://xmlns.example.com/1566479847232">
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" location="../Schemas/Client.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" location="../Schemas/Account.xsd"/>
+    <message name="GetAccountClientsInput">
+        <part name="input" element="ns:getById"/>
+    </message>
+    <message name="GetAccountClientsOutput">
+        <part name="output" element="ns2:root"/>
+    </message>
+    <message name="GetClientAccountsInput">
+        <part name="input" element="ns:getById"/>
+    </message>
+    <message name="GetClientAccountsOutput">
+        <part name="output" element="ns3:root"/>
+    </message>
+    <portType name="PortType_GetAccountClients">
+        <operation name="Operation">
+            <input message="tns:GetAccountClientsInput"/>
+            <output message="tns:GetAccountClientsOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_GetClientAccounts">
+        <operation name="Operation">
+            <input message="tns:GetClientAccountsInput"/>
+            <output message="tns:GetClientAccountsOutput"/>
+        </operation>
+    </portType>
+</definitions>

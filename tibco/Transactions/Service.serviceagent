@@ -8,7 +8,7 @@
         <groups>
             <row isDefault="true" groupName="Default"/>
         </groups>
-        <serviceChange>Fri Aug 09 12:01:08 BST 2019</serviceChange>
+        <serviceChange>Fri Aug 09 15:26:51 BST 2019</serviceChange>
         <name>Service</name>
         <resourceType>service.definition</resourceType>
         <interfaceImpl>
@@ -167,7 +167,50 @@
                             <tabName>service.definition.ep.tab.label</tabName>
                             <tabType>ep</tabType>
                             <config>
-                                <epBindings/>
+                                <epBindings>
+                                    <row epName="PortType_TransactionByIdEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/Transactions/Http_Connection/HTTP Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Transactions/Service.serviceagent/PortType_TransactionByIdEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="Operation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Transactions/Service.serviceagent/PortType_TransactionByIdEndpoint1/Operation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
                             </config>
                         </tab>
                     </detail>

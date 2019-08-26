@@ -73,8 +73,8 @@
     <pd:activity name="Query_GetAccountByIban">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>318</pd:x>
-        <pd:y>126</pd:y>
+        <pd:x>317</pd:x>
+        <pd:y>127</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -168,7 +168,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

@@ -28,7 +28,7 @@ export class ClientService {
     return this.http.get<Client>(this.API + '/clients/id/' + id);
   }
 
-  getByClientCC(clientCC: number) {
+  getByClientCC(clientCC: string) {
     return this.http.get<Client>(this.API + '/clients/cc/' + clientCC);
   }
 
@@ -36,8 +36,7 @@ export class ClientService {
     return this.http.post(this.API + '/clients/add', client, httpOptions);
   }
 
-  updateUser(client: string) {
+  updateClient(client: string) {
     return this.http.put(this.API + '/clients/update', client, httpOptions);
   }
-
 }

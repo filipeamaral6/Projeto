@@ -15,16 +15,11 @@ import { AuthenticationService } from 'app/services/authentication.service';
 export class ClientDetailComponent implements OnInit {
 
   client: Client;
-  currentUser: CurrentUser;
   notificationStatus = false;
 
-  teste = 'ertyghjklkcmnjv hjhfbvjhbd';
-
   constructor(
-    private clientLayout: ClientLayoutComponent,
     private clientService: ClientService,
     private authenticationService: AuthenticationService) {
-    this.currentUser = authenticationService.currentUserValue;
   }
 
   ngOnInit() {
@@ -32,8 +27,7 @@ export class ClientDetailComponent implements OnInit {
   }
 
   private getClientInfo() {
-
-    this.clientService.getById(this.currentUser.id).pipe(first()).subscribe(client => {
+    this.clientService.getById(this.authenticationService.currentUser.id).pipe(first()).subscribe(client => {
       this.client = client[0];
       this.checkNotificationStatus();
     });
@@ -58,7 +52,7 @@ export class ClientDetailComponent implements OnInit {
 
     const clientToJSON = JSON.stringify(this.client);
 
-    this.clientService.updateUser(clientToJSON)
+    this.clientService.updateClient(clientToJSON)
       .pipe(first())
       .subscribe(
         data => {

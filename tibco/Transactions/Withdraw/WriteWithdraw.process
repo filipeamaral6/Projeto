@@ -181,15 +181,15 @@
     <pd:activity name="IBAN_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>601</pd:x>
-        <pd:y>387</pd:y>
+        <pd:x>600</pd:x>
+        <pd:y>388</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Conta não encontrada!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Conta não encontrada!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -197,15 +197,15 @@
     <pd:activity name="ID_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>597</pd:x>
-        <pd:y>286</pd:y>
+        <pd:x>594</pd:x>
+        <pd:y>288</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Conta não encontrada!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Conta não encontrada!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -574,7 +574,7 @@
             <pd:inputBindings>
                 <root>
                     <message>
-                        <xsl:value-of select="&quot;O seu saldo não lhe permite fazer esta operação!&quot;"/>
+                        <xsl:value-of select="&quot;Erro: O seu saldo não lhe permite executar esta operação!&quot;"/>
                     </message>
                 </root>
             </pd:inputBindings>
@@ -594,15 +594,15 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>1006</pd:x>
-        <pd:y>317</pd:y>
+        <pd:x>1005</pd:x>
+        <pd:y>318</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

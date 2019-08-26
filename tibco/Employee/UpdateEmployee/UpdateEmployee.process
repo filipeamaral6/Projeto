@@ -255,14 +255,14 @@ WHERE id=?</statement>
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
         <pd:x>588</pd:x>
-        <pd:y>268</pd:y>
+        <pd:y>270</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O email que introduziu já existe!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O email que introduziu já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -271,14 +271,14 @@ WHERE id=?</statement>
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
         <pd:x>584</pd:x>
-        <pd:y>625</pd:y>
+        <pd:y>627</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Não foram encontrados resultados!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Não foram encontrados resultados!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -514,7 +514,7 @@ WHERE id=?</statement>
     <pd:activity name="user_id_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>589</pd:x>
+        <pd:x>587</pd:x>
         <pd:y>493</pd:y>
         <config>
             <variableName>message</variableName>
@@ -522,7 +522,7 @@ WHERE id=?</statement>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Não foram encontrados resultados!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Não foram encontrados resultados!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -538,7 +538,7 @@ WHERE id=?</statement>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O username que introduziu já foi registado!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O username que introduziu já foi registado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -557,15 +557,15 @@ WHERE id=?</statement>
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>934</pd:x>
-        <pd:y>391</pd:y>
+        <pd:x>927</pd:x>
+        <pd:y>395</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro:  Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

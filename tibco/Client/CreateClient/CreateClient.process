@@ -438,15 +438,15 @@
     <pd:activity name="CLIENTCC_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>680</pd:x>
-        <pd:y>586</pd:y>
+        <pd:x>625</pd:x>
+        <pd:y>570</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O número de indentificação civil que introduziu já foi registado!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O número de indentificação civil que introduziu já foi registado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -454,15 +454,15 @@
     <pd:activity name="NIF_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>624</pd:x>
-        <pd:y>469</pd:y>
+        <pd:x>619</pd:x>
+        <pd:y>462</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O NIF que introduziu já foi registado!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O NIF que introduziu já foi registado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -532,6 +532,10 @@
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>nationality</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
@@ -635,6 +639,10 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>notification</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -730,7 +738,7 @@
     <pd:activity name="Username_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>611</pd:x>
+        <pd:x>613</pd:x>
         <pd:y>358</pd:y>
         <config>
             <variableName>message</variableName>
@@ -738,7 +746,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O username que introduziu já existe!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O username que introduziu já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -806,15 +814,15 @@
     <pd:activity name="Email_EXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>615</pd:x>
-        <pd:y>255</pd:y>
+        <pd:x>614</pd:x>
+        <pd:y>251</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;O email que introduziu já existe!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: O email que introduziu já existe!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -833,7 +841,7 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>980</pd:x>
+        <pd:x>981</pd:x>
         <pd:y>337</pd:y>
         <config>
             <variableName>message</variableName>
@@ -841,7 +849,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of xmlns:xsl="http://www.w3.org/1999/XSL/Transform" select="&quot;Ocorreu um erro! Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Verifique se introduziu bem os dados, ou tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

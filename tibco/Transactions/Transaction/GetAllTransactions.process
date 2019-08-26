@@ -137,7 +137,7 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>651</pd:x>
+        <pd:x>652</pd:x>
         <pd:y>183</pd:y>
         <config>
             <variableName>message</variableName>
@@ -145,7 +145,7 @@
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Ocorreu um erro! Por Favor, tente mais tarde!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Por Favor, tente mais tarde!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>
@@ -153,15 +153,15 @@
     <pd:activity name="NOT_FOUND">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>488</pd:x>
-        <pd:y>48</pd:y>
+        <pd:x>489</pd:x>
+        <pd:y>49</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
         <pd:inputBindings>
             <root>
                 <message>
-                    <xsl:value-of select="&quot;Nenhum resultado encontrado!&quot;"/>
+                    <xsl:value-of select="&quot;Erro: Nenhum resultado encontrado!&quot;"/>
                 </message>
             </root>
         </pd:inputBindings>

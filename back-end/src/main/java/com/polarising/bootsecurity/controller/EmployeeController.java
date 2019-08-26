@@ -7,6 +7,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,18 +35,21 @@ public class EmployeeController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
-	// Add Client
+	// Add Employee
 	@PostMapping("employees/add")
-	public Object AddEmployee(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
+	public ResponseEntity<Object> AddEmployee(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
 			inputEmployee.setPassword(passwordEncoder.encode(inputEmployee.getPassword()));
-
 			EmployeeService employeeService = new EmployeeService();
-
 			OutputEmployee message = employeeService.getPortTypeEmployeeEndpoint1().operation(inputEmployee);
-			return message;
+			
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
 
@@ -52,12 +57,12 @@ public class EmployeeController {
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 	}
 
 	// Get Employees
 	@GetMapping("employees")
-	public List<Object> getEmployees() {
+	public ResponseEntity<List<Object>> getEmployees() {
 
 		EmployeeService employeeService = new EmployeeService();
 		Root getEmployees = employeeService.getPortTypeGetAllEmployeesEndpoint1().operation();
@@ -65,19 +70,20 @@ public class EmployeeController {
 		List<Object> message = new ArrayList<Object>();
 
 		if (!getEmployees.getInputEmployee().isEmpty()) {
-			for (InputEmployee client : getEmployees.getInputEmployee()) {
-				message.add(client);
+			for (InputEmployee employee : getEmployees.getInputEmployee()) {
+				message.add(employee);
 			}
 		} else {
 			message.add(getEmployees.getOutputEmployee());
+			return new ResponseEntity<List<Object>>(message, HttpStatus.BAD_REQUEST);
 		}
 
-		return message;
+		return new ResponseEntity<List<Object>>(message, HttpStatus.OK);
 	}
 
-	// Get Client by Id
+	// Get Employee by Id
 	@GetMapping("employees/id/{id}")
-	public Object getEmployeeById(@PathVariable String id) {
+	public ResponseEntity<Object> getEmployeeById(@PathVariable String id) {
 
 		EmployeeService employeeService = new EmployeeService();
 
@@ -87,23 +93,26 @@ public class EmployeeController {
 		Root getEmployeeById = employeeService.getPortTypeGetEmployeeEndpoint1().operation(getById);
 
 		if (getEmployeeById.getInputEmployee().isEmpty()) {
-			return getEmployeeById.getOutputEmployee();
+			return new ResponseEntity<Object>(getEmployeeById.getOutputEmployee(), HttpStatus.BAD_REQUEST);
 		} else {
-			return getEmployeeById.getInputEmployee();
+			return new ResponseEntity<Object>(getEmployeeById.getInputEmployee(), HttpStatus.OK);
 		}
 	}
 
-	// Update Client
+	// Update Employee
 	@PutMapping("employees/update")
-	public Object updateClient(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
+	public ResponseEntity<Object> updateClient(@Valid @RequestBody InputEmployee inputEmployee, BindingResult result) {
 
 		if (!result.hasErrors()) {
 
 			EmployeeService employeeService = new EmployeeService();
 
 			OutputEmployee message = employeeService.getPortTypeUpdateEmployeeEndpoint1().operation(inputEmployee);
-
-			return message;
+			
+			if(message.getMessage().startsWith("Erro")) {
+				return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<Object>(message, HttpStatus.OK);
 
 		}
 
@@ -111,7 +120,7 @@ public class EmployeeController {
 		error.put("field", result.getFieldError().getField());
 		error.put("message", result.getFieldError().getDefaultMessage());
 
-		return error;
+		return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
 
 	}
 }

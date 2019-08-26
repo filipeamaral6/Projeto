@@ -17,8 +17,8 @@ export class Client {
     nif?: string;
     notification?: string;
     phoneNumber?: string;
-    role?: string;
-    status?: string;
+    role = 'CLIENT';
+    status = 'ACTIVE';
     transactionPassword?: string;
     userId?: number;
     username?: string;

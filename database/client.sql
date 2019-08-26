@@ -2,6 +2,7 @@ CREATE TABLE `client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `full_name` varchar(255) NOT NULL,
   `nif` int(11) NOT NULL,
+  `client_cc` int(11) NOT NULL,
   `birthdate` date NOT NULL,
   `phone_number` bigint(20) DEFAULT NULL,
   `mobile_number` bigint(20) DEFAULT NULL,
@@ -18,5 +19,5 @@ CREATE TABLE `client` (
   PRIMARY KEY (`id`),
   KEY `client_user_fk` (`user_id`),
   CONSTRAINT `client_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 

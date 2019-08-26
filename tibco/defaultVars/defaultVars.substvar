@@ -45,9 +45,9 @@
 			<name>JmsProviderUrl</name>
 			<value>tcp://localhost:7222</value>
 			<deploymentSettable>true</deploymentSettable>
-			<serviceSettable>false</serviceSettable>
+			<serviceSettable>true</serviceSettable>
 			<type>String</type>
-			<modTime>1564672343855</modTime>
+			<modTime>1566309235186</modTime>
 		</globalVariable>
 		<globalVariable>
 			<name>JmsSslProviderUrl</name>
