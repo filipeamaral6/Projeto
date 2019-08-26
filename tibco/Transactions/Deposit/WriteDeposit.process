@@ -19,8 +19,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:WriteDepositOutput"/>
-    <pd:endX>801</pd:endX>
-    <pd:endY>280</pd:endY>
+    <pd:endX>798</pd:endX>
+    <pd:endY>281</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>

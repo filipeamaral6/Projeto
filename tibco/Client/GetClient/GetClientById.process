@@ -96,8 +96,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetClientByIdOutput"/>
-    <pd:endX>503</pd:endX>
-    <pd:endY>175</pd:endY>
+    <pd:endX>504</pd:endX>
+    <pd:endY>176</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>

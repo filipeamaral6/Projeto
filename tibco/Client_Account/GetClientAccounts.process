@@ -41,6 +41,9 @@
                                     <xsl:attribute name="employee_id">
                                         <xsl:value-of select="employee_id"/>
                                     </xsl:attribute>
+                                    <xsl:attribute name="user_id">
+                                        <xsl:value-of select="user_id"/>
+                                    </xsl:attribute>
                                 </ns2:inputAccount>
                             </xsl:for-each>
                         </xsl:when>
@@ -60,7 +63,7 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetClientAccountsOutput"/>
-    <pd:endX>466</pd:endX>
+    <pd:endX>467</pd:endX>
     <pd:endY>97</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
@@ -86,7 +89,7 @@
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT account.* FROM account_client, account WHERE account.id=account_client.account_id AND account_client.user_id=?</statement>
+            <statement>SELECT account.*, account_client.user_id FROM account_client, account WHERE account.id=account_client.account_id AND account_client.user_id=?</statement>
             <Prepared_Param_DataType>
                 <parameter>
                     <parameterName>user_id</parameterName>
@@ -128,6 +131,10 @@
             <QueryOutputCachedSchemaDataTypesName>DATE</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>employee_id</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>user_id</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>

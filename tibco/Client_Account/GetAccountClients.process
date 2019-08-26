@@ -97,7 +97,7 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAccountClientsOutput"/>
-    <pd:endX>445</pd:endX>
+    <pd:endX>460</pd:endX>
     <pd:endY>95</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
@@ -235,8 +235,8 @@
     <pd:activity name="NO_Accounts">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>449</pd:x>
-        <pd:y>220</pd:y>
+        <pd:x>464</pd:x>
+        <pd:y>221</pd:y>
         <config>
             <variableName>message</variableName>
         </config>

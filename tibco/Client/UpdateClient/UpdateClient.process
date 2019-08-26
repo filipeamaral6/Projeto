@@ -20,7 +20,7 @@
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:UpdateClientOutput"/>
     <pd:endX>821</pd:endX>
-    <pd:endY>395</pd:endY>
+    <pd:endY>398</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>

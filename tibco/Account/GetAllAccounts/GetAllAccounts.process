@@ -39,6 +39,9 @@
                             <xsl:attribute name="employee_id">
                                 <xsl:value-of select="employee_id"/>
                             </xsl:attribute>
+                            <xsl:attribute name="id">
+                                <xsl:value-of select="id"/>
+                            </xsl:attribute>
                         </ns:inputAccount>
                     </xsl:for-each>
                     <xsl:choose>
@@ -101,8 +104,8 @@
     <pd:activity name="Query_GetAllAccounts">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>303</pd:x>
-        <pd:y>118</pd:y>
+        <pd:x>302</pd:x>
+        <pd:y>120</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

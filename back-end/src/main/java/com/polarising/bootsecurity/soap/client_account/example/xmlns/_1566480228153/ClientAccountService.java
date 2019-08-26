@@ -86,6 +86,28 @@ public class ClientAccountService
     /**
      * 
      * @return
+     *     returns PortTypeDeleteAccountClient
+     */
+    @WebEndpoint(name = "PortType_DeleteAccountClientEndpoint1")
+    public PortTypeDeleteAccountClient getPortTypeDeleteAccountClientEndpoint1() {
+        return super.getPort(new QName("http://xmlns.example.com/1566480228153", "PortType_DeleteAccountClientEndpoint1"), PortTypeDeleteAccountClient.class);
+    }
+
+    /**
+     * 
+     * @param features
+     *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
+     * @return
+     *     returns PortTypeDeleteAccountClient
+     */
+    @WebEndpoint(name = "PortType_DeleteAccountClientEndpoint1")
+    public PortTypeDeleteAccountClient getPortTypeDeleteAccountClientEndpoint1(WebServiceFeature... features) {
+        return super.getPort(new QName("http://xmlns.example.com/1566480228153", "PortType_DeleteAccountClientEndpoint1"), PortTypeDeleteAccountClient.class, features);
+    }
+
+    /**
+     * 
+     * @return
      *     returns PortTypeGetAccountClients
      */
     @WebEndpoint(name = "PortType_GetAccountClientsEndpoint1")
@@ -103,6 +125,28 @@ public class ClientAccountService
     @WebEndpoint(name = "PortType_GetAccountClientsEndpoint1")
     public PortTypeGetAccountClients getPortTypeGetAccountClientsEndpoint1(WebServiceFeature... features) {
         return super.getPort(new QName("http://xmlns.example.com/1566480228153", "PortType_GetAccountClientsEndpoint1"), PortTypeGetAccountClients.class, features);
+    }
+
+    /**
+     * 
+     * @return
+     *     returns PortTypeAddClientToAccount
+     */
+    @WebEndpoint(name = "PortType_AddClientToAccountEndpoint1")
+    public PortTypeAddClientToAccount getPortTypeAddClientToAccountEndpoint1() {
+        return super.getPort(new QName("http://xmlns.example.com/1566480228153", "PortType_AddClientToAccountEndpoint1"), PortTypeAddClientToAccount.class);
+    }
+
+    /**
+     * 
+     * @param features
+     *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
+     * @return
+     *     returns PortTypeAddClientToAccount
+     */
+    @WebEndpoint(name = "PortType_AddClientToAccountEndpoint1")
+    public PortTypeAddClientToAccount getPortTypeAddClientToAccountEndpoint1(WebServiceFeature... features) {
+        return super.getPort(new QName("http://xmlns.example.com/1566480228153", "PortType_AddClientToAccountEndpoint1"), PortTypeAddClientToAccount.class, features);
     }
 
     private static URL __getWsdlLocation() {
