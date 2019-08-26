@@ -7,6 +7,7 @@ import { RouteInfo } from 'app/shared/sidebar/sidebar.component';
 
 const ROUTES = [
   { path: 'clients', title: 'Clientes', icon: 'nc-single-02', class: '' },
+  { path: 'accounts', title: 'Contas', icon: 'nc-bank', class: '' },
   { path: 'deposit', title: 'Depositar', icon: 'nc-box', class: '' },
   { path: 'transfer', title: 'Transferir', icon: 'nc-money-coins', class: ''},
   { path: 'payments', title: 'Pagamentos', icon: 'nc-cart-simple', class: ''}

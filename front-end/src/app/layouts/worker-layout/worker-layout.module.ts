@@ -11,6 +11,8 @@ import { DepositComponent } from 'app/pages/user/worker/deposit/deposit.componen
 import { PaymentsComponent } from 'app/pages/user/worker/payments/payments.component';
 import { TransferComponent } from 'app/pages/user/worker/transfer/transfer.component';
 import { AlertModule } from 'app/shared/alerts';
+import { AccountsComponent } from 'app/pages/user/worker/accounts/accounts.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 
 
 
@@ -20,13 +22,15 @@ import { AlertModule } from 'app/shared/alerts';
     RouterModule.forChild(WorkerLayoutRoutes),
     FormsModule,
     NgbModule,
-    AlertModule
+    AlertModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   declarations: [
     ClientsComponent,
     DepositComponent,
     PaymentsComponent,
-    TransferComponent
+    TransferComponent,
+    AccountsComponent
   ]
 })
 

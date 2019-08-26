@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Globals } from 'app/shared/Globals';
 import { Account } from 'app/shared/models/Account';
+import { Client } from 'app/shared/models/Client';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -33,6 +34,10 @@ export class AccountService {
 
   getAccountByClientId(clientId: number) {
     return this.http.get<Account[]>(this.API + '/client/accounts/' + clientId);
+  }
+
+  getAccountClients(accountId: number) {
+    return this.http.get<Client[]>(this.API + '/account/clients/' + accountId);
   }
 
   addAccount(account: string) {

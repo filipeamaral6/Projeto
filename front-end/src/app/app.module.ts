@@ -29,7 +29,6 @@ import { EmployeeService } from './services/transport/employee.service';
 
 
 
-
 @NgModule({
   declarations: [
     WorkerLayoutComponent,
@@ -51,7 +50,7 @@ import { EmployeeService } from './services/transport/employee.service';
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    HttpClientModule,
+    HttpClientModule
   ],
 
 

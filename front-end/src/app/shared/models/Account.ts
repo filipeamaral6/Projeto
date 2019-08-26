@@ -13,4 +13,5 @@ export class Account {
   employeeId?: number;
   color?: string;
   movementBalances?: any[];
+  holders?: any[];
 }

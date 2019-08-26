@@ -77,7 +77,7 @@ export class ClientsComponent implements OnInit {
   }
 
   addClient(form: NgForm) {
-
+    console.log(this.newClient);
     const newClientString = JSON.stringify(this.newClient);
 
     this.clientService.addClient(newClientString).pipe(first()).subscribe(response => {
