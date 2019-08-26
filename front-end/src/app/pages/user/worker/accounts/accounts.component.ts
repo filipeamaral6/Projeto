@@ -16,6 +16,12 @@ import { AuthenticationService } from 'app/services/authentication.service';
   styleUrls: ['./accounts.css']
 })
 export class AccountsComponent implements OnInit {
+  statusArray: string[] = [
+    'ALL',
+    'ACTIVE',
+    'INACTIVE'
+  ];
+  searchString: string;
   accounts: Account[];
   clients: Client[];
   selectedAccount: Account;
@@ -65,7 +71,7 @@ export class AccountsComponent implements OnInit {
           console.log(holder.item_text);
         }
 
-        this.modalService.dismissAll();
+        this.closeModal();
         this.alertService.success(JSON.parse(JSON.stringify(response)).message);
       }, error => {
         this.alertService.error(error);
@@ -80,7 +86,7 @@ export class AccountsComponent implements OnInit {
   deactivateAccount() {
     this.selectedAccount.status = 'INACTIVE';
     this.accountService.updateAccount(this.selectedAccount).pipe(first()).subscribe(response => {
-      this.modalService.dismissAll();
+      this.closeModal();
       this.alertService.success('Conta desativada com sucesso!');
     }, error => {
       this.alertService.error(error.message);
@@ -90,7 +96,7 @@ export class AccountsComponent implements OnInit {
   activateAccount() {
     this.selectedAccount.status = 'ACTIVE';
     this.accountService.updateAccount(this.selectedAccount).pipe(first()).subscribe(response => {
-      this.modalService.dismissAll();
+      this.closeModal();
       this.alertService.success('Conta ativada com sucesso!');
     }, error => {
       this.alertService.error(error.message);
@@ -104,7 +110,7 @@ export class AccountsComponent implements OnInit {
       console.log(this.accountClients);
     });
 
-    this.modalService.dismissAll();
+    this.closeModal();
     this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
   }
 
@@ -112,7 +118,7 @@ export class AccountsComponent implements OnInit {
     this.newAccount = new Account();
     this.fetchClients();
 
-    this.modalService.dismissAll();
+    this.closeModal();
     this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
   }
 
@@ -129,6 +135,32 @@ export class AccountsComponent implements OnInit {
     }
   }
 
+  fetchAccounts(value: string) {
+    this.accounts = [];
+    if (value === 'ACTIVE') {
+      this.accountService.getAll().pipe(first()).subscribe(accounts => {
+        accounts.forEach(account => {
+          if (account.status === 'ACTIVE') {
+            this.accounts.push(account);
+          }
+        });
+      });
+    } else if (value === 'INACTIVE') {
+      this.accountService.getAll().pipe(first()).subscribe(accounts => {
+        accounts.forEach(account => {
+          if (account.status === 'INACTIVE') {
+            this.accounts.push(account);
+          }
+        });
+      });
+    } else {
+      this.accountService.getAll().pipe(first()).subscribe(accounts => {
+        this.accounts = accounts;
+      });
+    }
+    console.log(this.accounts);
+  }
+
   fetchClients() {
     this.clientService.getAll().pipe(first()).subscribe(clients => {
       this.clients = clients;
@@ -138,11 +170,9 @@ export class AccountsComponent implements OnInit {
     });
   }
 
-
-  onItemSelect(item: any) {
-    console.log(this.newAccount.holders);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
+  closeModal() {
+    this.editMode = false;
+    this.editButtonLabel = 'Editar Dados';
+    this.fetchClients();
   }
 }

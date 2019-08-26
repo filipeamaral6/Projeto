@@ -31,7 +31,10 @@ import { FilterPipe } from 'app/shared/filter.pipe';
     ClientsComponent,
     DepositComponent,
     PaymentsComponent,
-    TransferComponent
+    TransferComponent,
+    AccountsComponent,
+    EmployeesComponent,
+    FilterPipe
   ]
 })
 

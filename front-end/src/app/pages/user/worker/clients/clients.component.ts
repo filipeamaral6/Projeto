@@ -16,6 +16,12 @@ import { EmployeeService } from 'app/services/transport/employee.service';
   styleUrls: ['./clients.css']
 })
 export class ClientsComponent implements OnInit {
+  statusArray: string[] = [
+    'ALL',
+    'ACTIVE',
+    'INACTIVE'
+  ];
+  searchString: string;
   clients: Client[];
   selectedClient: Client;
   newClient: Client;
@@ -96,7 +102,7 @@ export class ClientsComponent implements OnInit {
           this.newAccount.userId = client[0].userId;
 
           this.accountService.addAccount(JSON.stringify(this.newAccount)).pipe(first()).subscribe(responseAccount => {
-            this.modalService.dismissAll();
+            this.closeModal();
             const message = JSON.parse(JSON.stringify(response)).message;
             this.alertService.success(JSON.stringify(message));
             this.fetchClients();
@@ -120,7 +126,7 @@ export class ClientsComponent implements OnInit {
     this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
       console.log(response);
       this.fetchClients();
-      this.modalService.dismissAll();
+      this.closeModal();
 
       const message = JSON.parse(JSON.stringify(response)).message;
       this.alertService.success(message);
@@ -136,7 +142,7 @@ export class ClientsComponent implements OnInit {
 
     this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
       console.log(response);
-      this.modalService.dismissAll();
+      this.closeModal();
     });
   }
 
@@ -147,7 +153,7 @@ export class ClientsComponent implements OnInit {
 
     this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
       console.log(response);
-      this.modalService.dismissAll();
+      this.closeModal();
     });
   }
 
@@ -162,7 +168,7 @@ export class ClientsComponent implements OnInit {
       this.newClient = new Client();
       this.newAccount = new Account();
     }
-    this.modalService.open(content, { size: 'lg' });
+    this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
   }
 
   toggleEditMode() {
@@ -173,7 +179,7 @@ export class ClientsComponent implements OnInit {
     } else {
       this.editButtonLabel = 'Editar Dados';
 
-      this.modalService.dismissAll();
+      this.closeModal();
 
       this.fetchClients();
     }
@@ -198,6 +204,12 @@ export class ClientsComponent implements OnInit {
     let accountNumber = this.randomString('0123456789', 11);
 
     this.newAccount.accountNumber = accountNumber;
+  }
+
+  closeModal() {
+    this.editMode = false;
+    this.editButtonLabel = 'Editar Dados';
+    this.fetchClients();
   }
 
   private randomString(characters: string, length: number) {
