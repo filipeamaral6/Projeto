@@ -25,6 +25,7 @@ import { AlertComponent } from './shared/alerts/alert.component';
 import { AlertService, AlertModule } from './shared/alerts';
 import { TransactionService } from './services/transport/transaction.service';
 import { EmployeeService } from './services/transport/employee.service';
+import { FilterPipe } from './shared/filter.pipe';
 
 
 
@@ -37,7 +38,8 @@ import { EmployeeService } from './services/transport/employee.service';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    LoadingSpinnerComponent],
+    LoadingSpinnerComponent
+  ],
   imports: [
     AlertModule,
     BrowserAnimationsModule,
@@ -51,7 +53,7 @@ import { EmployeeService } from './services/transport/employee.service';
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    HttpClientModule,
+    HttpClientModule
   ],
 
 

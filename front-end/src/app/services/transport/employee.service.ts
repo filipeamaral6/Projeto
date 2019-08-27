@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Globals } from 'app/shared/Globals';
-import { Deposit } from 'app/shared/models/Deposit';
 import { Employee } from 'app/shared/models/Employee';
 import { first } from 'rxjs/operators';
 
@@ -23,5 +22,13 @@ export class EmployeeService {
 
     getAll() {
         return this.http.get<Employee[]>(this.API + '/employees');
+    }
+
+    addEmployee(employee: string) {
+        return this.http.post(this.API + '/employees/add', employee, httpOptions);
+    }
+
+    updateEmployee(employee: string) {
+        return this.http.put(this.API + '/employees/update', employee, httpOptions);
     }
 }

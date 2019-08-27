@@ -38,7 +38,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RootClientAccount }
+     * Create an instance of {@link Root }
      * 
      */
     public RootClientAccount createRoot() {

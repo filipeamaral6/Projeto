@@ -37,7 +37,7 @@
     <pd:activity name="Query_AccountById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>262</pd:x>
+        <pd:x>267</pd:x>
         <pd:y>69</pd:y>
         <config>
             <timeout>10</timeout>
@@ -166,7 +166,7 @@ WHERE id=?</statement>
         <pd:activity name="Update_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>265</pd:x>
+            <pd:x>264</pd:x>
             <pd:y>232</pd:y>
             <config>
                 <timeout>10</timeout>

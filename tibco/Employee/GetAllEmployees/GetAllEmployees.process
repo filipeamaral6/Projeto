@@ -54,7 +54,7 @@
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllEmployeesOutput"/>
     <pd:endX>452</pd:endX>
-    <pd:endY>74</pd:endY>
+    <pd:endY>77</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -71,8 +71,8 @@
     <pd:activity name="Query_SelectAllEmployees">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>306</pd:x>
-        <pd:y>73</pd:y>
+        <pd:x>304</pd:x>
+        <pd:y>74</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

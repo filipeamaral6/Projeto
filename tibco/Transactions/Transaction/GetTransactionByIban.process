@@ -4,46 +4,50 @@
     <pd:name>Transactions/Transaction/GetTransactionByIban.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetTransactionsByIbanInput"/>
-    <pd:startX>27</pd:startX>
-    <pd:startY>282</pd:startY>
+    <pd:startX>100</pd:startX>
+    <pd:startY>258</pd:startY>
     <pd:returnBindings>
         <pfx:GetTransactionsByIbanOutput>
             <output>
                 <ns2:root>
-                    <xsl:for-each select="$Query_GetTransactionByAccountIban/resultSet/Record">
-                        <ns2:inputTransaction>
-                            <xsl:attribute name="id">
-                                <xsl:value-of select="id"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="account_id">
-                                <xsl:value-of select="account_id"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="value">
-                                <xsl:value-of select="value"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="account_iban">
-                                <xsl:value-of select="account_iban"/>
-                            </xsl:attribute>
-                            <xsl:attribute name="created_at">
-                                <xsl:value-of select="created_at"/>
-                            </xsl:attribute>
-                            <xsl:if test="user_id">
-                                <xsl:attribute name="user_id">
-                                    <xsl:value-of select="user_id"/>
-                                </xsl:attribute>
-                            </xsl:if>
-                            <xsl:attribute name="type">
-                                <xsl:value-of select="type"/>
-                            </xsl:attribute>
-                            <xsl:if test="description">
-                                <xsl:attribute name="description">
-                                    <xsl:value-of select="description"/>
-                                </xsl:attribute>
-                            </xsl:if>
-                        </ns2:inputTransaction>
-                    </xsl:for-each>
                     <xsl:choose>
-                        <xsl:when test="not(exists($Query_GetTransactionByAccountIban/resultSet/Record))&#xA;or $_error_Query_GetAccountByIban/ActivityErrors&#xA;or $_error_Query_GetTransactionByAccountIban/ActivityErrors">
+                        <xsl:when test="exists($Query_GetTransactionByAccountIban/resultSet/Record)">
+                            <xsl:for-each select="$Query_GetTransactionByAccountIban/resultSet/Record">
+                                <ns2:inputTransaction>
+                                    <xsl:attribute name="id">
+                                        <xsl:value-of select="id"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="account_id">
+                                        <xsl:value-of select="account_id"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="value"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="account_iban">
+                                        <xsl:value-of select="account_iban"/>
+                                    </xsl:attribute>
+                                    <xsl:attribute name="created_at">
+                                        <xsl:value-of select="created_at"/>
+                                    </xsl:attribute>
+                                    <xsl:if test="user_id">
+                                        <xsl:attribute name="user_id">
+                                            <xsl:value-of select="user_id"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                    <xsl:attribute name="type">
+                                        <xsl:value-of select="type"/>
+                                    </xsl:attribute>
+                                    <xsl:if test="description">
+                                        <xsl:attribute name="description">
+                                            <xsl:value-of select="description"/>
+                                        </xsl:attribute>
+                                    </xsl:if>
+                                </ns2:inputTransaction>
+                            </xsl:for-each>
+                        </xsl:when>
+                    </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="not(exists($Query_GetTransactionByAccountIban/resultSet/Record)) &#xA;or $_error_Query_GetTransactionByAccountIban/ActivityErrors">
                             <ns2:outputTransaction>
                                 <xsl:attribute name="message">
                                     <xsl:value-of select="$message/root/message"/>
@@ -57,8 +61,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetTransactionsByIbanOutput"/>
-    <pd:endX>852</pd:endX>
-    <pd:endY>326</pd:endY>
+    <pd:endX>843</pd:endX>
+    <pd:endY>283</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -75,8 +79,8 @@
     <pd:activity name="Account_IBAN_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>516</pd:x>
-        <pd:y>306</pd:y>
+        <pd:x>575</pd:x>
+        <pd:y>269</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -91,8 +95,8 @@
     <pd:activity name="Query_GetAccountByIban">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>169</pd:x>
-        <pd:y>292</pd:y>
+        <pd:x>299</pd:x>
+        <pd:y>262</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -163,8 +167,8 @@
     <pd:activity name="Query_GetTransactionByAccountIban">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>99</pd:x>
-        <pd:y>64</pd:y>
+        <pd:x>298</pd:x>
+        <pd:y>43</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -227,8 +231,8 @@
     <pd:activity name="NOT_FOUND">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>1022</pd:x>
-        <pd:y>35</pd:y>
+        <pd:x>847</pd:x>
+        <pd:y>38</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -243,8 +247,8 @@
     <pd:activity name="Catch">
         <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
         <pd:resourceType>ae.activities.catch</pd:resourceType>
-        <pd:x>1045</pd:x>
-        <pd:y>311</pd:y>
+        <pd:x>1036</pd:x>
+        <pd:y>280</pd:y>
         <pd:handler>true</pd:handler>
         <config>
             <catchAll>true</catchAll>
@@ -254,8 +258,8 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>960</pd:x>
-        <pd:y>316</pd:y>
+        <pd:x>946</pd:x>
+        <pd:y>282</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -290,6 +294,22 @@
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
+        <pd:from>Query_GetAccountByIban</pd:from>
+        <pd:to>Query_GetTransactionByAccountIban</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>exists($Query_GetAccountByIban/resultSet/Record)</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Query_GetTransactionByAccountIban</pd:from>
+        <pd:to>NOT_FOUND</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>not(exists($Query_GetTransactionByAccountIban/resultSet/Record))</pd:xpath>
+    </pd:transition>
+    <pd:transition>
         <pd:from>NOT_FOUND</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
@@ -311,27 +331,11 @@
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>Query_GetAccountByIban</pd:from>
-        <pd:to>Query_GetTransactionByAccountIban</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>exists($Query_GetAccountByIban/resultSet/Record)</pd:xpath>
-    </pd:transition>
-    <pd:transition>
         <pd:from>Query_GetTransactionByAccountIban</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
         <pd:xpath>exists($Query_GetTransactionByAccountIban/resultSet/Record)</pd:xpath>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>Query_GetTransactionByAccountIban</pd:from>
-        <pd:to>NOT_FOUND</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>not(exists($Query_GetTransactionByAccountIban/resultSet/Record))</pd:xpath>
     </pd:transition>
 </pd:ProcessDefinition>

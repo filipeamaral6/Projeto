@@ -268,8 +268,8 @@
     <pd:activity name="Query_Username_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>264</pd:x>
-        <pd:y>396</pd:y>
+        <pd:x>265</pd:x>
+        <pd:y>398</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -344,7 +344,7 @@
     <pd:activity name="Query_email_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>278</pd:x>
+        <pd:x>277</pd:x>
         <pd:y>253</pd:y>
         <config>
             <timeout>10</timeout>

@@ -1,6 +1,6 @@
 import { User } from './User';
 
-export class Client {
+export class Client extends User {
 
     address?: string;
     birthDate?: string;
@@ -8,19 +8,19 @@ export class Client {
     country?: string;
     county?: string;
     createdAt?: string;
-    email?: string;
+    //email?: string;
     fullName?: string;
     id?: number;
     loginPassword?: string;
     mobileNumber?: string;
     nationality?: string;
     nif?: string;
-    notification?: string;
+    notification = 'TRUE';
     phoneNumber?: string;
-    role = 'CLIENT';
-    status = 'ACTIVE';
+    //role = 'CLIENT';
+    //status = 'ACTIVE';
     transactionPassword?: string;
-    userId?: number;
-    username?: string;
+    //userId?: number;
+    //username?: string;
     zipCode?: string;
 }

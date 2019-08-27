@@ -1,3 +1,30 @@
+<div class="row col-md-8" style="padding-left: 15px;">
+  <div class="card col-md-4" style="margin-right: 15px;">
+    <input
+      type="text"
+      class="form-control"
+      name="searchString"
+      placeholder="Type to search by account number..."
+      [(ngModel)]="searchString"
+      style="border-width: 0; padding: 15px;"
+    />
+  </div>
+  <div class="card col-md-2">
+    <select
+      class="form-control"
+      value="ALL"
+      name="status"
+      #f
+      (change)="fetchClients(f.value)"
+      style="border-width: 0px; margin: auto;"
+    >
+      <ng-container *ngFor="let status of statusArray">
+        <option [value]="status">{{ status }}</option>
+      </ng-container>
+    </select>
+  </div>
+</div>
+
 <div class="card">
   <div class="card-body">
     <div class="table-responsive">
@@ -19,7 +46,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let client of clients" (click)="openModal(clientDetailsModal, client)">
+          <tr *ngFor="let client of clients | filter: 'accountNumber':searchString" (click)="openModal(clientDetailsModal, client)">
             <td>
               {{ client.fullName }}
             </td>

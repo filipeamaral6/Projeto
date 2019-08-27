@@ -1,7 +1,6 @@
 
 package com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.account;
 
-import javax.validation.constraints.NotBlank;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -39,16 +38,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 @XmlRootElement(name = "inputAccount")
 public class InputAccount {
-	
-	@NotBlank(message="Campo obrigatório")
+
     @XmlAttribute(name = "account_number")
     protected String accountNumber;
-	@NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "balance")
     protected String balance;
     @XmlAttribute(name = "created_at")
     protected String createdAt;
-    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "employee_id")
     protected String employeeId;
     @XmlAttribute(name = "iban")
@@ -57,13 +53,10 @@ public class InputAccount {
     protected String id;
     @XmlAttribute(name = "interest")
     protected String interest;
-    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "status")
     protected String status;
-    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "type")
     protected String type;
-    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "user_id")
     protected String userId;
 

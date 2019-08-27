@@ -1,0 +1,201 @@
+<div class="row col-md-8" style="padding-left: 15px;">
+    <div class="card col-md-4" style="margin-right: 15px;">
+      <input
+        type="text"
+        class="form-control"
+        name="searchString"
+        placeholder="Type to search by account number..."
+        [(ngModel)]="searchString"
+        style="border-width: 0; padding: 15px;"
+      />
+    </div>
+    <div class="card col-md-2">
+      <select
+        class="form-control"
+        value="ALL"
+        name="status"
+        #f
+        (change)="fetchAccounts(f.value)"
+        style="border-width: 0px; margin: auto;"
+      >
+        <ng-container *ngFor="let status of statusArray">
+          <option [value]="status">{{ status }}</option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+
+<div class="card col-md-10">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class=" text-primary">
+                    <tr>
+                        <th>
+                            Número
+                        </th>
+                        <th>
+                            IBAN
+                        </th>
+                        <th class="text-right">
+                            Estado
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let account of accounts | filter: 'accountNumber':searchString"
+                        (click)="openAccountDetailsModal(accountDetailsModal, account)">
+                        <td>
+                            {{ account.accountNumber }}
+                        </td>
+                        <td>
+                            {{ account.iban }}
+                        </td>
+                        <td class="text-right">
+                            {{ account.status }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div>
+            <span>
+                <a class="btn btn-primary" (click)="openAddAccountModal(addAccountModal)">Abrir Conta</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<ng-template #accountDetailsModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Detalhes</h4>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click'); activeModal = false;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <alert></alert>
+        <form #editAccountForm="ngForm" (ngSubmit)="updateAccount(editAccountForm)">
+            <button *ngIf="selectedAccount.status === 'ACTIVE'" type="button" class="btn btn-danger"
+                (click)="deactivateAccount()">Desativar Conta</button>
+            <button *ngIf="selectedAccount.status === 'INACTIVE'" type="button" class="btn btn-success"
+                (click)="activateAccount()">Ativar Conta</button>
+            <div class="form-group">
+                <label for="iban">IBAN</label>
+                <code type="text" class="form-control col-md-6" name="iban">{{selectedAccount.iban}}</code>
+            </div>
+            <hr>
+            <div class="row col-md-12">
+                <div class="form-group" style="padding-right: 4.9%">
+                    <label for="accountNumber">Número</label>
+                    <code type="text" class="form-control" name="accountNumber">{{selectedAccount.accountNumber}}</code>
+                </div>
+                <div class="form-group">
+                    <label for="balance">Saldo(€)</label>
+                    <code type="text" class="form-control" name="balance">{{selectedAccount.balance}}</code>
+                </div>
+            </div>
+            <hr>
+            <h6>Titulares da conta</h6>
+            <button type="button" class="btn btn-secondary" (click)="toggleEditMode()">{{ editButtonLabel }}</button>
+            <br>
+            <span *ngIf="editMode" class="col-md-7">
+                <ng-multiselect-dropdown-angular7 [placeholder]="'Selecionar Titulares'" [data]="dropdownList"
+                    [(ngModel)]="newHolders" [settings]="dropdownSettings" name="holders">
+                </ng-multiselect-dropdown-angular7>
+                <button type="submit" class="btn btn-info">Adicionar</button>
+            </span>
+            <table class="table">
+                <thead class=" text-primary">
+                    <tr>
+                        <th *ngIf="editMode">
+                            Remover
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            NIF
+                        </th>
+                        <th class="text-right">
+                            CC
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let client of accountClients">
+
+                        <td *ngIf="editMode">
+                            <button type="button" class="btn btn-danger" (click)="removeClientFromAccount(client.id, addAccountModal, selectedAccount)">
+                                <span class="nc-icon nc-simple-remove"></span>
+                            </button>
+                        </td>
+                        <td>
+                            {{ client.fullName }}
+                        </td>
+                        <td>
+                            {{ client.email }}
+                        </td>
+                        <td>
+                            {{ client.nif }}
+                        </td>
+                        <td class="text-right">
+                            {{ client.clientCc }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #addAccountModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Abrir Conta</h4>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click'); activeModal = false;">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #addAccountForm="ngForm" (ngSubmit)="addAccount()">
+            <div class="form-group">
+                <label for="balance">Saldo Inicial*</label>
+                <input type="number" class="form-control col-md-10" name="balance" [(ngModel)]="newAccount.balance"
+                    [ngClass]="{ 'is-invalid': balance.touched && balance.errors }" #balance="ngModel" required>
+                <div *ngIf="balance.touched && balance.hasError('required')" class="invalid-feedback">O Saldo inicial
+                    tem de ser maior ou igual que 500!
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="accountType">Tipo de conta*</label>
+                <div class="row col-md-12">
+                    <div class="custom-control custom-radio" style="padding-right: 4.9%">
+                        <input type="radio" class="custom-control-input" id="currentAccount" name="accountType"
+                            value="CURRENT" [(ngModel)]="newAccount.type">
+                        <label class="custom-control-label" for="currentAccount">Conta à ordem</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="savingsAccount" name="accountType"
+                            value="SAVINGS" [(ngModel)]="newAccount.type">
+                        <label class="custom-control-label" for="savingsAccount">Conta poupança</label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="accountHolders">Titulares</label>
+                <ng-multiselect-dropdown-angular7 [placeholder]="'Selecionar Titulares'" [data]="dropdownList"
+                    [(ngModel)]="newAccount.holders" [settings]="dropdownSettings" name="holders">
+                </ng-multiselect-dropdown-angular7>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="addAccountForm.invalid">Guardar</button>
+        </form>
+    </div>
+</ng-template>

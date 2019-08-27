@@ -4,8 +4,8 @@
     <pd:name>Transactions/Transaction/GetTransactionById.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:GetTransactionByIdInput"/>
-    <pd:startX>47</pd:startX>
-    <pd:startY>35</pd:startY>
+    <pd:startX>27</pd:startX>
+    <pd:startY>37</pd:startY>
     <pd:returnBindings>
         <pfx:GetTransactionByIdOuput>
             <output>
@@ -104,8 +104,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetTransactionByIdOuput"/>
-    <pd:endX>785</pd:endX>
-    <pd:endY>273</pd:endY>
+    <pd:endX>778</pd:endX>
+    <pd:endY>299</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -122,8 +122,8 @@
     <pd:activity name="NOT_FOUND">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>1086</pd:x>
-        <pd:y>51</pd:y>
+        <pd:x>952</pd:x>
+        <pd:y>55</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -138,8 +138,8 @@
     <pd:activity name="Query_GetTransactionById">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>196</pd:x>
-        <pd:y>37</pd:y>
+        <pd:x>156</pd:x>
+        <pd:y>36</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -204,8 +204,8 @@
     <pd:activity name="Catch">
         <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
         <pd:resourceType>ae.activities.catch</pd:resourceType>
-        <pd:x>1121</pd:x>
-        <pd:y>260</pd:y>
+        <pd:x>1025</pd:x>
+        <pd:y>280</pd:y>
         <pd:handler>true</pd:handler>
         <config>
             <catchAll>true</catchAll>
@@ -215,8 +215,8 @@
     <pd:activity name="ERROR">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>991</pd:x>
-        <pd:y>263</pd:y>
+        <pd:x>907</pd:x>
+        <pd:y>291</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -231,8 +231,8 @@
     <pd:activity name="GetWithdrawTransaction">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>83</pd:x>
-        <pd:y>255</pd:y>
+        <pd:x>108</pd:x>
+        <pd:y>278</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -280,8 +280,8 @@ WHERE transaction_id=?</statement>
     <pd:activity name="GetDepositTransaction">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>898</pd:x>
-        <pd:y>78</pd:y>
+        <pd:x>801</pd:x>
+        <pd:y>143</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -289,6 +289,12 @@ WHERE transaction_id=?</statement>
             <emptyStrAsNil>false</emptyStrAsNil>
             <statement>SELECT * FROM deposit WHERE transaction_id=?</statement>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>transaction_id</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
             <oraObjects/>
             <oraTables/>
             <QueryOutputCachedSchemaColumns>id</QueryOutputCachedSchemaColumns>
@@ -311,12 +317,6 @@ WHERE transaction_id=?</statement>
             <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>BIGINT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <Prepared_Param_DataType>
-                <parameter>
-                    <parameterName>transaction_id</parameterName>
-                    <dataType>INTEGER</dataType>
-                </parameter>
-            </Prepared_Param_DataType>
         </config>
         <pd:inputBindings>
             <jdbcQueryActivityInput>
@@ -336,8 +336,8 @@ WHERE transaction_id=?</statement>
     <pd:activity name="GetTransferTransaction">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>677</pd:x>
-        <pd:y>135</pd:y>
+        <pd:x>626</pd:x>
+        <pd:y>185</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -359,8 +359,8 @@ WHERE transaction_id=?</statement>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>destination_iban</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>transaction_id</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
@@ -389,8 +389,8 @@ WHERE transaction_id=?</statement>
     <pd:activity name="GetPaymentTransaction">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>417</pd:x>
-        <pd:y>195</pd:y>
+        <pd:x>404</pd:x>
+        <pd:y>225</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -446,8 +446,8 @@ WHERE transaction_id=?</statement>
     <pd:activity name="Map Data">
         <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
         <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
-        <pd:x>312</pd:x>
-        <pd:y>98</pd:y>
+        <pd:x>122</pd:x>
+        <pd:y>152</pd:y>
         <config>
             <element>
                 <xsd:element name="root">

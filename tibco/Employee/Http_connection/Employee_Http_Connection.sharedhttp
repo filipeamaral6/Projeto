@@ -3,7 +3,7 @@
     <config>
         <Host>%%Globals/Host%%</Host>
         <serverType>HttpComponent</serverType>
-        <Port>%%Globals/HTTP_Connections/Client/Client_Port%%</Port>
+        <Port>%%Globals/HTTP_Connections/Employee/Employee_Port%%</Port>
         <HttpConnectionProperties>
             <row>
                 <PropertyName>uriEncoding</PropertyName>

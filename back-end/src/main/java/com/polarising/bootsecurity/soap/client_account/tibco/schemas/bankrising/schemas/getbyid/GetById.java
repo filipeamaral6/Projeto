@@ -1,7 +1,6 @@
 
 package com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid;
 
-import javax.validation.constraints.NotBlank;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -30,8 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 @XmlRootElement(name = "getById")
 public class GetById {
-	
-	@NotBlank(message="Campo obrigatório")
+
     @XmlAttribute(name = "id")
     protected String id;
 
