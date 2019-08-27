@@ -15,11 +15,9 @@
                             <xsl:attribute name="id">
                                 <xsl:value-of select="id"/>
                             </xsl:attribute>
-                            <xsl:if test="@xsi:type">
-                                <xsl:attribute name="type">
-                                    <xsl:value-of select="@xsi:type"/>
-                                </xsl:attribute>
-                            </xsl:if>
+                            <xsl:attribute name="type">
+                                <xsl:value-of select="type"/>
+                            </xsl:attribute>
                             <xsl:attribute name="iban">
                                 <xsl:value-of select="iban"/>
                             </xsl:attribute>

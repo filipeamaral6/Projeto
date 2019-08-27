@@ -20,7 +20,7 @@
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:CreateAccountOutput"/>
     <pd:endX>1093</pd:endX>
-    <pd:endY>128</pd:endY>
+    <pd:endY>129</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>
@@ -92,7 +92,7 @@
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
             <pd:x>228</pd:x>
-            <pd:y>306</pd:y>
+            <pd:y>308</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>

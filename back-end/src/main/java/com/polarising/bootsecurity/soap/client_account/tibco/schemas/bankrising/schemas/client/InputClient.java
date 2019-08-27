@@ -49,8 +49,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "")
 @XmlRootElement(name = "inputClient")
 public class InputClient {
-	
-	
+
     @XmlAttribute(name = "address")
     protected String address;
     @XmlAttribute(name = "birthDate")

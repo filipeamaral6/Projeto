@@ -21,7 +21,7 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:CreateClientOutput"/>
-    <pd:endX>843</pd:endX>
+    <pd:endX>842</pd:endX>
     <pd:endY>337</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
@@ -325,8 +325,8 @@
         <pd:activity name="CreateUser">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>508</pd:x>
-            <pd:y>114</pd:y>
+            <pd:x>507</pd:x>
+            <pd:y>117</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>

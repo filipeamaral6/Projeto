@@ -8,8 +8,8 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.account.RootClientAccount;
-import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid.GetById;
+import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.accountclient.InputAccountClient;
+import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.accountclient.OutputAccountClient;
 
 
 
@@ -19,7 +19,7 @@ import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "PortType_GetClientAccounts", targetNamespace = "http://xmlns.example.com/1566480228153")
+@WebService(name = "PortType_AddClientToAccount", targetNamespace = "http://xmlns.example.com/1566480228153")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 @XmlSeeAlso({
 	com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.account.ObjectFactory.class,
@@ -27,19 +27,19 @@ import com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.
 	com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.client.ObjectFactory.class,
 	com.polarising.bootsecurity.soap.client_account.tibco.schemas.bankrising.schemas.getbyid.ObjectFactory.class
 })
-public interface PortTypeGetClientAccounts {
+public interface PortTypeAddClientToAccount {
 
 
     /**
      * 
      * @param input
      * @return
-     *     returns com.tibco.schemas.bankrising.schemas.account.Root
+     *     returns com.tibco.schemas.bankrising.schemas.accountclient.OutputAccountClient
      */
-    @WebMethod(operationName = "Operation", action = "/Client_Account/Service.serviceagent/PortType_GetClientAccountsEndpoint1/Operation")
-    @WebResult(name = "root", targetNamespace = "http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd", partName = "output")
-    public RootClientAccount operation(
-        @WebParam(name = "getById", targetNamespace = "http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd", partName = "input")
-        GetById input);
+    @WebMethod(operationName = "Operation", action = "/Client_Account/Service.serviceagent/PortType_AddClientToAccountEndpoint1/Operation")
+    @WebResult(name = "outputAccountClient", targetNamespace = "http://www.tibco.com/schemas/Bankrising/Schemas/AccountClient.xsd", partName = "output")
+    public OutputAccountClient operation(
+        @WebParam(name = "inputAccountClient", targetNamespace = "http://www.tibco.com/schemas/Bankrising/Schemas/AccountClient.xsd", partName = "input")
+        InputAccountClient input);
 
 }

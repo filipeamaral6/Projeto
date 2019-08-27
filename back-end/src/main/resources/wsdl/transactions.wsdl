@@ -216,25 +216,25 @@
     </wsdl:types>
     <wsdl:service name="Service">
         <wsdl:port name="PortType_TransferEndpoint1" binding="tns:PortType_TransferEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Transactions/Service.serviceagent/PortType_TransferEndpoint1"/>
+            <soap:address location="http://localhost:8085/Transactions/Service.serviceagent/PortType_TransferEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_GetTransactionsByIbanEndpoint1" binding="tns:PortType_GetTransactionsByIbanEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Transactions/Service.serviceagent/PortType_GetTransactionsByIbanEndpoint1"/>
+            <soap:address location="http://localhost:8085/Transactions/Service.serviceagent/PortType_GetTransactionsByIbanEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_GetAllTransactionsEndpoint1" binding="tns:PortType_GetAllTransactionsEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Transactions/Service.serviceagent/PortType_GetAllTransactionsEndpoint1"/>
+            <soap:address location="http://localhost:8085/Transactions/Service.serviceagent/PortType_GetAllTransactionsEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_PaymentEndpoint1" binding="tns:PortType_PaymentEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Transactions/Service.serviceagent/PortType_PaymentEndpoint1"/>
+            <soap:address location="http://localhost:8085/Transactions/Service.serviceagent/PortType_PaymentEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_WithdrawEndpoint1" binding="tns:PortType_WithdrawEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Transactions/Service.serviceagent/PortType_WithdrawEndpoint1"/>
+            <soap:address location="http://localhost:8085/Transactions/Service.serviceagent/PortType_WithdrawEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_TransactionByIdEndpoint1" binding="tns:PortType_TransactionByIdEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Transactions/Service.serviceagent/PortType_TransactionByIdEndpoint1"/>
+            <soap:address location="http://localhost:8085/Transactions/Service.serviceagent/PortType_TransactionByIdEndpoint1"/>
         </wsdl:port>
         <wsdl:port name="PortType_DepositEndpoint1" binding="tns:PortType_DepositEndpoint1Binding">
-            <soap:address location="http://localhost:8083/Transactions/Service.serviceagent/PortType_DepositEndpoint1"/>
+            <soap:address location="http://localhost:8085/Transactions/Service.serviceagent/PortType_DepositEndpoint1"/>
         </wsdl:port>
     </wsdl:service>
     <wsdl:portType name="PortType_Transfer">

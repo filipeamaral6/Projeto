@@ -251,7 +251,7 @@ public class TransactionController {
 		
 		// Get Transactions
 		@GetMapping("transactions")
-		public ResponseEntity<List<Object>> getAccounts() {
+		public ResponseEntity<List<Object>> getTransactions() {
 
 			TransactionService transactionService = new TransactionService();
 			RootTransaction getTransactions = transactionService.getPortTypeGetAllTransactionsEndpoint1().operation();

@@ -54,7 +54,7 @@
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx:GetAllEmployeesOutput"/>
     <pd:endX>452</pd:endX>
-    <pd:endY>74</pd:endY>
+    <pd:endY>77</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables>
         <message>

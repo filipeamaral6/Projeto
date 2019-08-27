@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:tns="http://xmlns.example.com/1566479847232" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:ns3="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" targetNamespace="http://xmlns.example.com/1566479847232">
-    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" xmlns:tns="http://xmlns.example.com/1566479847232" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" xmlns:ns4="http://www.tibco.com/schemas/Bankrising/Schemas/AccountClient.xsd" xmlns:ns3="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" targetNamespace="http://xmlns.example.com/1566479847232">
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Client.xsd" location="../Schemas/Client.xsd"/>
     <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/Account.xsd" location="../Schemas/Account.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/getById.xsd" location="../Schemas/GetById.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/Bankrising/Schemas/AccountClient.xsd" location="../Schemas/AccountClient.xsd"/>
     <message name="GetAccountClientsInput">
         <part name="input" element="ns:getById"/>
     </message>
@@ -15,6 +16,18 @@
     <message name="GetClientAccountsOutput">
         <part name="output" element="ns3:root"/>
     </message>
+    <message name="AddClientToAccountInput">
+        <part name="input" element="ns4:inputAccountClient"/>
+    </message>
+    <message name="AddClientToAccountOutput">
+        <part name="output" element="ns4:outputAccountClient"/>
+    </message>
+    <message name="DeleteAccountClientInput">
+        <part name="input" element="ns4:inputAccountClient"/>
+    </message>
+    <message name="DeleteAccountClientOutput">
+        <part name="output" element="ns4:outputAccountClient"/>
+    </message>
     <portType name="PortType_GetAccountClients">
         <operation name="Operation">
             <input message="tns:GetAccountClientsInput"/>
@@ -25,6 +38,18 @@
         <operation name="Operation">
             <input message="tns:GetClientAccountsInput"/>
             <output message="tns:GetClientAccountsOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_AddClientToAccount">
+        <operation name="Operation">
+            <input message="tns:AddClientToAccountInput"/>
+            <output message="tns:AddClientToAccountOutput"/>
+        </operation>
+    </portType>
+    <portType name="PortType_DeleteAccountClient">
+        <operation name="Operation">
+            <input message="tns:DeleteAccountClientInput"/>
+            <output message="tns:DeleteAccountClientOutput"/>
         </operation>
     </portType>
 </definitions>
