@@ -85,6 +85,7 @@ export class AccountsComponent implements OnInit {
     for(let client of this.newHolders) {
       this.accountService.addClientToAccount(+client.item_id, this.selectedAccount.id).pipe(first()).subscribe(response => {
         this.alertService.success(JSON.parse(JSON.stringify(response)).message);
+        this.accountClients.push(client);
       });
     }
   }
