@@ -109,8 +109,8 @@
     <pd:activity name="Query_account_id_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>339</pd:x>
-        <pd:y>213</pd:y>
+        <pd:x>346</pd:x>
+        <pd:y>204</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -181,8 +181,8 @@
     <pd:activity name="IBAN_NOTEXISTS">
         <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
         <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-        <pd:x>487</pd:x>
-        <pd:y>353</pd:y>
+        <pd:x>459</pd:x>
+        <pd:y>366</pd:y>
         <config>
             <variableName>message</variableName>
         </config>
@@ -545,8 +545,8 @@
         <pd:activity name="GetAccountBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>735</pd:x>
-            <pd:y>72</pd:y>
+            <pd:x>742</pd:x>
+            <pd:y>74</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>

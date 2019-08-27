@@ -92,8 +92,8 @@
     <pd:activity name="JDBC Query">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>300</pd:x>
-        <pd:y>104</pd:y>
+        <pd:x>298</pd:x>
+        <pd:y>103</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

@@ -5,7 +5,7 @@
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx:WritePaymentInput"/>
     <pd:startX>27</pd:startX>
-    <pd:startY>418</pd:startY>
+    <pd:startY>438</pd:startY>
     <pd:returnBindings>
         <pfx:WritePaymentOutput>
             <output>
@@ -37,8 +37,8 @@
     <pd:activity name="Query_IBAN_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>194</pd:x>
-        <pd:y>416</pd:y>
+        <pd:x>191</pd:x>
+        <pd:y>446</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -109,7 +109,7 @@
     <pd:activity name="Query_account_id_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>216</pd:x>
+        <pd:x>217</pd:x>
         <pd:y>297</pd:y>
         <config>
             <timeout>10</timeout>
@@ -401,7 +401,7 @@
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
             <pd:x>833</pd:x>
-            <pd:y>160</pd:y>
+            <pd:y>161</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -423,8 +423,8 @@
         <pd:activity name="WritePayment">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>961</pd:x>
-            <pd:y>162</pd:y>
+            <pd:x>962</pd:x>
+            <pd:y>163</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -514,7 +514,7 @@
         <pd:activity name="UPDATE_ACCOUNT">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>529</pd:x>
+            <pd:x>526</pd:x>
             <pd:y>158</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -638,8 +638,8 @@
     <pd:activity name="Query_AccountCient_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>249</pd:x>
-        <pd:y>161</pd:y>
+        <pd:x>248</pd:x>
+        <pd:y>162</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

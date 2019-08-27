@@ -37,9 +37,9 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>16</pd:x>
-        <pd:y>2</pd:y>
-        <pd:width>1154</pd:width>
+        <pd:x>-1</pd:x>
+        <pd:y>4</pd:y>
+        <pd:width>1221</pd:width>
         <pd:height>261</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
         <pd:collapsedHeight>70</pd:collapsedHeight>
@@ -118,13 +118,6 @@
             <pd:conditionType>always</pd:conditionType>
         </pd:transition>
         <pd:transition>
-            <pd:from>WriteTransfer</pd:from>
-            <pd:to>GetDestinationAccountId</pd:to>
-            <pd:lineType>Default</pd:lineType>
-            <pd:lineColor>-16777216</pd:lineColor>
-            <pd:conditionType>always</pd:conditionType>
-        </pd:transition>
-        <pd:transition>
             <pd:from>GetDestinationAccountId</pd:from>
             <pd:to>DestinationTransaction</pd:to>
             <pd:lineType>Default</pd:lineType>
@@ -133,7 +126,7 @@
         </pd:transition>
         <pd:transition>
             <pd:from>DestinationTransaction</pd:from>
-            <pd:to>GetDestinationBalance</pd:to>
+            <pd:to>LAST_INSERT_ID_Destination</pd:to>
             <pd:lineType>Default</pd:lineType>
             <pd:lineColor>-16777216</pd:lineColor>
             <pd:conditionType>always</pd:conditionType>
@@ -146,11 +139,32 @@
             <pd:conditionType>xpath</pd:conditionType>
             <pd:xpath>($GetOriginAccountBalance/resultSet/Record[1]/balance - $Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value) &lt; 0</pd:xpath>
         </pd:transition>
+        <pd:transition>
+            <pd:from>WriteTransfer</pd:from>
+            <pd:to>GetDestinationAccountId</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>LAST_INSERT_ID_Destination</pd:from>
+            <pd:to>WriteDestinationTransfer</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>WriteDestinationTransfer</pd:from>
+            <pd:to>GetDestinationBalance</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
         <pd:activity name="WriteTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>232</pd:x>
-            <pd:y>201</pd:y>
+            <pd:x>183</pd:x>
+            <pd:y>198</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -252,8 +266,8 @@
         <pd:activity name="LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>350</pd:x>
-            <pd:y>196</pd:y>
+            <pd:x>291</pd:x>
+            <pd:y>199</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -275,8 +289,8 @@
         <pd:activity name="WriteTransfer">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>465</pd:x>
-            <pd:y>194</pd:y>
+            <pd:x>392</pd:x>
+            <pd:y>199</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -336,8 +350,8 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1085</pd:x>
-            <pd:y>207</pd:y>
+            <pd:x>1178</pd:x>
+            <pd:y>203</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -352,8 +366,8 @@
         <pd:activity name="UPDATE_Origin_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>98</pd:x>
-            <pd:y>200</pd:y>
+            <pd:x>67</pd:x>
+            <pd:y>198</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -399,8 +413,8 @@
         <pd:activity name="GetOriginAccountBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>103</pd:x>
-            <pd:y>68</pd:y>
+            <pd:x>69</pd:x>
+            <pd:y>67</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -439,7 +453,7 @@
         <pd:activity name="UPDATE_Destination_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>971</pd:x>
+            <pd:x>1084</pd:x>
             <pd:y>203</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -486,7 +500,7 @@
         <pd:activity name="GetDestinationBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>831</pd:x>
+            <pd:x>968</pd:x>
             <pd:y>201</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -526,8 +540,8 @@
         <pd:activity name="DestinationTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>697</pd:x>
-            <pd:y>198</pd:y>
+            <pd:x>602</pd:x>
+            <pd:y>201</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -629,8 +643,8 @@
         <pd:activity name="GetDestinationAccountId">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>581</pd:x>
-            <pd:y>196</pd:y>
+            <pd:x>492</pd:x>
+            <pd:y>199</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -669,8 +683,8 @@
         <pd:activity name="NO_MONEY">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1082</pd:x>
-            <pd:y>67</pd:y>
+            <pd:x>1140</pd:x>
+            <pd:y>71</pd:y>
             <config>
                 <variableName>message</variableName>
             </config>
@@ -680,6 +694,90 @@
                         <xsl:value-of select="&quot;Erro: O seu saldo não lhe permite executar esta operação!&quot;"/>
                     </message>
                 </root>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="LAST_INSERT_ID_Destination">
+            <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+            <pd:x>721</pd:x>
+            <pd:y>199</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <maxRows>100</maxRows>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <statement>SELECT  LAST_INSERT_ID();</statement>
+                <oraObjects/>
+                <oraTables/>
+                <QueryOutputCachedSchemaColumns>LAST_INSERT_ID</QueryOutputCachedSchemaColumns>
+                <QueryOutputCachedSchemaDataTypes>-5</QueryOutputCachedSchemaDataTypes>
+                <QueryOutputCachedSchemaDataTypesName>BIGINT UNSIGNED</QueryOutputCachedSchemaDataTypesName>
+                <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            </config>
+            <pd:inputBindings>
+                <jdbcQueryActivityInput/>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="WriteDestinationTransfer">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>842</pd:x>
+            <pd:y>199</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <statement>INSERT INTO transfer (destination_iban, transaction_id, employee_id) VALUES (?,?,?)</statement>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>destination_iban</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>transaction_id</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>employee_id</parameterName>
+                        <dataType>INTEGER</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput>
+                    <destination_iban>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@destination_iban)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@destination_iban"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </destination_iban>
+                    <transaction_id>
+                        <xsl:choose>
+                            <xsl:when test="exists($LAST_INSERT_ID_Destination/resultSet/Record[1]/LAST_INSERT_ID)">
+                                <xsl:value-of select="$LAST_INSERT_ID_Destination/resultSet/Record[1]/LAST_INSERT_ID"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </transaction_id>
+                    <employee_id>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@employee_id)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@employee_id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </employee_id>
+                </jdbcUpdateActivityInput>
             </pd:inputBindings>
         </pd:activity>
     </pd:group>
@@ -718,7 +816,7 @@
     <pd:activity name="Query_Account_ID_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>265</pd:x>
+        <pd:x>262</pd:x>
         <pd:y>313</pd:y>
         <config>
             <timeout>10</timeout>
@@ -791,7 +889,7 @@
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>258</pd:x>
-        <pd:y>429</pd:y>
+        <pd:y>430</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

@@ -144,7 +144,7 @@
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
         <pd:x>360</pd:x>
-        <pd:y>173</pd:y>
+        <pd:y>174</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

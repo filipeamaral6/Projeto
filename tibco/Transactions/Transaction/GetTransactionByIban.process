@@ -95,7 +95,7 @@
     <pd:activity name="Query_GetAccountByIban">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>298</pd:x>
+        <pd:x>299</pd:x>
         <pd:y>262</pd:y>
         <config>
             <timeout>10</timeout>
