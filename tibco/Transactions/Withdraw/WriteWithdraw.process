@@ -37,7 +37,7 @@
     <pd:activity name="Query_IBAN_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>298</pd:x>
+        <pd:x>299</pd:x>
         <pd:y>357</pd:y>
         <config>
             <timeout>10</timeout>
@@ -109,8 +109,8 @@
     <pd:activity name="Query_account_id_EXISTS">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>307</pd:x>
-        <pd:y>244</pd:y>
+        <pd:x>306</pd:x>
+        <pd:y>245</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>
@@ -297,7 +297,7 @@
         <pd:activity name="WriteTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>641</pd:x>
+            <pd:x>643</pd:x>
             <pd:y>151</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -401,7 +401,7 @@
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
             <pd:x>790</pd:x>
-            <pd:y>151</pd:y>
+            <pd:y>152</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -423,7 +423,7 @@
         <pd:activity name="WriteWithdraw">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>917</pd:x>
+            <pd:x>918</pd:x>
             <pd:y>150</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -527,7 +527,7 @@
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
             <pd:x>488</pd:x>
-            <pd:y>56</pd:y>
+            <pd:y>57</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>

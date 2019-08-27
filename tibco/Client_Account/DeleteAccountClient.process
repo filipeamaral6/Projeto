@@ -37,7 +37,7 @@
     <pd:activity name="GetClientFromAccount">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>267</pd:x>
+        <pd:x>266</pd:x>
         <pd:y>57</pd:y>
         <config>
             <timeout>10</timeout>
@@ -95,8 +95,8 @@
     <pd:activity name="JDBC Update">
         <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-        <pd:x>425</pd:x>
-        <pd:y>57</pd:y>
+        <pd:x>424</pd:x>
+        <pd:y>58</pd:y>
         <config>
             <timeout>10</timeout>
             <commit>false</commit>

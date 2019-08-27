@@ -19,11 +19,11 @@
 		</globalVariable>
 		<globalVariable>
 			<name>password</name>
-			<value>academia</value>
+			<value></value>
 			<deploymentSettable>true</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
-			<modTime>1566467986706</modTime>
+			<modTime>1566898320788</modTime>
 		</globalVariable>
 		<globalVariable>
 			<name>username</name>
