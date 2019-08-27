@@ -13,13 +13,13 @@
                     <div class="col-md-6" style="padding-left: 0">
                         <div class="form-group">
                             <label for="entity">Entidate</label>
-                            <input (keypress)="digitOnly($event)" type="text"  class="form-control" [(ngModel)]="newPayment.entity">
+                            <input (keypress)="digitOnly($event)" type="text"  class="form-control" [(ngModel)]="paymentForm.value.entity">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="reference">Referência</label>
-                            <input (keypress)="digitOnly($event)" type="text" class="form-control" [(ngModel)]="newPayment.reference">
+                            <input (keypress)="digitOnly($event)" type="text" class="form-control" [(ngModel)]="paymentForm.value.reference">
                         </div>
                     </div>
                 </div>
@@ -31,17 +31,19 @@
                             <div class="row col-md-12">
                               <div class="col-md-6" style="padding: 0">
                                 <input (keypress)="digitOnly($event)" type="text" class="form-control" 
-                                    style="text-align: right;" [(ngModel)]="newPayment.value" [ngClass]="{ 'is-invalid': submitted && f.value.errors }" />
-                                    <!-- <div *ngIf="submitted && !!f.value.errors" class="invalid-feedback">
-                                        <div *ngIf="!!f.value.value.required">First name is required</div>
+                                    style="text-align: right;" [(ngModel)]="paymentForm.value.euros"/>
+                                    <!-- [ngClass]="{ 'is-invalid': submitted && f.euros.errors }"
+                                    <div *ngIf="submitted && !!f.euros.errors" class="invalid-feedback">
+                                        <div *ngIf="!!f.euros.required">First name is required</div>
                                     </div> -->
                               </div>
                               <div class="col-md-1" id="comma-sign">
                                 <h5 class="payment-value"> ,</h5>
                               </div>
                               <div class="col-md-3 form-group" style="padding: 0">
-                                <input (keypress)="digitOnly($event)" type="text" class="form-control" [(ngModel)]="cents" [ngClass]="{ 'is-invalid': submitted && f.cents.errors }" />
-                                    <!-- <div *ngIf="submitted && !!f.cents.errors" class="invalid-feedback">
+                                <input (keypress)="digitOnly($event)" type="text" class="form-control" [(ngModel)]="paymentForm.value.cents"/>
+                                    <!-- [ngClass]="{ 'is-invalid': submitted && f.cents.errors }"
+                                    <div *ngIf="submitted && !!f.cents.errors" class="invalid-feedback">
                                         <div *ngIf="!!f.cents.errors.required">First name is required</div>
                                     </div> -->
                               </div>
@@ -56,7 +58,7 @@
                                 <label for="transactionCode">Codigo de Segurança</label>
                                 <div class="col-md-12 security-code" *ngIf="!isEyeOpen" style="padding: 0">
                                     <div class="col-md-10" style="padding: 0">
-                                        <input type="password" class="form-control pass-control" [(ngModel)]="newPayment.transactionCode"/>
+                                        <input type="password" class="form-control pass-control" [(ngModel)]="paymentForm.value.transactionCode"/>
                                     </div>
                                     <div class="col-md-2" style="padding: 0">
                                         <span>
@@ -66,7 +68,7 @@
                                 </div>
                                 <div class="col-md-12 security-code" *ngIf="isEyeOpen" style="padding: 0">
                                     <div class="col-md-10" style="padding: 0">
-                                        <input type="text" class="form-control pass-control" [(ngModel)]="newPayment.transactionCode"/>
+                                        <input type="text" class="form-control pass-control" [(ngModel)]="paymentForm.value.transactionCode"/>
                                     </div>
                                     <div class="col-md-2" style="padding: 0">
                                         <span>
@@ -82,7 +84,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="description">Descrição do Pagamento</label>
-                    <textarea type="text" class="form-control" style="min-height: 115px" [(ngModel)]="newPayment.description"></textarea>
+                    <textarea type="text" class="form-control" style="min-height: 115px" [(ngModel)]="paymentForm.value.description"></textarea>
                 </div>
             </div>
         </div>
