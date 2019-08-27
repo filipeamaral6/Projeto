@@ -8,13 +8,13 @@
         <processArchive name="Process Archive">
             <resourceType>process.archive.resource</resourceType>
             <authorProperty>andre.mendonca</authorProperty>
-            <processProperty>/Account/Service.serviceagent,/Client/Service.serviceagent,/Employee/Service.serviceagent,/Transactions/Service.serviceagent,/User/Service.serviceagent</processProperty>
+            <processProperty>/Account/Service.serviceagent,/Client/Service.serviceagent,/Client_Account/Service.serviceagent,/Employee/Service.serviceagent,/Transactions/Service.serviceagent,/User/Service.serviceagent</processProperty>
         </processArchive>
-        <versionProperty>2</versionProperty>
+        <versionProperty>1</versionProperty>
         <authorProperty>andre.mendonca</authorProperty>
         <addServiceSettableGvars>true</addServiceSettableGvars>
         <name>tibco</name>
         <designer/>
-        <fileLocationProperty>C:\Users\andre.mendonca\tibco.ear</fileLocationProperty>
+        <fileLocationProperty>C:\Users\andre.mendonca\Desktop\Bankrising\bankrising.ear</fileLocationProperty>
     </enterpriseArchive>
 </Repository:repository>
