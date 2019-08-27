@@ -10,11 +10,15 @@
             <authorProperty>andre.mendonca</authorProperty>
             <processProperty>/Account/Service.serviceagent,/Client/Service.serviceagent,/Client_Account/Service.serviceagent,/Employee/Service.serviceagent,/Transactions/Service.serviceagent,/User/Service.serviceagent</processProperty>
         </processArchive>
-        <versionProperty>1</versionProperty>
+        <versionProperty>2</versionProperty>
         <authorProperty>andre.mendonca</authorProperty>
         <addServiceSettableGvars>true</addServiceSettableGvars>
         <name>tibco</name>
-        <designer/>
+        <designer>
+            <lockedProperties/>
+            <fixedChildren/>
+            <resourceDescriptions/>
+        </designer>
         <fileLocationProperty>C:\Users\andre.mendonca\Desktop\Bankrising\bankrising.ear</fileLocationProperty>
     </enterpriseArchive>
 </Repository:repository>
