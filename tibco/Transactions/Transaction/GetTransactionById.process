@@ -451,7 +451,7 @@ WHERE transaction_id=?</statement>
         <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
         <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
         <pd:x>122</pd:x>
-        <pd:y>149</pd:y>
+        <pd:y>152</pd:y>
         <config>
             <element>
                 <xsd:element name="root">
