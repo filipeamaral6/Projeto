@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'app/shared/models/Client';
-import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.component';
 import { Account } from 'app/shared/models/Account';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ClientService } from 'app/services/transport/client.service';
+import { AuthenticationService } from 'app/services/authentication.service';
+import { Payment } from 'app/shared/models/Payment';
+import { TransactionService } from 'app/services/transport/transaction.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -14,55 +18,63 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class PaymentsComponent implements OnInit {
 
-  client: Client;
-  selectedAccount: Account = null;
+  selectedAccount: Account;
   paymentForm: FormGroup;
   isEyeOpen: boolean;
+  submitted = false;
 
 
   constructor(
-    private clientLayout: ClientLayoutComponent,
     private formBuilder: FormBuilder,
-  ) {
-    this.clientLayout.refreshData();
-
-  }
+    private authenticationService: AuthenticationService,
+    private transactionService: TransactionService,
+  ) {}
 
   ngOnInit() {
-    this.isEyeOpen = false;
+    this.selectedAccount = null;
 
-    this.paymentForm = this.formBuilder.group({
-      type: ['', Validators.required],
-      accountIban: ['', Validators.required],
-      clientId: ['', Validators.required],
-      value: ['', Validators.required],
-      cents: ['', Validators.required, Validators.min(0), Validators.max(99)],
-      description: ['', Validators.required, Validators.maxLength(200)],
-      entity: ['', Validators.required, Validators.min(0), Validators.max(99999)],
-      reference: ['', Validators.required, Validators.min(0), Validators.max(999999999)]
-    });
+    this.initForm();
   }
 
   get f() {
     return this.paymentForm.controls;
   }
 
-  selectAccount(account: Account) {
-    console.log('payments' + account.id);
-    this.selectedAccount = account;
-  }
-
   resetForm() {
-    console.log('Reset');
+    this.ngOnInit();
   }
 
   cancelFunction() {
-    this.selectAccount = null;
-    console.log('Cancel');
+    this.selectedAccount = null;
+    this.ngOnInit();
   }
 
   onSubmit() {
     console.log('Submit');
+    this.submitted = true;
+
+    this.paymentForm.value.employeeId = 0;
+    this.paymentForm.value.type = 'Pagamento';
+    this.paymentForm.value.userId = this.authenticationService.currentUser.id;
+    this.paymentForm.value.accountIban = this.selectedAccount.iban;
+    this.paymentForm.value.accountId = this.selectedAccount.id;
+
+    this.paymentForm.value.value = this.paymentForm.value.euros + '.' + this.paymentForm.value.cents;
+
+    console.log( this.paymentForm.value );
+
+    if ( this.paymentForm.invalid ) {
+      console.log(1);
+      this.ngOnInit();
+      return;
+    }
+
+
+    this.transactionService.addPayment(this.paymentForm.value).pipe(first()).subscribe( response => {
+      console.log(response);
+    });
+    this.ngOnInit();
+
   }
 
   digitOnly(event: { which: any; keyCode: any; }): boolean {
@@ -71,7 +83,6 @@ export class PaymentsComponent implements OnInit {
       return false;
     }
     return true;
-
   }
 
   showPass() {
@@ -80,7 +91,28 @@ export class PaymentsComponent implements OnInit {
     } else {
       this.isEyeOpen = false;
     }
+  }
 
+  selectAccount(account: Account) {
+    this.selectedAccount = account;
+  }
+
+  initForm() {
+
+    this.isEyeOpen = false;
+
+    this.paymentForm = this.formBuilder.group({
+      employeeId: ['', Validators.required],
+      userId: ['', Validators.required],
+      type: ['', Validators.required],
+      value: ['', Validators.required],
+      euros: ['', Validators.required],
+      cents: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
+      description: ['', [Validators.required, Validators.maxLength(200)]],
+      entity: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+      reference: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      transactionCode: ['', Validators.required]
+    });
   }
 
 }

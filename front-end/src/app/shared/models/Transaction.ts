@@ -9,4 +9,8 @@ export class Transaction {
   type?: string;
   description?: string;
   accountId?: number;
+  date?: string;
+  hour?: string;
+  transactionCode?: string;
+
 }

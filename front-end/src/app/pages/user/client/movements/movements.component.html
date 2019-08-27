@@ -1,33 +1,91 @@
-<div class="col-sm-10 offset-sm-1" style="padding: 0">
+<div class="col-sm-12" style="padding: 0">
   <app-account-list [component]="this" ></app-account-list>
 </div>
 
-<div class="col-sm-10 offset-sm-1" style="padding: 0; margin-top: 2%">
-  <div class="card card-movements col-md-12">
+<div class="card">
+  <div class="card-body">
+    <div>
+      <span>
+        <a class="btn btn-primary" (click)="filterTransaction = null">Todos os Movimentos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'Depósito'">Depósitos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'Levantamento'">Levantamentos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'Transferência'">Transferências</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'Pagamento'">Pagamentos</a>
+      </span>
+    </div>
+    <hr>
     <div class="table-responsive">
       <table class="table">
         <thead class=" text-primary">
           <tr>
-            <th> Name </th>
-            <th> Country </th>
-            <th> City </th>
-            <th class="text-right"> Salary </th>
+            <th>Data</th>
+            <th>Conta de Origem</th>
+            <th >Valor da transação</th>
+            <th >Tipo de Transacção</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td> Dakota Rice </td>
-            <td> Niger </td>
-            <td> Oud-Turnhout </td>
-            <td class="text-right"> $36,738 </td>
+        <tbody *ngIf="filterTransaction !== null">
+          <tr *ngFor="let transaction of transactionList" (click)="openModal(transactionDetailsModal, transaction)">
+            <td *ngIf="transaction.type === filterTransaction">{{ transaction.date }}</td>
+            <td *ngIf="transaction.type === filterTransaction">{{ transaction.accountIban }}</td>
+            <td *ngIf="transaction.type === filterTransaction">{{ transaction.value }} €</td>
+            <td *ngIf="transaction.type === filterTransaction">{{ transaction.type }}</td>
           </tr>
-          <tr>
-            <td> Minerva Hooper </td>
-            <td> Curaçao </td>
-            <td> Sinaai-Waas </td>
-            <td class="text-right"> $23,789 </td>
-          </tr>
+        </tbody>
+        <tbody *ngIf="filterTransaction === null">
+            <tr *ngFor="let transaction of transactionList" (click)="openModal(transactionDetailsModal, transaction)">
+              <td>{{ transaction.date }}</td>
+              <td>{{ transaction.accountIban }}</td>
+              <td>{{ transaction.value }} €</td>
+              <td>{{ transaction.type }}</td>
+            </tr>
+          </tbody>
       </table>
     </div>
   </div>
 </div>
+
+<ng-template #transactionDetailsModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Detalhes do Movimento</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click'); activeModal = false;">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <alert></alert>
+      <div class="row col-sm-12">
+        <div class="col-sm-4">
+          <label for="date">Data:</label>
+          <p></p>
+        </div>
+        <div class="col-sm-4">
+          <label for="hour">Hora:</label>
+          <p></p>
+        </div>
+        <div class="col-sm-4">
+          <label for="type">Tipo:</label>
+          <p></p>
+        </div>
+      </div>
+      <div class="row col-sm-12">
+        <!-- <div class="col-sm-4" *ngIf="selectedTransaction.type === 'Pagamento'">
+          <label for="date">IBAN de Destino</label>
+          <p>{{selectedTransaction.destinationIban}}</p>
+        </div>
+        <div class="col-sm-4" *ngIf="selectedTransaction.type !== 'Pagamento'">
+          <label for="date">Conta de Destino</label>
+          <p>{{selectedTransaction.entity}} - {{selectedTransaction.reference}}</p>
+        </div> -->
+        <div class="col-sm-4">
+          <label for="hour">Hora:</label>
+          <p></p>
+        </div>
+        <div class="col-sm-4">
+          <label for="type">Tipo:</label>
+          <p></p>
+        </div>
+      </div>
+
+    </div>
+  </ng-template>

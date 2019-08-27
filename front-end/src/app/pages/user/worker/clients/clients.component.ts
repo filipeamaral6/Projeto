@@ -193,18 +193,18 @@ export class ClientsComponent implements OnInit {
     }
   }
 
-  generateIban() {
-    let iban = 'PT50';
-    iban += this.randomString('0123456789', 21);
+  // generateIban() {
+  //   let iban = 'PT50';
+  //   iban += this.randomString('0123456789', 21);
 
-    this.newAccount.iban = iban;
-  }
+  //   this.newAccount.iban = iban;
+  // }
 
-  generateAccountNumber() {
-    let accountNumber = this.randomString('0123456789', 11);
+  // generateAccountNumber() {
+  //   let accountNumber = this.randomString('0123456789', 11);
 
-    this.newAccount.accountNumber = accountNumber;
-  }
+  //   this.newAccount.accountNumber = accountNumber;
+  // }
 
   closeModal() {
     this.editMode = false;

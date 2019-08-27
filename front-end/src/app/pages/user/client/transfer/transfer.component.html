@@ -1,8 +1,8 @@
-<div class="col-sm-10 offset-sm-1" style="padding: 0">
+<div class="col-sm-12" style="padding: 0">
   <app-account-list [component]="this"></app-account-list>
 </div>
 
-<div class="card card-user-tansfer col-sm-10 offset-sm-1"  *ngIf="selectedAccount != null">
+<div class="card card-user-tansfer col-sm-12"  *ngIf="selectedAccount != null">
   <div class="card-header">
     <h5 class="card-title">Transferência</h5>
   </div>
@@ -19,7 +19,7 @@
               <div class="form-group">
                 <label for="value">Valor da Transferência</label>
                 <div class="row col-md-12">
-                  <div class="col-md-7" style="padding: 0">
+                  <div class="col-md-6" style="padding: 0">
                     <input
                       (keypress)="digitOnly($event)"
                       type="text"
@@ -31,7 +31,7 @@
                     <h5 class="payment-value"> ,</h5>
                   </div>
                   <div
-                    class="col-md-2 form-group"
+                    class="col-md-3 form-group"
                     style="padding: 0"
                   >
                     <input 
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-md-2" style="padding: 0">
                             <span>
-                                <i class="button fa fa-eye-slash eye-icon form-control" id="eyeClose" (click)="showPass()"></i>
+                                <i class="button fa fa-eye-slash eye-icon" id="eyeClose" (click)="showPass()"></i>
                             </span>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-md-2" style="padding: 0">
                             <span>
-                                <i class="button fa fa-eye eye-icon form-control" id="eyeClose" (click)="showPass()"></i>
+                                <i class="button fa fa-eye eye-icon" id="eyeClose" (click)="showPass()"></i>
                             </span>
                         </div>
                     </div>
@@ -90,26 +90,12 @@
   </div>
 </div>
 
-<div class="col-md-12" *ngIf="selectedAccount !== null">
-  <div class="row">
-    <div class="update mr-auto ml-auto">
-      <button type="submit" class="btn btn-success btn-round">
-        Efetuar Pagamento
-      </button>
-      <button
-        type="button"
-        class="btn btn-secundary btn-round"
-        style="margin-left: 15px"
-      >
-        Descartar
-      </button>
-      <button
-        type="button"
-        class="btn btn-danger btn-round"
-        style="margin-left: 15px"
-      >
-        Cancelar
-      </button>
+<div class="row col-sm-12" *ngIf="selectedAccount != null" style="margin-left: 5px">
+    <div class="row" style="float: left; ">
+        <div class="update mr-auto ml-auto">
+            <button type="submit" class="btn btn-success" (click)="onSubmit()">Efetuar Transferência</button>
+            <button type="button" class="btn btn-secundary" (click)="resetForm()">Descartar</button>
+            <button type="button" class="btn btn-danger" (click)="cancelFunction()">Cancelar</button>
+        </div>
     </div>
-  </div>
 </div>

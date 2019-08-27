@@ -304,12 +304,8 @@
                 <commit>false</commit>
                 <emptyStrAsNil>false</emptyStrAsNil>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-                <statement>INSERT INTO transaction (account_id, value, account_iban, user_id, type, description) VALUES (?,?,?,?,?,?) </statement>
+                <statement>INSERT INTO transaction ( value, account_iban, user_id, type, description) VALUES (?,?,?,?,?) </statement>
                 <Prepared_Param_DataType>
-                    <parameter>
-                        <parameterName>account_id</parameterName>
-                        <dataType>INTEGER</dataType>
-                    </parameter>
                     <parameter>
                         <parameterName>value</parameterName>
                         <dataType>DOUBLE</dataType>
@@ -334,16 +330,6 @@
             </config>
             <pd:inputBindings>
                 <jdbcUpdateActivityInput>
-                    <account_id>
-                        <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:WritePaymentInput/input/ns1:inputPayment/@account_id)">
-                                <xsl:value-of select="$Start/pfx:WritePaymentInput/input/ns1:inputPayment/@account_id"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </account_id>
                     <value>
                         <xsl:choose>
                             <xsl:when test="exists($Start/pfx:WritePaymentInput/input/ns1:inputPayment/@value)">
