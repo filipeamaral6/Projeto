@@ -46,7 +46,7 @@ export class TransferComponent implements OnInit {
     this.submitted = true;
 
     this.transferForm.value.employeeId = 0;
-    this.transferForm.value.type = 'Pagamento';
+    this.transferForm.value.type = 'Transferência';
     this.transferForm.value.userId = this.authenticationService.currentUser.id;
     this.transferForm.value.accountIban = this.selectedAccount.iban;
     this.transferForm.value.accountId = this.selectedAccount.id;
@@ -55,17 +55,17 @@ export class TransferComponent implements OnInit {
 
     console.log( this.transferForm.value );
 
-    if ( this.transferForm.invalid ) {
-      console.log(1);
-      this.ngOnInit();
-      return;
-    }
+    // if ( this.transferForm.invalid ) {
+    //   console.log(1);
+    //   this.ngOnInit();
+    //   return;
+    // }
 
-
-    this.transactionService.addPayment(this.transferForm.value).pipe(first()).subscribe( response => {
+    this.transactionService.addTransfer(this.transferForm.value).pipe(first()).subscribe( response => {
       console.log(response);
     });
-    this.ngOnInit();
+    this.submitted = false;
+    this.cancelFunction()
 
   }
 
@@ -103,6 +103,7 @@ export class TransferComponent implements OnInit {
       euros: ['', Validators.required],
       cents: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
       description: ['', [Validators.required, Validators.maxLength(200)]],
+      destinationIban: ['', [Validators.required, Validators.minLength(25), Validators.maxLength(25)]],
       transactionCode: ['', Validators.required]
     });
   }

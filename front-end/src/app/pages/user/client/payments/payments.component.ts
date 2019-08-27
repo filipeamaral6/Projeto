@@ -63,16 +63,17 @@ export class PaymentsComponent implements OnInit {
 
     console.log( this.paymentForm.value );
 
-    if ( this.paymentForm.invalid ) {
-      console.log(1);
-      this.ngOnInit();
-      return;
-    }
+    // if ( this.paymentForm.invalid ) {
+    //   console.log(1);
+    //   this.ngOnInit();
+    //   return;
+    // }
 
 
     this.transactionService.addPayment(this.paymentForm.value).pipe(first()).subscribe( response => {
       console.log(response);
     });
+    this.submitted = false;
     this.ngOnInit();
 
   }
@@ -105,6 +106,7 @@ export class PaymentsComponent implements OnInit {
       employeeId: ['', Validators.required],
       userId: ['', Validators.required],
       type: ['', Validators.required],
+      accountIban: ['', Validators.required],
       value: ['', Validators.required],
       euros: ['', Validators.required],
       cents: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
