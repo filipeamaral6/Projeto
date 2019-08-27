@@ -15,3 +15,12 @@ button#account {
 .card-title {
   padding-left: 15px;
 }
+
+.table tbody tr:hover {
+  background-color: #CCE7E7;
+  cursor:pointer;
+}
+
+.general-padding {
+  padding: 0;
+}

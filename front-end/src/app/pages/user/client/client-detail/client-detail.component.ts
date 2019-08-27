@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientLayoutComponent } from 'app/layouts/client-layout/client-layout.component';
 import { Client } from 'app/shared/models/Client';
 import { ClientService } from 'app/services/transport/client.service';
-import { CurrentUser } from 'app/shared/models/CurrentUser';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'app/services/authentication.service';
 

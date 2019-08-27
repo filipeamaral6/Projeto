@@ -24,10 +24,6 @@ export class TransferComponent implements OnInit {
     // this.accounts = this.getAccountList();
   }
 
-  selectAccount(accountId: number) {
-    console.log('transfer' + accountId);
-  }
-
   getAccountList() {
     return this.clientLayout.getAccounts;
   }
@@ -59,7 +55,10 @@ export class TransferComponent implements OnInit {
     } else {
       this.isEyeOpen = false;
     }
+  }
 
+  selectAccount(account: Account) {
+    this.selectedAccount = account;
   }
 
 }

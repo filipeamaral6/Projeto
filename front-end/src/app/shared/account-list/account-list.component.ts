@@ -53,24 +53,22 @@ export class AccountListComponent implements OnInit {
     }
   }
 
-  getSelectedAccount() {
-    return this.selectedAccount;
-  }
-
   sendSelectedAccount(account: Account) {
-    this.selectedAccount = account;
-    this.createdAt = this.selectedAccount.createdAt.toString().substring(0, 10);
-    
-    console.log(this.selectedAccount.type);
-    
-    this.component.selectedAccount = account;
+    if ( this.selectedAccount !== account ) {
+      this.selectedAccount = account;
+      this.createdAt = this.selectedAccount.createdAt.toString().substring(0, 10);
+      this.component.selectAccount(account)
+    } else {
+      this.selectedAccount = null;
+      this.component.selectedAccount = null;
+    }
   }
 
   private initAccountList() {
     if ( this.authenticationService.currentUser.role === 'CLIENT' ) {
       if ( (this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent) ) {
         this.accountInfoPopUp = true;
-        this.accountList = this.component.getAccountList();
+        this.getClientAccounts();
       }
       if ( ((this.component instanceof PaymentsComponent) || (this.component instanceof TransferComponent)) ) {
         this.accountList.forEach(account => {
@@ -83,7 +81,7 @@ export class AccountListComponent implements OnInit {
     if ( (this.authenticationService.currentUser.role === 'OPERATOR') || (this.authenticationService.currentUser.role === 'ADMIN') ) {
       if ( (this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent) ) {
         this.accountInfoPopUp = true;
-        this.accountList = this.component.getAccountList();
+        this.getClientAccounts();
       }
       if ( this.component instanceof PaymentsComponent ) {
         this.accountList.forEach(account => {

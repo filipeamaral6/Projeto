@@ -161,10 +161,6 @@
             <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>account_id</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>4</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>INT</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>value</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>8</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>DOUBLE</QueryOutputCachedSchemaDataTypesName>
@@ -550,7 +546,7 @@ WHERE transaction_id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Map-Data/root/param = "transfer"</pd:xpath>
+        <pd:xpath>$Map-Data/root/param = "transferência"</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Map Data</pd:from>
@@ -558,7 +554,7 @@ WHERE transaction_id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Map-Data/root/param = "withdraw"</pd:xpath>
+        <pd:xpath>$Map-Data/root/param = "levantamento"</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Map Data</pd:from>
@@ -566,7 +562,7 @@ WHERE transaction_id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Map-Data/root/param = "payment"</pd:xpath>
+        <pd:xpath>$Map-Data/root/param = "pagamento"</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>Map Data</pd:from>
@@ -574,6 +570,6 @@ WHERE transaction_id=?</statement>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>$Map-Data/root/param = "deposit"</pd:xpath>
+        <pd:xpath>$Map-Data/root/param = "depósito"</pd:xpath>
     </pd:transition>
 </pd:ProcessDefinition>
