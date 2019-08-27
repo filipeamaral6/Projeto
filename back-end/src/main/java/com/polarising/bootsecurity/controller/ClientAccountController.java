@@ -60,7 +60,7 @@ public class ClientAccountController {
 	
 		
 		//Delete Client from Account
-		@DeleteMapping("deleteClient")
+		@PostMapping("deleteClient")
 		public ResponseEntity<Object> DeleteClient(@Valid @RequestBody InputAccountClient inputAccountClient, BindingResult result) {
 
 			if (!result.hasErrors()) {

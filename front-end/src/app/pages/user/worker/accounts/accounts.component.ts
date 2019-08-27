@@ -26,6 +26,7 @@ export class AccountsComponent implements OnInit {
   clients: Client[];
   selectedAccount: Account;
   newAccount: Account;
+  newHolders: any[];
   editMode: boolean;
   editButtonLabel: string;
   accountClients: Client[];
@@ -66,13 +67,14 @@ export class AccountsComponent implements OnInit {
         }
       }
 
-      this.accountService.addAccount(JSON.stringify(this.newAccount)).pipe(first()).subscribe(response => {
-        for(let holder of this.newAccount.holders) {
-          console.log(holder.item_text);
-        }
-
-        this.closeModal();
-        this.alertService.success(JSON.parse(JSON.stringify(response)).message);
+      this.accountService.addAccount(JSON.stringify(this.newAccount)).pipe(first()).subscribe(addResponse => {
+        this.accountService.getAll().pipe(first()).subscribe(accounts => {
+          const addedAccount = accounts[accounts.length - 1];
+          for (let holder of this.newAccount.holders) {
+            this.accountService.addClientToAccount(holder.item_id, addedAccount.id).pipe(first()).subscribe(response => {
+            });
+          }
+        });
       }, error => {
         this.alertService.error(error);
       });
@@ -80,7 +82,26 @@ export class AccountsComponent implements OnInit {
   }
 
   updateAccount() {
+    for(let client of this.newHolders) {
+      this.accountService.addClientToAccount(+client.item_id, this.selectedAccount.id).pipe(first()).subscribe(response => {
+        this.alertService.success(JSON.parse(JSON.stringify(response)).message);
+      });
+    }
+  }
 
+  removeClientFromAccount(clientId: number, modal: ModalEvent, account: Account) {
+    this.accountService.deleteClientFromAccount(clientId, this.selectedAccount.id).pipe(first()).subscribe(response => {
+      this.alertService.success(JSON.parse(JSON.stringify(response)).message);
+      for (let client of this.accountClients) {
+        // tslint:disable-next-line: triple-equals
+        if (client.id == clientId) {
+          this.accountClients.splice(this.accountClients.indexOf(client), 1);
+          break;
+        }
+      }
+    }, error => {
+      this.alertService.error(error.message);
+    });
   }
 
   deactivateAccount() {

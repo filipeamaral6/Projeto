@@ -48,4 +48,23 @@ export class AccountService {
     return this.http.put(this.API + '/accounts/update', account, httpOptions);
   }
 
+  addClientToAccount(clientId: number, accountId: number) {
+    const body = JSON.parse(JSON.stringify({
+      clientId: clientId,
+      accountId: accountId
+    }));
+    console.log(body);
+
+    return this.http.post(this.API + '/addClient', body, httpOptions);
+  }
+
+  deleteClientFromAccount(clientId: number, accountId: number) {
+    const body = JSON.parse(JSON.stringify({
+      clientId: clientId,
+      accountId: accountId
+    }));
+    console.log(body);
+
+    return this.http.post(this.API + '/deleteClient', body, httpOptions);
+  }
 }
