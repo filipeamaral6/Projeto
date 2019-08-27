@@ -30,7 +30,7 @@
     </wsdl:types>
     <wsdl:service name="Service">
         <wsdl:port name="PortType_GetAllUsersEndpoint1" binding="tns:PortType_GetAllUsersEndpoint1Binding">
-            <soap:address location="http://localhost:8086/User/Service.serviceagent/PortType_GetAllUsersEndpoint1"/>
+            <soap:address location="http://localhost:8084/User/Service.serviceagent/PortType_GetAllUsersEndpoint1"/>
         </wsdl:port>
     </wsdl:service>
     <wsdl:portType name="PortType_GetAllUsers">
