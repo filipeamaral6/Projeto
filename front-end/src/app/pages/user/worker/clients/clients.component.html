@@ -1,6 +1,6 @@
-<div class="row col-md-8" style="padding-left: 15px;">
+<div class="row col-md-10" style="padding-left: 15px;">
   <div class="card col-md-4" style="margin-right: 15px;">
-    <input type="text" class="form-control" name="searchString" placeholder="Type to search by account number..."
+    <input type="text" class="form-control" name="searchString" placeholder="Pesquisar por nome..."
       [(ngModel)]="searchString" style="border-width: 0; padding: 15px;" />
   </div>
   <div class="card col-md-2">
@@ -34,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let client of clients | filter: 'accountNumber':searchString"
+          <tr *ngFor="let client of clients | filter: 'fullName':searchString"
             (click)="openModal(clientDetailsModal, client)">
             <td>
               {{ client.fullName }}

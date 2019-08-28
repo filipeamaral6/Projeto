@@ -1,6 +1,6 @@
-<div class="row col-md-8" style="padding-left: 15px;">
-    <div class="card col-md-4" style="margin-right: 15px;">
-        <input type="text" class="form-control" name="searchString" placeholder="Type to search by account number..."
+<div class="row col-md-10" style="padding-left: 15px;">
+    <div class="card col-md-6" style="margin-right: 15px;">
+        <input type="text" class="form-control" name="searchString" placeholder="Pesquisar por número de conta..."
             [(ngModel)]="searchString" style="border-width: 0; padding: 15px;" />
     </div>
     <div class="card col-md-2">
@@ -149,11 +149,11 @@
                 <h6>Titulares da conta</h6>
                 <div>
                     <span>
-                        <a class="btn btn-primary" (click)="filterTransaction = null">Todos os Movimentos</a>
-                        <a class="btn btn-primary" (click)="filterTransaction = 'Depósito'">Depósitos</a>
-                        <a class="btn btn-primary" (click)="filterTransaction = 'Levantamento'">Levantamentos</a>
-                        <a class="btn btn-primary" (click)="filterTransaction = 'Transferência'">Transferências</a>
-                        <a class="btn btn-primary" (click)="filterTransaction = 'Pagamento'">Pagamentos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = null" [ngStyle]="filterTransaction === null ? { 'background-color': 'black', 'color': 'white' }: null">Todos os Movimentos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'Depósito'" [ngStyle]="filterTransaction === 'Depósito' ? { 'background-color': 'black', 'color': 'white' }: null">Depósitos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'Levantamento'" [ngStyle]="filterTransaction === 'Levantamento' ? { 'background-color': 'black', 'color': 'white' }: null">Levantamentos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'Transferência'" [ngStyle]="filterTransaction === 'Transferência' ? { 'background-color': 'black', 'color': 'white' }: null">Transferências</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'Pagamento'" [ngStyle]="filterTransaction === 'Pagamento' ? { 'background-color': 'black', 'color': 'white' }: null">Pagamentos</a>
                     </span>
                 </div>
                 <hr>

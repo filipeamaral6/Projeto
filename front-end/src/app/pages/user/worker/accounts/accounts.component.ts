@@ -204,6 +204,7 @@ export class AccountsComponent implements OnInit {
       console.log(transactions);
       this.transactionList = transactions;
       this.openTab = 'transactions';
+      this.filterTransaction = null;
     }, error => {
       this.alertService.error(error.error.message);
     });

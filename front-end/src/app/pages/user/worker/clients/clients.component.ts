@@ -74,15 +74,35 @@ export class ClientsComponent implements OnInit {
     private alertService: AlertService, private employeeService: EmployeeService) { }
 
   ngOnInit() {
-    this.fetchClients();
+    this.fetchClients('ALL');
     this.role = this.authenticationService.currentUser.role;
   }
 
-  fetchClients() {
-    this.clientService.getAll().pipe(first()).subscribe(clients => {
-      console.log(clients);
-      this.clients = clients;
-    });
+  fetchClients(value: string) {
+    this.clients = [];
+    if (value === 'ACTIVE') {
+      this.clientService.getAll().pipe(first()).subscribe(clients => {
+        clients.forEach(client => {
+          if (client.status === 'ACTIVE') {
+            this.clients.push(client);
+          }
+        });
+      });
+    } else if (value === 'INACTIVE') {
+      this.clientService.getAll().pipe(first()).subscribe(clients => {
+        clients.forEach(client => {
+          if (client.status === 'INACTIVE') {
+            this.clients.push(client);
+          }
+        });
+      });
+    } else {
+      this.clientService.getAll().pipe(first()).subscribe(clients => {
+        console.log(clients);
+        this.clients = clients;
+      });
+    }
+    console.log(this.clients);
   }
 
   addClient(form: NgForm) {
@@ -110,7 +130,7 @@ export class ClientsComponent implements OnInit {
               this.closeModal();
               const message = JSON.parse(JSON.stringify(response)).message;
               this.alertService.success(JSON.stringify(message));
-              this.fetchClients();
+              this.fetchClients('ALL');
             }, error => {
               this.showErrorAlert(error);
             }
@@ -121,7 +141,7 @@ export class ClientsComponent implements OnInit {
                 this.closeModal();
                 const message = JSON.parse(JSON.stringify(response)).message;
                 this.alertService.success(JSON.stringify(message));
-                this.fetchClients();
+                this.fetchClients('ALL');
               });
           }
         });
@@ -140,7 +160,7 @@ export class ClientsComponent implements OnInit {
 
     this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
       console.log(response);
-      this.fetchClients();
+      this.fetchClients('ALL');
       this.closeModal();
 
       const message = JSON.parse(JSON.stringify(response)).message;
@@ -201,7 +221,7 @@ export class ClientsComponent implements OnInit {
 
       this.closeModal();
 
-      this.fetchClients();
+      this.fetchClients('ALL');
     }
   }
 
@@ -229,7 +249,7 @@ export class ClientsComponent implements OnInit {
   closeModal() {
     this.editMode = false;
     this.editButtonLabel = 'Editar Dados';
-    this.fetchClients();
+    this.fetchClients('ALL');
   }
 
   private randomString(characters: string, length: number) {
