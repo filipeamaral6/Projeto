@@ -15,6 +15,7 @@ import { AccountsComponent } from 'app/pages/user/worker/accounts/accounts.compo
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 import { EmployeesComponent } from 'app/pages/user/worker/employees/employees.component';
 import { FilterPipe } from 'app/shared/filter.pipe';
+import { WithdrawComponent } from 'app/pages/user/worker/withdraw/withdraw.component';
 
 
 
@@ -34,6 +35,7 @@ import { FilterPipe } from 'app/shared/filter.pipe';
     TransferComponent,
     AccountsComponent,
     EmployeesComponent,
+    WithdrawComponent,
     FilterPipe
   ]
 })

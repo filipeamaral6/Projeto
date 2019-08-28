@@ -7,11 +7,13 @@ import { AccountsComponent } from 'app/pages/user/worker/accounts/accounts.compo
 import { EmployeesComponent } from 'app/pages/user/worker/employees/employees.component';
 import { EmployeeGuard } from 'app/guards/employee.guard';
 import { AdminGuard } from 'app/guards/admin.guard';
+import { WithdrawComponent } from 'app/pages/user/worker/withdraw/withdraw.component';
 
 
 export const WorkerLayoutRoutes: Routes = [
   { path: 'clients', component: ClientsComponent, canActivate: [EmployeeGuard] },
   { path: 'deposit', component: DepositComponent, canActivate: [EmployeeGuard] },
+  { path: 'withdraw', component: WithdrawComponent, canActivate: [EmployeeGuard] },
   { path: 'transfer', component: TransferComponent, canActivate: [EmployeeGuard] },
   { path: 'payments', component: PaymentsComponent, canActivate: [EmployeeGuard] },
   { path: 'accounts', component: AccountsComponent, canActivate: [EmployeeGuard] },

@@ -124,10 +124,15 @@
           <input type="text" class="form-control" value="{{selectedClient.phoneNumber}}" [disabled]="!editMode"
             [(ngModel)]="selectedClient.phoneNumber" name="phoneNumber">
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-2">
+          <label for="prefix">Prefixo</label>
+          <input type="text" class="form-control" value="{{ prefix }}" [(ngModel)]="prefix" name="prefix"
+            [disabled]="!editMode">
+        </div>
+        <div class="form-group col-md-3">
           <label for="mobileNumber">Telemóvel</label>
-          <input type="text" class="form-control" value="{{selectedClient.mobileNumber}}" [disabled]="!editMode"
-            [(ngModel)]="selectedClient.mobileNumber" name="mobileNumber">
+          <input type="text" class="form-control" value="{{ mobileNumber }}" [disabled]="!editMode"
+            [(ngModel)]="mobileNumber" name="mobileNumber">
         </div>
       </div>
       <hr>
@@ -217,9 +222,14 @@
           <label for="phoneNumber">Telefone</label>
           <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="newClient.phoneNumber">
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-2">
+          <label for="prefix">Prefixo</label>
+          <input type="text" class="form-control" value="{{ prefix }}" [(ngModel)]="prefix" name="prefix">
+        </div>
+        <div class="form-group col-md-3">
           <label for="mobileNumber">Telemóvel</label>
-          <input type="text" class="form-control" name="mobileNumber" [(ngModel)]="newClient.mobileNumber">
+          <input type="text" class="form-control" value="{{ mobileNumber }}" [(ngModel)]="mobileNumber"
+            name="mobileNumber">
         </div>
       </div>
       <hr>
@@ -271,7 +281,7 @@
         </div>
       </div>
       <div class="row col-md-12">
-        
+
       </div>
       <hr>
       <div class="form-group">

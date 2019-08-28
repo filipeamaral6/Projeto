@@ -42,9 +42,11 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 
 			if (!getUsers.getInputUsers().isEmpty()) {
 				for (InputUsers inputUser : getUsers.getInputUsers()) {
-					User user = new User(Long.parseLong(inputUser.getId()), inputUser.getUsername(), inputUser.getPassword(), inputUser.getEmail(),
-							inputUser.getRole());
-					users.add(user);
+					if(inputUser.getStatus().equals("ACTIVE")) {
+						User user = new User(Long.parseLong(inputUser.getId()), inputUser.getUsername(), inputUser.getPassword(), inputUser.getEmail(),
+								inputUser.getRole());
+						users.add(user);
+					}
 				}
 			}
 

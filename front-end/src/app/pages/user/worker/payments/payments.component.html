@@ -4,7 +4,7 @@
             [(ngModel)]="searchString" style="border-width: 0; padding: 15px;" />
     </div>
     <div class="card col-md-2">
-        <select class="form-control" value="ALL" name="status" #f (change)="fetchClients()"
+        <select class="form-control" value="ALL" name="status" #f (change)="fetchClients(f.value)"
             style="border-width: 0px; margin: auto;">
             <ng-container *ngFor="let status of statusArray">
                 <option [value]="status">{{ status }}</option>

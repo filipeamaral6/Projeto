@@ -52,7 +52,7 @@ export class MovementsComponent implements OnInit {
     this.selectedAccount = account;
     this.transactionService.getAllbyAccountIban(this.selectedAccount.iban).pipe(first()).subscribe( transactions => {
       transactions.forEach(transaction => {
-        transaction.createdAt = transaction.createdAt.substring(0, 10);
+        //transaction.createdAt = transaction.createdAt.toString().substring(0, 10);
         this.transactionList.push(transaction);
       });
     });
