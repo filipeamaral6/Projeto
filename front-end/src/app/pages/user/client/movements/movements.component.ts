@@ -71,16 +71,16 @@ export class MovementsComponent implements OnInit {
             transaction.hour = dateAux[1];
 
             this.transactionService.getTransactionById(transaction.id).pipe(first()).subscribe( array => {
-              if ( transaction.type === 'Pagamento' ) {
+              if ( transaction.type === 'PAGAMENTO' ) {
                 this.paymentList.push(this.transactionService.bindingPayment(array[1], transaction));
               }
-              if ( transaction.type === 'Transferência' ) {
+              if ( transaction.type === 'TRANSFERÊNCIA' ) {
                 this.transferList.push(this.transactionService.bindingTransfer(array[3], transaction));
               }
-              if ( transaction.type === 'Depósito' ) {
+              if ( transaction.type === 'DEPÓSITO' ) {
                 this.depositList.push(this.transactionService.bindingDeposit(array[2], transaction));
               }
-              if ( transaction.type === 'Levantamento' ) {
+              if ( transaction.type === 'LEVANTAMENTO' ) {
                 this.withdrawList.push(this.transactionService.bindingWithdraw(array[4], transaction));
               }
             });
@@ -94,45 +94,45 @@ export class MovementsComponent implements OnInit {
 
   openModal(content: any, transaction: Transaction) {
     this.selectedTransaction = this.selectTransaction( transaction );
-    console.log(this.selectTransaction(transaction));
 
     this.modalService.open(content, { size: 'lg' });
   }
 
-  selectTransaction( transaction: Transaction) {
-    if (transaction.type === 'Pagamento') {
+  selectTransaction( transaction: Transaction ) {
+    let temp: any;
+    if (transaction.type === 'PAGAMENTO') {
       this.paymentList.forEach(payment => {
 
         if ( payment.id === transaction.id ) {
-          return payment;
+          temp = payment;
         }
       });
     }
-    if (transaction.type === 'Levantamento') {
+    if (transaction.type === 'LEVANTAMENTO') {
       this.withdrawList.forEach(withdraw => {
         console.log(withdraw);
         if (withdraw.id === transaction.id ) {
-          return withdraw;
+          temp = withdraw;
         }
       });
     }
-    if (transaction.type === 'Transferência') {
+    if (transaction.type === 'TRANSFERÊNCIA') {
       this.transferList.forEach(transfer => {
         console.log(transfer);
         if ( transfer.id === transaction.id ) {
-          return transfer;
+          temp = transfer;
         }
       });
     }
-    if (transaction.type === 'Depósito') {
+    if (transaction.type === 'DEPÓSITO') {
       this.depositList.forEach(deposit => {
         console.log(deposit);
         if ( deposit.id === transaction.id ) {
-          return deposit;
+          temp = deposit;
         }
       });
     }
-    return null;
+    return temp;
   }
 
 }
