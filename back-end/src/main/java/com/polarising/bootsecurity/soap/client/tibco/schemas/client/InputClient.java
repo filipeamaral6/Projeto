@@ -62,6 +62,7 @@ public class InputClient {
     @XmlAttribute(name = "birthDate")
     protected String birthDate;
     
+    @Size(min = 8, max = 8, message="Número de caracteres obrigatórios (8)")
     @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "client_cc")
     protected String clientCc;
@@ -94,7 +95,7 @@ public class InputClient {
     @XmlAttribute(name = "login_password")
     protected String loginPassword;
     
-    @Size(min = 12, max = 12, message="Número de caracteres obrigatórios (9)")
+    @Size(min = 12, max = 12, message="Número de caracteres obrigatórios (12)")
     @XmlAttribute(name = "mobile_number")
     protected String mobileNumber;
     
@@ -111,7 +112,7 @@ public class InputClient {
     @XmlAttribute(name = "notification")
     protected String notification;
     
-    @Size(min = 9, max = 9, message="Número de caracteres obrigatórios (9)")
+    @Size(min = 12, max = 12, message="Número de caracteres obrigatórios (12)")
     @XmlAttribute(name = "phone_number")
     protected String phoneNumber;
     
