@@ -37,9 +37,7 @@ INSERT INTO account_client(account_id, user_id) VALUES('5', '3');
 INSERT INTO account_client(account_id, user_id) VALUES('6', '3');
 
 INSERT INTO transaction (id, value, account_iban, created_at, user_id, type, description, account_id) VALUES('1', '120', 'PT50400065651111111111199', current_timestamp(), '1', 'PAGAMENTO', 'Pagamento da conta do gás/luz', '1');
-INSERT INTO payment(id, entity, reference, transaction_id) VALUES('1', '12312', '987654321', '1');
 INSERT INTO transaction (id, value, account_iban, created_at, user_id, type, description, account_id) VALUES('2', '50', 'PT50400065651111111111199', current_timestamp(), '1', 'PAGAMENTO', 'Carregamento Pokerstars', '1');
-INSERT INTO payment(id, entity, reference, transaction_id) VALUES('2', '18765', '123456789', '2');
 INSERT INTO transaction (id, value, account_iban, created_at, user_id, type, description, account_id) VALUES('3', '300', 'PT50400065651111111111199', current_timestamp(), '1', 'DEPÓSITO', 'Depósito despesas', '1');
 INSERT INTO deposit (id, employee_id, transaction_id, depositer_name, depositer_cc_number) VALUES('1', '1', '3', 'Filipe Amaral', '11111111');
 INSERT INTO transaction (id, value, account_iban, created_at, user_id, type, description, account_id) VALUES('4', '150', 'PT50400065651111111111199', current_timestamp(), '1', 'TRANSFERÊNCIA', 'Reforço conta poupança', '1');

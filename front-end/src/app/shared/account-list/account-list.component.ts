@@ -7,6 +7,8 @@ import { TransferComponent } from 'app/pages/user/client/transfer/transfer.compo
 import { AuthenticationService } from 'app/services/authentication.service';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'app/services/transport/account.service';
+import { AlertService } from '../alerts/alert.service';
+
 
 
 @Component({
@@ -26,6 +28,7 @@ export class AccountListComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private accountService: AccountService,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -98,6 +101,8 @@ export class AccountListComponent implements OnInit {
 
     this.accountService.getAccountByClientId(this.authenticationService.currentUser.id).pipe(first()).subscribe( accounts => {
       this.accountList = accounts;
+    }, error => {
+      this.alertService.error(error);
     });
   }
 

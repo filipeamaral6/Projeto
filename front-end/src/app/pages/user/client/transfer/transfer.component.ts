@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { TransactionService } from 'app/services/transport/transaction.service';
 import { first } from 'rxjs/operators';
+import { AlertService } from 'app/shared/alerts/alert.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -24,6 +25,7 @@ export class TransferComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private transactionService: TransactionService,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -57,6 +59,8 @@ export class TransferComponent implements OnInit {
 
     this.transactionService.addTransfer(this.transferForm.value).pipe(first()).subscribe( response => {
       console.log(response);
+    }, error => {
+      this.alertService.error(error);
     });
     this.submitted = false;
     this.cancelFunction()

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { TransactionService } from 'app/services/transport/transaction.service';
 import { first } from 'rxjs/operators';
+import { AlertService } from 'app/shared/alerts/alert.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -25,6 +26,7 @@ export class PaymentsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private transactionService: TransactionService,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -58,13 +60,15 @@ export class PaymentsComponent implements OnInit {
 
     // if ( this.paymentForm.invalid ) {
     //   console.log(1);
-    //   this.ngOnInit();
+    //   this.ngOnInikst();
     //   return;
     // }
 
 
     this.transactionService.addPayment(this.paymentForm.value).pipe(first()).subscribe( response => {
       console.log(response);
+    }, error => {
+      this.alertService.error(error.error.field);
     });
     this.submitted = false;
 
