@@ -115,7 +115,7 @@
     <pd:activity name="JDBC Query">
         <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
         <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-        <pd:x>302</pd:x>
+        <pd:x>303</pd:x>
         <pd:y>93</pd:y>
         <config>
             <timeout>10</timeout>
@@ -123,7 +123,7 @@
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-            <statement>SELECT user.email, user.password,  user.username, user.role, user.status, client.* FROM user, account_client, client WHERE user.id=account_client.user_id AND user.id=client.user_id AND account_id=?</statement>
+            <statement>SELECT user.email, user.password,  user.username, user.role, client.* FROM user, account_client, client WHERE user.id=account_client.user_id AND user.id=client.user_id AND account_id=?</statement>
             <Prepared_Param_DataType>
                 <parameter>
                     <parameterName>account_id</parameterName>
@@ -145,10 +145,6 @@
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>role</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
@@ -197,6 +193,10 @@
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>nationality</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>

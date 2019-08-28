@@ -1,23 +1,11 @@
 <div class="row col-md-8" style="padding-left: 15px;">
   <div class="card col-md-4" style="margin-right: 15px;">
-    <input
-      type="text"
-      class="form-control"
-      name="searchString"
-      placeholder="Type to search by account number..."
-      [(ngModel)]="searchString"
-      style="border-width: 0; padding: 15px;"
-    />
+    <input type="text" class="form-control" name="searchString" placeholder="Type to search by account number..."
+      [(ngModel)]="searchString" style="border-width: 0; padding: 15px;" />
   </div>
   <div class="card col-md-2">
-    <select
-      class="form-control"
-      value="ALL"
-      name="status"
-      #f
-      (change)="fetchClients(f.value)"
-      style="border-width: 0px; margin: auto;"
-    >
+    <select class="form-control" value="ALL" name="status" #f (change)="fetchClients(f.value)"
+      style="border-width: 0px; margin: auto;">
       <ng-container *ngFor="let status of statusArray">
         <option [value]="status">{{ status }}</option>
       </ng-container>
@@ -46,7 +34,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let client of clients | filter: 'accountNumber':searchString" (click)="openModal(clientDetailsModal, client)">
+          <tr *ngFor="let client of clients | filter: 'accountNumber':searchString"
+            (click)="openModal(clientDetailsModal, client)">
             <td>
               {{ client.fullName }}
             </td>
@@ -270,8 +259,6 @@
           <div *ngIf="username.touched && username.hasError('required')" class="invalid-feedback">Username inválido
           </div>
         </div>
-      </div>
-      <div class="row col-md-12">
         <div class="form-group" style="padding-right: 4.9%">
           <label for="password">Password*</label>
           <input type="password" class="form-control" name="password" [(ngModel)]="newClient.loginPassword"
@@ -282,42 +269,58 @@
           <button type="button" class="btn btn-secondary" (click)="generatePassword('password')">Gerar</button> |
           <button type="button" class="btn btn-success">Imprimir</button>
         </div>
-        <div class="form-group">
-          <label for="transactionPassword">Password para transações</label>
-          <input type="password" class="form-control" name="transactionPassword"
-            [(ngModel)]="newClient.transactionPassword"
-            [ngClass]="{ 'is-invalid': transactionPassword.touched && transactionPassword.errors }"
-            #transactionPassword="ngModel" required>
-          <div *ngIf="transactionPassword.touched && transactionPassword.hasError('required')" class="invalid-feedback">
-            Password para transações inválida
-          </div>
-          <button type="button" class="btn btn-secondary"
-            (click)="generatePassword('transactionPassword')">Gerar</button> |
-          <button type="button" class="btn btn-success">Imprimir</button>
-        </div>
+      </div>
+      <div class="row col-md-12">
+        
       </div>
       <hr>
       <div class="form-group">
-        <label for="accountType">Tipo de conta*</label>
+        <label for="openAccount">Abrir nova conta?*</label>
         <div class="row col-md-12">
           <div class="custom-control custom-radio" style="padding-right: 4.9%">
-            <input type="radio" class="custom-control-input" id="currentAccount" name="accountType" value="CURRENT"
-              [(ngModel)]="newAccount.type">
-            <label class="custom-control-label" for="currentAccount">Conta à ordem</label>
+            <input type="radio" class="custom-control-input" id="yes" name="yes" value="true" [(ngModel)]="openAccount">
+            <label class="custom-control-label" for="yes">Sim</label>
           </div>
           <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" id="savingsAccount" name="accountType" value="SAVINGS"
-              [(ngModel)]="newAccount.type">
-            <label class="custom-control-label" for="savingsAccount">Conta poupança</label>
+            <input type="radio" class="custom-control-input" id="no" name="no" value="false" [(ngModel)]="openAccount">
+            <label class="custom-control-label" for="no">No</label>
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="iban">Saldo inicial(€)*</label>
-        <input type="number" class="form-control" name="balance" [(ngModel)]="newAccount.balance"
-          [ngClass]="{ 'is-invalid': balance.touched && balance.errors }" #balance="ngModel" required [min]=500>
-        <div *ngIf="balance.touched && balance.hasError('required')" class="invalid-feedback">O saldo tem de ser maior
-          ou igual que 500€</div>
+      <hr>
+      <div *ngIf="openAccount === 'true'">
+        <div class="form-group">
+          <label for="accountType">Tipo de conta*</label>
+          <div class="row col-md-12">
+            <div class="custom-control custom-radio" style="padding-right: 4.9%">
+              <input type="radio" class="custom-control-input" id="currentAccount" name="accountType" value="CURRENT"
+                [(ngModel)]="newAccount.type">
+              <label class="custom-control-label" for="currentAccount">Conta à ordem</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="savingsAccount" name="accountType" value="SAVINGS"
+                [(ngModel)]="newAccount.type">
+              <label class="custom-control-label" for="savingsAccount">Conta poupança</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="iban">Saldo inicial(€)*</label>
+          <input type="number" class="form-control" name="balance" [(ngModel)]="newAccount.balance"
+            [ngClass]="{ 'is-invalid': balance.touched && balance.errors }" #balance="ngModel" required [min]=500>
+          <div *ngIf="balance.touched && balance.hasError('required')" class="invalid-feedback">O saldo tem de ser maior
+            ou igual que 500€</div>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="openAccount === 'false'">
+        <label for="selectAccount">Selecionar conta</label>
+        <select name="account" class="form-control" [(ngModel)]="selectedAccount"
+          [ngClass]="{ 'is-invalid': account.touched && account.errors }" #account="ngModel" required>
+          <option *ngFor="let account of accounts" [ngValue]="account">Número: {{ account.accountNumber }}
+            | IBAN: {{ account.iban }}</option>
+        </select>
+        <div *ngIf="account.touched && account.hasError('required')" class="invalid-feedback">Selecione uma
+          conta!</div>
       </div>
 
       <button type="button" class="btn btn-success">Imprimir dados de conta</button>

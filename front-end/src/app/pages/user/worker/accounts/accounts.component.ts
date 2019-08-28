@@ -9,6 +9,8 @@ import { ClientService } from 'app/services/transport/client.service';
 import { AlertService } from 'app/shared/alerts';
 import { EmployeeService } from 'app/services/transport/employee.service';
 import { AuthenticationService } from 'app/services/authentication.service';
+import { Transaction } from 'app/shared/models/Transaction';
+import { TransactionService } from 'app/services/transport/transaction.service';
 
 @Component({
   selector: 'app-accounts',
@@ -21,6 +23,9 @@ export class AccountsComponent implements OnInit {
     'ACTIVE',
     'INACTIVE'
   ];
+  openTab: string;
+  transactionList: Transaction[];
+  filterTransaction: string;
   searchString: string;
   accounts: Account[];
   clients: Client[];
@@ -34,7 +39,8 @@ export class AccountsComponent implements OnInit {
   dropdownSettings = {};
 
   constructor(private modalService: NgbModal, private accountService: AccountService, private clientService: ClientService,
-    private alertService: AlertService, private employeeService: EmployeeService, private authenticationService: AuthenticationService) { }
+    private alertService: AlertService, private employeeService: EmployeeService, private authenticationService: AuthenticationService,
+    private transactionService: TransactionService) { }
 
   ngOnInit() {
     this.editMode = false;
@@ -82,10 +88,12 @@ export class AccountsComponent implements OnInit {
   }
 
   updateAccount() {
-    for(let client of this.newHolders) {
-      this.accountService.addClientToAccount(+client.item_id, this.selectedAccount.id).pipe(first()).subscribe(response => {
+    for (let elem of this.newHolders) {
+      this.accountService.addClientToAccount(+elem.item_id, this.selectedAccount.id).pipe(first()).subscribe(response => {
         this.alertService.success(JSON.parse(JSON.stringify(response)).message);
-        this.accountClients.push(client);
+        this.fetchAccountClients(this.selectedAccount.id);
+      }, error => {
+        this.alertService.error(error.error.message);
       });
     }
   }
@@ -93,13 +101,7 @@ export class AccountsComponent implements OnInit {
   removeClientFromAccount(clientId: number, modal: ModalEvent, account: Account) {
     this.accountService.deleteClientFromAccount(clientId, this.selectedAccount.id).pipe(first()).subscribe(response => {
       this.alertService.success(JSON.parse(JSON.stringify(response)).message);
-      for (let client of this.accountClients) {
-        // tslint:disable-next-line: triple-equals
-        if (client.id == clientId) {
-          this.accountClients.splice(this.accountClients.indexOf(client), 1);
-          break;
-        }
-      }
+      this.fetchAccountClients(this.selectedAccount.id);
     }, error => {
       this.alertService.error(error.message);
     });
@@ -126,11 +128,9 @@ export class AccountsComponent implements OnInit {
   }
 
   openAccountDetailsModal(content: ModalEvent, account: Account) {
+    this.newHolders = [];
     this.selectedAccount = account;
-    this.accountService.getAccountClients(account.id).pipe(first()).subscribe(clients => {
-      this.accountClients = clients;
-      console.log(this.accountClients);
-    });
+    this.fetchAccountClients(account.id);
 
     this.closeModal();
     this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
@@ -157,6 +157,12 @@ export class AccountsComponent implements OnInit {
     }
   }
 
+  fetchAccountClients(accountId: number) {
+    this.accountService.getAccountClients(accountId).pipe(first()).subscribe(clients => {
+      this.accountClients = clients;
+    });
+  }
+
   fetchAccounts(value: string) {
     this.accounts = [];
     if (value === 'ACTIVE') {
@@ -177,6 +183,7 @@ export class AccountsComponent implements OnInit {
       });
     } else {
       this.accountService.getAll().pipe(first()).subscribe(accounts => {
+        console.log(accounts);
         this.accounts = accounts;
       });
     }
@@ -192,7 +199,18 @@ export class AccountsComponent implements OnInit {
     });
   }
 
+  fetchTransactions() {
+    this.transactionService.getAllbyAccountIban(this.selectedAccount.iban).pipe(first()).subscribe(transactions => {
+      console.log(transactions);
+      this.transactionList = transactions;
+      this.openTab = 'transactions';
+    }, error => {
+      this.alertService.error(error.error.message);
+    });
+  }
+
   closeModal() {
+    this.openTab = '';
     this.editMode = false;
     this.editButtonLabel = 'Editar Dados';
     this.fetchClients();

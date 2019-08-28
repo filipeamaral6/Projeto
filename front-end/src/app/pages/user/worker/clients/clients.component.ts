@@ -21,11 +21,14 @@ export class ClientsComponent implements OnInit {
     'ACTIVE',
     'INACTIVE'
   ];
+  openAccount: string;
   searchString: string;
   clients: Client[];
   selectedClient: Client;
   newClient: Client;
+  accounts: Account[];
   newAccount: Account;
+  selectedAccount: Account;
   verifyPassword: string;
   editMode = false;
   role: string;
@@ -84,6 +87,7 @@ export class ClientsComponent implements OnInit {
 
   addClient(form: NgForm) {
     console.log(this.newClient);
+    this.newClient.transactionPassword = 'test';
     const newClientString = JSON.stringify(this.newClient);
 
     this.clientService.addClient(newClientString).pipe(first()).subscribe(response => {
@@ -101,15 +105,25 @@ export class ClientsComponent implements OnInit {
         this.clientService.getByClientCC(this.newClient.clientCc).pipe(first()).subscribe(client => {
           this.newAccount.userId = client[0].userId;
 
-          this.accountService.addAccount(JSON.stringify(this.newAccount)).pipe(first()).subscribe(responseAccount => {
-            this.closeModal();
-            const message = JSON.parse(JSON.stringify(response)).message;
-            this.alertService.success(JSON.stringify(message));
-            this.fetchClients();
-          }, error => {
-            this.showErrorAlert(error);
+          if (this.openAccount === 'true') {
+            this.accountService.addAccount(JSON.stringify(this.newAccount)).pipe(first()).subscribe(responseAccount => {
+              this.closeModal();
+              const message = JSON.parse(JSON.stringify(response)).message;
+              this.alertService.success(JSON.stringify(message));
+              this.fetchClients();
+            }, error => {
+              this.showErrorAlert(error);
+            }
+            );
+          } else {
+            this.accountService.addClientToAccount(client[0].userId, this.selectedAccount.id).pipe(first()).
+              subscribe(responseAddToAccount => {
+                this.closeModal();
+                const message = JSON.parse(JSON.stringify(response)).message;
+                this.alertService.success(JSON.stringify(message));
+                this.fetchClients();
+              });
           }
-          );
         });
       }, error => {
         this.showErrorAlert(error);
@@ -117,6 +131,7 @@ export class ClientsComponent implements OnInit {
     }, error => {
       this.showErrorAlert(error);
     });
+    this.closeModal();
   }
 
   updateClient(form: NgForm) {
@@ -165,8 +180,13 @@ export class ClientsComponent implements OnInit {
         this.selectedClient.birthDate = formattedDate[0];
       }
     } else {
+      this.openAccount = '';
       this.newClient = new Client();
       this.newAccount = new Account();
+      this.selectedAccount = null;
+      this.accountService.getAll().pipe(first()).subscribe(accounts => {
+        this.accounts = accounts;
+      });
     }
     this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
   }
