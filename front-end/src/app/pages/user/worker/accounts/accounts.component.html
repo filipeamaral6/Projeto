@@ -1,29 +1,17 @@
-<div class="row col-md-8" style="padding-left: 15px;">
-    <div class="card col-md-4" style="margin-right: 15px;">
-      <input
-        type="text"
-        class="form-control"
-        name="searchString"
-        placeholder="Type to search by account number..."
-        [(ngModel)]="searchString"
-        style="border-width: 0; padding: 15px;"
-      />
+<div class="row col-md-10" style="padding-left: 15px;">
+    <div class="card col-md-6" style="margin-right: 15px;">
+        <input type="text" class="form-control" name="searchString" placeholder="Pesquisar por número de conta..."
+            [(ngModel)]="searchString" style="border-width: 0; padding: 15px;" />
     </div>
     <div class="card col-md-2">
-      <select
-        class="form-control"
-        value="ALL"
-        name="status"
-        #f
-        (change)="fetchAccounts(f.value)"
-        style="border-width: 0px; margin: auto;"
-      >
-        <ng-container *ngFor="let status of statusArray">
-          <option [value]="status">{{ status }}</option>
-        </ng-container>
-      </select>
+        <select class="form-control" value="ALL" name="status" #f (change)="fetchAccounts(f.value)"
+            style="border-width: 0px; margin: auto;">
+            <ng-container *ngFor="let status of statusArray">
+                <option [value]="status">{{ status }}</option>
+            </ng-container>
+        </select>
     </div>
-  </div>
+</div>
 
 <div class="card col-md-10">
     <div class="card-body">
@@ -98,58 +86,106 @@
                 </div>
             </div>
             <hr>
-            <h6>Titulares da conta</h6>
-            <button type="button" class="btn btn-secondary" (click)="toggleEditMode()">{{ editButtonLabel }}</button>
-            <br>
-            <span *ngIf="editMode" class="col-md-7">
-                <ng-multiselect-dropdown-angular7 [placeholder]="'Selecionar Titulares'" [data]="dropdownList"
-                    [(ngModel)]="newHolders" [settings]="dropdownSettings" name="holders">
-                </ng-multiselect-dropdown-angular7>
-                <button type="submit" class="btn btn-info">Adicionar</button>
-            </span>
-            <table class="table">
-                <thead class=" text-primary">
-                    <tr>
-                        <th *ngIf="editMode">
-                            Remover
-                        </th>
-                        <th>
-                            Nome
-                        </th>
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            NIF
-                        </th>
-                        <th class="text-right">
-                            CC
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let client of accountClients">
+            <button class="btn btn-primary"
+                (click)="openTab = 'holders'; editMode = false; editButtonLabel = 'Editar Titulares'">Titulares</button>
+            <button class="btn btn-primary" (click)="fetchTransactions();">Transações</button>
+            <div *ngIf="openTab === 'holders'">
+                <h6>Titulares da conta</h6>
+                <button type="button" class="btn btn-secondary"
+                    (click)="toggleEditMode()">{{ editButtonLabel }}</button>
+                <br>
+                <span *ngIf="editMode" class="col-md-7">
+                    <ng-multiselect-dropdown-angular7 [placeholder]="'Selecionar Titulares'" [data]="dropdownList"
+                        [(ngModel)]="newHolders" [settings]="dropdownSettings" name="holders">
+                    </ng-multiselect-dropdown-angular7>
+                    <button type="submit" class="btn btn-info">Adicionar</button>
+                </span>
+                <table class="table">
+                    <thead class=" text-primary">
+                        <tr>
+                            <th *ngIf="editMode">
+                                Remover
+                            </th>
+                            <th>
+                                Nome
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                NIF
+                            </th>
+                            <th class="text-right">
+                                CC
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let client of accountClients">
 
-                        <td *ngIf="editMode">
-                            <button type="button" class="btn btn-danger" (click)="removeClientFromAccount(client.id, addAccountModal, selectedAccount)">
-                                <span class="nc-icon nc-simple-remove"></span>
-                            </button>
-                        </td>
-                        <td>
-                            {{ client.fullName }}
-                        </td>
-                        <td>
-                            {{ client.email }}
-                        </td>
-                        <td>
-                            {{ client.nif }}
-                        </td>
-                        <td class="text-right">
-                            {{ client.clientCc }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            <td *ngIf="editMode">
+                                <button type="button" class="btn btn-danger"
+                                    (click)="removeClientFromAccount(client.userId, addAccountModal, selectedAccount)">
+                                    <span class="nc-icon nc-simple-remove"></span>
+                                </button>
+                            </td>
+                            <td>
+                                {{ client.fullName }}
+                            </td>
+                            <td>
+                                {{ client.email }}
+                            </td>
+                            <td>
+                                {{ client.nif }}
+                            </td>
+                            <td class="text-right">
+                                {{ client.clientCc }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="openTab === 'transactions'">
+                <h6>Titulares da conta</h6>
+                <div>
+                    <span>
+                        <a class="btn btn-primary" (click)="filterTransaction = null" [ngStyle]="filterTransaction === null ? { 'background-color': 'black', 'color': 'white' }: null">Todos os Movimentos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'Depósito'" [ngStyle]="filterTransaction === 'Depósito' ? { 'background-color': 'black', 'color': 'white' }: null">Depósitos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'Levantamento'" [ngStyle]="filterTransaction === 'Levantamento' ? { 'background-color': 'black', 'color': 'white' }: null">Levantamentos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'Transferência'" [ngStyle]="filterTransaction === 'Transferência' ? { 'background-color': 'black', 'color': 'white' }: null">Transferências</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'Pagamento'" [ngStyle]="filterTransaction === 'Pagamento' ? { 'background-color': 'black', 'color': 'white' }: null">Pagamentos</a>
+                    </span>
+                </div>
+                <hr>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <tr>
+                                <th>Data</th>
+                                <th>Conta de Origem</th>
+                                <th>Valor da transação</th>
+                                <th>Tipo de Transacção</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="filterTransaction !== null">
+                            <tr *ngFor="let transaction of transactionList">
+                                <td *ngIf="transaction.type === filterTransaction">{{ transaction.date }}</td>
+                                <td *ngIf="transaction.type === filterTransaction">{{ transaction.accountIban }}</td>
+                                <td *ngIf="transaction.type === filterTransaction">{{ transaction.value }} €</td>
+                                <td *ngIf="transaction.type === filterTransaction">{{ transaction.type }}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="filterTransaction === null">
+                            <tr *ngFor="let transaction of transactionList">
+                                <td>{{ transaction.date }}</td>
+                                <td>{{ transaction.accountIban }}</td>
+                                <td>{{ transaction.value }} €</td>
+                                <td>{{ transaction.type }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </form>
     </div>
 </ng-template>

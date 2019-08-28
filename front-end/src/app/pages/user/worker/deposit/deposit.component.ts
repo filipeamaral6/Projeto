@@ -19,6 +19,12 @@ import { Employee } from 'app/shared/models/Employee';
   styleUrls: ['./deposit.css']
 })
 export class DepositComponent implements OnInit {
+  searchString: string;
+  statusArray = [
+    'ALL',
+    'ACTIVE',
+    'INACTIVE'
+  ];
   clients: Client[];
   accounts: Account[];
   selectedClient: Client;
@@ -31,9 +37,7 @@ export class DepositComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.clientService.getAll().pipe(first()).subscribe(clients => {
-      this.clients = clients;
-    });
+    this.fetchClients('ALL');
   }
 
   depositIntoAccount(form: NgForm) {
@@ -77,4 +81,32 @@ export class DepositComponent implements OnInit {
   selectAccount(account: Account) {
     this.selectedAccount = account;
   }
+
+  fetchClients(value: string) {
+    this.clients = [];
+    if (value === 'ACTIVE') {
+      this.clientService.getAll().pipe(first()).subscribe(clients => {
+        clients.forEach(client => {
+          if (client.status === 'ACTIVE') {
+            this.clients.push(client);
+          }
+        });
+      });
+    } else if (value === 'INACTIVE') {
+      this.clientService.getAll().pipe(first()).subscribe(clients => {
+        clients.forEach(client => {
+          if (client.status === 'INACTIVE') {
+            this.clients.push(client);
+          }
+        });
+      });
+    } else {
+      this.clientService.getAll().pipe(first()).subscribe(clients => {
+        console.log(clients);
+        this.clients = clients;
+      });
+    }
+    console.log(this.clients);
+  }
 }
+

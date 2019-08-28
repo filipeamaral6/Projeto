@@ -18,6 +18,12 @@ import { Payment } from 'app/shared/models/Payment';
   styleUrls: ['./payments.css']
 })
 export class PaymentsComponent implements OnInit {
+  searchString: string;
+  statusArray = [
+    'ALL',
+    'ACTIVE',
+    'INACTIVE'
+  ];
   clients: Client[];
   selectedClient: Client;
   selectedAccount: Account;
@@ -29,9 +35,7 @@ export class PaymentsComponent implements OnInit {
     private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.clientService.getAll().pipe(first()).subscribe(clients => {
-      this.clients = clients;
-    });
+    this.fetchClients('All');
   }
 
   doPayment() {
@@ -70,5 +74,32 @@ export class PaymentsComponent implements OnInit {
       this.modalService.open(content, { size: 'lg' });
       this.payment = new Payment();
     });
+  }
+
+  fetchClients(value: string) {
+    this.clients = [];
+    if (value === 'ACTIVE') {
+      this.clientService.getAll().pipe(first()).subscribe(clients => {
+        clients.forEach(client => {
+          if (client.status === 'ACTIVE') {
+            this.clients.push(client);
+          }
+        });
+      });
+    } else if (value === 'INACTIVE') {
+      this.clientService.getAll().pipe(first()).subscribe(clients => {
+        clients.forEach(client => {
+          if (client.status === 'INACTIVE') {
+            this.clients.push(client);
+          }
+        });
+      });
+    } else {
+      this.clientService.getAll().pipe(first()).subscribe(clients => {
+        console.log(clients);
+        this.clients = clients;
+      });
+    }
+    console.log(this.clients);
   }
 }
