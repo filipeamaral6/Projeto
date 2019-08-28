@@ -94,7 +94,7 @@
 <div class="row col-sm-12" *ngIf="selectedAccount != null" style="margin-left: 5px">
     <div class="row" style="float: left; ">
         <div class="update mr-auto ml-auto">
-            <button type="submit" class="btn btn-success" (click)="onSubmit()">Efetuar Pagamento</button>
+            <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="paymentForm.invalid">Efetuar Pagamento</button>
             <button type="button" class="btn btn-secundary" (click)="resetForm()">Descartar</button>
             <button type="button" class="btn btn-danger" (click)="cancelFunction()">Cancelar</button>
         </div>

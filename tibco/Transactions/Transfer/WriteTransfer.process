@@ -37,10 +37,10 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>-1</pd:x>
+        <pd:x>-14</pd:x>
         <pd:y>4</pd:y>
-        <pd:width>1221</pd:width>
-        <pd:height>261</pd:height>
+        <pd:width>1846</pd:width>
+        <pd:height>275</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
         <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
@@ -170,7 +170,7 @@
                 <commit>false</commit>
                 <emptyStrAsNil>false</emptyStrAsNil>
                 <jdbcSharedConfig>/JDBC/JDBC Connection.sharedjdbc</jdbcSharedConfig>
-                <statement>INSERT INTO transaction ( value, account_iban, user_id, type, description) VALUES (?,?,?,?,?) </statement>
+                <statement>INSERT INTO transaction ( value, account_iban, user_id, type, description, account_id) VALUES (?,?,?,?,?,?) </statement>
                 <Prepared_Param_DataType>
                     <parameter>
                         <parameterName>value</parameterName>
@@ -191,6 +191,10 @@
                     <parameter>
                         <parameterName>description</parameterName>
                         <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>account_id</parameterName>
+                        <dataType>INTEGER</dataType>
                     </parameter>
                 </Prepared_Param_DataType>
             </config>
@@ -246,6 +250,16 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </description>
+                    <account_id>
+                        <xsl:choose>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@account_id)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@account_id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </account_id>
                 </jdbcUpdateActivityInput>
             </pd:inputBindings>
         </pd:activity>

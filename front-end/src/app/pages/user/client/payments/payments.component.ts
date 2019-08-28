@@ -50,10 +50,7 @@ export class PaymentsComponent implements OnInit {
     console.log('Submit');
     this.submitted = true;
 
-    this.paymentForm.value.type = 'Pagamento';
-    this.paymentForm.value.userId = this.authenticationService.currentUser.id;
-    this.paymentForm.value.accountIban = this.selectedAccount.iban;
-    this.paymentForm.value.accountId = this.selectedAccount.id;
+
 
     this.paymentForm.value.value = this.paymentForm.value.euros + '.' + this.paymentForm.value.cents;
 
@@ -70,7 +67,6 @@ export class PaymentsComponent implements OnInit {
       console.log(response);
     });
     this.submitted = false;
-    this.ngOnInit();
 
   }
 
@@ -92,6 +88,15 @@ export class PaymentsComponent implements OnInit {
 
   selectAccount(account: Account) {
     this.selectedAccount = account;
+    if ( account === null) {
+      this.initForm();
+    } else {
+      this.paymentForm.value.type = 'PAGAMENTO';
+      this.paymentForm.value.userId = this.authenticationService.currentUser.id;
+      this.paymentForm.value.accountIban = this.selectedAccount.iban;
+      this.paymentForm.value.accountId = this.selectedAccount.id;
+      console.log(this.paymentForm);
+    }
   }
 
   initForm() {
@@ -99,11 +104,12 @@ export class PaymentsComponent implements OnInit {
     this.isEyeOpen = false;
 
     this.paymentForm = this.formBuilder.group({
-      employeeId: ['', Validators.required],
+      employeeId: [''],
+      accountId: [''],
       userId: ['', Validators.required],
       type: ['', Validators.required],
       accountIban: ['', Validators.required],
-      value: ['', Validators.required],
+      value: [''],
       euros: ['', Validators.required],
       cents: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
       description: ['', [Validators.required, Validators.maxLength(200)]],

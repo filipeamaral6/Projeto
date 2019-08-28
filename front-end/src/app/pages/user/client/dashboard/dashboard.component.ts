@@ -34,9 +34,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private clientLayout: ClientLayoutComponent,
-    ) {
-      this.clientLayout.refreshData();
-    }
+    ) {}
 
 
 
@@ -130,10 +128,5 @@ export class DashboardComponent implements OnInit {
   selectAccount(accountId: number) {
     console.log('dashboard' + accountId);
   }
-
-  getAccountList() {
-    return this.clientLayout.getAccounts;
-  }
-
 
 }

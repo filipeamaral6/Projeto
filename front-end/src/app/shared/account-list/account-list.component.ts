@@ -72,7 +72,7 @@ export class AccountListComponent implements OnInit {
       }
       if ( ((this.component instanceof PaymentsComponent) || (this.component instanceof TransferComponent)) ) {
         this.accountList.forEach(account => {
-          if ( account.type.toLowerCase() !== 'poupança') {
+          if ( account.type !== 'POUPANÇA') {
             this.accountList.push(account);
           }
         });
@@ -85,7 +85,7 @@ export class AccountListComponent implements OnInit {
       }
       if ( this.component instanceof PaymentsComponent ) {
         this.accountList.forEach(account => {
-          if ( account.type.toLowerCase() !== 'poupança') {
+          if ( account.type !== 'POUPANÇA') {
             this.accountList.push(account);
           }
         });

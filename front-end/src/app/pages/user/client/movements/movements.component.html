@@ -6,11 +6,11 @@
   <div class="card-body">
     <div>
       <span>
-        <a class="btn btn-primary" (click)="filterTransaction = null">Todos os Movimentos</a>
-        <a class="btn btn-primary" (click)="filterTransaction = 'DEPÓSITO'">Depósitos</a>
-        <a class="btn btn-primary" (click)="filterTransaction = 'LEVANTAMENTO'">Levantamentos</a>
-        <a class="btn btn-primary" (click)="filterTransaction = 'TRANSFERÊNCIA'">Transferências</a>
-        <a class="btn btn-primary" (click)="filterTransaction = 'PAGAMENTO'">Pagamentos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = null" [ngStyle]="filterTransaction === null ? { 'background-color': 'black', 'color': 'white' }: null">Todos os Movimentos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'DEPÓSITO'" [ngStyle]="filterTransaction === 'DEPÓSITO' ? { 'background-color': 'black', 'color': 'white' }: null">Depósitos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'LEVANTAMENTO'" [ngStyle]="filterTransaction === 'LEVANTAMENTO' ? { 'background-color': 'black', 'color': 'white' }: null">Levantamentos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'TRANSFERÊNCIA'" [ngStyle]="filterTransaction === 'TRANSFERÊNCIA' ? { 'background-color': 'black', 'color': 'white' }: null">Transferências</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'PAGAMENTO'" [ngStyle]="filterTransaction === 'PAGAMENTO' ? { 'background-color': 'black', 'color': 'white' }: null">Pagamentos</a>
       </span>
     </div>
     <hr>

@@ -45,11 +45,6 @@ export class TransferComponent implements OnInit {
     console.log('Submit');
     this.submitted = true;
 
-    this.transferForm.value.type = 'Transferência';
-    this.transferForm.value.userId = this.authenticationService.currentUser.id;
-    this.transferForm.value.accountIban = this.selectedAccount.iban;
-    this.transferForm.value.accountId = this.selectedAccount.id;
-
     this.transferForm.value.value = this.transferForm.value.euros + '.' + this.transferForm.value.cents;
 
     console.log( this.transferForm.value );
@@ -87,6 +82,16 @@ export class TransferComponent implements OnInit {
 
   selectAccount(account: Account) {
     this.selectedAccount = account;
+    if ( account === null) {
+      this.initForm();
+    } else {
+      this.transferForm.value.employeeId = 0;
+      this.transferForm.value.type = 'TRANSFERÊNCIA';
+      this.transferForm.value.userId = this.authenticationService.currentUser.id;
+      this.transferForm.value.accountIban = this.selectedAccount.iban;
+      this.transferForm.value.accountId = this.selectedAccount.id;
+      console.log(this.transferForm);
+    }
   }
 
   initForm() {
@@ -94,11 +99,12 @@ export class TransferComponent implements OnInit {
     this.isEyeOpen = false;
 
     this.transferForm = this.formBuilder.group({
-      employeeId: ['', Validators.required],
+      employeeId: [''],
+      accountId: [''],
       userId: ['', Validators.required],
       type: ['', Validators.required],
       accountIban: ['', Validators.required],
-      value: ['', Validators.required],
+      value: [''],
       euros: ['', Validators.required],
       cents: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
       description: ['', [Validators.required, Validators.maxLength(200)]],
