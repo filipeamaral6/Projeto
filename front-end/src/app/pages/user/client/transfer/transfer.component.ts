@@ -45,7 +45,6 @@ export class TransferComponent implements OnInit {
     console.log('Submit');
     this.submitted = true;
 
-    this.transferForm.value.employeeId = 0;
     this.transferForm.value.type = 'Transferência';
     this.transferForm.value.userId = this.authenticationService.currentUser.id;
     this.transferForm.value.accountIban = this.selectedAccount.iban;

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'app/shared/models/Client';
 import { Account } from 'app/shared/models/Account';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ClientService } from 'app/services/transport/client.service';
 import { AuthenticationService } from 'app/services/authentication.service';
-import { Payment } from 'app/shared/models/Payment';
 import { TransactionService } from 'app/services/transport/transaction.service';
 import { first } from 'rxjs/operators';
 
@@ -53,7 +50,6 @@ export class PaymentsComponent implements OnInit {
     console.log('Submit');
     this.submitted = true;
 
-    this.paymentForm.value.employeeId = 0;
     this.paymentForm.value.type = 'Pagamento';
     this.paymentForm.value.userId = this.authenticationService.currentUser.id;
     this.paymentForm.value.accountIban = this.selectedAccount.iban;
