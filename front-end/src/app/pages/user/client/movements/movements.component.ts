@@ -11,6 +11,7 @@ import { AuthenticationService } from 'app/services/authentication.service';
 import { AccountService } from 'app/services/transport/account.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Withdraw } from 'app/shared/models/Withdraw';
+import { AlertService } from 'app/shared/alerts/alert.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -89,6 +90,8 @@ export class MovementsComponent implements OnInit {
           this.transactionList = transactions;
         });
       });
+    }, error => {
+      this.alertService.error(error);
     });
   }
 

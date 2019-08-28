@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { TransactionService } from 'app/services/transport/transaction.service';
 import { first } from 'rxjs/operators';
+import { AlertService } from 'app/shared/alerts/alert.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -24,6 +25,7 @@ export class TransferComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private transactionService: TransactionService,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -45,27 +47,23 @@ export class TransferComponent implements OnInit {
     console.log('Submit');
     this.submitted = true;
 
-    this.transferForm.value.employeeId = 0;
-    this.transferForm.value.type = 'Pagamento';
-    this.transferForm.value.userId = this.authenticationService.currentUser.id;
-    this.transferForm.value.accountIban = this.selectedAccount.iban;
-    this.transferForm.value.accountId = this.selectedAccount.id;
-
     this.transferForm.value.value = this.transferForm.value.euros + '.' + this.transferForm.value.cents;
 
     console.log( this.transferForm.value );
 
-    if ( this.transferForm.invalid ) {
-      console.log(1);
-      this.ngOnInit();
-      return;
-    }
+    // if ( this.transferForm.invalid ) {
+    //   console.log(1);
+    //   this.ngOnInit();
+    //   return;
+    // }
 
-
-    this.transactionService.addPayment(this.transferForm.value).pipe(first()).subscribe( response => {
+    this.transactionService.addTransfer(this.transferForm.value).pipe(first()).subscribe( response => {
       console.log(response);
+    }, error => {
+      this.alertService.error(error);
     });
-    this.ngOnInit();
+    this.submitted = false;
+    this.cancelFunction()
 
   }
 
@@ -88,6 +86,16 @@ export class TransferComponent implements OnInit {
 
   selectAccount(account: Account) {
     this.selectedAccount = account;
+    if ( account === null) {
+      this.initForm();
+    } else {
+      this.transferForm.value.employeeId = 0;
+      this.transferForm.value.type = 'TRANSFERÊNCIA';
+      this.transferForm.value.userId = this.authenticationService.currentUser.id;
+      this.transferForm.value.accountIban = this.selectedAccount.iban;
+      this.transferForm.value.accountId = this.selectedAccount.id;
+      console.log(this.transferForm);
+    }
   }
 
   initForm() {
@@ -95,14 +103,16 @@ export class TransferComponent implements OnInit {
     this.isEyeOpen = false;
 
     this.transferForm = this.formBuilder.group({
-      employeeId: ['', Validators.required],
+      employeeId: [''],
+      accountId: [''],
       userId: ['', Validators.required],
       type: ['', Validators.required],
       accountIban: ['', Validators.required],
-      value: ['', Validators.required],
+      value: [''],
       euros: ['', Validators.required],
       cents: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
       description: ['', [Validators.required, Validators.maxLength(200)]],
+      destinationIban: ['', [Validators.required, Validators.minLength(25), Validators.maxLength(25)]],
       transactionCode: ['', Validators.required]
     });
   }

@@ -1,7 +1,7 @@
 <div class="col-sm-12" style="padding: 0">
   <app-account-list [component]="this"></app-account-list>
 </div>
-
+<alert></alert>
 <div class="card card-user-tansfer col-sm-12"  *ngIf="selectedAccount != null">
   <div class="card-header">
     <h5 class="card-title">Transferência</h5>
@@ -12,7 +12,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="entity">IBAN de Destino</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" [(ngModel)]="transferForm.value.destinationIban"/>
           </div>
           <div class="row col-md-12" style="padding-left: 0">
             <div class="col-md-6" style="padding-left: 0">
@@ -25,6 +25,7 @@
                       type="text"
                       class="form-control"
                       style="text-align: right;"
+                      [(ngModel)]="transferForm.value.euros"
                     />
                   </div>
                   <div class="col-md-1" id="comma-sign">
@@ -37,7 +38,9 @@
                     <input 
                       (keypress)="digitOnly($event)"
                       type="text" 
-                      class="form-control" />
+                      class="form-control" 
+                      [(ngModel)]="transferForm.value.cents"
+                      />
                   </div>
                   <div class="col-md-1" id="euro-sign">
                     <h5 class="payment-value">€</h5>
@@ -50,7 +53,7 @@
                     <label for="transactionCode">Codigo de Segurança</label>
                     <div class="col-md-12 security-code" *ngIf="!isEyeOpen" style="padding: 0">
                         <div class="col-md-10" style="padding: 0">
-                            <input type="password" class="form-control pass-control"/>
+                            <input type="password" class="form-control pass-control" [(ngModel)]="transferForm.value.transactionCode"/>
                         </div>
                         <div class="col-md-2" style="padding: 0">
                             <span>
@@ -60,7 +63,7 @@
                     </div>
                     <div class="col-md-12 security-code" *ngIf="isEyeOpen" style="padding: 0">
                         <div class="col-md-10" style="padding: 0">
-                            <input type="password" class="form-control pass-control"/>
+                            <input type="text" class="form-control pass-control" [(ngModel)]="transferForm.value.transactionCode"/>
                         </div>
                         <div class="col-md-2" style="padding: 0">
                             <span>
@@ -75,11 +78,12 @@
 
         <div class="col-md-6">
           <div class="form-group">
-            <label for="description">Descrição do Pagamento</label>
+            <label for="description">Descrição da Transferência</label>
             <textarea
               type="text"
               class="form-control"
               style="min-height: 115px"
+              [(ngModel)]="transferForm.value.description"
             >
             </textarea>
           </div>

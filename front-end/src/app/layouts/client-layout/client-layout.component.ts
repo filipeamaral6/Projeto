@@ -25,35 +25,14 @@ export class ClientLayoutComponent implements OnInit {
   routes: RouteInfo[];
 
   accountList: Account[];
-  account1: Account;
-  account2: Account;
-  account3: Account;
-  account4: Account;
-
 
   constructor(
     private authenticationService: AuthenticationService,
     private accountService: AccountService
-  ) {
-  }
-
+  ) {}
 
   ngOnInit() {
     this.routes = ROUTES;
-    // this.initAccounts();
   }
-
-  public get getAccounts() {
-    return this.accountList;
-  }
-
-
-
-  public refreshData() {
-    // this.getClientAccounts();
-    // this.getClientMovements();
-  }
-
-
 
 }

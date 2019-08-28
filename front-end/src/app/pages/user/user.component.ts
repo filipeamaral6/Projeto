@@ -19,19 +19,6 @@ export class UserComponent implements OnInit {
     private clientLayout: ClientLayoutComponent) {
     }
 
-  ngOnInit() {
-    this.clientLayout.refreshData();
-
-  }
-
-  editMode() {
-    this.isEditing = true;
-    console.log(this.isEditing);
-  }
-
-  exitEditMode() {
-    this.isEditing = false;
-    console.log(this.isEditing);
-  }
+  ngOnInit() {}
 
 }
