@@ -43,7 +43,7 @@ export class TransferComponent implements OnInit {
       this.transfer.accountId = this.selectedAccount.id;
       this.transfer.accountIban = this.selectedAccount.iban;
       this.transfer.userId = this.selectedClient.userId;
-      this.transfer.type = 'Transferência';
+      this.transfer.type = 'TRANSFERÊNCIA';
 
       for (let employee of employees) {
         console.log(employee.userId + ' ' + this.authenticationService.currentUser.id);

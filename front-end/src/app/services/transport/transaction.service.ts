@@ -25,7 +25,7 @@ export class TransactionService {
     constructor(private http: HttpClient, private globals: Globals) { }
 
     getAllbyAccountIban(iban: string) {
-        return this.http.get<Transaction[]>(this.API + '/transaction/accountIBAN/' + iban);
+        return this.http.get<any[]>(this.API + '/transaction/accountIBAN/' + iban);
     }
 
     getTransactionById(id: number) {

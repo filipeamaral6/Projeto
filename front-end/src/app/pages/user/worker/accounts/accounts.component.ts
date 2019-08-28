@@ -11,6 +11,10 @@ import { EmployeeService } from 'app/services/transport/employee.service';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { Transaction } from 'app/shared/models/Transaction';
 import { TransactionService } from 'app/services/transport/transaction.service';
+import { Payment } from 'app/shared/models/Payment';
+import { Deposit } from 'app/shared/models/Deposit';
+import { Transfer } from 'app/shared/models/Transfer';
+import { Withdraw } from 'app/shared/models/Withdraw';
 
 @Component({
   selector: 'app-accounts',
@@ -18,6 +22,11 @@ import { TransactionService } from 'app/services/transport/transaction.service';
   styleUrls: ['./accounts.css']
 })
 export class AccountsComponent implements OnInit {
+  transaction: Transaction;
+  payment: Payment;
+  transfer: Transfer;
+  withdraw: Withdraw;
+  deposit: Deposit;
   statusArray: string[] = [
     'ALL',
     'ACTIVE',
@@ -147,6 +156,17 @@ export class AccountsComponent implements OnInit {
     this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
   }
 
+  openTransactionDetailsModal(content: ModalEvent, transactionId: number) {
+    this.transaction = null;
+    this.payment = null;
+    this.deposit = null;
+    this.withdraw = null;
+    this.transfer = null;
+
+    this.getTransactionById(transactionId);
+    this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
+  }
+
   toggleEditMode() {
     this.editMode = !this.editMode;
 
@@ -211,6 +231,35 @@ export class AccountsComponent implements OnInit {
     }, error => {
       this.alertService.error(error.error.message);
     });
+  }
+
+  getTransactionById(id: number) {
+    this.transactionService.getTransactionById(id).pipe(first()).subscribe(transaction => {
+      console.log(transaction);
+      this.transaction = transaction[0][0];
+      let dateAux = transaction[0][0].createdAt.toString().split('T');
+      this.transaction.date = dateAux[0];
+      this.transaction.hour = dateAux[1].split('+')[0];
+      if (transaction[0][0].type === 'PAGAMENTO') {
+        this.payment = transaction[1][0];
+      } else if (transaction[0][0].type === 'DEPÓSITO') {
+        this.deposit = transaction[2][0];
+      } else if (transaction[0][0].type === 'TRANSFERÊNCIA') {
+        this.transfer = transaction[3][0];
+      }
+    });
+  }
+
+  isTransfer(transaction: Transaction) {
+    const transfer: Transfer = transaction as Transfer;
+
+    if(transfer.destinationIban) {
+      console.log('true');
+      return true;
+    }
+
+    console.log('false');
+    return false;
   }
 
   closeModal() {

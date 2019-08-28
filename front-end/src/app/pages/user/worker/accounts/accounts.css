@@ -2,3 +2,7 @@
     background-color: #CCE7E7;
     cursor:pointer;
 }
+
+#transactionDetails.modal-body label {
+    font-weight: 550;
+  }

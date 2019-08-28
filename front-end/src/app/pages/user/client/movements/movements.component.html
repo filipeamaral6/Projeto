@@ -143,7 +143,7 @@
       </div>
       <div class="col-sm-4">
         <label for="desc">Descrição:</label>
-        <p *ngIf="transaction.description">
+        <p *ngIf="!!transaction.description">
           {{ transaction.description }}
         </p>
         <p *ngIf="!transaction.description">Sem descrição</p>
