@@ -41,6 +41,7 @@ export class MovementsComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private accontService: AccountService,
     private modalService: NgbModal,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {

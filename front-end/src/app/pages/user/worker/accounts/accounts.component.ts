@@ -216,6 +216,7 @@ export class AccountsComponent implements OnInit {
   fetchClients() {
     this.clientService.getAll().pipe(first()).subscribe(clients => {
       this.clients = clients;
+      this.dropdownList = [];
       for (let client of clients) {
         this.dropdownList.push({ item_id: client.userId, item_text: client.email });
       }

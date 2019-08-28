@@ -277,7 +277,7 @@
           <div *ngIf="loginPassword.touched && loginPassword.hasError('required')" class="invalid-feedback">Password
             inválida</div>
           <button type="button" class="btn btn-secondary" (click)="generatePassword('password')">Gerar</button> |
-          <button type="button" class="btn btn-success">Imprimir</button>
+          <button type="button" class="btn btn-success" (click)="print('A imprimir password')">Imprimir</button>
         </div>
       </div>
       <div class="row col-md-12">
@@ -333,7 +333,7 @@
           conta!</div>
       </div>
 
-      <button type="button" class="btn btn-success">Imprimir dados de conta</button>
+      <button type="button" class="btn btn-success" (click)="print('A imprimir dados de conta')">Imprimir dados de conta</button>
       <div>* Campo Obrigatório</div>
       <alert></alert>
       <hr>

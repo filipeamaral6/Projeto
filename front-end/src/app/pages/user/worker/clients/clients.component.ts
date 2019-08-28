@@ -250,6 +250,10 @@ export class ClientsComponent implements OnInit {
     this.fetchClients('ALL');
   }
 
+  print(message: string) {
+    this.alertService.info(message);
+  }
+
   private randomString(characters: string, length: number) {
     let result = '';
     const charactersLength = characters.length;
