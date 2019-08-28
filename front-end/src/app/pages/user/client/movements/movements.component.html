@@ -1,91 +1,176 @@
 <div class="col-sm-12" style="padding: 0">
-  <app-account-list [component]="this" ></app-account-list>
+  <app-account-list [component]="this"></app-account-list>
 </div>
 
 <div class="card">
   <div class="card-body">
     <div>
       <span>
-        <a class="btn btn-primary" (click)="filterTransaction = null">Todos os Movimentos</a>
-        <a class="btn btn-primary" (click)="filterTransaction = 'Depósito'">Depósitos</a>
-        <a class="btn btn-primary" (click)="filterTransaction = 'Levantamento'">Levantamentos</a>
-        <a class="btn btn-primary" (click)="filterTransaction = 'Transferência'">Transferências</a>
-        <a class="btn btn-primary" (click)="filterTransaction = 'Pagamento'">Pagamentos</a>
+        <a
+          class="btn btn-primary"
+          (click)="filterTransaction = null"
+          [ngStyle]="
+            filterTransaction === null
+              ? { 'background-color': 'black', color: 'white' }
+              : null
+          "
+          >Todos os Movimentos</a
+        >
+        <a
+          class="btn btn-primary"
+          (click)="filterTransaction = 'DEPÓSITO'"
+          [ngStyle]="
+            filterTransaction === 'DEPÓSITO'
+              ? { 'background-color': 'black', color: 'white' }
+              : null
+          "
+          >Depósitos</a
+        >
+        <a
+          class="btn btn-primary"
+          (click)="filterTransaction = 'LEVANTAMENTO'"
+          [ngStyle]="
+            filterTransaction === 'LEVANTAMENTO'
+              ? { 'background-color': 'black', color: 'white' }
+              : null
+          "
+          >Levantamentos</a
+        >
+        <a
+          class="btn btn-primary"
+          (click)="filterTransaction = 'TRANSFERÊNCIA'"
+          [ngStyle]="
+            filterTransaction === 'TRANSFERÊNCIA'
+              ? { 'background-color': 'black', color: 'white' }
+              : null
+          "
+          >Transferências</a
+        >
+        <a
+          class="btn btn-primary"
+          (click)="filterTransaction = 'PAGAMENTO'"
+          [ngStyle]="
+            filterTransaction === 'PAGAMENTO'
+              ? { 'background-color': 'black', color: 'white' }
+              : null
+          "
+          >Pagamentos</a
+        >
       </span>
     </div>
-    <hr>
+    <hr />
     <div class="table-responsive">
       <table class="table">
         <thead class=" text-primary">
           <tr>
             <th>Data</th>
             <th>Conta de Origem</th>
-            <th >Valor da transação</th>
-            <th >Tipo de Transacção</th>
+            <th>Valor da transação</th>
+            <th>Tipo de Transacção</th>
           </tr>
         </thead>
         <tbody *ngIf="filterTransaction !== null">
-          <tr *ngFor="let transaction of transactionList" (click)="openModal(transactionDetailsModal, transaction)">
-            <td *ngIf="transaction.type === filterTransaction">{{ transaction.date }}</td>
-            <td *ngIf="transaction.type === filterTransaction">{{ transaction.accountIban }}</td>
-            <td *ngIf="transaction.type === filterTransaction">{{ transaction.value }} €</td>
-            <td *ngIf="transaction.type === filterTransaction">{{ transaction.type }}</td>
+          <tr
+            *ngFor="let transaction of transactionList"
+            (click)="openModal(transactionDetailsModal, transaction)"
+          >
+            <td *ngIf="transaction.type === filterTransaction">
+              {{ transaction.createdAt.toString().split("T")[0] }}
+            </td>
+            <td *ngIf="transaction.type === filterTransaction">
+              {{ transaction.accountIban }}
+            </td>
+            <td *ngIf="transaction.type === filterTransaction">
+              {{ transaction.value }} €
+            </td>
+            <td *ngIf="transaction.type === filterTransaction">
+              {{ transaction.type }}
+            </td>
           </tr>
         </tbody>
         <tbody *ngIf="filterTransaction === null">
-            <tr *ngFor="let transaction of transactionList" (click)="openModal(transactionDetailsModal, transaction)">
-              <td>{{ transaction.date }}</td>
-              <td>{{ transaction.accountIban }}</td>
-              <td>{{ transaction.value }} €</td>
-              <td>{{ transaction.type }}</td>
-            </tr>
-          </tbody>
+          <tr
+            *ngFor="let transaction of transactionList"
+            (click)="openModal(transactionDetailsModal, transaction)"
+          >
+            <td>{{ transaction.createdAt.toString().split("T")[0] }}</td>
+            <td>{{ transaction.accountIban }}</td>
+            <td>{{ transaction.value }} €</td>
+            <td>{{ transaction.type }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
 </div>
 
 <ng-template #transactionDetailsModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Detalhes do Movimento</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click'); activeModal = false;">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <alert></alert>
-      <div class="row col-sm-12">
-        <div class="col-sm-4">
-          <label for="date">Data:</label>
-          <p></p>
-        </div>
-        <div class="col-sm-4">
-          <label for="hour">Hora:</label>
-          <p></p>
-        </div>
-        <div class="col-sm-4">
-          <label for="type">Tipo:</label>
-          <p></p>
-        </div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detalhes do Movimento</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click'); activeModal = false; closeModal()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body " id="transactionDetails">
+    <alert></alert>
+    <div class="row col-sm-12">
+      <div class="col-sm-4">
+        <label for="type">Tipo:</label>
+        <p>{{ transaction.type }}</p>
       </div>
-      <div class="row col-sm-12">
-        <!-- <div class="col-sm-4" *ngIf="selectedTransaction.type === 'Pagamento'">
-          <label for="date">IBAN de Destino</label>
-          <p>{{selectedTransaction.destinationIban}}</p>
-        </div>
-        <div class="col-sm-4" *ngIf="selectedTransaction.type !== 'Pagamento'">
-          <label for="date">Conta de Destino</label>
-          <p>{{selectedTransaction.entity}} - {{selectedTransaction.reference}}</p>
-        </div> -->
-        <div class="col-sm-4">
-          <label for="hour">Hora:</label>
-          <p></p>
-        </div>
-        <div class="col-sm-4">
-          <label for="type">Tipo:</label>
-          <p></p>
-        </div>
+      <div class="col-sm-4">
+        <label for="date">Data:</label>
+        <p>{{ transaction.date }}</p>
       </div>
-
+      <div class="col-sm-4">
+        <label for="hour">Hora:</label>
+        <p>{{ transaction.hour }}</p>
+      </div>
     </div>
-  </ng-template>
+    <div class="row col-sm-12">
+      <div class="col-sm-4">
+        <label for="value">Valor:</label>
+        <p>{{ transaction.value }} €</p>
+      </div>
+      <div class="col-sm-4">
+        <label for="acc">Conta de origem:</label>
+        <p>{{ transaction.accountIban }}</p>
+      </div>
+      <div class="col-sm-4">
+        <label for="desc">Descrição:</label>
+        <p *ngIf="transaction.description">
+          {{ transaction.description }}
+        </p>
+        <p *ngIf="!transaction.description">Sem descrição</p>
+      </div>
+    </div>
+    <hr />
+    <div class="row col-sm-12">
+      <div *ngIf="payment" class="col-sm-4">
+        <label for="entity">Entidade:</label>
+        <p>{{ payment.entity }}</p>
+      </div>
+      <div *ngIf="payment" class="col-sm-4">
+        <label for="ref">Referência:</label>
+        <p>{{ payment.reference }}</p>
+      </div>
+      <div *ngIf="deposit" class="col-sm-4">
+        <label for="depName">Nome depositante:</label>
+        <p>{{ deposit.depositerName }}</p>
+      </div>
+      <div *ngIf="deposit" class="col-sm-4">
+        <label for="depCC">CC depositante:</label>
+        <p>{{ deposit.depositerCcNumber }}</p>
+      </div>
+      <div *ngIf="transfer" class="col-sm-4">
+        <label for="transfer">Conta de destino:</label>
+        <p>{{ transfer.destinationIban }}</p>
+      </div>
+    </div>
+  </div>
+</ng-template>

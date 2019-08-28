@@ -1,9 +1,9 @@
-button#account:focus, button#account:hover {
-  border: #4A90E2;
-  background-color: #4A90E2;
+button#account:focus,
+button#account:hover {
+  border: #4a90e2;
+  background-color: #4a90e2;
   outline: transparent;
 }
-
 
 button#account {
   border: transparent;
@@ -17,10 +17,14 @@ button#account {
 }
 
 .table tbody tr:hover {
-  background-color: #CCE7E7;
-  cursor:pointer;
+  background-color: #cce7e7;
+  cursor: pointer;
 }
 
 .general-padding {
   padding: 0;
+}
+
+#transactionDetails.modal-body label {
+  font-weight: 550;
 }

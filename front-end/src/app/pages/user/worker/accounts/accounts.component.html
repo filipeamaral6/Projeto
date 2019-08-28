@@ -169,7 +169,7 @@
                         </thead>
                         <tbody *ngIf="filterTransaction !== null">
                             <tr *ngFor="let transaction of transactionList">
-                                <td *ngIf="transaction.type === filterTransaction">{{ transaction.date }}</td>
+                                <td *ngIf="transaction.type === filterTransaction">{{ transaction.createdAt.toString().split('T')[0] }}</td>
                                 <td *ngIf="transaction.type === filterTransaction">{{ transaction.accountIban }}</td>
                                 <td *ngIf="transaction.type === filterTransaction">{{ transaction.value }} €</td>
                                 <td *ngIf="transaction.type === filterTransaction">{{ transaction.type }}</td>
@@ -177,7 +177,7 @@
                         </tbody>
                         <tbody *ngIf="filterTransaction === null">
                             <tr *ngFor="let transaction of transactionList">
-                                <td>{{ transaction.date }}</td>
+                                <td>{{ transaction.createdAt.toString().split('T')[0] }}</td>
                                 <td>{{ transaction.accountIban }}</td>
                                 <td>{{ transaction.value }} €</td>
                                 <td>{{ transaction.type }}</td>

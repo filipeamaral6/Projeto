@@ -1,118 +1,194 @@
 <div class="row col-md-10" style="padding-left: 15px;">
-    <div class="card col-md-4" style="margin-right: 15px;">
-        <input type="text" class="form-control" name="searchString" placeholder="Pesquisar por nome..."
-            [(ngModel)]="searchString" style="border-width: 0; padding: 15px;" />
-    </div>
-    <div class="card col-md-2">
-        <select class="form-control" value="ALL" name="status" #f (change)="fetchClients()"
-            style="border-width: 0px; margin: auto;">
-            <ng-container *ngFor="let status of statusArray">
-                <option [value]="status">{{ status }}</option>
-            </ng-container>
-        </select>
-    </div>
+  <div class="card col-md-4" style="margin-right: 15px;">
+    <input
+      type="text"
+      class="form-control"
+      name="searchString"
+      placeholder="Pesquisar por cartão de cidadão..."
+      [(ngModel)]="searchString"
+      style="border-width: 0; padding: 15px;"
+    />
+  </div>
+  <div class="card col-md-2">
+    <select
+      class="form-control"
+      value="ALL"
+      name="status"
+      #f
+      (change)="fetchClients()"
+      style="border-width: 0px; margin: auto;"
+    >
+      <ng-container *ngFor="let status of statusArray">
+        <option [value]="status">{{ status }}</option>
+      </ng-container>
+    </select>
+  </div>
 </div>
 
 <div class="card">
-    <div class="card-body">
-        <div class="table-responsive">
-            <h5>Selecionar Cliente</h5>
-            <table class="table">
-                <thead class=" text-primary">
-                    <tr>
-                        <th>
-                            Nome
-                        </th>
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            Morada
-                        </th>
-                        <th class="text-right">
-                            Estado
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let client of clients | filter: 'fullName':searchString" (click)="openModal(transferModal, client)">
-                        <td>
-                            {{ client.fullName }}
-                        </td>
-                        <td>
-                            {{ client.email }}
-                        </td>
-                        <td>
-                            {{ client.address }}
-                        </td>
-                        <td class="text-right">
-                            {{ client.status }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <h5>Selecionar Cliente</h5>
+      <table class="table">
+        <thead class=" text-primary">
+          <tr>
+            <th>
+              Nome
+            </th>
+
+            <th>
+              Morada
+            </th>
+            <th>
+              Cartão de Cidadão
+            </th>
+            <th class="text-right">
+              Estado
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let client of clients | filter: 'clientCc':searchString"
+            (click)="openModal(transferModal, client)"
+          >
+            <td>
+              {{ client.fullName }}
+            </td>
+
+            <td>
+              {{ client.address }}
+            </td>
+            <td>
+              {{ client.clientCc }}
+            </td>
+            <td class="text-right">
+              {{ client.status }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 
 <ng-template #transferModal let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Selecionar conta e introduzir dados dos depósito</h4>
-        <button type="button" class="close" aria-label="Close"
-            (click)="modal.dismiss('Cross click'); activeModal = false;">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form #form="ngForm">
-            <div class="row col-md-8">
-                <div class="form-group">
-                    <label for="selectAccount">Selecionar conta</label>
-                    <select name="account" class="form-control" [(ngModel)]="selectedAccount"
-                        [ngClass]="{ 'is-invalid': account.touched && account.errors }" #account="ngModel" required>
-                        <option *ngFor="let account of accounts" [ngValue]="account">Número: {{ account.accountNumber }}
-                            | IBAN: {{ account.iban }}</option>
-                    </select>
-                    <div *ngIf="account.touched && account.hasError('required')" class="invalid-feedback">Selecione uma
-                        conta!</div>
-                </div>
-
-            </div>
-            <hr>
-            <div class="row">
-                <div class="form-group col-md-5">
-                    <label for="iban">IBAN de destino*</label>
-                    <input type="text" class="form-control" name="iban" [(ngModel)]="transfer.destinationIban"
-                        [ngClass]="{ 'is-invalid': iban.touched && iban.errors }" #iban="ngModel" required>
-                    <div *ngIf="iban.touched && iban.hasError('required')" class="invalid-feedback">
-                        Insira
-                        o IBAN de destino!</div>
-                </div>
-            </div>
-            <div class="form-group" style="padding-right: 4.9%">
-                <label for="description">Descrição*</label>
-                <textarea type="text" class="form-control" name="description" [(ngModel)]="transfer.description"
-                    [ngClass]="{ 'is-invalid': description.touched && description.errors }" #description="ngModel"
-                    required></textarea>
-                <div *ngIf="description.touched && description.hasError('required')" class="invalid-feedback">Insira
-                    uma descrição!</div>
-            </div>
-            <hr>
-            <div class="row col-md-8" style="align-content: center">
-                <div class="form-group" style="padding-right: 4.9%">
-                    <label for="amount">Quantia a transferir(€)*</label>
-                    <input type="number" class="form-control" name="amount" [(ngModel)]="transfer.value"
-                        [ngClass]="{ 'is-invalid': amount.touched && amount.errors }" #amount="ngModel" required
-                        [min]=5>
-                    <div *ngIf="amount.touched && amount.hasError('required')" class="invalid-feedback">Insira uma
-                        quantia a depositar!</div>
-                    <div *ngIf="amount.touched && amount.hasError('min')" class="invalid-feedback">A quantia tem de
-                        ser
-                        igual ou superior a 5€!</div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-success" (click)="doTransfer()"
-                [disabled]="form.invalid">Transferir</button>
-        </form>
-    </div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Selecionar conta e introduzir dados dos depósito
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click'); activeModal = false"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm">
+      <div class="row col-md-8">
+        <div class="form-group">
+          <label for="selectAccount">Selecionar conta</label>
+          <select
+            name="account"
+            class="form-control"
+            [(ngModel)]="selectedAccount"
+            [ngClass]="{ 'is-invalid': account.touched && account.errors }"
+            #account="ngModel"
+            required
+          >
+            <option *ngFor="let account of accounts" [ngValue]="account"
+              >Número: {{ account.accountNumber }} | IBAN:
+              {{ account.iban }}</option
+            >
+          </select>
+          <div
+            *ngIf="account.touched && account.hasError('required')"
+            class="invalid-feedback"
+          >
+            Selecione uma conta!
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="form-group col-md-5">
+          <label for="iban">IBAN de destino*</label>
+          <input
+            type="text"
+            class="form-control"
+            name="iban"
+            [(ngModel)]="transfer.destinationIban"
+            [ngClass]="{ 'is-invalid': iban.touched && iban.errors }"
+            #iban="ngModel"
+            required
+          />
+          <div
+            *ngIf="iban.touched && iban.hasError('required')"
+            class="invalid-feedback"
+          >
+            Insira o IBAN de destino!
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="padding-right: 4.9%">
+        <label for="description">Descrição*</label>
+        <textarea
+          type="text"
+          class="form-control"
+          name="description"
+          [(ngModel)]="transfer.description"
+          [ngClass]="{
+            'is-invalid': description.touched && description.errors
+          }"
+          #description="ngModel"
+          required
+        ></textarea>
+        <div
+          *ngIf="description.touched && description.hasError('required')"
+          class="invalid-feedback"
+        >
+          Insira uma descrição!
+        </div>
+      </div>
+      <hr />
+      <div class="row col-md-8" style="align-content: center">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="amount">Quantia a transferir(€)*</label>
+          <input
+            type="number"
+            class="form-control"
+            name="amount"
+            [(ngModel)]="transfer.value"
+            [ngClass]="{ 'is-invalid': amount.touched && amount.errors }"
+            #amount="ngModel"
+            required
+            [min]="5"
+          />
+          <div
+            *ngIf="amount.touched && amount.hasError('required')"
+            class="invalid-feedback"
+          >
+            Insira uma quantia a depositar!
+          </div>
+          <div
+            *ngIf="amount.touched && amount.hasError('min')"
+            class="invalid-feedback"
+          >
+            A quantia tem de ser igual ou superior a 5€!
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="doTransfer()"
+        [disabled]="form.invalid"
+      >
+        Transferir
+      </button>
+    </form>
+  </div>
 </ng-template>
