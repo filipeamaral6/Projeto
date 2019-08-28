@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'app/services/authentication.service';
 
 
 export interface RouteInfo {
@@ -21,7 +22,7 @@ export let ROUTES: RouteInfo[] = [];
 export class SidebarComponent implements OnInit {
   @Input() menuItems: any[];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     // this.menuItems = [
@@ -37,7 +38,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onLogout() {
-    localStorage.removeItem('currentUser');
-    this.router.navigate(['']);
+    this.authenticationService.logout();
+    this.router.navigate(['/']);
   }
 }

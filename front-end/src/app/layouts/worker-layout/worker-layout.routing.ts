@@ -5,13 +5,15 @@ import { PaymentsComponent } from 'app/pages/user/worker/payments/payments.compo
 import { ClientsComponent } from 'app/pages/user/worker/clients/clients.component';
 import { AccountsComponent } from 'app/pages/user/worker/accounts/accounts.component';
 import { EmployeesComponent } from 'app/pages/user/worker/employees/employees.component';
+import { EmployeeGuard } from 'app/guards/employee.guard';
+import { AdminGuard } from 'app/guards/admin.guard';
 
 
 export const WorkerLayoutRoutes: Routes = [
-  { path: 'clients', component: ClientsComponent },
-  { path: 'deposit', component: DepositComponent },
-  { path: 'transfer', component: TransferComponent },
-  { path: 'payments', component: PaymentsComponent },
-  { path: 'accounts', component: AccountsComponent },
-  { path: 'employees', component: EmployeesComponent }
+  { path: 'clients', component: ClientsComponent, canActivate: [EmployeeGuard] },
+  { path: 'deposit', component: DepositComponent, canActivate: [EmployeeGuard] },
+  { path: 'transfer', component: TransferComponent, canActivate: [EmployeeGuard] },
+  { path: 'payments', component: PaymentsComponent, canActivate: [EmployeeGuard] },
+  { path: 'accounts', component: AccountsComponent, canActivate: [EmployeeGuard] },
+  { path: 'employees', component: EmployeesComponent, canActivate: [AdminGuard] }
 ];

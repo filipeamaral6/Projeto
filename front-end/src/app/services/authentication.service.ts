@@ -7,7 +7,7 @@ import { Globals } from '../shared/Globals';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type': 'application/json'
 
   })
 };
@@ -30,7 +30,7 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private globals: Globals) {
-      this.persistUser();
+    this.persistUser();
   }
 
   login(username, password) {
@@ -44,12 +44,11 @@ export class AuthenticationService {
       }));
   }
 
-  // logout() {
-
-  //   // remove user from local storage and set current user to null
-  //   localStorage.removeItem('currentUser');
-  //   this.currentUser = null;
-  // }
+  logout() {
+    // remove user from local storage and set current user to null
+    localStorage.removeItem('currentUser');
+    this.currentUser = null;
+  }
 
   // recoverPassword(body: string) {
   //   return this.http.post(this.API + '/auth/recover-password', body);
