@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { AccessService } from 'app/services/access.service';
 import { User } from 'app/shared/models/User';
+import { AlertService } from 'app/shared/alerts';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +26,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private accessService: AccessService
-    //    private alertService: AlertService,
+    private accessService: AccessService,
+    private alertService: AlertService,
 
   ) {
     if (this.accessService.isLoggedIn) {
@@ -65,7 +66,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           const role = data.role;
-
+          console.log(data);
           if (role === 'CLIENT') {
             this.router.navigate(['/client']);
           } else {
@@ -74,7 +75,12 @@ export class LoginComponent implements OnInit {
         },
 
         error => {
-          //          this.alertService.error(error.message);
+          console.log(error);
+          if (error.error.status === 401) {
+            this.alertService.error("Username ou password incorreta");
+          } else {
+            this.alertService.error(error.error.message);
+          }
           this.isLoading = false;
           this.isTakingAWhile = false;
         });
