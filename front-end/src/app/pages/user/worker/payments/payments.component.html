@@ -14,112 +14,187 @@
 </div>
 
 <div class="card">
-    <div class="card-body">
-        <div class="table-responsive">
-            <h5>Selecionar Cliente</h5>
-            <table class="table">
-                <thead class=" text-primary">
-                    <tr>
-                        <th>
-                            Nome
-                        </th>
-                        <th>
-                            Email
-                        </th>
-                        <th>
-                            Morada
-                        </th>
-                        <th class="text-right">
-                            Estado
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let client of clients | filter: 'fullName':searchString" (click)="openModal(paymentsModal, client)">
-                        <td>
-                            {{ client.fullName }}
-                        </td>
-                        <td>
-                            {{ client.email }}
-                        </td>
-                        <td>
-                            {{ client.address }}
-                        </td>
-                        <td class="text-right">
-                            {{ client.status }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <h5>Selecionar Cliente</h5>
+      <table class="table">
+        <thead class=" text-primary">
+          <tr>
+            <th>
+              Nome
+            </th>
+
+            <th>
+              Morada
+            </th>
+            <th>
+              Cartão de Cidadão
+            </th>
+            <th class="text-right">
+              Estado
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let client of clients | filter: 'clientCc':searchString"
+            (click)="openModal(paymentsModal, client)"
+          >
+            <td>
+              {{ client.fullName }}
+            </td>
+
+            <td>
+              {{ client.address }}
+            </td>
+            <td>
+              {{ client.clientCc }}
+            </td>
+            <td class="text-right">
+              {{ client.status }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 
 <ng-template #paymentsModal let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Selecionar conta e introduzir dados do pagamento</h4>
-        <button type="button" class="close" aria-label="Close"
-            (click)="modal.dismiss('Cross click'); activeModal = false;">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form #form="ngForm">
-            <div class="row col-md-8">
-                <div class="form-group">
-                    <label for="selectAccount">Selecionar conta</label>
-                    <select name="account" class="form-control" [(ngModel)]="selectedAccount"
-                        [ngClass]="{ 'is-invalid': account.touched && account.errors }" #account="ngModel" required>
-                        <option *ngFor="let account of accounts" [ngValue]="account">Número: {{ account.accountNumber }}
-                            | IBAN: {{ account.iban }}</option>
-                    </select>
-                    <div *ngIf="account.touched && account.hasError('required')" class="invalid-feedback">Selecione uma
-                        conta!</div>
-                </div>
-
-            </div>
-            <hr>
-            <div class="row">
-                <div class="form-group col-md-5">
-                    <label for="reference">Referência*</label>
-                    <input type="text" class="form-control" name="reference" [(ngModel)]="payment.reference"
-                        [ngClass]="{ 'is-invalid': reference.touched && reference.errors }" #reference="ngModel"
-                        required>
-                    <div *ngIf="reference.touched && reference.hasError('required')" class="invalid-feedback">
-                        Insira a referência!</div>
-                </div>
-                <div class="form-group col-md-5">
-                    <label for="entity">Entidade*</label>
-                    <input type="text" class="form-control" name="entity" [(ngModel)]="payment.entity"
-                        [ngClass]="{ 'is-invalid': entity.touched && entity.errors }" #entity="ngModel" required>
-                    <div *ngIf="entity.touched && entity.hasError('required')" class="invalid-feedback">
-                        Insira a entidade!</div>
-                </div>
-            </div>
-            <div class="form-group" style="padding-right: 4.9%">
-                <label for="description">Descrição*</label>
-                <textarea type="text" class="form-control" name="description" [(ngModel)]="payment.description"
-                    [ngClass]="{ 'is-invalid': description.touched && description.errors }" #description="ngModel"
-                    required></textarea>
-                <div *ngIf="description.touched && description.hasError('required')" class="invalid-feedback">Insira
-                    uma descrição!</div>
-            </div>
-            <hr>
-            <div class="row col-md-8" style="align-content: center">
-                <div class="form-group" style="padding-right: 4.9%">
-                    <label for="amount">Quantia(€)*</label>
-                    <input type="number" class="form-control" name="value" [(ngModel)]="payment.value"
-                        [ngClass]="{ 'is-invalid': amount.touched && amount.errors }" #amount="ngModel" required
-                        [min]=5>
-                    <div *ngIf="amount.touched && amount.hasError('required')" class="invalid-feedback">Insira uma
-                        quantia!</div>
-                    <div *ngIf="amount.touched && amount.hasError('min')" class="invalid-feedback">A quantia tem de
-                        ser
-                        igual ou superior a 5€!</div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-success" (click)="doPayment()"
-                [disabled]="form.invalid">Transferir</button>
-        </form>
-    </div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      Selecionar conta e introduzir dados do pagamento
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click'); activeModal = false"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm">
+      <div class="row col-md-8">
+        <div class="form-group">
+          <label for="selectAccount">Selecionar conta</label>
+          <select
+            name="account"
+            class="form-control"
+            [(ngModel)]="selectedAccount"
+            [ngClass]="{ 'is-invalid': account.touched && account.errors }"
+            #account="ngModel"
+            required
+          >
+            <option *ngFor="let account of accounts" [ngValue]="account"
+              >Número: {{ account.accountNumber }} | IBAN:
+              {{ account.iban }}</option
+            >
+          </select>
+          <div
+            *ngIf="account.touched && account.hasError('required')"
+            class="invalid-feedback"
+          >
+            Selecione uma conta!
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="form-group col-md-5">
+          <label for="reference">Referência*</label>
+          <input
+            type="text"
+            class="form-control"
+            name="reference"
+            [(ngModel)]="payment.reference"
+            [ngClass]="{ 'is-invalid': reference.touched && reference.errors }"
+            #reference="ngModel"
+            required
+          />
+          <div
+            *ngIf="reference.touched && reference.hasError('required')"
+            class="invalid-feedback"
+          >
+            Insira a referência!
+          </div>
+        </div>
+        <div class="form-group col-md-5">
+          <label for="entity">Entidade*</label>
+          <input
+            type="text"
+            class="form-control"
+            name="entity"
+            [(ngModel)]="payment.entity"
+            [ngClass]="{ 'is-invalid': entity.touched && entity.errors }"
+            #entity="ngModel"
+            required
+          />
+          <div
+            *ngIf="entity.touched && entity.hasError('required')"
+            class="invalid-feedback"
+          >
+            Insira a entidade!
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="padding-right: 4.9%">
+        <label for="description">Descrição*</label>
+        <textarea
+          type="text"
+          class="form-control"
+          name="description"
+          [(ngModel)]="payment.description"
+          [ngClass]="{
+            'is-invalid': description.touched && description.errors
+          }"
+          #description="ngModel"
+          required
+        ></textarea>
+        <div
+          *ngIf="description.touched && description.hasError('required')"
+          class="invalid-feedback"
+        >
+          Insira uma descrição!
+        </div>
+      </div>
+      <hr />
+      <div class="row col-md-8" style="align-content: center">
+        <div class="form-group" style="padding-right: 4.9%">
+          <label for="amount">Quantia(€)*</label>
+          <input
+            type="number"
+            class="form-control"
+            name="value"
+            [(ngModel)]="payment.value"
+            [ngClass]="{ 'is-invalid': amount.touched && amount.errors }"
+            #amount="ngModel"
+            required
+            [min]="5"
+          />
+          <div
+            *ngIf="amount.touched && amount.hasError('required')"
+            class="invalid-feedback"
+          >
+            Insira uma quantia!
+          </div>
+          <div
+            *ngIf="amount.touched && amount.hasError('min')"
+            class="invalid-feedback"
+          >
+            A quantia tem de ser igual ou superior a 5€!
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="doPayment()"
+        [disabled]="form.invalid"
+      >
+        Transferir
+      </button>
+    </form>
+  </div>
 </ng-template>

@@ -1,6 +1,6 @@
 <div class="row col-md-10" style="padding-left: 15px;">
   <div class="card col-md-4" style="margin-right: 15px;">
-    <input type="text" class="form-control" name="searchString" placeholder="Pesquisar por nome..."
+    <input type="text" class="form-control" name="searchString" placeholder="Pesquisar por cartão de cidadão..."
       [(ngModel)]="searchString" style="border-width: 0; padding: 15px;" />
   </div>
   <div class="card col-md-2">
@@ -23,28 +23,28 @@
               Nome
             </th>
             <th>
-              Email
-            </th>
-            <th>
               Morada
             </th>
+            <th>
+                Cartão de Cidadão
+              </th>
             <th class="text-right">
               Estado
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let client of clients | filter: 'fullName':searchString"
+          <tr *ngFor="let client of clients | filter: 'clientCc':searchString"
             (click)="openModal(clientDetailsModal, client)">
             <td>
               {{ client.fullName }}
             </td>
             <td>
-              {{ client.email }}
-            </td>
-            <td>
               {{ client.address }}
             </td>
+            <td>
+              {{ client.clientCc }}
+              </td>
             <td class="text-right">
               {{ client.status }}
             </td>
