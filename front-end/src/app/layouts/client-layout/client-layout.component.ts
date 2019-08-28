@@ -7,7 +7,7 @@ import { AccountService } from 'app/services/transport/account.service';
 import { RouteInfo } from 'app/shared/sidebar/sidebar.component';
 
 const ROUTES = [
-  { path: 'dashboard', title: 'Página Inicial', icon: 'nc-bank', class: '' },
+  { path: 'dashboard', title: 'Contas', icon: 'nc-bank', class: '' },
   { path: 'user', title: 'Perfil', icon: 'nc-single-02', class: '' },
   { path: 'movements', title: 'Movimentos', icon: 'nc-single-copy-04', class: '' },
   { path: 'transfer', title: 'Transferências', icon: 'nc-credit-card', class: '' },

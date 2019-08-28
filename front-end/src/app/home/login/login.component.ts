@@ -68,16 +68,16 @@ export class LoginComponent implements OnInit {
           const role = data.role;
           console.log(data);
           if (role === 'CLIENT') {
-            this.router.navigate(['/client']);
+            this.router.navigate(['/client/dashboard']);
           } else {
-            this.router.navigate(['/worker']);
+            this.router.navigate(['/worker/clients']);
           }
         },
 
         error => {
           console.log(error);
           if (error.error.status === 401) {
-            this.alertService.error("Username ou password incorreta");
+            this.alertService.error('Username ou password incorreta');
           } else {
             this.alertService.error(error.error.message);
           }
