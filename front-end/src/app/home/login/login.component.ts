@@ -78,8 +78,11 @@ export class LoginComponent implements OnInit {
           console.log(error);
           if (error.error.status === 401) {
             this.alertService.error('Username ou password incorreta');
-          } else {
+          }
+          else if (error.error.message) {
             this.alertService.error(error.error.message);
+          } else {
+            this.alertService.error('Servidor indisponível');
           }
           this.isLoading = false;
           this.isTakingAWhile = false;

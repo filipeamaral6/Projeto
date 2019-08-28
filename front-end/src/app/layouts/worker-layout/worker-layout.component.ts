@@ -4,8 +4,17 @@ import { Account } from 'app/shared/models/Account';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { AccountService } from 'app/services/transport/account.service';
 import { RouteInfo } from 'app/shared/sidebar/sidebar.component';
+import { User } from 'app/shared/models/User';
 
-const ROUTES = [
+const RoutesEmployee = [
+  { path: 'clients', title: 'Clientes', icon: 'nc-single-02', class: '' },
+  { path: 'accounts', title: 'Contas', icon: 'nc-bank', class: '' },
+  { path: 'deposit', title: 'Depositar', icon: 'nc-box', class: '' },
+  { path: 'transfer', title: 'Transferir', icon: 'nc-money-coins', class: '' },
+  { path: 'payments', title: 'Pagamentos', icon: 'nc-cart-simple', class: '' },
+];
+
+const RoutesAdmin = [
   { path: 'employees', title: 'Colaboradores', icon: 'nc-badge', class: '' },
   { path: 'clients', title: 'Clientes', icon: 'nc-single-02', class: '' },
   { path: 'accounts', title: 'Contas', icon: 'nc-bank', class: '' },
@@ -26,8 +35,18 @@ export class WorkerLayoutComponent implements OnInit {
   private accounts: Account[];
   routes: RouteInfo[];
 
+  constructor(
+    private authenticationService: AuthenticationService,
+    private accountService: AccountService
+  ) { }
+
   ngOnInit() {
-    this.routes = ROUTES;
+    this.currentUser = this.authenticationService.currentUser;
+    if (this.currentUser.role === 'ADMIN') {
+      this.routes = RoutesAdmin;
+    } else {
+      this.routes = RoutesEmployee;
+    }
   }
 
   public get getWorker() {
@@ -36,12 +55,5 @@ export class WorkerLayoutComponent implements OnInit {
 
   public get getAccounts() {
     return this.accounts;
-  }
-
-  constructor(
-    private authenticationService: AuthenticationService,
-    private accountService: AccountService
-  ) {
-    this.currentUser = this.authenticationService.currentUser;
   }
 }
