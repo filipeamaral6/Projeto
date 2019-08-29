@@ -150,10 +150,6 @@
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>notification</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
@@ -251,10 +247,6 @@
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>nationality</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
@@ -491,10 +483,6 @@
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
             <QueryOutputCachedSchemaColumns>nationality</QueryOutputCachedSchemaColumns>
-            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
-            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
-            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
-            <QueryOutputCachedSchemaColumns>status</QueryOutputCachedSchemaColumns>
             <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
             <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
             <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>

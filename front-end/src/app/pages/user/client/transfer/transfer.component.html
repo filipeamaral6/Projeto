@@ -2,104 +2,387 @@
   <app-account-list [component]="this"></app-account-list>
 </div>
 <alert></alert>
-<div class="card card-user-tansfer col-sm-12"  *ngIf="selectedAccount != null">
-  <div class="card-header">
-    <h5 class="card-title">Transferência</h5>
-  </div>
-  <div class="card-body col-md-12">
-    <div class="row col-md-12">
-      <div class="row col-md-12" style="padding-left: 0">
-        <div class="col-md-6">
+<form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+  <div class="card card-user col-sm-9" *ngIf="selectedAccount != null">
+    <div class="card-header">
+      <h5 class="card-title">Transferência</h5>
+    </div>
+    <div class="card-body col-md-12" style="padding-left: 15px;">
+      <div class="row">
+        <div class="col-md-8">
           <div class="form-group">
             <label for="entity">IBAN de Destino</label>
-            <input type="text" class="form-control" [(ngModel)]="transferForm.value.destinationIban"/>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="destinationIban"
+              [ngClass]="{
+                'is-invalid': submitted && f.destinationIban.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && !!f.destinationIban.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="!!f.destinationIban.errors.required">
+                Campo obrigatório
+              </div>
+            </div>
           </div>
-          <div class="row col-md-12" style="padding-left: 0">
-            <div class="col-md-6" style="padding-left: 0">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-5">
               <div class="form-group">
-                <label for="value">Valor da Transferência</label>
-                <div class="row col-md-12">
-                  <div class="col-md-6" style="padding: 0">
-                    <input
-                      (keypress)="digitOnly($event)"
-                      type="text"
-                      class="form-control"
-                      style="text-align: right;"
-                      [(ngModel)]="transferForm.value.euros"
-                    />
-                  </div>
-                  <div class="col-md-1" id="comma-sign">
-                    <h5 class="payment-value"> ,</h5>
-                  </div>
-                  <div
-                    class="col-md-3 form-group"
-                    style="padding: 0"
+                <label for="transfer">Valor da Transferência</label>
+                <div class="form-inline">
+                  <input
+                    size="9"
+                    (keypress)="digitOnly($event)"
+                    type="text"
+                    formControlName="euros"
+                    class="form-control"
+                    style="text-align: right;"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.euros.errors
+                    }"
+                  />
+                  <h5
+                    style="margin-bottom: 0; padding-left:5px; padding-right:5px;"
                   >
-                    <input 
-                      (keypress)="digitOnly($event)"
-                      type="text" 
-                      class="form-control" 
-                      [(ngModel)]="transferForm.value.cents"
-                      />
+                    ,
+                  </h5>
+
+                  <input
+                    size="3"
+                    (keypress)="digitOnly($event)"
+                    type="text"
+                    class="form-control"
+                    formControlName="cents"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.cents.errors
+                    }"
+                  />
+
+                  <h5 style="margin-bottom: 0; padding-left:5px;">
+                    €
+                  </h5>
+                </div>
+                <div
+                  *ngIf="submitted && !!f.cents.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="!!f.cents.errors.required">
+                    Obrigatório
                   </div>
-                  <div class="col-md-1" id="euro-sign">
-                    <h5 class="payment-value">€</h5>
+                </div>
+                <div *ngIf="submitted && !!f.transactionCode.errors">
+                  <div *ngIf="!!f.transactionCode.errors.required">
+                    <p class="invalid-text">Campo obrigatório</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6" style="padding-right: 0">
-                <div class="form-group" >
-                    <label for="transactionCode">Codigo de Segurança</label>
-                    <div class="col-md-12 security-code" *ngIf="!isEyeOpen" style="padding: 0">
-                        <div class="col-md-10" style="padding: 0">
-                            <input type="password" class="form-control pass-control" [(ngModel)]="transferForm.value.transactionCode"/>
-                        </div>
-                        <div class="col-md-2" style="padding: 0">
-                            <span>
-                                <i class="button fa fa-eye-slash eye-icon" id="eyeClose" (click)="showPass()"></i>
-                            </span>
-                        </div>
+            <div class="col-md-6" style="text-align: left;">
+              <div class="form-group">
+                <label for="transactionCode">Codigo de Segurança</label>
+                <div
+                  class="col-md-12 security-code"
+                  *ngIf="!isEyeOpen"
+                  style="padding: 0"
+                >
+                  <div class="col-md-10" style="padding: 0">
+                    <input
+                      type="password"
+                      class="form-control pass-control"
+                      formControlName="transactionCode"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.transactionCode.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="submitted && !!f.transactionCode.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="!!f.transactionCode.errors.required">
+                        Campo obrigatório
+                      </div>
                     </div>
-                    <div class="col-md-12 security-code" *ngIf="isEyeOpen" style="padding: 0">
-                        <div class="col-md-10" style="padding: 0">
-                            <input type="text" class="form-control pass-control" [(ngModel)]="transferForm.value.transactionCode"/>
-                        </div>
-                        <div class="col-md-2" style="padding: 0">
-                            <span>
-                                <i class="button fa fa-eye eye-icon" id="eyeClose" (click)="showPass()"></i>
-                            </span>
-                        </div>
-                    </div>
+                  </div>
+                  <div class="col-md-2" style="padding: 0">
+                    <span>
+                      <i
+                        class="button fa fa-eye-slash eye-icon"
+                        id="eyeClose"
+                        (click)="showPass()"
+                      ></i>
+                    </span>
+                  </div>
                 </div>
+                <div
+                  class="col-md-12 security-code"
+                  *ngIf="isEyeOpen"
+                  style="padding: 0"
+                >
+                  <div class="col-md-10" style="padding: 0">
+                    <input
+                      type="text"
+                      class="form-control pass-control"
+                      formControlName="transactionCode"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.transactionCode.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="submitted && !!f.transactionCode.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="!!f.transactionCode.errors.required">
+                        Campo obrigatório
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2" style="padding: 0">
+                    <span>
+                      <i
+                        class="button fa fa-eye eye-icon"
+                        id="eyeClose"
+                        (click)="showPass()"
+                      ></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="col-md-6">
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <label for="desc">Descrição</label>
           <div class="form-group">
-            <label for="description">Descrição da Transferência</label>
             <textarea
               type="text"
               class="form-control"
-              style="min-height: 115px"
-              [(ngModel)]="transferForm.value.description"
+              formControlName="description"
             >
             </textarea>
           </div>
         </div>
       </div>
     </div>
-    <div class="row col-md-12"></div>
+  </div>
+</form>
+<div
+  class="row col-sm-12"
+  *ngIf="selectedAccount != null"
+  style="margin-left: 5px"
+>
+  <div class="row" style="float: left; ">
+    <div class="update mr-auto ml-auto">
+      <button type="submit" class="btn btn-success" (click)="onSubmit()">
+        Efetuar Transferência
+      </button>
+      <button
+        type="button"
+        class="btn btn-secundary"
+        (click)="transferForm.reset()"
+      >
+        Descartar
+      </button>
+    </div>
   </div>
 </div>
 
-<div class="row col-sm-12" *ngIf="selectedAccount != null" style="margin-left: 5px">
-    <div class="row" style="float: left; ">
-        <div class="update mr-auto ml-auto">
-            <button type="submit" class="btn btn-success" (click)="onSubmit()">Efetuar Transferência</button>
-            <button type="button" class="btn btn-secundary" (click)="resetForm()">Descartar</button>
-            <button type="button" class="btn btn-danger" (click)="cancelFunction()">Cancelar</button>
-        </div>
-    </div>
+<!-- <div class="col-sm-12" style="padding: 0">
+  <app-account-list [component]="this"></app-account-list>
 </div>
+<alert></alert>
+<form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+  <div class="card card-user-tansfer col-sm-12" *ngIf="selectedAccount != null">
+    <div class="card-header">
+      <h5 class="card-title">Transferência</h5>
+    </div>
+    <div class="card-body col-md-12">
+      <div class="row col-md-12">
+        <div class="row col-md-12" style="padding-left: 0">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="entity">IBAN de Destino</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="destinationIban"
+                [ngClass]="{
+                  'is-invalid': submitted && f.destinationIban.errors
+                }"
+              />
+              <div
+                *ngIf="submitted && !!f.destinationIban.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="!!f.destinationIban.errors.required">
+                  Campo obrigatório
+                </div>
+              </div>
+            </div>
+
+            <div class="row col-md-12" style="padding-left: 0">
+              <div class="col-md-6" style="padding-left: 0">
+                <div class="form-group">
+                  <label for="value">Valor da Transferência</label>
+                  <div class="row col-md-12">
+                    <div class="form-group">
+                    <div class="col-md-6" style="padding: 0">
+                      <input
+                        (keypress)="digitOnly($event)"
+                        type="text"
+                        formControlName="euros"
+                        class="form-control"
+                        style="text-align: right;"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.euros.errors
+                        }"
+                      />
+                    </div>
+                    <div class="col-md-1" id="comma-sign">
+                      <h5 class="payment-value">,</h5>
+                    </div>
+                    <div class="col-md-3 form-group" style="padding: 0">
+                      <input
+                        (keypress)="digitOnly($event)"
+                        type="text"
+                        class="form-control"
+                        formControlName="cents"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.cents.errors
+                        }"
+                      />
+                    </div>
+                    <div class="col-md-1" id="euro-sign">
+                      <h5 class="payment-value">€</h5>
+                    </div>
+                    <div
+                      *ngIf="
+                        submitted && (!!f.euros.errors || !!f.cents.errors)
+                      "
+                      class="invalid-feedback"
+                    >
+                      <div
+                        *ngIf="
+                          !!f.euros.errors.required || !!f.cents.errors.required
+                        "
+                      >
+                        Campo obrigatório
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" style="padding-right: 0">
+                <div class="form-group">
+                  <label for="transactionCode">Codigo de Segurança</label>
+                  <div
+                    class="col-md-12 security-code"
+                    *ngIf="!isEyeOpen"
+                    style="padding: 0"
+                  >
+                    <div class="col-md-10" style="padding: 0">
+                      <input
+                        type="password"
+                        class="form-control pass-control"
+                        formControlName="transactionCode"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.transactionCode.errors
+                        }"
+                      />
+                    </div>
+                    <div class="col-md-2" style="padding: 0">
+                      <span>
+                        <i
+                          class="button fa fa-eye-slash eye-icon"
+                          id="eyeClose"
+                          (click)="showPass()"
+                        ></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-md-12 security-code"
+                    *ngIf="isEyeOpen"
+                    style="padding: 0"
+                  >
+                    <div class="col-md-10" style="padding: 0">
+                      <input
+                        type="text"
+                        class="form-control pass-control"
+                        formControlName="transactionCode"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.transactionCode.errors
+                        }"
+                      />
+                    </div>
+                    <div class="col-md-2" style="padding: 0">
+                      <span>
+                        <i
+                          class="button fa fa-eye eye-icon"
+                          id="eyeClose"
+                          (click)="showPass()"
+                        ></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="submitted && !!f.transactionCode.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="!!f.transactionCode.errors.required">
+                      Campo obrigatório
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="description">Descrição do Pagamento</label>
+              <textarea
+                type="text"
+                class="form-control"
+                style="min-height: 115px"
+                formControlName="description"
+              >
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row col-md-12"></div>
+    </div>
+  </div>
+</form>
+<div
+  class="row col-sm-12"
+  *ngIf="selectedAccount != null"
+  style="margin-left: 5px"
+>
+  <div class="row" style="float: left; ">
+    <div class="update mr-auto ml-auto">
+      <button type="submit" class="btn btn-success" (click)="onSubmit()">
+        Efetuar Transferência
+      </button>
+      <button
+        type="button"
+        class="btn btn-secundary"
+        (click)="transferForm.reset()"
+      >
+        Descartar
+      </button>
+    </div>
+  </div>
+</div> -->

@@ -25,7 +25,6 @@ div.row.col-md-12 {
   border-bottom-left-radius: 0; */
 }
 
-
 .pass-control {
   flex: 1;
   /* border-right-width: 0;
@@ -39,26 +38,21 @@ div.row.col-md-12 {
 }
 
 #eyeClose {
-  text-align: left;
-  padding-left: 2px;
-  padding-top: 8.2px;
-  padding-bottom: 8.2px;
+  display: block;
+  margin: auto;
+  padding-top: 9.5px;
 }
 
 #eyeClose:hover {
   color: lightskyblue;
 }
 
-#comma-sign {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-#euro-sign {
-  padding-left: 10px;
-  padding-right: 0px;
-}
-
 button {
   margin-right: 15px;
+}
+
+.invalid-text {
+  padding-top: 4px;
+  font-size: 80%;
+  color: #dc3545;
 }

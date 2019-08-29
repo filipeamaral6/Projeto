@@ -4,7 +4,9 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'app/services/authentication.service';
 import { TransactionService } from 'app/services/transport/transaction.service';
 import { first } from 'rxjs/operators';
-import { AlertService } from 'app/shared/alerts/alert.service';
+import { Transfer } from 'app/shared/models/Transfer';
+import { CurrentUser } from 'app/shared/models/CurrentUser';
+import { AlertService } from 'app/shared/alerts';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,55 +23,71 @@ export class TransferComponent implements OnInit {
   selectedAccount: Account;
   transferForm: FormGroup;
   isEyeOpen: boolean;
+  currentUser: CurrentUser;
+  accountList: Account[];
 
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private transactionService: TransactionService,
     private alertService: AlertService,
-    private router: Router
-  ) { }
+    private route: Router
+  ) {
+    this.currentUser = this.authenticationService.currentUserValue;
+  }
+
+  get f() {
+    return this.transferForm.controls;
+  }
 
   ngOnInit() {
     this.selectedAccount = null;
+    this.isEyeOpen = false;
 
-    this.initForm();
+    this.transferForm = this.formBuilder.group({
+      type: ['TRANSFERÊNCIA', Validators.required],
+      destinationIban: ['', Validators.required],
+      euros: ['', Validators.required],
+      cents: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
+      description: ['', [Validators.required, Validators.maxLength(200)]],
+      transactionCode: ['', Validators.required]
+    });
   }
 
   resetForm() {
-    this.initForm();
+    this.transferForm.reset();
   }
 
-  cancelFunction() {
-    this.selectAccount = null;
-    this.initForm();
-  }
 
   onSubmit() {
-    console.log('Submit');
     this.submitted = true;
 
-    this.transferForm.value.value = this.transferForm.value.euros + '.' + this.transferForm.value.cents;
+    let value = this.transferForm.value.euros + '.' + this.transferForm.value.cents;
 
-    console.log( this.transferForm.value );
+    let transfer = new Transfer();
+    transfer.accountId = this.selectedAccount.id;
+    transfer.accountIban = this.selectedAccount.iban;
+    transfer.description = this.transferForm.value.description;
+    transfer.destinationIban = this.transferForm.value.destinationIban;
+    transfer.type = this.transferForm.value.type;
+    transfer.value = +value;
+    transfer.userId = this.currentUser.id;
 
-    // if ( this.transferForm.invalid ) {
-    //   console.log(1);
-    //   this.ngOnInit();
-    //   return;
-    // }
+    console.log(this.transferForm);
 
-    this.transactionService.addTransfer(this.transferForm.value).pipe(first()).subscribe( response => {
-      this.alertService.success(JSON.parse(JSON.stringify(response)).message + ' A redirecionar para os movimentos!');
-      setTimeout(() => {
-        this.router.navigate(['/client/movements/']);
-      }, 3000);
-    }, error => {
-      this.alertService.error(error);
-    });
-    this.submitted = false;
-    this.cancelFunction()
+    if (this.transferForm.invalid) {
+      return;
+    }
 
+    this.transactionService.addTransfer(transfer).pipe(first()).subscribe(
+      response => {
+        this.alertService.success('Transferência concluída com sucesso');
+        this.ngOnInit();
+        setTimeout(() => { this.route.navigate(['/client/movements']); }, 1500);
+      },
+      error => {
+        this.showErrorAlert(error);
+      });
   }
 
   digitOnly(event: { which: any; keyCode: any; }): boolean {
@@ -82,7 +100,7 @@ export class TransferComponent implements OnInit {
   }
 
   showPass() {
-    if ( !this.isEyeOpen ) {
+    if (!this.isEyeOpen) {
       this.isEyeOpen = true;
     } else {
       this.isEyeOpen = false;
@@ -103,23 +121,26 @@ export class TransferComponent implements OnInit {
     }
   }
 
-  initForm() {
-
-    this.isEyeOpen = false;
-
-    this.transferForm = this.formBuilder.group({
-      employeeId: [''],
-      accountId: [''],
-      userId: ['', Validators.required],
-      type: ['', Validators.required],
-      accountIban: ['', Validators.required],
-      value: [''],
-      euros: ['', Validators.required],
-      cents: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
-      description: ['', [Validators.required, Validators.maxLength(200)]],
-      destinationIban: ['', [Validators.required, Validators.minLength(25), Validators.maxLength(25)]],
-      transactionCode: ['', Validators.required]
-    });
+  private showErrorAlert(error: ErrorEvent) {
+    let message: string;
+    if (error.error.field) {
+      message = 'Erro no campo "' + this.translateField(error.error.field) + '": ' + error.error.message;
+    } else {
+      message = error.error.message;
+    }
+    this.alertService.error(message);
   }
 
+  private translateField(field: string) {
+    switch (field) {
+      case 'value':
+        return 'Valor';
+      case 'accountIban':
+        return 'IBAN de origem';
+      case 'description':
+        return 'Descrição';
+      case 'destinationIban':
+        return 'IBAN de destino';
+    }
+  }
 }
