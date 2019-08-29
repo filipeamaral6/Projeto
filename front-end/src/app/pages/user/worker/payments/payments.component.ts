@@ -44,7 +44,7 @@ export class PaymentsComponent implements OnInit {
       this.payment.accountIban = this.selectedAccount.iban;
       this.payment.userId = this.selectedClient.userId;
       this.payment.type = 'PAGAMENTO';
-      this.payment.value = this.payment.value  -1;
+      this.payment.value = this.payment.value * -1;
 
       for (let employee of employees) {
         console.log(employee.userId + ' ' + this.authenticationService.currentUser.id);

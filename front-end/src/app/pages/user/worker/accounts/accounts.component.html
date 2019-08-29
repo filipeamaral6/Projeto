@@ -290,7 +290,7 @@
         <div class="row col-sm-12">
             <div class="col-sm-4">
                 <label for="value">Valor:</label>
-                <p *ngIf="transaction.value < 0">-{{ transaction.value }}€</p>
+                <p *ngIf="transaction.value < 0">{{ transaction.value }}€</p>
                 <p *ngIf="transaction.value >= 0">+{{ transaction.value }}€</p>
             </div>
             <div class="col-sm-4">
