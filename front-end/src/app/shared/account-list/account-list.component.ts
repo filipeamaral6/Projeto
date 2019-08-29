@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { Account } from 'app/shared/models/Account';
 import { DashboardComponent } from 'app/pages/user/client/dashboard/dashboard.component';
 import { MovementsComponent } from 'app/pages/user/client/movements/movements.component';
@@ -8,12 +8,12 @@ import { AuthenticationService } from 'app/services/authentication.service';
 import { first } from 'rxjs/operators';
 import { AccountService } from 'app/services/transport/account.service';
 
-
 @Component({
   selector: 'app-account-list',
   templateUrl: './account-list.component.html',
   styleUrls: ['./account-list.component.css']
 })
+
 export class AccountListComponent implements OnInit {
 
   @Input() private component: any;
@@ -30,7 +30,7 @@ export class AccountListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.accountList  = [];
+    this.accountList = [];
     this.selectedAccount = null;
     this.accountInfoPopUp = false;
     this.getClientAccounts();
@@ -41,10 +41,10 @@ export class AccountListComponent implements OnInit {
     let style = {
       'background-color': 'white'
     }
-    if ( this.selectedAccount === null ) {
+    if (this.selectedAccount === null) {
       return style;
     } else {
-      if ( accountId === this.selectedAccount.id ) {
+      if (accountId === this.selectedAccount.id) {
         style = {
           'background-color': '#E1F5FE'
         }
@@ -54,7 +54,7 @@ export class AccountListComponent implements OnInit {
   }
 
   sendSelectedAccount(account: Account) {
-    if ( this.selectedAccount !== account ) {
+    if (this.selectedAccount !== account) {
       this.selectedAccount = account;
       this.createdAt = this.selectedAccount.createdAt.toString().substring(0, 10);
       this.component.selectAccount(account)
@@ -65,27 +65,27 @@ export class AccountListComponent implements OnInit {
   }
 
   private initAccountList() {
-    if ( this.authenticationService.currentUser.role === 'CLIENT' ) {
-      if ( (this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent) ) {
+    if (this.authenticationService.currentUser.role === 'CLIENT') {
+      if ((this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent)) {
         this.accountInfoPopUp = true;
         this.getClientAccounts();
       }
-      if ( ((this.component instanceof PaymentsComponent) || (this.component instanceof TransferComponent)) ) {
+      if (((this.component instanceof PaymentsComponent) || (this.component instanceof TransferComponent))) {
         this.accountList.forEach(account => {
-          if ( account.type.toLowerCase() !== 'poupança') {
+          if (account.type.toLowerCase() !== 'poupança') {
             this.accountList.push(account);
           }
         });
       }
     }
-    if ( (this.authenticationService.currentUser.role === 'OPERATOR') || (this.authenticationService.currentUser.role === 'ADMIN') ) {
-      if ( (this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent) ) {
+    if ((this.authenticationService.currentUser.role === 'OPERATOR') || (this.authenticationService.currentUser.role === 'ADMIN')) {
+      if ((this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent)) {
         this.accountInfoPopUp = true;
         this.getClientAccounts();
       }
-      if ( this.component instanceof PaymentsComponent ) {
+      if (this.component instanceof PaymentsComponent) {
         this.accountList.forEach(account => {
-          if ( account.type.toLowerCase() !== 'poupança') {
+          if (account.type.toLowerCase() !== 'poupança') {
             this.accountList.push(account);
           }
         });
@@ -96,9 +96,8 @@ export class AccountListComponent implements OnInit {
   private getClientAccounts() {
     this.accountList = [];
 
-    this.accountService.getAccountByClientId(this.authenticationService.currentUser.id).pipe(first()).subscribe( accounts => {
+    this.accountService.getAccountByClientId(this.authenticationService.currentUser.id).pipe(first()).subscribe(accounts => {
       this.accountList = accounts;
     });
   }
-
 }

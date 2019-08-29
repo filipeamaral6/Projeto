@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ClientLayoutRoutes } from './client-layout.routing';
 
@@ -23,6 +23,7 @@ import { AlertModule } from 'app/shared/alerts/alert.module';
     RouterModule.forChild(ClientLayoutRoutes),
     FormsModule,
     NgbModule,
+    ReactiveFormsModule,
     AlertModule
   ],
   declarations: [
