@@ -55,22 +55,26 @@ export class MovementsComponent implements OnInit {
   }
 
   selectAccount(account: Account) {
-    this.transactionList = [];
-    this.selectedAccount = account;
-    this.transactionService.getAllbyAccountIban(this.selectedAccount.iban).pipe(first()).subscribe(transactions => {
-      transactions.forEach(transaction => {
-        transaction.createdAt = transaction.createdAt.substring(0, 10);
-        this.transactionList.push(transaction);
+    if ( account === null ) {
+      this.getClientAllTransactions();
+    } else {
+      this.transactionList = [];
+      this.selectedAccount = account;
+      this.transactionService.getAllbyAccountIban(this.selectedAccount.iban).pipe(first()).subscribe(transactions => {
+        transactions.forEach(transaction => {
+          transaction.createdAt = transaction.createdAt.substring(0, 10);
+          this.transactionList.push(transaction);
+        });
+        this.transactionList = this.transactionList.reverse();
       });
-      this.transactionList = this.transactionList.reverse();
-    });
+    }
   }
 
   getTransactionById(id: number) {
     this.transactionService.getTransactionById(id).pipe(first()).subscribe(transaction => {
-      console.log(transaction);
+
       this.transaction = transaction[0][0];
-      let dateAux = transaction[0][0].createdAt.toString().split('T');
+      const dateAux = transaction[0][0].createdAt.toString().split('T');
       this.transaction.date = dateAux[0];
       this.transaction.hour = dateAux[1].split('+')[0];
       if (transaction[0][0].type === 'PAGAMENTO') {
@@ -88,17 +92,19 @@ export class MovementsComponent implements OnInit {
     this.accontService.getAccountByClientId(this.authenticationService.currentUser.id).pipe(first()).subscribe(accounts => {
       accounts.forEach(account => {
         this.transactionService.getAllbyAccountIban(account.iban).pipe(first()).subscribe(transactions => {
-          console.log(transactions)
-          this.transactionList = transactions.reverse();
+          transactions.forEach(transaction => {
+            this.transactionList.push(transaction);
+          });
         });
       });
     }, error => {
       this.alertService.error(error);
     });
+    this.transactionList = this.transactionList.reverse();
   }
 
   incomingTransfer(transaction: Transaction) {
-    
+
   }
 
   openModal(content: any, transaction: Transaction) {

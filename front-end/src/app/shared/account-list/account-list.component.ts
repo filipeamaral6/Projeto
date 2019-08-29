@@ -38,7 +38,7 @@ export class AccountListComponent implements OnInit {
     this.selectedAccount = null;
     this.accountInfoPopUp = false;
     this.getClientAccounts();
-    this.initAccountList();
+    // this.initAccountList();
   }
 
   selectedStyle(accountId: number) {
@@ -68,34 +68,34 @@ export class AccountListComponent implements OnInit {
     }
   }
 
-  private initAccountList() {
-    if (this.authenticationService.currentUser.role === 'CLIENT') {
-      if ((this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent)) {
-        this.accountInfoPopUp = true;
-        this.getClientAccounts();
-      }
-      if (((this.component instanceof PaymentsComponent) || (this.component instanceof TransferComponent))) {
-        this.accountList.forEach(account => {
-          if ( account.type !== 'POUPANÇA') {
-            this.accountList.push(account);
-          }
-        });
-      }
-    }
-    if ((this.authenticationService.currentUser.role === 'OPERATOR') || (this.authenticationService.currentUser.role === 'ADMIN')) {
-      if ((this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent)) {
-        this.accountInfoPopUp = true;
-        this.getClientAccounts();
-      }
-      if (this.component instanceof PaymentsComponent) {
-        this.accountList.forEach(account => {
-          if ( account.type !== 'POUPANÇA') {
-            this.accountList.push(account);
-          }
-        });
-      }
-    }
-  }
+  // private initAccountList() {
+  //   if (this.authenticationService.currentUser.role === 'CLIENT') {
+  //     if ((this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent)) {
+  //       this.accountInfoPopUp = true;
+  //       this.getClientAccounts();
+  //     }
+  //     if (((this.component instanceof PaymentsComponent) || (this.component instanceof TransferComponent))) {
+  //       this.accountList.forEach(account => {
+  //         if ( account.type !== 'POUPANÇA') {
+  //           this.accountList.push(account);
+  //         }
+  //       });
+  //     }
+  //   }
+  //   if ((this.authenticationService.currentUser.role === 'OPERATOR') || (this.authenticationService.currentUser.role === 'ADMIN')) {
+  //     if ((this.component instanceof DashboardComponent) || (this.component instanceof MovementsComponent)) {
+  //       this.accountInfoPopUp = true;
+  //       this.getClientAccounts();
+  //     }
+  //     if (this.component instanceof PaymentsComponent) {
+  //       this.accountList.forEach(account => {
+  //         if ( account.type !== 'POUPANÇA') {
+  //           this.accountList.push(account);
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
 
   private getClientAccounts() {
     this.accountList = [];
