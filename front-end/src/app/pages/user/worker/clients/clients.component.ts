@@ -16,6 +16,8 @@ import { EmployeeService } from 'app/services/transport/employee.service';
   styleUrls: ['./clients.css']
 })
 export class ClientsComponent implements OnInit {
+  mobileNumber: string;
+  prefix: string;
   statusArray: string[] = [
     'ALL',
     'ACTIVE',
@@ -106,12 +108,18 @@ export class ClientsComponent implements OnInit {
   }
 
   addClient(form: NgForm) {
-    console.log(this.newClient);
     this.newClient.transactionPassword = 'test';
+    this.newClient.mobileNumber = this.prefix + this.mobileNumber;
+    this.newClient.role = 'CLIENT';
+    this.newClient.status = 'ACTIVE';
     const newClientString = JSON.stringify(this.newClient);
 
     this.clientService.addClient(newClientString).pipe(first()).subscribe(response => {
       console.log(response);
+      this.closeModal();
+      const message = JSON.parse(JSON.stringify(response)).message;
+      this.alertService.success(JSON.stringify(message));
+      this.fetchClients('ALL');
 
       this.employeeService.getAll().pipe(first()).subscribe(employees => {
         for (let employee of employees) {
@@ -138,10 +146,6 @@ export class ClientsComponent implements OnInit {
           } else {
             this.accountService.addClientToAccount(client[0].userId, this.selectedAccount.id).pipe(first()).
               subscribe(responseAddToAccount => {
-                this.closeModal();
-                const message = JSON.parse(JSON.stringify(response)).message;
-                this.alertService.success(JSON.stringify(message));
-                this.fetchClients('ALL');
               });
           }
         });
@@ -155,7 +159,7 @@ export class ClientsComponent implements OnInit {
   }
 
   updateClient(form: NgForm) {
-
+    this.selectedClient.mobileNumber = this.prefix + this.mobileNumber;
     const updatedClient = JSON.stringify(this.selectedClient);
 
     this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
@@ -176,7 +180,8 @@ export class ClientsComponent implements OnInit {
     const updatedClient = JSON.stringify(this.selectedClient);
 
     this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
-      console.log(response);
+      const message = JSON.parse(JSON.stringify(response)).message;
+      this.alertService.success(message);
       this.closeModal();
     });
   }
@@ -187,7 +192,8 @@ export class ClientsComponent implements OnInit {
     const updatedClient = JSON.stringify(this.selectedClient);
 
     this.clientService.updateClient(updatedClient).pipe(first()).subscribe(response => {
-      console.log(response);
+      const message = JSON.parse(JSON.stringify(response)).message;
+      this.alertService.success(message);
       this.closeModal();
     });
   }
@@ -195,11 +201,15 @@ export class ClientsComponent implements OnInit {
   openModal(content, client) {
     if (client !== null) {
       this.selectedClient = client;
+      this.prefix = client.mobileNumber.slice(0, 3);
+      this.mobileNumber = client.mobileNumber.slice(3);
       const formattedDate: string[] = this.selectedClient.birthDate.split('T');
       if (formattedDate.length > 0) {
         this.selectedClient.birthDate = formattedDate[0];
       }
     } else {
+      this.prefix = '351';
+      this.mobileNumber = '';
       this.openAccount = '';
       this.newClient = new Client();
       this.newAccount = new Account();
@@ -233,20 +243,8 @@ export class ClientsComponent implements OnInit {
     }
   }
 
-  // generateIban() {
-  //   let iban = 'PT50';
-  //   iban += this.randomString('0123456789', 21);
-
-  //   this.newAccount.iban = iban;
-  // }
-
-  // generateAccountNumber() {
-  //   let accountNumber = this.randomString('0123456789', 11);
-
-  //   this.newAccount.accountNumber = accountNumber;
-  // }
-
   closeModal() {
+    this.modalService.dismissAll();
     this.editMode = false;
     this.editButtonLabel = 'Editar Dados';
     this.fetchClients('ALL');
@@ -265,7 +263,7 @@ export class ClientsComponent implements OnInit {
   private showErrorAlert(error: ErrorEvent) {
     let message: string;
     if (error.error.field) {
-      message = 'Campo "' + this.translateField(error.error.field) + '" por preencher!';
+      message = 'Erro no campo "' + this.translateField(error.error.field) + '": ' + error.error.message;
     } else {
       message = error.error.message;
     }

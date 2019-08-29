@@ -91,7 +91,7 @@
             <button class="btn btn-primary" (click)="fetchTransactions();">Transações</button>
             <div *ngIf="openTab === 'holders'">
                 <h6>Titulares da conta</h6>
-                <button type="button" class="btn btn-secondary"
+                <button *ngIf="selectedAccount.status === 'ACTIVE'" type="button" class="btn btn-secondary"
                     (click)="toggleEditMode()">{{ editButtonLabel }}</button>
                 <br>
                 <span *ngIf="editMode" class="col-md-7">

@@ -109,21 +109,24 @@ export class AccountsComponent implements OnInit {
 
   deactivateAccount() {
     this.selectedAccount.status = 'INACTIVE';
+    this.selectedAccount.userId = this.authenticationService.currentUser.id;
+    console.log(this.selectedAccount);
     this.accountService.updateAccount(this.selectedAccount).pipe(first()).subscribe(response => {
       this.closeModal();
       this.alertService.success('Conta desativada com sucesso!');
     }, error => {
-      this.alertService.error(error.message);
+      this.alertService.error(error);
     });
   }
 
   activateAccount() {
     this.selectedAccount.status = 'ACTIVE';
+    this.selectedAccount.userId = this.authenticationService.currentUser.id;
     this.accountService.updateAccount(this.selectedAccount).pipe(first()).subscribe(response => {
       this.closeModal();
       this.alertService.success('Conta ativada com sucesso!');
     }, error => {
-      this.alertService.error(error.message);
+      this.alertService.error(error);
     });
   }
 

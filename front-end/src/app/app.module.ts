@@ -26,6 +26,7 @@ import { AlertService, AlertModule } from './shared/alerts';
 import { TransactionService } from './services/transport/transaction.service';
 import { EmployeeService } from './services/transport/employee.service';
 import { FilterPipe } from './shared/filter.pipe';
+import { WithdrawComponent } from './pages/user/worker/withdraw/withdraw.component';
 
 
 
