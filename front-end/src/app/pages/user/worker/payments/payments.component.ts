@@ -71,7 +71,7 @@ export class PaymentsComponent implements OnInit {
     this.accountService.getAccountByClientId(client.id).pipe(first()).subscribe(accounts => {
       this.accounts = accounts;
       console.log(this.accounts);
-      this.modalService.open(content, { size: 'lg' });
+      this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
       this.payment = new Payment();
     });
   }

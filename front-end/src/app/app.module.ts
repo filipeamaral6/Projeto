@@ -48,7 +48,8 @@ import { WithdrawComponent } from './pages/user/worker/withdraw/withdraw.compone
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes,
       {
-        useHash: true
+        useHash: true,
+        onSameUrlNavigation: 'reload'
       }),
     SidebarModule,
     NavbarModule,

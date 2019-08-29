@@ -5,6 +5,7 @@ import { AuthenticationService } from 'app/services/authentication.service';
 import { TransactionService } from 'app/services/transport/transaction.service';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'app/shared/alerts/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -26,6 +27,7 @@ export class TransferComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private transactionService: TransactionService,
     private alertService: AlertService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -58,7 +60,10 @@ export class TransferComponent implements OnInit {
     // }
 
     this.transactionService.addTransfer(this.transferForm.value).pipe(first()).subscribe( response => {
-      console.log(response);
+      this.alertService.success(JSON.parse(JSON.stringify(response)).message + ' A redirecionar para os movimentos!');
+      setTimeout(() => {
+        this.router.navigate(['/client/movements/']);
+      }, 3000);
     }, error => {
       this.alertService.error(error);
     });

@@ -38,9 +38,9 @@
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
         <pd:x>-14</pd:x>
-        <pd:y>4</pd:y>
-        <pd:width>1846</pd:width>
-        <pd:height>275</pd:height>
+        <pd:y>3</pd:y>
+        <pd:width>2783</pd:width>
+        <pd:height>277</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
         <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
@@ -389,8 +389,8 @@
                 <jdbcUpdateActivityInput>
                     <balance>
                         <xsl:choose>
-                            <xsl:when test="exists($GetOriginAccountBalance/resultSet/Record[1]/balance - $Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value)">
-                                <xsl:value-of select="$GetOriginAccountBalance/resultSet/Record[1]/balance - $Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value"/>
+                            <xsl:when test="exists($GetOriginAccountBalance/resultSet/Record[1]/balance + $Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value)">
+                                <xsl:value-of select="$GetOriginAccountBalance/resultSet/Record[1]/balance + $Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>
@@ -476,8 +476,8 @@
                 <jdbcUpdateActivityInput>
                     <balance>
                         <xsl:choose>
-                            <xsl:when test="exists($GetDestinationBalance/resultSet/Record[1]/balance + $Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value)">
-                                <xsl:value-of select="$GetDestinationBalance/resultSet/Record[1]/balance + $Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value"/>
+                            <xsl:when test="exists($GetDestinationBalance/resultSet/Record[1]/balance - $Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value)">
+                                <xsl:value-of select="$GetDestinationBalance/resultSet/Record[1]/balance - $Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>

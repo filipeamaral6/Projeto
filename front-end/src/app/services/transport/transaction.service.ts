@@ -49,6 +49,10 @@ export class TransactionService {
         return this.http.post(this.API + '/payment/add', payment);
     }
 
+    addWithdraw(withdraw: Withdraw) {
+        return this.http.post(this.API + '/withdraw/add', withdraw);
+    }
+
     bindingPayment(info: any[], transaction: Transaction) {
         let payment: Payment = new Payment;
         payment.entity = info[0].entity;

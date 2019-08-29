@@ -55,7 +55,6 @@ public class InputPayment {
     @Size(max = 255, message="Número de caracteres máximo (255)")
     @XmlAttribute(name = "description")
     protected String description;
-    @NotBlank(message="Campo obrigatório")
     @XmlAttribute(name = "employee_id")
     protected String employeeId;
     @NotBlank(message="Campo obrigatório")

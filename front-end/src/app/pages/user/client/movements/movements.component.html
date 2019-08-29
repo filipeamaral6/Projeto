@@ -6,56 +6,31 @@
   <div class="card-body">
     <div>
       <span>
-        <a
-          class="btn btn-primary"
-          (click)="filterTransaction = null"
-          [ngStyle]="
+        <a class="btn btn-primary" (click)="filterTransaction = null" [ngStyle]="
             filterTransaction === null
               ? { 'background-color': 'black', color: 'white' }
               : null
-          "
-          >Todos os Movimentos</a
-        >
-        <a
-          class="btn btn-primary"
-          (click)="filterTransaction = 'DEPÓSITO'"
-          [ngStyle]="
+          ">Todos os Movimentos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'DEPÓSITO'" [ngStyle]="
             filterTransaction === 'DEPÓSITO'
               ? { 'background-color': 'black', color: 'white' }
               : null
-          "
-          >Depósitos</a
-        >
-        <a
-          class="btn btn-primary"
-          (click)="filterTransaction = 'LEVANTAMENTO'"
-          [ngStyle]="
+          ">Depósitos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'LEVANTAMENTO'" [ngStyle]="
             filterTransaction === 'LEVANTAMENTO'
               ? { 'background-color': 'black', color: 'white' }
               : null
-          "
-          >Levantamentos</a
-        >
-        <a
-          class="btn btn-primary"
-          (click)="filterTransaction = 'TRANSFERÊNCIA'"
-          [ngStyle]="
+          ">Levantamentos</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'TRANSFERÊNCIA'" [ngStyle]="
             filterTransaction === 'TRANSFERÊNCIA'
               ? { 'background-color': 'black', color: 'white' }
               : null
-          "
-          >Transferências</a
-        >
-        <a
-          class="btn btn-primary"
-          (click)="filterTransaction = 'PAGAMENTO'"
-          [ngStyle]="
+          ">Transferências</a>
+        <a class="btn btn-primary" (click)="filterTransaction = 'PAGAMENTO'" [ngStyle]="
             filterTransaction === 'PAGAMENTO'
               ? { 'background-color': 'black', color: 'white' }
               : null
-          "
-          >Pagamentos</a
-        >
+          ">Pagamentos</a>
       </span>
     </div>
     <hr />
@@ -70,10 +45,7 @@
           </tr>
         </thead>
         <tbody *ngIf="filterTransaction !== null">
-          <tr
-            *ngFor="let transaction of transactionList"
-            (click)="openModal(transactionDetailsModal, transaction)"
-          >
+          <tr *ngFor="let transaction of transactionList" (click)="openModal(transactionDetailsModal, transaction)">
             <td *ngIf="transaction.type === filterTransaction">
               {{ transaction.createdAt.toString().split("T")[0] }}
             </td>
@@ -89,13 +61,14 @@
           </tr>
         </tbody>
         <tbody *ngIf="filterTransaction === null">
-          <tr
-            *ngFor="let transaction of transactionList"
-            (click)="openModal(transactionDetailsModal, transaction)"
-          >
+          <tr *ngFor="let transaction of transactionList" (click)="openModal(transactionDetailsModal, transaction)">
             <td>{{ transaction.createdAt.toString().split("T")[0] }}</td>
             <td>{{ transaction.accountIban }}</td>
-            <td>{{ transaction.value }} €</td>
+            <td>
+              <!-- {{ transaction.value }} € -->
+              <p *ngIf="transaction.value >= 0" style="color: green">+{{ transaction.value }}</p>
+              <p *ngIf="transaction.value < 0" style="color: red">{{ transaction.value }}</p>
+            </td>
             <td>{{ transaction.type }}</td>
           </tr>
         </tbody>
@@ -107,12 +80,8 @@
 <ng-template #transactionDetailsModal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Detalhes do Movimento</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click'); activeModal = false; closeModal()"
-    >
+    <button type="button" class="close" aria-label="Close"
+      (click)="modal.dismiss('Cross click'); activeModal = false; closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

@@ -5,6 +5,8 @@ import { AuthenticationService } from 'app/services/authentication.service';
 import { TransactionService } from 'app/services/transport/transaction.service';
 import { first } from 'rxjs/operators';
 import { AlertService } from 'app/shared/alerts/alert.service';
+import { Payment } from 'app/shared/models/Payment';
+import { Router } from '@angular/router';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -15,7 +17,9 @@ import { AlertService } from 'app/shared/alerts/alert.service';
 })
 
 export class PaymentsComponent implements OnInit {
-
+  euros: number;
+  cents: number;
+  newPayment: Payment;
   selectedAccount: Account;
   paymentForm: FormGroup;
   isEyeOpen: boolean;
@@ -27,12 +31,13 @@ export class PaymentsComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private transactionService: TransactionService,
     private alertService: AlertService,
-  ) {}
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.selectedAccount = null;
-
-    this.initForm();
+    this.newPayment = new Payment();
+    this.newPayment.employeeId = null;
   }
 
   get f() {
@@ -51,24 +56,19 @@ export class PaymentsComponent implements OnInit {
   onSubmit() {
     console.log('Submit');
     this.submitted = true;
+    this.newPayment.value = +(this.euros + '.' + this.cents);
+    this.newPayment.employeeId = null;
 
+    console.log(this.newPayment);
 
-
-    this.paymentForm.value.value = this.paymentForm.value.euros + '.' + this.paymentForm.value.cents;
-
-    console.log( this.paymentForm.value );
-
-    // if ( this.paymentForm.invalid ) {
-    //   console.log(1);
-    //   this.ngOnInikst();
-    //   return;
-    // }
-
-
-    this.transactionService.addPayment(this.paymentForm.value).pipe(first()).subscribe( response => {
-      console.log(response);
+    this.transactionService.addPayment(this.newPayment).pipe(first()).subscribe(response => {
+      this.alertService.success(JSON.parse(JSON.stringify(response)).message + ' A redirecionar para os movimentos!');
+      setTimeout(() => {
+        this.router.navigate(['/client/movements/']);
+      }, 3000);
     }, error => {
-      this.alertService.error(error.error.field);
+      console.log(error);
+      this.alertService.error(error.error);
     });
     this.submitted = false;
 
@@ -83,7 +83,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   showPass() {
-    if ( !this.isEyeOpen ) {
+    if (!this.isEyeOpen) {
       this.isEyeOpen = true;
     } else {
       this.isEyeOpen = false;
@@ -91,36 +91,14 @@ export class PaymentsComponent implements OnInit {
   }
 
   selectAccount(account: Account) {
-    this.selectedAccount = account;
-    if ( account === null) {
-      this.initForm();
-    } else {
-      this.paymentForm.value.type = 'PAGAMENTO';
-      this.paymentForm.value.userId = this.authenticationService.currentUser.id;
-      this.paymentForm.value.accountIban = this.selectedAccount.iban;
-      this.paymentForm.value.accountId = this.selectedAccount.id;
-      console.log(this.paymentForm);
-    }
-  }
-
-  initForm() {
-
     this.isEyeOpen = false;
+    this.selectedAccount = account;
+    this.newPayment = new Payment();
 
-    this.paymentForm = this.formBuilder.group({
-      employeeId: [''],
-      accountId: [''],
-      userId: ['', Validators.required],
-      type: ['', Validators.required],
-      accountIban: ['', Validators.required],
-      value: [''],
-      euros: ['', Validators.required],
-      cents: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
-      description: ['', [Validators.required, Validators.maxLength(200)]],
-      entity: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-      reference: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-      transactionCode: ['', Validators.required]
-    });
+    this.newPayment.type = 'PAGAMENTO';
+    this.newPayment.userId = this.authenticationService.currentUser.id;
+    this.newPayment.accountIban = this.selectedAccount.iban;
+    this.newPayment.accountId = this.selectedAccount.id;
   }
 
 }

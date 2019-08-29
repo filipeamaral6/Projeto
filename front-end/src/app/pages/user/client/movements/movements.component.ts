@@ -96,6 +96,10 @@ export class MovementsComponent implements OnInit {
     });
   }
 
+  incomingTransfer(transaction: Transaction) {
+    
+  }
+
   openModal(content: any, transaction: Transaction) {
     this.getTransactionById(transaction.id);
     console.log(transaction);
