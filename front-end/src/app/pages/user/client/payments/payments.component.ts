@@ -56,7 +56,7 @@ export class PaymentsComponent implements OnInit {
   onSubmit() {
     console.log('Submit');
     this.submitted = true;
-    this.newPayment.value = +(this.euros + '.' + this.cents);
+    this.newPayment.value = +(this.euros + '.' + this.cents) * -1;
     this.newPayment.employeeId = null;
 
     console.log(this.newPayment);

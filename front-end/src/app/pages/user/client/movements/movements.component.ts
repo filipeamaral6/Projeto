@@ -62,6 +62,7 @@ export class MovementsComponent implements OnInit {
         transaction.createdAt = transaction.createdAt.substring(0, 10);
         this.transactionList.push(transaction);
       });
+      this.transactionList = this.transactionList.reverse();
     });
   }
 
@@ -88,7 +89,7 @@ export class MovementsComponent implements OnInit {
       accounts.forEach(account => {
         this.transactionService.getAllbyAccountIban(account.iban).pipe(first()).subscribe(transactions => {
           console.log(transactions)
-          this.transactionList = transactions;
+          this.transactionList = transactions.reverse();
         });
       });
     }, error => {

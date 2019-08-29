@@ -39,8 +39,8 @@
         <pd:resourceType>ae.process.group</pd:resourceType>
         <pd:x>-14</pd:x>
         <pd:y>3</pd:y>
-        <pd:width>2783</pd:width>
-        <pd:height>277</pd:height>
+        <pd:width>4189</pd:width>
+        <pd:height>278</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
         <pd:collapsedHeight>70</pd:collapsedHeight>
         <pd:groupVariables/>
@@ -589,8 +589,8 @@
                     </account_id>
                     <value>
                         <xsl:choose>
-                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value)">
-                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value"/>
+                            <xsl:when test="exists($Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value * -1)">
+                                <xsl:value-of select="$Start/pfx:WriteTransferInput/input/ns1:inputTransfer/@value * -1"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="xsi:nil">true</xsl:attribute>

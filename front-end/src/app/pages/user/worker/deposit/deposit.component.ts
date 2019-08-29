@@ -45,6 +45,7 @@ export class DepositComponent implements OnInit {
     this.deposit.accountIban = this.selectedAccount.iban;
     this.deposit.userId = this.selectedClient.userId;
     this.deposit.type = 'DEPÓSITO';
+    this.deposit.value = this.deposit.value;
 
     this.employeeService.getAll().pipe(first()).subscribe(employees => {
       for (let employee of employees) {

@@ -46,6 +46,7 @@ export class WithdrawComponent implements OnInit {
       this.newWithdraw.accountIban = this.selectedAccount.iban;
       this.newWithdraw.userId = this.authenticationService.currentUser.id;
       this.newWithdraw.type = 'LEVANTAMENTO';
+      this.newWithdraw.value = this.newWithdraw.value * -1;
 
       for (let employee of employees) {
         console.log(employee.userId + ' ' + this.authenticationService.currentUser.id);

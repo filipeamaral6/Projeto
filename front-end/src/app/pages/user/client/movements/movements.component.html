@@ -53,7 +53,8 @@
               {{ transaction.accountIban }}
             </td>
             <td *ngIf="transaction.type === filterTransaction">
-              {{ transaction.value }} €
+                <p *ngIf="transaction.value >= 0" style="color: green">+{{ transaction.value }}€</p> 
+                <p *ngIf="transaction.value < 0" style="color: red">{{ transaction.value }}€</p> 
             </td>
             <td *ngIf="transaction.type === filterTransaction">
               {{ transaction.type }}
@@ -66,8 +67,8 @@
             <td>{{ transaction.accountIban }}</td>
             <td>
               <!-- {{ transaction.value }} € -->
-              <p *ngIf="transaction.value >= 0" style="color: green">+{{ transaction.value }}</p>
-              <p *ngIf="transaction.value < 0" style="color: red">{{ transaction.value }}</p>
+              <p *ngIf="transaction.value >= 0" style="color: green">+{{ transaction.value }}€</p>
+              <p *ngIf="transaction.value < 0" style="color: red">{{ transaction.value }}€</p>
             </td>
             <td>{{ transaction.type }}</td>
           </tr>

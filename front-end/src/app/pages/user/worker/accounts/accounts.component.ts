@@ -226,7 +226,7 @@ export class AccountsComponent implements OnInit {
   fetchTransactions() {
     this.transactionService.getAllbyAccountIban(this.selectedAccount.iban).pipe(first()).subscribe(transactions => {
       console.log(transactions);
-      this.transactionList = transactions;
+      this.transactionList = transactions.reverse();
       this.openTab = 'transactions';
       this.filterTransaction = null;
     }, error => {

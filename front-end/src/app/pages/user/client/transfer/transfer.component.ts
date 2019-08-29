@@ -70,7 +70,7 @@ export class TransferComponent implements OnInit {
     transfer.description = this.transferForm.value.description;
     transfer.destinationIban = this.transferForm.value.destinationIban;
     transfer.type = this.transferForm.value.type;
-    transfer.value = +value;
+    transfer.value = +value * -1;
     transfer.userId = this.currentUser.id;
 
     console.log(this.transferForm);
@@ -109,16 +109,12 @@ export class TransferComponent implements OnInit {
 
   selectAccount(account: Account) {
     this.selectedAccount = account;
-    if ( account === null) {
-      this.initForm();
-    } else {
-      this.transferForm.value.employeeId = 0;
-      this.transferForm.value.type = 'TRANSFERÊNCIA';
-      this.transferForm.value.userId = this.authenticationService.currentUser.id;
-      this.transferForm.value.accountIban = this.selectedAccount.iban;
-      this.transferForm.value.accountId = this.selectedAccount.id;
-      console.log(this.transferForm);
-    }
+    this.transferForm.value.employeeId = 0;
+    this.transferForm.value.type = 'TRANSFERÊNCIA';
+    this.transferForm.value.userId = this.authenticationService.currentUser.id;
+    this.transferForm.value.accountIban = this.selectedAccount.iban;
+    this.transferForm.value.accountId = this.selectedAccount.id;
+    console.log(this.transferForm);
   }
 
   private showErrorAlert(error: ErrorEvent) {

@@ -150,17 +150,31 @@
                 <h6>Titulares da conta</h6>
                 <div>
                     <span>
-                        <a class="btn btn-primary" (click)="filterTransaction = null"
-                            [ngStyle]="filterTransaction === null ? { 'background-color': 'black', 'color': 'white' }: null">Todos
-                            os Movimentos</a>
-                        <a class="btn btn-primary" (click)="filterTransaction = 'Depósito'"
-                            [ngStyle]="filterTransaction === 'Depósito' ? { 'background-color': 'black', 'color': 'white' }: null">Depósitos</a>
-                        <a class="btn btn-primary" (click)="filterTransaction = 'Levantamento'"
-                            [ngStyle]="filterTransaction === 'Levantamento' ? { 'background-color': 'black', 'color': 'white' }: null">Levantamentos</a>
-                        <a class="btn btn-primary" (click)="filterTransaction = 'Transferência'"
-                            [ngStyle]="filterTransaction === 'Transferência' ? { 'background-color': 'black', 'color': 'white' }: null">Transferências</a>
-                        <a class="btn btn-primary" (click)="filterTransaction = 'Pagamento'"
-                            [ngStyle]="filterTransaction === 'Pagamento' ? { 'background-color': 'black', 'color': 'white' }: null">Pagamentos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = null" [ngStyle]="
+                                    filterTransaction === null
+                                      ? { 'background-color': 'black', color: 'white' }
+                                      : null
+                                  ">Todos os Movimentos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'DEPÓSITO'" [ngStyle]="
+                                    filterTransaction === 'DEPÓSITO'
+                                      ? { 'background-color': 'black', color: 'white' }
+                                      : null
+                                  ">Depósitos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'LEVANTAMENTO'" [ngStyle]="
+                                    filterTransaction === 'LEVANTAMENTO'
+                                      ? { 'background-color': 'black', color: 'white' }
+                                      : null
+                                  ">Levantamentos</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'TRANSFERÊNCIA'" [ngStyle]="
+                                    filterTransaction === 'TRANSFERÊNCIA'
+                                      ? { 'background-color': 'black', color: 'white' }
+                                      : null
+                                  ">Transferências</a>
+                        <a class="btn btn-primary" (click)="filterTransaction = 'PAGAMENTO'" [ngStyle]="
+                                    filterTransaction === 'PAGAMENTO'
+                                      ? { 'background-color': 'black', color: 'white' }
+                                      : null
+                                  ">Pagamentos</a>
                     </span>
                 </div>
                 <hr>
@@ -174,18 +188,26 @@
                             </tr>
                         </thead>
                         <tbody *ngIf="filterTransaction !== null">
-                            <tr *ngFor="let transaction of transactionList">
+                            <tr *ngFor="let transaction of transactionList"
+                                (click)="openTransactionDetailsModal(transactionDetailsModal, transaction.id)">
                                 <td *ngIf="transaction.type === filterTransaction">
                                     {{ transaction.createdAt.toString().split('T')[0] }}</td>
                                 <td *ngIf="transaction.type === filterTransaction">{{ transaction.accountIban }}</td>
-                                <td *ngIf="transaction.type === filterTransaction">{{ transaction.value }} €</td>
+                                <td *ngIf="transaction.type === filterTransaction">
+                                    <p *ngIf="transaction.value >= 0" style="color: green">+{{ transaction.value }}€</p>
+                                    <p *ngIf="transaction.value < 0" style="color: red">{{ transaction.value }}€</p>
+                                </td>
                                 <td *ngIf="transaction.type === filterTransaction">{{ transaction.type }}</td>
                             </tr>
                         </tbody>
                         <tbody *ngIf="filterTransaction === null">
-                            <tr *ngFor="let transaction of transactionList" (click)="openTransactionDetailsModal(transactionDetailsModal, transaction.id)">
+                            <tr *ngFor="let transaction of transactionList"
+                                (click)="openTransactionDetailsModal(transactionDetailsModal, transaction.id)">
                                 <td>{{ transaction.createdAt.toString().split('T')[0] }}</td>
-                                <td>{{ transaction.value }} €</td>
+                                <td>
+                                    <p *ngIf="transaction.value >= 0" style="color: green">+{{ transaction.value }}€</p>
+                                    <p *ngIf="transaction.value < 0" style="color: red">{{ transaction.value }}€</p>
+                                </td>
                                 <td>{{ transaction.type }}</td>
                             </tr>
                         </tbody>
@@ -245,8 +267,7 @@
 <ng-template #transactionDetailsModal let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Detalhes do Movimento</h4>
-        <button type="button" class="close" aria-label="Close"
-            (click)="modal.dismiss('Cross click');">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click');">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -269,7 +290,8 @@
         <div class="row col-sm-12">
             <div class="col-sm-4">
                 <label for="value">Valor:</label>
-                <p>{{ transaction.value }} €</p>
+                <p *ngIf="transaction.value < 0">-{{ transaction.value }}€</p>
+                <p *ngIf="transaction.value >= 0">+{{ transaction.value }}€</p>
             </div>
             <div class="col-sm-4">
                 <label for="acc">Conta de origem:</label>
