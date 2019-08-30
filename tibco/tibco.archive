@@ -3,22 +3,18 @@
     <enterpriseArchive>
         <sharedArchive name="Shared Archive">
             <resourceType>shared.archive.resource</resourceType>
-            <authorProperty>andre.mendonca</authorProperty>
+            <authorProperty>filipe.amaral</authorProperty>
         </sharedArchive>
         <processArchive name="Process Archive">
             <resourceType>process.archive.resource</resourceType>
-            <authorProperty>andre.mendonca</authorProperty>
-            <processProperty>/Account/Service.serviceagent,/Client/Service.serviceagent,/Client_Account/Service.serviceagent,/Employee/Service.serviceagent,/Transactions/Service.serviceagent,/User/Service.serviceagent</processProperty>
+            <authorProperty>filipe.amaral</authorProperty>
+            <processProperty>/User/Service.serviceagent,/Transactions/Service.serviceagent,/Employee/Service.serviceagent,/Client_Account/Service.serviceagent,/Client/Service.serviceagent,/Account/Service.serviceagent</processProperty>
         </processArchive>
         <versionProperty>2</versionProperty>
-        <authorProperty>andre.mendonca</authorProperty>
+        <authorProperty>filipe.amaral</authorProperty>
         <addServiceSettableGvars>true</addServiceSettableGvars>
         <name>tibco</name>
-        <designer>
-            <lockedProperties/>
-            <fixedChildren/>
-            <resourceDescriptions/>
-        </designer>
-        <fileLocationProperty>C:\Users\andre.mendonca\Desktop\Bankrising\bankrising.ear</fileLocationProperty>
+        <designer/>
+        <fileLocationProperty>C:\Users\filipe.amaral\Desktop\bankrising.ear</fileLocationProperty>
     </enterpriseArchive>
 </Repository:repository>

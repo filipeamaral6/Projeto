@@ -37,9 +37,9 @@
     <pd:group name="Group">
         <pd:type>com.tibco.pe.core.TransactionGroup</pd:type>
         <pd:resourceType>ae.process.group</pd:resourceType>
-        <pd:x>-14</pd:x>
+        <pd:x>1</pd:x>
         <pd:y>3</pd:y>
-        <pd:width>4189</pd:width>
+        <pd:width>6298</pd:width>
         <pd:height>278</pd:height>
         <pd:collapsedWidth>57</pd:collapsedWidth>
         <pd:collapsedHeight>70</pd:collapsedHeight>
@@ -163,7 +163,7 @@
         <pd:activity name="WriteTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>183</pd:x>
+            <pd:x>198</pd:x>
             <pd:y>198</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -266,7 +266,7 @@
         <pd:activity name="LAST_INSERT_ID">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>291</pd:x>
+            <pd:x>306</pd:x>
             <pd:y>199</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -289,7 +289,7 @@
         <pd:activity name="WriteTransfer">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>392</pd:x>
+            <pd:x>407</pd:x>
             <pd:y>199</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -350,7 +350,7 @@
         <pd:activity name="SUCCESS">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1178</pd:x>
+            <pd:x>1193</pd:x>
             <pd:y>203</pd:y>
             <config>
                 <variableName>message</variableName>
@@ -366,7 +366,7 @@
         <pd:activity name="UPDATE_Origin_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>67</pd:x>
+            <pd:x>82</pd:x>
             <pd:y>198</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -413,7 +413,7 @@
         <pd:activity name="GetOriginAccountBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>69</pd:x>
+            <pd:x>84</pd:x>
             <pd:y>67</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -453,8 +453,8 @@
         <pd:activity name="UPDATE_Destination_Account">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>1084</pd:x>
-            <pd:y>203</pd:y>
+            <pd:x>1098</pd:x>
+            <pd:y>202</pd:y>
             <config>
                 <timeout>10</timeout>
                 <commit>false</commit>
@@ -500,7 +500,7 @@
         <pd:activity name="GetDestinationBalance">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>968</pd:x>
+            <pd:x>983</pd:x>
             <pd:y>201</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -540,7 +540,7 @@
         <pd:activity name="DestinationTransaction">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>602</pd:x>
+            <pd:x>617</pd:x>
             <pd:y>201</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -643,7 +643,7 @@
         <pd:activity name="GetDestinationAccountId">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>492</pd:x>
+            <pd:x>507</pd:x>
             <pd:y>199</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -683,7 +683,7 @@
         <pd:activity name="NO_MONEY">
             <pd:type>com.tibco.pe.core.AssignActivity</pd:type>
             <pd:resourceType>ae.activities.assignActivity</pd:resourceType>
-            <pd:x>1140</pd:x>
+            <pd:x>1155</pd:x>
             <pd:y>71</pd:y>
             <config>
                 <variableName>message</variableName>
@@ -699,7 +699,7 @@
         <pd:activity name="LAST_INSERT_ID_Destination">
             <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
-            <pd:x>721</pd:x>
+            <pd:x>736</pd:x>
             <pd:y>199</pd:y>
             <config>
                 <timeout>10</timeout>
@@ -722,7 +722,7 @@
         <pd:activity name="WriteDestinationTransfer">
             <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
             <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
-            <pd:x>842</pd:x>
+            <pd:x>857</pd:x>
             <pd:y>199</pd:y>
             <config>
                 <timeout>10</timeout>

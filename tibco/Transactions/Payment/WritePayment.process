@@ -536,7 +536,7 @@
             <pd:inputBindings>
                 <jdbcUpdateActivityInput>
                     <balance>
-                        <xsl:value-of select="$GetAccountBalance/resultSet/Record[1]/balance - $Start/pfx:WritePaymentInput/input/ns1:inputPayment/@value"/>
+                        <xsl:value-of select="$GetAccountBalance/resultSet/Record[1]/balance + $Start/pfx:WritePaymentInput/input/ns1:inputPayment/@value"/>
                     </balance>
                     <id>
                         <xsl:choose>
